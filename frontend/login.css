@@ -1,0 +1,134 @@
+/* login.css */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  background-image: url(/frontend/images/FundoLogin.png);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+  width: 608px;
+  height: 722px;
+  text-align: center;
+}
+
+.email-box {
+  margin-top: 50px;
+  
+}
+
+.email-box h1{
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  position: relative;
+  left: 23px;
+  top: 5px;
+}
+
+.email-box input {
+  width: 541px;
+  height: 51px;
+  padding-left: 15px;
+  border: 1px solid rgb(194, 192, 192);
+  border-radius: 15px;
+  font-size: large;
+}
+.email-box input::placeholder {
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(194, 192, 192);
+  font-size: large;
+}
+.email-box input:focus {
+  outline: none;
+  border: 1px solid rgb(194, 192, 192);
+  color: rgb(63, 58, 58); 
+  font-size: large;
+}
+
+.email-box {
+  margin-top: 50px;
+  
+}
+
+.password-box h1{
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  position: relative;
+  left: 23px;
+  top: 5px;
+}
+
+.password-box input {
+  width: 541px;
+  height: 51px;
+  padding-left: 15px;
+  border: 1px solid rgb(194, 192, 192);
+  border-radius: 15px;
+  font-size: large;
+}
+.password-box input::placeholder {
+  font-family: 'Montserrat', sans-serif;
+  color: rgb(194, 192, 192);
+  font-size: large;
+}
+.password-box input:focus {
+  outline: none;
+  border: 1px solid rgb(194, 192, 192);
+  color: rgb(63, 58, 58); 
+  font-size: large;
+}
+
+.confirm-button {
+  margin-top: 50px;
+
+}
+
+.confirm-button button{
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  width: 541px;
+  height: 61px;
+  color: white;
+  font-size: x-large;
+  font-weight: 500;
+  background-color: #2957A4;
+  border-radius: 30px;
+  border: none;
+}
+
+.login-box a:nth-child(5) {
+  color: black;
+  font-size: medium;
+  font-weight: 600;
+  margin-top: 20px;
+  display: flex;
+  position: relative;
+  left: 23px;
+  text-decoration: underline;
+}
+
+.login-box a:nth-child(1) {
+  color: black;
+  text-decoration: none;
+  position: relative;
+  top: 250px;
+}
+.login-box a:nth-child(1) strong {
+  text-decoration: underline;
+}
+
