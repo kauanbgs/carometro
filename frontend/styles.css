@@ -1,5 +1,24 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+:root {
+  --back: #E4E4E4;
+  --background: #EFEFEF;
+  --textoCinza: #F2F2F2;
+  --textoCinzaSuporte: #BABABA;
+  --textoSelecionado: #FFFFFF;
+  --branco: #FFFFFF;
+  --azulPrincipal: #2957A4;
+  --azulSecundario: #4F89DF;
+  --laranjaPrincipal: #D95D36;
+  --laranjaSecundario: #DF804D;
+  --erro: #EE6E6E;
+  --sucesso: #CAF6A7;
+  --preto: #000000;
+  --textoNotificacoes: #606060;
 }
+
+.sidebar{
+  width: 20%;
+  height: 1080px;
+  background-color: red;
+  
+}
+
