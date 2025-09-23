@@ -17,24 +17,15 @@
 
 *{
   box-sizing: border-box;
+  padding: 0;
+
 }
 
 body{
   margin: 0;
   font-family: sans-serif;
-  background-color: var(--background);
+  background-color: var(--back);
   color: var(--textoCinzaSuporte);
 }
 
-.sidebar{
-  position: fixed;
-  top: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 240px;
-  height: 100%;
-  padding: 40px 10px 30px 10px;
-  border-right: 1px solid var(--textoCinza);
-}
 
