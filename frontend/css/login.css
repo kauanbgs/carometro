@@ -1,7 +1,6 @@
 /* login.css */
 
 body {
-  margin: 0;
   height: 100vh;
   width: 100%;
   display: flex;
@@ -24,14 +23,18 @@ body {
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
-  width: 80%;
-  height: 575px;
+  width: 70%;
+  height: 67%;
   text-align: center;
+  
 }
 
+.login-box img{
+  width: 45%;
+}
 .email-box {
   margin-top: 50px;
-  
+  margin-bottom: 15px;
 }
 
 .email-box h1, .password-box h1{
@@ -41,11 +44,15 @@ body {
   position: relative;
   left: 23px;
   top: 5px;
+  color: var(--preto);
+  padding-bottom: 10px;
+
 }
 
+
 .email-box input, .password-box input {
-  width: 89%;
-  height: 51px;
+  width: 88.98%;
+  height: 40px;
   padding-left: 15px;
   border: 2px solid rgb(194, 192, 192);
   border-radius: 15px;
@@ -54,7 +61,7 @@ body {
 .email-box input::placeholder, .password-box input::placeholder {
   font-family: 'Montserrat', sans-serif;
   color: rgb(194, 192, 192);
-  font-size: large;
+  font-size: medium;
 }
 .email-box input:focus, .password-box input:focus {
   outline: none;
@@ -99,6 +106,7 @@ body {
   text-decoration: none;
   position: relative;
   top: 120px;
+  align-items: flex-end;
 
 }
 .login-box a:nth-child(1) strong {

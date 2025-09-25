@@ -3,7 +3,7 @@ i {
 }
 
 .separador{
-    display: block;
+    display: flex;
     background-color: var(--preto);
     width: 70%;
     height: 0.5px;
@@ -26,7 +26,8 @@ i {
 
 }
 .sidebar {
-    display: block;
+    display: flex;
+    flex-direction: column;
     width: 20%;
     height:100vh;
     background-color: var(--background);
@@ -38,7 +39,6 @@ i {
 }
 
 .sidebar header img {
-    width: 12rem;                               
+    width: 100%;                               
     margin-top: 16%;
-    max-width: 100%
 }
