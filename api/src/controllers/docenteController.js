@@ -3,7 +3,7 @@ const connect = require("../db/connect");
 
 module.exports = class docenteController {
     static async createDocente(req, res) {
-        const { email, senha, nome } = req.body;
+        const { email, senha, nome, tipo } = req.body;
         if(!email || !senha || !nome) {
             return res.status(400).json({error: "Todos os campos devem ser preenchidos"});
         }
@@ -12,7 +12,7 @@ module.exports = class docenteController {
             return res.status(400).json({error: "Email já cadastrado"})
         }
 
-        const query = `INSERT INTO docente (nome, email, senha) VALUES ('${nome}', '${email}', '${senha}');`
+        const query = `INSERT INTO docente (nome, email, senha, tipo) VALUES ('${nome}', '${email}', '${senha}', '${tipo}');`
 
         // Executar a query INSERT
         connect.query(query, function(err) {
@@ -25,7 +25,7 @@ module.exports = class docenteController {
         })
     }
     static async readDocente(req, res) {
-        const { nome, email, senha } = req.body
+        const { nome, email, senha, tipo} = req.body
         const query = `SELECT * FROM docentes;`
         connect.query(query, function(err){
             if(err){
