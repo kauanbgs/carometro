@@ -8,7 +8,7 @@ router.get("/health", (req, res) => {
 
 router.post("/docente", docenteController.createDocente)
 router.get("/docente", docenteController.readDocente)
-// router.put("/docente", docenteController.updateDocente)
-// router.delete("/docente/:id_docente", docenteController.deleteDocente)
+router.put("/docente", docenteController.updateDocente)
+router.delete("/docente/:id_docente", docenteController.deleteDocente)
 
 module.exports = router;
