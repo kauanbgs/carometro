@@ -1,5 +1,4 @@
-/* login.css */
-
+/* Estilo do corpo da página para centralizar a caixa de login */
 body {
   height: 100vh;
   width: 100%;
@@ -7,109 +6,107 @@ body {
   justify-content: center;
   align-items: center;
   font-family: 'Montserrat', sans-serif;
-  background-image: url(/frontend/images/FundoLogin.png);
+  background-image: url(../images/FundoLogin.png);
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
+/* Caixa principal do formulário de login */
 .login-box {
   background: var(--branco);
+  width: 70%;
+  height: 67%;
+  max-width: 600px;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
-  width: 70%;
-  height: 67%;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
   
 }
 
-.login-box img{
-  width: 45%;
-}
-.email-box {
-  margin-top: 50px;
-  margin-bottom: 15px;
+/* Logo do SENAI */
+.login-box img {
+  width: 40%;
+  margin-bottom: 4rem;
+  align-self: center;
+  
 }
 
-.email-box h1, .password-box h1{
-  font-size: 20px;
-  font-weight: 400;
-  display: flex;
-  position: relative;
-  left: 23px;
-  top: 5px;
+#email::placeholder, #password::placeholder {
+  opacity: 0.6;
+}
+
+.input-group label{
   color: var(--preto);
-  padding-bottom: 10px;
-
 }
 
+/* Grupo de label + input */
+.input-group {
+  margin-bottom: 1.7rem;
+  text-align: left;
+}
 
-.email-box input, .password-box input {
-  width: 88.98%;
-  height: 40px;
+label{
+  font-size: large;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.input-group input {
+  width: 100%;
+  height: 45px;
   padding-left: 15px;
-  border: 2px solid rgb(194, 192, 192);
-  border-radius: 15px;
-  font-size: large;
-}
-.email-box input::placeholder, .password-box input::placeholder {
-  font-family: 'Montserrat', sans-serif;
-  color: rgb(194, 192, 192);
-  font-size: medium;
-}
-.email-box input:focus, .password-box input:focus {
-  outline: none;
-  border: 2px solid rgb(194, 192, 192);
-  color: rgb(63, 58, 58); 
-  font-size: large;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: large
+  
 }
 
-
-.confirm-button {
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-
-}
-
-.confirm-button button{
+/* Botão "Entrar" */
+.login-button {
+  width: 100%;
+  height: 61px;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
-  width: 541px;
-  height: 61px;
-  color:  var(--textoCinza);
+  color: var(--branco);
   font-size: x-large;
-  font-weight: 500;
+  font-weight: 600;
   background-color: var(--azulPrincipal);
-  border-radius: 30px;
+  border-radius: 50px;
   border: none;
+  margin-top: 1rem;
 }
 
-.login-box a:nth-child(5) {
+/* Link "Esqueci minha senha" */
+.forgot-password {
+  display: block;
+  text-align: left;
+  margin-top: 1.9rem;
   color: var(--preto);
-  font-size: medium;
+  text-decoration: underline;
   font-weight: 500;
-  margin-top: 20px;
-  display: flex;
+  font-size: large;
   
-  text-decoration: underline;
+  
 }
 
-.login-box a:nth-child(1) {
-  color: var(--preto);
+/* Link "Não tem uma conta? Registrar" */
+.register-link {
+  color: #333;
   text-decoration: none;
-  position: relative;
-  top: 120px;
-  align-items: flex-end;
-
+  font-weight: 400;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+  margin-top: auto;
+  
 }
-.login-box a:nth-child(1) strong {
+
+.register-link strong {
+  font-weight: 600;
+  color: var(--preto);
   text-decoration: underline;
+  
 }
-

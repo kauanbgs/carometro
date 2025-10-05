@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Carometro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/login.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <title>Pagina Login</title>
+</head>
 <body>
-  <main class="container">
-    <div class="login-box">
-        <img src="./images/SenaiLogo.png" alt="Logo senai">
+  <div class="login-box">
+    <img src="./images/SenaiLogo.png" alt="Logo Senai">
 
-        <div class="email-box">
-          <h1>Endereço de email</h1>
-          <input type="text" placeholder="ex: kauan.plaza@docente.senai.br">
-        </div>
+    <form>
+      <div class="input-group">
+        <label for="email">Endereço de email</label>
+        <input type="email" id="email" name="email" placeholder="ex: kauanplaza@docente.senai.br" required>
+      </div>
 
-        <div class="password-box">
-          <h1>Senha</h1>
-          <input class="password" type="password" placeholder="ex: SeuNome123">
-        </div>
-        
-        <div class="confirm-button">
-          <button>Entrar</button>
-        </div>
-        <a href="#">Esqueci minha senha</a>
+      <div class="input-group">
+        <label for="password">Senha</label>
+        <input type="password" id="password" name="password" placeholder="ex: seuNome123" required>
+      </div>
 
-        <div class="info">
-          <a href="#">Não tem uma conta? <strong>Registrar</strong></a>
-        </div>
+      <button type="submit" class="login-button">Entrei</button>
 
-    </div>
-  </main>
+      <a href="#" class="forgot-password">Esqueci minha senha</a>
+    </form>
+
+    <a href="#" class="register-link">Não tem uma conta? <strong>Registrar</strong></a>
+  </div>
 </body>
 </html>
