@@ -1,0 +1,246 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #f2f2f2;
+    color: #4a4a4a;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 60px 50px;
+    display: flex;
+    min-height: calc(100vh - 120px); /* Ajusta para preencher altura mínima */
+}
+
+.logo {
+    position: absolute;
+    top: 40px;
+    left: 60px;
+    width: 150px; /* Ajuste conforme o logo real */
+    height: auto;
+    z-index: 10;
+}
+
+.columns {
+    display: flex;
+    width: 100%;
+    gap: 0;
+    align-items: stretch; /* Garante que as colunas tenham a mesma altura */
+}
+
+.left-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 30px;
+    box-sizing: border-box;
+}
+
+.right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centraliza verticalmente o conteúdo da coluna direita */
+    padding-left: 30px;
+    box-sizing: border-box;
+}
+
+.divider {
+    width: 1px;
+    background-color: #bdbdbd;
+    margin: 0 30px;
+}
+
+.main-title {
+    color: #1f3e8e;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.3;
+    margin: 0 0 25px 0;
+}
+
+.support-text {
+    color: #4a4a4a;
+    font-weight: 400;
+    font-size: 16px;
+    margin: 0 0 25px 0;
+}
+
+.contact-block {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.contact-icon {
+    width: 32px;
+    height: 32px;
+    background-color: #2951b8;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 16px;
+    flex-shrink: 0; /* Impede que o ícone encolha em telas pequenas */
+}
+
+.contact-text {
+    color: #4a4a4a;
+    font-size: 16px;
+    margin: 0;
+    flex: 1; /* Permite que o texto ocupe o espaço disponível */
+}
+
+.back-button {
+    background-color: #2951b8;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    width: 200px;
+    height: 45px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    align-self: center;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #1f3e8e;
+}
+
+.faq-title {
+    color: #1f3e8e;
+    font-weight: 700;
+    font-size: 28px;
+    margin: 0 0 20px 0;
+}
+
+.faq-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 0;
+}
+
+.faq-list li {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Responsividade para tablets (768px a 1024px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .container {
+        padding: 60px 40px 50px;
+        max-width: 100%;
+    }
+
+    .logo {
+        left: 40px;
+    }
+
+    .left-column, .right-column {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .divider {
+        margin: 0 20px;
+    }
+}
+
+/* Responsividade para mobile (menor que 768px) */
+@media (max-width: 768px) {
+    body {
+        line-height: 1.5; /* Linha ligeiramente menor para mobile */
+    }
+
+    .container {
+        padding: 40px 20px 40px;
+        flex-direction: column;
+        min-height: auto; /* Remove altura mínima para mobile */
+    }
+
+    .logo {
+        position: static; /* Remove posição absoluta para centralizar */
+        display: block;
+        margin: 0 auto 20px;
+        width: 100px; /* Logo menor em mobile */
+        left: auto;
+        top: auto;
+    }
+
+    .columns {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .divider {
+        display: none; /* Remove divisor em mobile */
+    }
+
+    .left-column, .right-column {
+        padding: 0;
+        margin-bottom: 40px;
+        justify-content: flex-start; /* Remove centralização vertical em mobile */
+    }
+
+    .main-title, .faq-title {
+        font-size: 24px; /* Títulos menores */
+        text-align: center; /* Centraliza títulos em mobile */
+    }
+
+    .back-button {
+        width: 100%;
+        max-width: 200px; /* Mantém limite, mas flexível */
+        align-self: center;
+    }
+
+    .faq-list {
+        padding-left: 15px; /* Padding menor para lista em mobile */
+    }
+
+    .faq-list li {
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+
+    .contact-item {
+        justify-content: center; /* Centraliza itens de contato em mobile */
+    }
+}
+
+/* Responsividade para telas muito pequenas (ex: < 480px) */
+@media (max-width: 480px) {
+    .container {
+        padding: 30px 15px 30px;
+    }
+
+    .main-title, .faq-title {
+        font-size: 22px;
+    }
+
+    .support-text, .contact-text, .faq-list li {
+        font-size: 14px;
+    }
+
+    .contact-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+}
