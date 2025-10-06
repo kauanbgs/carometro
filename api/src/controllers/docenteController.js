@@ -8,8 +8,6 @@ module.exports = class docenteController {
         .status(400)
         .json({ error: "Todos os campos devem ser preenchidos" });
     }
-    let query;
-    let value;
     if (tipo) {
       query = `INSERT INTO docente (email, senha, nome, tipo) VALUES (?,?,?,?)`;
       value = [email, senha, nome, tipo];
