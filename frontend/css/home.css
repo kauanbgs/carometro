@@ -1,0 +1,354 @@
+/* Reset e Configurações Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f5f6fa;
+    display: flex;
+    min-height: 100vh;
+    color: #333333;
+    line-height: 1.6;
+    overflow-x: hidden; /* Evita scroll horizontal em mobile */
+}
+
+/* Barra Lateral Esquerda */
+.sidebar {
+    width: 260px;
+    background-color: #ffffff;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease; /* Animação suave para mobile */
+    z-index: 1000;
+}
+
+.sidebar-header {
+    padding: 40px 30px 40px;
+    text-align: left;
+}
+
+.senai-logo {
+    display: flex;
+    flex-direction: column;
+}
+
+.senai-text {
+    color: #1f3e8e;
+    font-size: 28px;
+    font-weight: 700;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+.senai-i-accent {
+    color: #e37028; /* Simula o acento vermelho inclinado no I */
+}
+
+.senai-franca {
+    color: #555555;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* Menu de Navegação */
+.sidebar-nav {
+    flex: 1;
+    padding: 0 30px;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 0;
+    color: #333333;
+    font-weight: 700; /* Negrito para Home */
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: #1f3e8e;
+}
+
+.nav-item .icon {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.nav-section {
+    margin: 30px 0;
+}
+
+.section-title {
+    color: #1f3e8e;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.submenu {
+    list-style: none;
+    padding-left: 20px;
+}
+
+.submenu li {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    color: #333333;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.submenu li:hover {
+    color: #1f3e8e;
+}
+
+.submenu li .icon {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+/* Separadores */
+.separator {
+    height: 1px;
+    background-color: #dcdcdc;
+    border: none;
+    margin: 20px 0;
+}
+
+/* Rodapé Lateral */
+.sidebar-footer {
+    padding: 30px;
+    border-top: 1px solid #dcdcdc;
+    margin-top: auto;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.footer-links a {
+    color: #555555;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #1f3e8e;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #000000;
+    border-radius: 50%;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #333333;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.dropdown-arrow {
+    font-size: 12px;
+    color: #000000;
+}
+
+
+
+.hamburger:hover {
+    color: #1f3e8e;
+}
+
+/* Conteúdo Principal */
+.main-content {
+    margin-left: 300px; /* 260px sidebar + 40px gap */
+    flex: 1;
+    padding: 40px;
+    width: calc(100% - 300px);
+    max-width: 1400px;
+    position: relative;
+}
+
+/* Cabeçalho Principal */
+.main-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.main-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #333333;
+}
+
+.highlight {
+    color: #3a78f2;
+}
+
+/* Card Superior: Turmas */
+.turmas-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    padding: 40px 50px;
+    display: flex;
+    align-items: flex-start;
+    gap: 50px;
+    margin-bottom: 40px;
+    width: 90%;
+}
+
+.turma-section {
+    flex: 1;
+    text-align: left;
+}
+
+.turma-section h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #333333;
+}
+
+.orange-highlight {
+    color: #e37028;
+}
+
+.turma-section p {
+    font-size: 15px;
+    color: #555555;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.orange-btn {
+    background-color: #e37028;
+    color: #ffffff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 0 auto;
+}
+
+.orange-btn:hover {
+    background-color: #c45e1d;
+}
+
+.divider {
+    width: 1px;
+    background-color: #dcdcdc;
+    height: 100%;
+    flex-shrink: 0;
+    align-self: stretch;
+    margin: 0 25px; /* Metade do gap para centralizar */
+}
+
+/* Card Inferior: Ocorrências e Registros */
+.occurrences-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    padding: 40px 50px;
+    display: flex;
+    align-items: flex-start;
+    gap: 50px;
+    margin-top: 40px;
+    width: 90%;
+}
+
+.occurrences-section,
+.records-section {
+    flex: 1;
+}
+
+.occurrences-section h3,
+.records-section h3 {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333333;
+}
+
+.occurrence-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333333;
+    font-weight: 500;
+    height: 45px; /* Altura aproximada */
+    box-sizing: border-box;
+}
+
+.occurrence-item.negative {
+    background-color: #fcd9d6;
+}
+
+.occurrence-item.positive {
+    background-color: #d7f3da;
+}
+
+.arrow {
+    color: #555555;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.record-tag {
+    background-color: #cfe3ff;
+    color: #1f3e8e;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    display: inline-block;
+    width: fit-content;
+}
+
