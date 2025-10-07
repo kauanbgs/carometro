@@ -39,39 +39,6 @@ module.exports = class docenteController {
       return res.status(500).json({ error: "Erro interno no servidor" });
     }
   }
-  static async updateDocente(req, res) {
-    const { id_docente, email, senha, nome, tipo } = req.body;
-    if (!email || !senha || !nome || !id_docente) {
-      return res
-        .status(400)
-        .json({ error: "Todos os campos devem ser preenchidos" });
-    }
-    const query = `UPDATE docente SET email=?, senha=?, nome=?, tipo=? WHERE id_docente=?`;
-    const value = [email, senha, nome, tipo, id_docente];
-
-    try {
-      connect.query(query, value, function (err, results) {
-        if (err) {
-          console.log(err);
-          if (err.code === "ER_DUP_ENTRY") {
-            return res
-              .status(409)
-              .json({ error: "Email já está sendo usado por outro docente." });
-          }
-          return res.status(500).json({ error: "Erro interno no servidor!" });
-        }
-        if (results.affectedRows === 0) {
-          return res.status(404).json({ error: "Usuario nao encontrado!" });
-        }
-        return res
-          .status(200)
-          .json({ message: "Usuário atualizado com ID: " + id_docente });
-      });
-    } catch (error) {
-      console.error("Erro ao executar consulta", error);
-      return res.status(500).json({ error: "Erro interno do servidor!" });
-    }
-  }
   static async readDocente(req, res) {
     const query = `SELECT * FROM docente`;
     try {
@@ -124,6 +91,40 @@ module.exports = class docenteController {
     } catch (error) {
       console.log(error);
       return res.status(500).json({ error: "Erro interno no servidor" });
+    }
+  }
+
+  static async updateDocente(req, res) {
+    const { id_docente, email, senha, nome, tipo } = req.body;
+    if (!email || !senha || !nome || !id_docente) {
+      return res
+        .status(400)
+        .json({ error: "Todos os campos devem ser preenchidos" });
+    }
+    const query = `UPDATE docente SET email=?, senha=?, nome=?, tipo=? WHERE id_docente=?`;
+    const value = [email, senha, nome, tipo, id_docente];
+
+    try {
+      connect.query(query, value, function (err, results) {
+        if (err) {
+          console.log(err);
+          if (err.code === "ER_DUP_ENTRY") {
+            return res
+              .status(409)
+              .json({ error: "Email já está sendo usado por outro docente." });
+          }
+          return res.status(500).json({ error: "Erro interno no servidor!" });
+        }
+        if (results.affectedRows === 0) {
+          return res.status(404).json({ error: "Usuario nao encontrado!" });
+        }
+        return res
+          .status(200)
+          .json({ message: "Usuário atualizado com ID: " + id_docente });
+      });
+    } catch (error) {
+      console.error("Erro ao executar consulta", error);
+      return res.status(500).json({ error: "Erro interno do servidor!" });
     }
   }
 
