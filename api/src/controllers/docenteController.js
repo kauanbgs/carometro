@@ -8,12 +8,14 @@ module.exports = class docenteController {
         .status(400)
         .json({ error: "Todos os campos devem ser preenchidos" });
     }
+    let query;
+    let value;
     if (tipo) {
       query = `INSERT INTO docente (email, senha, nome, tipo) VALUES (?,?,?,?)`;
       value = [email, senha, nome, tipo];
     } else {
       query = `INSERT INTO docente (email, senha, nome) VALUES (?,?,?)`;
-      value = [email, senha, nome, tipo];
+      value = [email, senha, nome];
     }
 
     try {
@@ -78,13 +80,33 @@ module.exports = class docenteController {
         }
         return res
           .status(200)
-          .json({ message: "Obtendo todos os docentes", docentes: results });
+          .json({ message: "Obtendo todos os docentes ", docentes: results });
       });
     } catch (error) {
       console.log(error);
       return res.status(500).json({ error: "Erro interno no servidor" });
     }
   }
+  static async getDocenteById(req, res) {
+    const { id_docente } = req.params
+    const query = `SELECT * FROM docente WHERE id_docente=?`
+    const value = [id_docente]
+    try {
+      connect.query(query, value, function (err, results) {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ error: "Erro interno no servidor" });
+        }
+        return res
+          .status(200)
+          .json({ message: `Docente: `, docente: results });
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: "Erro interno no servidor" });
+    }
+  }
+
   static async deleteDocente(req, res) {
     const identificadorDocente = req.params.id_docente;
     const query = `DELETE FROM docente WHERE id_docente=?`;
