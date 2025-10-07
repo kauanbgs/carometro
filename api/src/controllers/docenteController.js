@@ -106,6 +106,28 @@ module.exports = class docenteController {
       return res.status(500).json({ error: "Erro interno no servidor" });
     }
   }
+  static async getDocenteByNome(req, res) {
+    const { nome } = req.params
+    const query = `SELECT * FROM docente WHERE nome LIKE ?`
+    const value = [`%${nome}%`]
+    try {
+      connect.query(query, value, function (err, results) {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ error: "Erro interno no servidor" });
+        }
+        if(results.length === 0){
+          return res.status(404).json({error: "Usuario não encontrado!"})
+        }
+        return res
+          .status(200)
+          .json({ message: `Docente: `, docente: results });
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: "Erro interno no servidor" });
+    }
+  }
 
   static async deleteDocente(req, res) {
     const identificadorDocente = req.params.id_docente;

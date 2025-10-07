@@ -10,6 +10,7 @@ router.get("/health", (req, res) => {
 router.post("/docente", docenteController.createDocente)
 router.get("/docente", docenteController.readDocente)
 router.get("/docente/:id_docente", docenteController.getDocenteById)
+router.get("/docente/nome/:nome", docenteController.getDocenteByNome)
 router.put("/docente", docenteController.updateDocente)
 router.delete("/docente/:id_docente", docenteController.deleteDocente)
 
