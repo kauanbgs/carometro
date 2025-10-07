@@ -41,16 +41,9 @@ module.exports = class docenteController {
         .status(400)
         .json({ error: "Todos os campos devem ser preenchidos" });
     }
-    let query;
-    let value
-    if (tipo) {
-      query = `UPDATE docente SET email=?, senha=?, nome=?, tipo=? WHERE id_docente=?`;
-      value = [email, senha, nome, tipo, id_docente];
-    }
-    else {
-      query = `UPDATE docente SET email=?, senha=?, nome=? WHERE id_docente=?`;
-      value = [email, senha, nome, id_docente];
-    }
+    const query = `UPDATE docente SET email=?, senha=?, nome=?, tipo=? WHERE id_docente=?`;
+    const value = [email, senha, nome, tipo, id_docente];
+  
 
     try {
       connect.query(query, value, function (err, results) {
