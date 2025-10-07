@@ -22,6 +22,11 @@ module.exports = class docenteController {
       connect.query(query, value, function (err, results) {
         if (err) {
           console.log(err);
+          if (err.code === "ER_DUP_ENTRY") {
+            return res
+              .status(409)
+              .json({ error: "Email já cadastrado. Tente outro." });
+          }
           return res
             .status(500)
             .json({ error: "Docente não cadastrado no banco de dados" });
@@ -43,12 +48,16 @@ module.exports = class docenteController {
     }
     const query = `UPDATE docente SET email=?, senha=?, nome=?, tipo=? WHERE id_docente=?`;
     const value = [email, senha, nome, tipo, id_docente];
-  
 
     try {
       connect.query(query, value, function (err, results) {
         if (err) {
           console.log(err);
+          if (err.code === "ER_DUP_ENTRY") {
+            return res
+              .status(409)
+              .json({ error: "Email já está sendo usado por outro docente." });
+          }
           return res.status(500).json({ error: "Erro interno no servidor!" });
         }
         if (results.affectedRows === 0) {
@@ -81,18 +90,16 @@ module.exports = class docenteController {
     }
   }
   static async getDocenteById(req, res) {
-    const { id_docente } = req.params
-    const query = `SELECT * FROM docente WHERE id_docente=?`
-    const value = [id_docente]
+    const { id_docente } = req.params;
+    const query = `SELECT * FROM docente WHERE id_docente=?`;
+    const value = [id_docente];
     try {
       connect.query(query, value, function (err, results) {
         if (err) {
           console.log(err);
           return res.status(500).json({ error: "Erro interno no servidor" });
         }
-        return res
-          .status(200)
-          .json({ message: `Docente: `, docente: results });
+        return res.status(200).json({ message: `Docente: `, docente: results });
       });
     } catch (error) {
       console.log(error);
@@ -100,21 +107,19 @@ module.exports = class docenteController {
     }
   }
   static async getDocenteByNome(req, res) {
-    const { nome } = req.params
-    const query = `SELECT * FROM docente WHERE nome LIKE ?`
-    const value = [`%${nome}%`]
+    const { nome } = req.params;
+    const query = `SELECT * FROM docente WHERE nome LIKE ?`;
+    const value = [`%${nome}%`];
     try {
       connect.query(query, value, function (err, results) {
         if (err) {
           console.log(err);
           return res.status(500).json({ error: "Erro interno no servidor" });
         }
-        if(results.length === 0){
-          return res.status(404).json({error: "Usuario não encontrado!"})
+        if (results.length === 0) {
+          return res.status(404).json({ error: "Usuario não encontrado!" });
         }
-        return res
-          .status(200)
-          .json({ message: `Docente: `, docente: results });
+        return res.status(200).json({ message: `Docente: `, docente: results });
       });
     } catch (error) {
       console.log(error);
