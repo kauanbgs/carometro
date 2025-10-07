@@ -1,0 +1,358 @@
+/* Reset and General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f5f6fa; /* Fundo geral */
+    color: #333333; /* Texto principal */
+    line-height: 1.5;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    max-width: 1920px; /* Largura total fixa */
+    margin: 0 auto; /* Centralizado horizontalmente */
+}
+
+/* Sidebar (260px fixa) */
+.sidebar {
+    width: 260px;
+    background-color: #ffffff; /* Fundo branco */
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 40px 0 0; /* Padding topo */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.logo-section {
+    padding: 0 30px; /* Padding laterais */
+    margin-bottom: 50px; /* Margem inferior para "Franca" */
+}
+
+.logo {
+    width: 160px;
+    height: 40px;
+    display: block;
+    margin-bottom: 6px; /* Margem inferior da logo */
+}
+
+.franca {
+    color: #555555; /* Cinza médio */
+    font-size: 15px;
+    font-weight: 400;
+}
+
+/* Menu de Navegação */
+.menu {
+    flex: 1;
+    padding: 0 30px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px; /* Espaçamento vertical */
+    cursor: pointer;
+    color: #333333;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.menu-item .icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    font-size: 18px; /* Para emojis */
+}
+
+.menu-item.active {
+    color: #1f3e8e; /* Azul institucional */
+}
+
+.section-title {
+    color: #1f3e8e;
+    font-size: 14px;
+    font-weight: 600; /* Bold para subtítulos */
+    text-transform: uppercase;
+    margin: 10px 0 10px 10px; /* Espaçamento e indent */
+}
+
+.divider {
+    height: 1px;
+    background-color: #dcdcdc; /* Linha divisória */
+    margin: 25px 0; /* Espaçamento vertical entre seções */
+}
+
+/* Rodapé da Sidebar */
+.sidebar-footer {
+    padding: 0 30px 25px;
+    margin-top: auto;
+}
+
+.footer-links {
+    margin-bottom: 20px;
+}
+
+.footer-link {
+    display: block;
+    color: #777777;
+    font-size: 13px;
+    font-weight: 400;
+    text-decoration: none;
+    margin-bottom: 8px; /* Espaçamento vertical */
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    background-color: #222222;
+    border-radius: 50%;
+    margin-right: 10px; /* Margem esquerda do texto */
+}
+
+.user-name {
+    margin-right: 5px;
+}
+
+.arrow {
+    font-size: 12px;
+    color: #333333;
+}
+
+/* Main Panel (margem esquerda 260px + 60px padding) */
+.main-panel {
+    margin-left: 320px; /* 260px sidebar + 60px margem */
+    flex: 1;
+    padding: 40px 60px 40px 0; /* Padding topo 40px, horizontal 60px direita/0 esquerda */
+    max-width: 1660px; /* Largura útil */
+    background-color: #f5f6fa;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Botão Voltar */
+.back-button {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    cursor: pointer;
+    color: #333333;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.back-icon {
+    font-size: 18px;
+    margin-right: 6px;
+}
+
+/* Título da Página */
+.page-title {
+    margin-bottom: 30px; /* Margem inferior */
+}
+
+.page-title h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333333;
+}
+
+/* Barra de Filtros */
+.filters-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px; /* Espaço para tabela */
+    gap: 20px; /* Espaçamento geral */
+}
+
+.filter-inputs {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaçamento entre campos */
+}
+
+.filter-input {
+    width: 280px; /* Nome da turma */
+    height: 45px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 400;
+    color: #333333;
+}
+
+.prof-input {
+    width: 200px; /* Professor */
+}
+
+.search-button {
+    width: 45px;
+    height: 45px;
+    background-color: #333333;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 10px; /* Margem esquerda */
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #1f3e8e;
+}
+
+.filter-divider {
+    width: 1px;
+    height: 45px;
+    background-color: #dcdcdc;
+    margin: 0 20px; /* Margem horizontal */
+}
+
+.add-button {
+    display: flex;
+    align-items: center;
+    width: 180px;
+    height: 45px;
+    background-color: #ffffff;
+    border: 1px solid #999999;
+    border-radius: 8px;
+    padding: 0 16px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #333333;
+    cursor: pointer;
+    gap: 8px;
+}
+
+.add-icon {
+    font-size: 18px;
+}
+
+/* Tabela de Turmas */
+.table-section {
+    margin-top: 30px; /* Margem superior */
+    background-color: #ffffff; /* Fundo tabela branco/transparente */
+    border-radius: 8px; /* Raio sutil se necessário */
+    overflow: hidden; /* Para scroll vertical se >15 linhas */
+    max-height: 600px; /* Ajuste para ~15 linhas visíveis em 950px */
+    overflow-y: auto;
+}
+
+.turmas-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+    font-weight: 400;
+    color: #333333;
+}
+
+.turmas-table th,
+.turmas-table td {
+    padding: 10px; /* Padding vertical/horizontal */
+    height: 45px; /* Altura das linhas */
+    text-align: left;
+    border-bottom: 1px solid #dcdcdc; /* Espaçamento vertical 4px via borda */
+}
+
+.turmas-table thead th {
+    border-bottom: 1px solid #dcdcdc; /* Borda inferior cabeçalho */
+    font-weight: 600;
+}
+
+.nome-col {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sort-icon {
+    width: 10px;
+    height: 10px;
+    font-size: 10px;
+    color: #333333;
+}
+
+.action-cell {
+    text-align: right;
+    font-size: 18px;
+    color: #333333;
+    cursor: pointer;
+}
+
+/* Paginação */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Margem entre botões */
+    margin-top: 30px; /* Margem superior */
+    margin-bottom: 50px; /* Margem inferior do conteúdo */
+}
+
+.pag-arrow,
+.pag-button {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #999999;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.pag-arrow {
+    font-size: 16px;
+}
+
+.pag-button.active {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.pag-button:hover,
+.pag-arrow:hover {
+    background-color: #1f3e8e;
+    color: #ffffff;
+}
+
+/* Desktop Responsivity (≥1024px, fixo para 1920px) */
+@media (min-width: 1024px) and (max-width: 1920px) {
+    .container {
+        overflow-x: hidden;
+    }
+
+    .main-panel {
+        padding-right: 60px; /* Padding horizontal geral */
+    }
+}

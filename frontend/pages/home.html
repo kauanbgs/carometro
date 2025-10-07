@@ -3,134 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carômetro - SENAI Franca</title>
+    <title>Carômetro do SENAI - Franca</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/home.css">
-    <!-- Opcional: Adicione esta linha para fonte Inter do Google Fonts -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"> -->
 </head>
 <body>
-    <aside class="sidebar" id="sidebar">
-        <!-- Topo: Logo SENAI -->
-        <div class="sidebar-header">
-            <div class="senai-logo">
-                <span class="senai-text">SEN<span class="senai-i-accent">A</span>I</span>
-                <span class="senai-franca">Franca</span>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-section">
+                <img src="../images/SenaiLogo.png" alt="SENAI Logo" class="logo">
+                <div class="franca">Franca</div>
             </div>
-        </div>
 
-        <!-- Menu de Navegação -->
-        <nav class="sidebar-nav">
-            <ul>
-                <li class="nav-item active">
+            <nav class="menu">
+                <div class="menu-item active">
                     <span class="icon">🏠</span>
-                    <span>Home</span>
-                </li>
-                <hr class="separator">
-                <li class="nav-section">
-                    <div class="section-title">ALUNOS</div>
-                    <ul class="submenu">
-                        <li>
-                            <span class="icon">👥</span>
-                            <span>Gerenciar Turmas</span>
-                        </li>
-                    </ul>
-                </li>
-                <hr class="separator">
-                <li class="nav-section">
-                    <div class="section-title">ADMINS</div>
-                    <ul class="submenu">
-                        <li>
-                            <span class="icon">👔</span>
-                            <span>Gerenciar Admins</span>
-                        </li>
-                    </ul>
-                </li>
-                <hr class="separator">
-                <li class="nav-section">
-                    <div class="section-title">DEV</div>
-                    <ul class="submenu">
-                        <li>
-                            <span class="icon">💻</span>
-                            <span>Gerenciar Docentes</span>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+                    <span class="text">Home</span>
+                </div>
 
-        <!-- Rodapé Lateral -->
-        <div class="sidebar-footer">
-            <div class="footer-links">
-                <a href="#">Termos de serviço</a>
-                <a href="#">Política de privacidade</a>
-            </div>
-            <div class="user-profile">
-                <div class="avatar"></div>
+                <div class="section-title">ALUNOS</div>
+                <div class="menu-item">
+                    <span class="icon">👥</span>
+                    <span class="text">Gerenciar Turmas</span>
+                </div>
+
+                <div class="section-title">ADMINS</div>
+                <div class="menu-item">
+                    <span class="icon">👥</span>
+                    <span class="text">Gerenciar Admins</span>
+                </div>
+
+                <div class="section-title">DEV</div>
+                <div class="menu-item">
+                    <span class="icon">💻</span>
+                    <span class="text">Gerenciar Docentes</span>
+                </div>
+            </nav>
+
+            <footer class="sidebar-footer">
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Termos de serviço</a>
+                    <a href="#" class="footer-link">Política de privacidade</a>
+                </div>
                 <div class="user-info">
-                    <span>Kauan Borges</span>
-                    <span class="dropdown-arrow">▼</span>
+                    <div class="avatar"></div>
+                    <span class="user-name">Kauan Borges</span>
+                    <span class="arrow">▼</span>
                 </div>
-            </div>
-        </div>
-    </aside>
+            </footer>
+        </aside>
 
-    <main class="main-content">
-        <!-- Cabeçalho Principal -->
-        <header class="main-header">
-            <h1>Bem vindo ao <span class="highlight">Carômetro</span> do SENAI - Franca!</h1>
-        </header>
+        <!-- Main Panel -->
+        <main class="main-panel">
+            <header class="main-title">
+                <h1>
+                    <span class="dark-text">Bem vindo ao</span>
+                    <span class="blue-text">Carômetro</span>
+                    <span class="dark-text">do SENAI - Franca!</span>
+                </h1>
+            </header>
 
-        <!-- Card Superior: Edição e Criação de Turmas -->
-        <section class="turmas-card">
-            <div class="turma-section left">
-                <h2>Deseja <span class="orange-highlight">editar</span> uma turma?</h2>
-                <p>Alguma nova notificação ou alteração na turma? Gerencie agora!</p>
-                <button class="orange-btn">Clique aqui e comece</button>
-            </div>
-            <div class="divider"></div>
-            <div class="turma-section right">
-                <h2>Pronto para <span class="orange-highlight">criar</span> uma turma?</h2>
-                <p>Usuários com permissão de administrador podem editar e ou criar turmas.</p>
-                <button class="orange-btn">Clique aqui e comece</button>
-            </div>
-        </section>
+            <!-- Card 1: Editar / Criar Turma -->
+            <section class="card edit-create-card">
+                <div class="column left">
+                    <h2>Deseja <span class="orange-text">editar</span> uma turma?</h2>
+                    <p>Alguma nova notificação ou alteração na turma? Gerencie agora!</p>
+                    <button class="orange-button">Clique aqui e comece</button>
+                </div>
+                <div class="column right">
+                    <h2>Pronto para <span class="orange-text">criar</span> uma turma?</h2>
+                    <p>Usuários com permissão de administrador podem editar e ou criar turmas.</p>
+                    <button class="orange-button">Clique aqui e comece</button>
+                </div>
+            </section>
 
-        <!-- Card Inferior: Ocorrências e Registros -->
-        <section class="occurrences-card">
-            <div class="occurrences-section">
-                <h3>Últimas Ocorrências</h3>
-                <div class="occurrence-item negative">
-                    <span>Euller Aplicou uma ocorrência em Kauan por má conduta</span>
-                    <span class="arrow">∨</span>
+            <!-- Card 2: Últimas Ocorrências / Últimos Registros -->
+            <section class="card occurrences-card">
+                <div class="column left">
+                    <h2>Últimas Ocorrências</h2>
+                    <div class="occurrences-list">
+                        <div class="occurrence red">Euller Aplicou uma ocorrência em Kauan por má conduta <span class="arrow">▼</span></div>
+                        <div class="occurrence green">Adriano editou o perfil de Kauan Borges Plaza <span class="arrow">▼</span></div>
+                        <div class="occurrence red">Adriano Deletou Arthur Cintra de Lacerda de 1C-DS <span class="arrow">▼</span></div>
+                        <div class="occurrence green">Adriano editou o perfil de Luiz Felipe Campos Margato <span class="arrow">▼</span></div>
+                        <div class="occurrence red">Euller Aplicou uma ocorrência em Luiz Felipe por má conduta <span class="arrow">▼</span></div>
+                    </div>
                 </div>
-                <div class="occurrence-item positive">
-                    <span>Adriano editou o perfil de Kauan Borges Plaza</span>
-                    <span class="arrow">∨</span>
+                <div class="column right">
+                    <h2>Últimos Registros</h2>
+                    <div class="tags-list">
+                        <span class="tag">Kauan Borges Plaza - 1C-DS</span>
+                        <span class="tag">Luiz Felipe Campos - 1C-DS</span>
+                        <span class="tag">Arthur Cintra de L. - 1C-DS</span>
+                        <span class="tag">Arthur Cintra Faleiros - 1C-DS</span>
+                        <span class="tag">Arthur Marques - 1C-DS</span>
+                    </div>
                 </div>
-                <div class="occurrence-item negative">
-                    <span>Adriano Deletou Arthur Cintra de Lacerda de 1C-DS</span>
-                    <span class="arrow">∨</span>
-                </div>
-                <div class="occurrence-item positive">
-                    <span>Adriano editou o perfil de Luiz Felipe Campos Margato</span>
-                    <span class="arrow">∨</span>
-                </div>
-                <div class="occurrence-item negative">
-                    <span>Euller Aplicou uma ocorrência em Luiz Felipe por má conduta</span>
-                    <span class="arrow">∨</span>
-                </div>
-            </div>
-            <div class="divider"></div>
-            <div class="records-section">
-                <h3>Últimos Registros</h3>
-                <div class="record-tag">Kauan Borges Plaza - 1C-DS</div>
-                <div class="record-tag">Luiz Felipe Campos - 1C-DS</div>
-                <div class="record-tag">Arthur Cintra de L. - 1C-DS</div>
-                <div class="record-tag">Arthur Cintra Faleiros - 1C-DS</div>
-                <div class="record-tag">Arthur Marques - 1C-DS</div>
-            </div>
-        </section>
-    </main>
-
+            </section>
+        </main>
+    </div>
 </body>
 </html>

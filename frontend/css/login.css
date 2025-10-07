@@ -14,8 +14,7 @@ body {
 /* Caixa principal do formulário de login */
 .login-box {
   background: var(--branco);
-  width: 70%;
-  height: 67%;
+  width: 31%;
   max-width: 600px;
   padding: 2rem;
   border-radius: 12px;
@@ -28,7 +27,7 @@ body {
 /* Logo do SENAI */
 .login-box img {
   width: 40%;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   align-self: center;
   
 }
@@ -43,36 +42,43 @@ body {
 
 /* Grupo de label + input */
 .input-group {
-  margin-bottom: 1.7rem;
+  margin-bottom: 1rem;
   text-align: left;
 }
 
 label{
-  font-size: large;
-  font-weight: 500;
+  font-size: small;
+  font-weight: 200;
   margin-bottom: 0.5rem;
   display: block;
 }
 
 .input-group input {
   width: 100%;
-  height: 45px;
+  height: 35px;
   padding-left: 15px;
-  border: 1px solid #dcdcdc;
+  border: .7px solid rgba(0, 0, 0, 0.475);
   border-radius: 8px;
   font-size: large
+  
+}
+
+.input-group input::placeholder{
+  font-size: small;
+  font-weight: 300;
+  color: rgba(0, 0, 0, 0.300);
   
 }
 
 /* Botão "Entrar" */
 .login-button {
   width: 100%;
-  height: 61px;
+  height: 40px;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
   color: var(--branco);
-  font-size: x-large;
-  font-weight: 600;
+  font-size: large;
+  font-weight: 300;
   background-color: var(--azulPrincipal);
   border-radius: 50px;
   border: none;
@@ -83,25 +89,27 @@ label{
 .forgot-password {
   display: block;
   text-align: left;
-  margin-top: 1.9rem;
+  margin: 1rem 0 4rem;
   color: var(--preto);
   text-decoration: underline;
-  font-weight: 500;
-  font-size: large;
+  font-weight: 300;
+  font-size: small;
   width: fit-content;
 }
 
 /* Link "Não tem uma conta? Registrar" */
 .register-link {
-  color: #333;
+  display: flex;
+  color: var(--preto);
   text-decoration: none;
-  font-weight: 400;
+  font-weight: 300;
   font-size: 14px;
+  align-items: center;
   text-align: center;
-  width: 100%;
-  margin-top: auto;
   width: fit-content;
-
+  justify-content: flex-end;
+  align-self: center;
+  
 }
 
 .register-link strong {

@@ -1,246 +1,165 @@
-body {
+* {
     margin: 0;
     padding: 0;
-    font-family: 'Inter', sans-serif;
-    background-color: #f2f2f2;
-    color: #4a4a4a;
-    line-height: 1.6;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 60px 50px;
+body {
+    background-color: var(--background);
+    color: var(--textoCinza);
     display: flex;
-    min-height: calc(100vh - 120px); /* Ajusta para preencher altura mínima */
+    flex-direction: column;
+    align-items: center;
 }
 
 .logo {
     position: absolute;
-    top: 40px;
+    top: 50px;
     left: 60px;
-    width: 150px; /* Ajuste conforme o logo real */
-    height: auto;
-    z-index: 10;
-}
-
-.columns {
-    display: flex;
-    width: 100%;
-    gap: 0;
-    align-items: stretch; /* Garante que as colunas tenham a mesma altura */
-}
-
-.left-column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-right: 30px;
-    box-sizing: border-box;
-}
-
-.right-column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centraliza verticalmente o conteúdo da coluna direita */
-    padding-left: 30px;
-    box-sizing: border-box;
-}
-
-.divider {
-    width: 1px;
-    background-color: #bdbdbd;
-    margin: 0 30px;
-}
-
-.main-title {
-    color: #1f3e8e;
-    font-weight: 700;
-    font-size: 28px;
-    line-height: 1.3;
-    margin: 0 0 25px 0;
-}
-
-.support-text {
-    color: #4a4a4a;
-    font-weight: 400;
-    font-size: 16px;
-    margin: 0 0 25px 0;
-}
-
-.contact-block {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 40px;
-}
-
-.contact-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.contact-icon {
-    width: 32px;
-    height: 32px;
-    background-color: #2951b8;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    font-size: 16px;
-    flex-shrink: 0; /* Impede que o ícone encolha em telas pequenas */
-}
-
-.contact-text {
-    color: #4a4a4a;
-    font-size: 16px;
-    margin: 0;
-    flex: 1; /* Permite que o texto ocupe o espaço disponível */
-}
-
-.back-button {
-    background-color: #2951b8;
-    color: #ffffff;
-    border: none;
-    border-radius: 25px;
     width: 200px;
-    height: 45px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    align-self: center;
-    transition: background-color 0.3s ease;
+    height: auto;
 }
 
-.back-button:hover {
-    background-color: #1f3e8e;
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: 10rem; 
+
+.colunas {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px; 
+    width: 1;
 }
 
-.faq-title {
-    color: #1f3e8e;
+.coluna-esquerda, .coluna-direita {
+    width: 45%;
+    padding: 20px;
+    background: transparent;
+}
+
+.titulo-esquerda {
+    font-size: 1.6rem;
+    color: var(--azulPrincipal);
     font-weight: 700;
-    font-size: 28px;
-    margin: 0 0 20px 0;
-}
-
-.faq-list {
-    list-style-type: disc;
-    padding-left: 20px;
-    margin: 0;
-}
-
-.faq-list li {
-    color: #333;
-    font-size: 16px;
-    line-height: 1.6;
+    text-align: center;
     margin-bottom: 15px;
 }
 
-/* Responsividade para tablets (768px a 1024px) */
-@media (max-width: 1024px) and (min-width: 769px) {
-    .container {
-        padding: 60px 40px 50px;
-        max-width: 100%;
-    }
-
-    .logo {
-        left: 40px;
-    }
-
-    .left-column, .right-column {
-        padding-right: 20px;
-        padding-left: 20px;
-    }
-
-    .divider {
-        margin: 0 20px;
-    }
+.texto-suporte-esquerda {
+    color: var(--preto);
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 400;
 }
 
-/* Responsividade para mobile (menor que 768px) */
-@media (max-width: 768px) {
-    body {
-        line-height: 1.5; /* Linha ligeiramente menor para mobile */
-    }
+.contato {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    margin-left: 6rem;
+    font-weight: 300;
+}
+#icons {
+    width: 500px;
+    display: flex;
+    align-items: center;
+    /* border: 2px solid black; */
+}
+#icons i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    height: 40px;
+    width: 40px;
+    background-color: var(--azulPrincipal);
+    border-radius: 9px;
 
-    .container {
-        padding: 40px 20px 40px;
-        flex-direction: column;
-        min-height: auto; /* Remove altura mínima para mobile */
-    }
-
-    .logo {
-        position: static; /* Remove posição absoluta para centralizar */
-        display: block;
-        margin: 0 auto 20px;
-        width: 100px; /* Logo menor em mobile */
-        left: auto;
-        top: auto;
-    }
-
-    .columns {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .divider {
-        display: none; /* Remove divisor em mobile */
-    }
-
-    .left-column, .right-column {
-        padding: 0;
-        margin-bottom: 40px;
-        justify-content: flex-start; /* Remove centralização vertical em mobile */
-    }
-
-    .main-title, .faq-title {
-        font-size: 24px; /* Títulos menores */
-        text-align: center; /* Centraliza títulos em mobile */
-    }
-
-    .back-button {
-        width: 100%;
-        max-width: 200px; /* Mantém limite, mas flexível */
-        align-self: center;
-    }
-
-    .faq-list {
-        padding-left: 15px; /* Padding menor para lista em mobile */
-    }
-
-    .faq-list li {
-        font-size: 15px;
-        margin-bottom: 12px;
-    }
-
-    .contact-item {
-        justify-content: center; /* Centraliza itens de contato em mobile */
-    }
+}
+.email-contato, .numero-contato {
+    gap: 12px; 
 }
 
-/* Responsividade para telas muito pequenas (ex: < 480px) */
-@media (max-width: 480px) {
-    .container {
-        padding: 30px 15px 30px;
-    }
+.imagem-email, .imagem-telefone {
+    background-color: var(--azulClaro);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 15px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    background-color: var(--azulPrincipal);
+}
 
-    .main-title, .faq-title {
-        font-size: 22px;
-    }
 
-    .support-text, .contact-text, .faq-list li {
-        font-size: 14px;
-    }
+.texto-email, .numero-telefone {
+    color: var(--preto);
+    font-size: 1rem;
+}
 
-    .contact-icon {
-        width: 28px;
-        height: 28px;
-        font-size: 14px;
-    }
+.botao-voltar {
+    background-color: var(--azulPrincipal);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 20px;
+    /* display: flex; */
+    text-align: center;
+    width: 70%;
+    /* border: 2px solid black; */
+    margin-left: 15%;
+}
+
+.botao-voltar:hover {
+    background-color: #15307b;
+}
+
+.divisao {
+    width: 1px;
+    height: 420px;
+    background-color: var(--preto);
+}
+
+.coluna-direita {
+    text-align: left;
+}
+
+.titulo-direita {
+    color: var(--azulPrincipal);
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.texto-suporte-direita {
+    list-style: disc;
+    padding-left: 25px;
+    color: var(--preto);
+    font-size: small;
+    line-height: 1.6;
+}
+
+.texto-suporte-direita li {
+    margin-bottom: 15px; 
+}
+
+.texto-suporte li {
+    margin-bottom: 15px;
 }

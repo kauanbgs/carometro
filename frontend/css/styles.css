@@ -13,7 +13,6 @@
   --sucesso: #CAF6A7;
   --preto: #000000;
   --textoNotificacoes: #606060;
-  --textoOpaco: rgba(0, 0, 0, 0.3);
 }
 
 *{
@@ -23,7 +22,7 @@
 }
 
 body{
-  font-family: sans-serif;
+  font-family: "Montserrat", "sans-serif";
   background-color: var(--back);
   color: var(--textoCinzaSuporte);
 }
