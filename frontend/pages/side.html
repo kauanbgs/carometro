@@ -1,70 +1,73 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar Modelo SENAI</title>
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <title>Gerenciar adms</title>
 </head>
 <body>
+  <aside class="sidebar">
+    <header class="sidebar-header">
+      <img class="logo" src="../images/SenaiLogo.png" alt="Imagem do Usuário">
+    </header>
 
-    <nav class="sidebar">
-        <div class="sidebar-header">
-            <img src="/images/SenaiLogo.png" alt="Logo SENAI" class="logo">
-        </div>
+    <nav class="sidebar-nav">
+      <button>
+        <span>
+          <i class="fa-etch fa-solid fa-house "></i>
+          <span>Home</span>
+        </span>
+      </button>
 
-        <ul class="nav-menu">
-            <li>
-                <a href="#" class="nav-link active">
-                    <i class="fas fa-home"></i> <span>Home</span>
-                </a>
-            </li>
+      <div></div>
 
-            <hr class="divider">
+      <div></div>
 
-            <li class="section-title">ALUNOS</li>
-            <li>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-users"></i> <span>Gerenciar Turmas</span>
-                </a>
-            </li>
 
-            <hr class="divider">
+      <div class="separador"></div>
+      
+      <h2 class="titulos-sidebar">ALUNOS</h2>   
+      <button>
+        <span>
+            <i class="fa-etch fa-solid fa-users"></i>
+            <span> Gerenciar Turmas</span>
+        </span>
+      </button>
+      
+      <div class="separador"></div>
 
-            <li class="section-title">ADMINS</li>
-            <li>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-user-shield"></i> <span>Gerenciar Admins</span>
-                </a>
-            </li>
-
-            <li class="section-title">DEV</li>
-            <li>
-                <a href="#" class="nav-link">
-                    <i class="fas fa-user-gear"></i> <span>Gerenciar Docentes</span>
-                </a>
-            </li>
-        </ul>
-
-        <div class="sidebar-footer">
-            <div class="footer-links">
-                <a href="#">Termos de serviço</a>
-                <a href="#">Política de privacidade</a>
-            </div>
-            <div class="user-profile">
-                <i class="fas fa-user-circle"></i>
-                <span>Kauan Borges</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-        </div>
+        <h2 class="titulos-sidebar">DOCENTE</h2>
+      <button>
+        <span>
+            <i class="fa-etch fa-solid fa-users">  </i>
+          <span>Sugerir um Docente</span>
+        </span>
+      </button>
+        <h2 class="titulos-sidebar">DEV</h2>
+            <button>
+        <span>
+            <i class="fa-etch fa-solid fa-users">  </i>
+          <span>Criar ou Editar Docentes    </span>
+        </span>
+      </button>
     </nav>
 
-    <main class="main-content">
-        <h1>Conteúdo da Página</h1>
-        <p>O resto do seu site ficaria aqui.</p>
-    </main>
+    <div class="termos">
+        <h6>Termos de seviços</h6>
+        <h6>Politicas de privacidade</h6>
+    </div>
 
+    <div class="perfil">
+        <img src="../images/fallen.jpg" alt="Imagem de perfil">
+        <h6>Fallen Borges</h6>
+        <span class="fa-etch fa-solid fa-chevron-down"></span>
+    </div>
+
+  </aside>
+  
 </body>
 </html>
