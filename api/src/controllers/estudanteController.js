@@ -49,14 +49,11 @@ module.exports = class estudanteController {
     }
     static async updateEstudante(req, res) {
         const { id_estudante, nome, email, telefone, data_criacao, status, numero_aluno, fk_id_turma } = req.body;
-        if(!id_estudante || !nome || !email || !telefone || !data_criacao || !status || !numero_aluno || !fk_id_turma){
+        if(!nome || !email || !telefone || !data_criacao || !status || !numero_aluno || !fk_id_turma){
             return res.status(400). json({error: "Todos os campos devem ser preenchidos"});
         }
 
-        const query = `
-            UPDATE estudante SET nome=?, email=?, telefone=?, data_criacao=?, status=?, numero_aluno=?, fk_id_turma=?
-            WHERE id_estudante=?
-            `
+        const query = `UPDATE estudante SET nome=?, email=?, telefone=?, data_criacao=?, status=?, numero_aluno=?, fk_id_turma=?WHERE id_estudante=?`
         const value =[nome, email, telefone, data_criacao, status, numero_aluno, fk_id_turma, id_estudante];
         
         try {
