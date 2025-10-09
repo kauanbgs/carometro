@@ -40,15 +40,19 @@ i {
     font-family: "Montserrat", "arial-sans";
     display: flex;
     flex-direction: column;
-    width: 20vw;
-    height:100vh;
+    width: 20%;
+    height:100%;
     background-color: var(--background);
     border-radius: 0px 5vh 0px 0px;
-    border: 2px solid rgb(89, 255, 0);
+    /* border: 2px solid rgb(89, 255, 0); */
     justify-self: flex-start;
     align-self: flex-start;
-    
+    position: fixed;
+    left: 0;
+    overflow: scroll;
+    scrollbar-width: none;
 }
+
 
 
 .sidebar header{
@@ -69,7 +73,7 @@ i {
     height: fit-content;
     margin-top: 3rem; 
     align-items: center;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     
 }
 
@@ -116,7 +120,7 @@ i {
     gap: 10px;   
     align-items: center;
     color: var(--preto);
-    border: 2px solid rgb(89, 255, 0);
+    /* border: 2px solid rgb(89, 255, 0); */
 
 }
 
@@ -140,24 +144,24 @@ i {
     border: 1.5px solid var(--preto);
 }
 
-.body-central{
+.container{
     font-family: "Montserrat", "sans-serif";
     display: flex;
-    height: 100%;
-    width: 75.5vw;
+    height: 100vh;
+    width: 77.5vw;
     background-color: var(--background);
-    border: 2px solid red;
+    /* border: 2px solid red; */
     border-radius: 5vh 0px 0px 0px;
 }
 
 body{
     display: flex;
     flex-direction: row-reverse;
-    border: 3px solid rgb(255, 251, 6);
+    /* border: 3px solid rgb(255, 251, 6); */
     background-color: var(--back);
     justify-content: space-between;
 }
 
 .foot{
-    margin-top: 135px;
+    margin-top: 75px;
 }
