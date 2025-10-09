@@ -20,7 +20,6 @@ i {
 .sidebar nav button {
   display: flex;
   gap: 10px;             
-  background: none;
   border: none;
   color: var(--preto);
   font-size: small;

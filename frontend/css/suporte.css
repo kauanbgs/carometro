@@ -5,7 +5,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-body {
+#body-suporte {
     background-color: var(--background);
     color: var(--textoCinza);
     display: flex;
@@ -41,7 +41,6 @@ body {
 .coluna-esquerda, .coluna-direita {
     width: 45%;
     padding: 20px;
-    background: transparent;
 }
 
 .titulo-esquerda {

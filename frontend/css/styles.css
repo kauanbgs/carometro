@@ -26,3 +26,14 @@ body{
   background-color: var(--back);
   color: var(--textoCinzaSuporte);
 }
+
+footer {
+  background-color: transparent; /* Cor de fundo escura */
+  color: white; /* Cor do texto do rodapé */
+  text-align: center; /* Centraliza o texto */
+  padding: 15px 0; /* Espaçamento interno no topo e na base */
+  width: 100%; /* Faz com que o rodapé ocupe toda a largura */
+  position: absolute; /* Posiciona o rodapé de forma absoluta */
+  bottom: 0; /* Posiciona o rodapé na parte inferior da página */
+  font-size: xx-small;
+}
