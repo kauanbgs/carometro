@@ -73,7 +73,7 @@ module.exports = class docenteController {
       return res.status(500).json({ error: "Erro interno no servidor" });
     }
   }
-  static async getDocenteByNome(req, res) {
+  static async getDocenteByName(req, res) {
     const { nome } = req.params;
     const query = `SELECT * FROM docente WHERE nome LIKE ?`;
     const value = [`%${nome}%`];
@@ -95,32 +95,37 @@ module.exports = class docenteController {
   }
 
   static async updateDocente(req, res) {
-    const { id_docente, email, senha, nome, tipo } = req.body;
-    if (!email || !senha || !nome || !id_docente) {
+    const { id_docente, senha, nome, tipo } = req.body;
+
+    if (!senha || !nome || !id_docente) {
       return res
         .status(400)
         .json({ error: "Todos os campos devem ser preenchidos" });
     }
-    const query = `UPDATE docente SET email=?, senha=?, nome=?, tipo=? WHERE id_docente=?`;
-    const value = [email, senha, nome, tipo, id_docente];
+
+    let query;
+    let values;
+
+    if (tipo) {
+      query = `UPDATE docente SET senha = ?, nome = ?, tipo = ? WHERE id_docente = ?`;
+      values = [senha, nome, tipo, id_docente];
+    } else {
+      query = `UPDATE docente SET senha = ?, nome = ? WHERE id_docente = ?`;
+      values = [senha, nome, id_docente];
+    }
 
     try {
-      connect.query(query, value, function (err, results) {
+      connect.query(query, values, function (err, results) {
         if (err) {
           console.log(err);
-          if (err.code === "ER_DUP_ENTRY") {
-            return res
-              .status(409)
-              .json({ error: "Email já está sendo usado por outro docente." });
-          }
           return res.status(500).json({ error: "Erro interno no servidor!" });
         }
         if (results.affectedRows === 0) {
-          return res.status(404).json({ error: "Usuario nao encontrado!" });
+          return res.status(404).json({ error: "Usuário não encontrado!" });
         }
         return res
           .status(200)
-          .json({ message: "Usuário atualizado com ID: " + id_docente });
+          .json({ message: "Usuário atualizado com sucesso!", id_docente });
       });
     } catch (error) {
       console.error("Erro ao executar consulta", error);
