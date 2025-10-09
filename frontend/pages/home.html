@@ -1,109 +1,76 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carômetro do SENAI - Franca</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/home.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <title>Página home - Carometro </title>
 </head>
 <body>
-    <div class="container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="logo-section">
-                <img src="../images/SenaiLogo.png" alt="SENAI Logo" class="logo">
-                <div class="franca">Franca</div>
-            </div>
+    <aside class="sidebar">
+    <header class="sidebar-header">
+      <img class="logo" src="../images/SenaiLogo.png" alt="Imagem da Logo">
+    </header>
 
-            <nav class="menu">
-                <div class="menu-item active">
-                    <span class="icon">🏠</span>
-                    <span class="text">Home</span>
-                </div>
+    <nav class="sidebar-nav">
+      <button>
+        <span>
+          <i class="fa-etch fa-solid fa-house "></i>
+          <span>Home</span>
+        </span>
+      </button>
 
-                <div class="section-title">ALUNOS</div>
-                <div class="menu-item">
-                    <span class="icon">👥</span>
-                    <span class="text">Gerenciar Turmas</span>
-                </div>
+      <div></div>
 
-                <div class="section-title">ADMINS</div>
-                <div class="menu-item">
-                    <span class="icon">👥</span>
-                    <span class="text">Gerenciar Admins</span>
-                </div>
+      <div></div>
 
-                <div class="section-title">DEV</div>
-                <div class="menu-item">
-                    <span class="icon">💻</span>
-                    <span class="text">Gerenciar Docentes</span>
-                </div>
-            </nav>
 
-            <footer class="sidebar-footer">
-                <div class="footer-links">
-                    <a href="#" class="footer-link">Termos de serviço</a>
-                    <a href="#" class="footer-link">Política de privacidade</a>
-                </div>
-                <div class="user-info">
-                    <div class="avatar"></div>
-                    <span class="user-name">Kauan Borges</span>
-                    <span class="arrow">▼</span>
-                </div>
-            </footer>
-        </aside>
+      <div class="separador"></div>
+      
+      <h2 class="titulos-sidebar">ALUNOS</h2>   
+      <button>
+        <span>
+            <i class="fa-etch fa-solid fa-users"></i>
+            <span> Gerenciar Turmas</span>
+        </span>
+      </button>
+      
+      <div class="separador"></div>
 
-        <!-- Main Panel -->
-        <main class="main-panel">
-            <header class="main-title">
-                <h1>
-                    <span class="dark-text">Bem vindo ao</span>
-                    <span class="blue-text">Carômetro</span>
-                    <span class="dark-text">do SENAI - Franca!</span>
-                </h1>
-            </header>
+        <h2 class="titulos-sidebar">DOCENTE</h2>
+      <button>
+        <span>
+            <i class="fa-etch fa-solid fa-users">  </i>
+          <span>Sugerir um Docente</span>
+        </span>
+      </button>
+        <h2 class="titulos-sidebar">DEV</h2>
+            <button>
+        <span>
+            <i class="fa-etch fa-solid fa-users">  </i>
+          <span>Criar ou Editar Docentes    </span>
+        </span>
+      </button>
+    </nav>
 
-            <!-- Card 1: Editar / Criar Turma -->
-            <section class="card edit-create-card">
-                <div class="column left">
-                    <h2>Deseja <span class="orange-text">editar</span> uma turma?</h2>
-                    <p>Alguma nova notificação ou alteração na turma? Gerencie agora!</p>
-                    <button class="orange-button">Clique aqui e comece</button>
-                </div>
-                <div class="column right">
-                    <h2>Pronto para <span class="orange-text">criar</span> uma turma?</h2>
-                    <p>Usuários com permissão de administrador podem editar e ou criar turmas.</p>
-                    <button class="orange-button">Clique aqui e comece</button>
-                </div>
-            </section>
-
-            <!-- Card 2: Últimas Ocorrências / Últimos Registros -->
-            <section class="card occurrences-card">
-                <div class="column left">
-                    <h2>Últimas Ocorrências</h2>
-                    <div class="occurrences-list">
-                        <div class="occurrence red">Euller Aplicou uma ocorrência em Kauan por má conduta <span class="arrow">▼</span></div>
-                        <div class="occurrence green">Adriano editou o perfil de Kauan Borges Plaza <span class="arrow">▼</span></div>
-                        <div class="occurrence red">Adriano Deletou Arthur Cintra de Lacerda de 1C-DS <span class="arrow">▼</span></div>
-                        <div class="occurrence green">Adriano editou o perfil de Luiz Felipe Campos Margato <span class="arrow">▼</span></div>
-                        <div class="occurrence red">Euller Aplicou uma ocorrência em Luiz Felipe por má conduta <span class="arrow">▼</span></div>
-                    </div>
-                </div>
-                <div class="column right">
-                    <h2>Últimos Registros</h2>
-                    <div class="tags-list">
-                        <span class="tag">Kauan Borges Plaza - 1C-DS</span>
-                        <span class="tag">Luiz Felipe Campos - 1C-DS</span>
-                        <span class="tag">Arthur Cintra de L. - 1C-DS</span>
-                        <span class="tag">Arthur Cintra Faleiros - 1C-DS</span>
-                        <span class="tag">Arthur Marques - 1C-DS</span>
-                    </div>
-                </div>
-            </section>
-        </main>
+    <div class="termos">
+        <h6>Termos de seviços</h6>
+        <h6>Politicas de privacidade</h6>
     </div>
+
+    <div class="perfil">
+        <img src="../images/fallen.jpg" alt="Imagem de perfil">
+        <h6>Fallen Borges</h6>
+        <span class="fa-etch fa-solid fa-chevron-down"></span>
+    </div>
+
+  </aside>
+
+  <body>
+    
+  </body>
 </body>
 </html>
