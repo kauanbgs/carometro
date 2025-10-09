@@ -8,7 +8,6 @@
     
 }
 
-
 i {
     display: flex;
     align-items: center;
@@ -27,7 +26,7 @@ i {
   width: 80%;             
   padding: 4px 4px;
   border-radius: 8px;
-
+  font-weight: 300;
 }
 
 .sidebar nav button span {
@@ -38,14 +37,19 @@ i {
 
 
 .sidebar {
-    font-family: "Montserrat", "sans-serif";
+    font-family: "Montserrat", "arial-sans";
     display: flex;
     flex-direction: column;
-    width: 20.2%;
+    width: 20vw;
     height:100vh;
     background-color: var(--background);
     border-radius: 0px 5vh 0px 0px;
+    border: 2px solid rgb(89, 255, 0);
+    justify-self: flex-start;
+    align-self: flex-start;
+    
 }
+
 
 .sidebar header{
     display: flex;
@@ -62,32 +66,40 @@ i {
     flex-direction: column;
     gap: 14px;
     width: 100%;
-    height: 65%;
+    height: fit-content;
     margin-top: 3rem; 
     align-items: center;
-    /* border: 2px solid red; */
+    border: 2px solid red;
+    
 }
 
 .titulos-sidebar{
     color: var(--azulPrincipal);
     /* border: 2px solid red; */
     font-size: medium;
+
 }
 .sidebar nav span{
+    font-family: "Montserrat", "arial-sans";
     text-align: left;
-    /* border: 2px solid blue; */
     display: flex;
-    
+    font-weight: 300;
+    text-wrap: nowrap;
 }
 
 .termos{
+    font-family: "Montserrat", "arial-sans";
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    /* border: 2px solid blue; */
     color: var(--preto);
     gap: 2px;
     font-size: small;
+    margin-bottom: 25px;
+}
+.termos h6 {
+    font-weight: 300;
+    font-size: x-small;
 }
 
 .termos, .perfil{
@@ -96,7 +108,7 @@ i {
 }
 
 .perfil{
-    margin-top: 25px;
+    margin-bottom: 25px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -104,6 +116,8 @@ i {
     gap: 10px;   
     align-items: center;
     color: var(--preto);
+    border: 2px solid rgb(89, 255, 0);
+
 }
 
 .perfil h6{
@@ -124,4 +138,26 @@ i {
     height: auto;
     border-radius: 50px;
     border: 1.5px solid var(--preto);
+}
+
+.body-central{
+    font-family: "Montserrat", "sans-serif";
+    display: flex;
+    height: 100%;
+    width: 75.5vw;
+    background-color: var(--background);
+    border: 2px solid red;
+    border-radius: 5vh 0px 0px 0px;
+}
+
+body{
+    display: flex;
+    flex-direction: row-reverse;
+    border: 3px solid rgb(255, 251, 6);
+    background-color: var(--back);
+    justify-content: space-between;
+}
+
+.foot{
+    margin-top: 135px;
 }
