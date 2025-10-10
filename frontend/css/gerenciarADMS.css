@@ -1,0 +1,49 @@
+.voltar{
+    display: flex;
+    /* border: 2px solid red; */
+    align-items: center;
+    align-self: flex-start;
+    margin-left: 5vw;
+    margin-top: 5vw;
+    color: var(--textoNotificacoes);
+}
+
+.opcoes-docente{
+    display: flex;
+    border-radius: 15px;
+    font-family: "Montserrat", sans-serif;
+    flex-direction: row;
+    align-items: top;
+    gap: 75px;
+    margin-top: 30px;
+}
+
+.separador-vertical{
+    display: flex;
+    border: 0.2px solid rgb(0, 0, 0);
+    height: 30vw;
+}
+
+.info-esquerda h1{
+    color: var(--preto);
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 400;
+    margin-top: 50px;
+}
+
+.info-esquerda p{
+    color: var(--preto);
+}
+
+.info-direita h1{
+    color: var(--preto);
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 400;
+    margin-top: 50px;
+}
+
+.info-direita p{
+    color: var(--preto);
+}

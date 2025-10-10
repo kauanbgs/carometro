@@ -96,24 +96,23 @@
 
 }
 .lista-ocorrencias{
-    border: 2px solid red;
-    
+  border: 2px solid red;
 }
 .ocorrencia-laranja {
-    font-size: medium;
-    background-color: var(--laranjaSecundario);
-    border-radius: 5px;
+  font-size: medium;
+  background-color: var(--laranjaSecundario);
+  border-radius: 5px;
   }
 
-  .ocorrencia-verde {
-    font-size: medium;
-    background-color: var(--sucesso);
-    border-radius: 5px;
-  }
+.ocorrencia-verde {
+  font-size: medium;
+  background-color: var(--sucesso);
+  border-radius: 5px;
+}
 
-  .ocorrencia-vermelha {
-    font-size: medium;
-    background-color: var(--erro);
-    border-radius: 5px;
-  }
+.ocorrencia-vermelha {
+  font-size: medium;
+  background-color: var(--erro);
+  border-radius: 5px;
+}
   
