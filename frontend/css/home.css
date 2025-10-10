@@ -1,5 +1,4 @@
 .titulo-home strong {
-  /* display: flex; */
   color: var(--azulSecundario);
   font-weight: 400;
 }
@@ -9,13 +8,11 @@
   color: var(--preto);
   font-weight: 400;
   font-size: 40px;
-  /* border: 2px solid red; */
   height: fit-content;
   width: fit-content;
 }
 
 .container {
-  /* border: 2px solid blue; */
   display: flex;
   overflow: scroll;
   overflow-x: hidden;
@@ -26,7 +23,15 @@
   margin-left: 80px;
   flex-direction: column;
   margin-top: 85px;
-  gap: 55px;
+  gap: 55px; 
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  gap: 55px; 
+  border: 2px solid red;
 }
 
 .infos-turma {
@@ -36,6 +41,10 @@
   flex-direction: row;
   background-color: white;
   box-shadow: 2px 4px 25px 1px;
+  padding: 75px 40px 75px 40px;
+  height: 39%;
+  background-color: var(--background);
+  gap: 65px;
 }
 
 #infos button {
@@ -71,14 +80,6 @@
   font-weight: 400;
 }
 
-.infos-turma {
-  padding: 75px 40px 75px 40px;
-  width: fit-content;
-  height: 39%;
-  background-color: var(--background);
-  gap: 65px;
-}
-
 .separador-vertical {
   border: 1px solid black;
 }
@@ -89,16 +90,13 @@
   display: flex;
   flex-direction: row;
   box-shadow: 2px 4px 25px 1px;
-  border: 2px solid red;
-  padding: 0 0 0 -40px;
-
+  padding: 0; 
 }
 
 .ocorrencia h2 {
   font-size: medium;
   color: var(--preto);
   text-align: center;
-
 }
 
 .coluna-esquerda {
@@ -124,8 +122,6 @@
 }
 
 .lista-ocorrencias {
-  /* border: 2px solid red; */
-  /* width: fit-content; */
   align-items: center;
   color: var(--preto);
   text-wrap: nowrap;
@@ -156,25 +152,11 @@
   background-color: var(--erro);
 }
 
-
-.lista-ocorrencias {
-  /* width: fit-content; */
-  align-items: center;
-  color: var(--preto);
-  text-wrap: nowrap;
-  text-align: center;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 20px;
-}
-
 .lista-ocorrencias span {
-  /* border: 2px solid red; */
   cursor: pointer;
 }
 
 .lista-registros {
-  /* width: fit-content; */
   align-items: center;
   color: var(--preto);
   text-wrap: nowrap;
