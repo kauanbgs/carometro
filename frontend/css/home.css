@@ -63,6 +63,7 @@
   font-weight: 400;
   color: black;
   text-wrap: nowrap;
+  font-size: x-large;
 }
 
 .infos-turma strong {
@@ -71,7 +72,7 @@
 }
 
 .infos-turma {
-  padding: 25px;
+  padding: 75px 40px 75px 40px;
   width: fit-content;
   height: 39%;
   background-color: var(--background);
@@ -81,12 +82,16 @@
 .separador-vertical {
   border: 1px solid black;
 }
+
 .ocorrencia {
   border-radius: 15px;
   font-family: "Montserrat", sans-serif;
   display: flex;
   flex-direction: row;
   box-shadow: 2px 4px 25px 1px;
+  border: 2px solid red;
+  padding: 0 0 0 -40px;
+
 }
 
 .ocorrencia h2 {
@@ -95,24 +100,96 @@
   text-align: center;
 
 }
-.lista-ocorrencias{
-  border: 2px solid red;
+
+.coluna-esquerda {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+  margin-bottom: 30px;
+  border-radius: 15px;
+  background-color: var(--back);
+  box-shadow: 2px 4px 25px 1px;
+  gap: 10px;
 }
-.ocorrencia-laranja {
+
+.coluna-direita {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+  margin-bottom: 30px;
+  border-radius: 15px;
+  background-color: var(--back);
+  box-shadow: 2px 4px 25px 1px;
+  gap: 10px;
+}
+
+.lista-ocorrencias {
+  /* border: 2px solid red; */
+  /* width: fit-content; */
+  align-items: center;
+  color: var(--preto);
+  text-wrap: nowrap;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+.ocorrencia-item {
   font-size: medium;
+  border-radius: 25px;
+  margin: 15px;
+  padding: 15px;
+  color: var(--preto);
+  border: .5px solid rgba(0, 0, 0, 0.52);
+}
+
+.ocorrencia-item.cor-laranja {
   background-color: var(--laranjaSecundario);
-  border-radius: 5px;
-  }
+}
 
-.ocorrencia-verde {
-  font-size: medium;
+.ocorrencia-item.cor-verde {
   background-color: var(--sucesso);
-  border-radius: 5px;
 }
 
-.ocorrencia-vermelha {
-  font-size: medium;
+.ocorrencia-item.cor-vermelha {
   background-color: var(--erro);
-  border-radius: 5px;
 }
-  
+
+
+.lista-ocorrencias {
+  /* width: fit-content; */
+  align-items: center;
+  color: var(--preto);
+  text-wrap: nowrap;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+.lista-ocorrencias span {
+  /* border: 2px solid red; */
+  cursor: pointer;
+}
+
+.lista-registros {
+  /* width: fit-content; */
+  align-items: center;
+  color: var(--preto);
+  text-wrap: nowrap;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+.registro {
+  font-size: medium;
+  border-radius: 25px;
+  margin: 15px;
+  padding: 15px;
+  color: var(--azul);
+  border: .5px solid rgba(0, 0, 0, 0.52);
+  background-color: var(--azulSecundario);
+}
