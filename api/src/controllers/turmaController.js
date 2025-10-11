@@ -1,6 +1,6 @@
 const connect = require("../db/connect");
 
-module.exports = class estudanteController {
+module.exports = class turmaController {
   static async createTurma(req, res) {
     const { nome, fk_id_docente } = req.body;
 
@@ -117,7 +117,7 @@ module.exports = class estudanteController {
           return res.status(500).json({ error: "Erro interno no servidor" });
         }
         if (results.length === 0) {
-          return res.status(404).json({ error: "Usuario não encontrado!" });
+          return res.status(404).json({ error: "Turma não encontrada!" });
         }
         return res.status(200).json({ message: `Turma: `, turma: results });
       });
@@ -128,7 +128,6 @@ module.exports = class estudanteController {
   }
 
   static async updateTurma(req, res) {
-    // console.log("Rs")
     const { nome } = req.body;
     const { id_turma } = req.params
 

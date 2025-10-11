@@ -9,11 +9,18 @@ module.exports = class estudanteController {
       data_criacao,
       status,
       numero_aluno,
-      fk_id_turma
+      fk_id_turma,
     } = req.body;
 
     if (
-      !nome || !email || !telefone || !data_criacao || !status || !numero_aluno || !fk_id_turma) {
+      !nome ||
+      !email ||
+      !telefone ||
+      !data_criacao ||
+      !status ||
+      !numero_aluno ||
+      !fk_id_turma
+    ) {
       return res
         .status(400)
         .json({ error: "Todos os campos devem ser preenchidos" });
@@ -27,7 +34,7 @@ module.exports = class estudanteController {
       data_criacao,
       status,
       numero_aluno,
-      fk_id_turma
+      fk_id_turma,
     ];
 
     connect.query(query, values, function (err, results) {
@@ -76,9 +83,13 @@ module.exports = class estudanteController {
     const value = [id_estudante];
     try {
       connect.query(query, value, function (err, results) {
-        if (err) {
-          console.log(err);
-          return res.status(500).json({ error: "Erro interno no servidor" });
+        if (err.code == "")
+          if (err) {
+            console.log(err);
+            return res.status(500).json({ error: "Erro interno no servidor" });
+          }
+        if (results.length === 0) {
+          return res.status(404).json({ error: "Estudante não encontrado" });
         }
         return res
           .status(200)
@@ -98,6 +109,9 @@ module.exports = class estudanteController {
         if (err) {
           console.log(err);
           return res.status(500).json({ error: "Erro interno no servidor" });
+        }
+        if (results.length === 0) {
+          return res.status(404).json({ error: "Estudante não encontrado" });
         }
         return res
           .status(200)
@@ -133,7 +147,7 @@ module.exports = class estudanteController {
   }
 
   static async updateEstudante(req, res) {
-    console.log("rs")
+    console.log("rs");
     const {
       nome,
       email,
@@ -142,7 +156,7 @@ module.exports = class estudanteController {
       status,
       numero_aluno,
       fk_id_turma,
-      id_estudante 
+      id_estudante,
     } = req.body;
     if (
       !nome ||
