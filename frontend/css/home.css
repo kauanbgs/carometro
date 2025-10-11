@@ -31,7 +31,6 @@
   flex-direction: column;
   width: fit-content;
   gap: 55px; 
-  border: 2px solid red;
 }
 
 .infos-turma {

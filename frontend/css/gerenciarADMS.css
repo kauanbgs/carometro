@@ -6,6 +6,7 @@
     margin-left: 5vw;
     margin-top: 5vw;
     color: var(--textoNotificacoes);
+    cursor: pointer;
 }
 
 .opcoes-docente{
@@ -46,4 +47,10 @@
 
 .info-direita p{
     color: var(--preto);
+}
+
+.link{
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
 }
