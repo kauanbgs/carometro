@@ -59,6 +59,7 @@
   color: var(--preto);
   font-size: medium;
   text-decoration: none;
+  cursor: pointer;
 }
 
 #infos p {

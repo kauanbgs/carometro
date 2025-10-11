@@ -26,7 +26,7 @@
             <h1>Deseja <strong>editar</strong> uma turma?</h1>
             <p>Alguma nova notificação ou alteração na <br>turma? gerencie agora!</p>
             <button>
-              <a href="#">Clique aqui e comece</a>
+              <a onclick="window.location.href='../pages/gerenciarTurmas.html'">Clique aqui e comece</a>
             </button>
           </div>
 
@@ -36,7 +36,7 @@
             <h1>Pronto para <strong>criar</strong> uma turma?</h1>
             <p>Usuários com permissão de administrador <br>podem editar e ou criar turmas.</p>
             <button>
-              <a href="#">Clique aqui e comece</a>
+              <a onclick="window.location.href='../pages/gerenciarTurmas.html'">Clique aqui e comece</a>
             </button>
           </div>
         </nav>
@@ -93,32 +93,39 @@
       <button>
         <span>
           <i class="fa-etch fa-solid fa-house "></i>
-          <span>Home</span>
+          <a onclick="window.location.href='../pages/home.html'">Home</a>
         </span>
       </button>
+
       <div></div>
+
       <div></div>
+
+
       <div class="separador"></div>
+
       <h2 class="titulos-sidebar">ALUNOS</h2>
       <button>
         <span>
           <i class="fa-etch fa-solid fa-users"></i>
-          <span> Gerenciar Turmas</span>
+          <a onclick="window.location.href='../pages/gerenciarTurmas.html'"> Gerenciar Turmas</a>
         </span>
       </button>
+
       <div class="separador"></div>
+
       <h2 class="titulos-sidebar">DOCENTE</h2>
       <button>
         <span>
           <i class="fa-etch fa-solid fa-users"> </i>
-          <span>Gerenciar Docente</span>
+          <a onclick="window.location.href='#'">Gerenciar Docente</a>
         </span>
       </button>
       <h2 class="titulos-sidebar">DEV</h2>
       <button>
         <span>
           <i class="fa-etch fa-solid fa-users"> </i>
-          <span onclick="window.location.href='../pages/gerenciarADMS.html'" >Criar ou Editar Docentes </span>
+          <a onclick="window.location.href='../pages/gerenciarADMS.html'">Criar ou Editar Docentes </a>
         </span>
       </button>
     </nav>
@@ -127,12 +134,14 @@
         <h6>Termos de seviços</h6>
         <h6>Politicas de privacidade</h6>
       </div>
+
       <div class="perfil">
         <img src="../images/fallen.jpg" alt="Imagem de perfil">
         <h6>Fallen Borges</h6>
-        <span class="fa-etch fa-solid fa-chevron-down"></span>
+        <i class="fa-etch fa-solid fa-chevron-down"></i>
       </div>
     </div>
+
   </aside>
 
 </body>
