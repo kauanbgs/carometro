@@ -231,6 +231,19 @@
     margin-left: 15px;
 }
 
+.adicionar-aluno p {
+    display: flex;
+    font-weight: 100;
+    color: var(--preto);
+    margin: 0;
+    text-wrap: nowrap;
+}
+
+.adicionar-aluno i {
+    display: flex;
+    color: black;
+}
+
 .alunos {
     display: flex;
     margin-left: 25px;
