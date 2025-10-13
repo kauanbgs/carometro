@@ -1,0 +1,56 @@
+QUERIES docente{
+    createDocente:
+        if (tipo){
+        INSERT INTO docente (email, senha, nome, tipo) VALUES (?,?,?,?)
+        } else {
+        INSERT INTO docente (email, senha, nome) VALUES (?,?,?)
+        }
+    readDocente: 
+        SELECT * FROM docente
+    getDocenteByID:
+        SELECT * FROM docente WHERE id_docente=?
+    getDocenteByName: 
+        SELECT * FROM docente WHERE nome LIKE ? 
+        value = [`%${nome}%`];
+    updateDocente:
+        if(tipo){
+          UPDATE docente SET senha = ?, nome = ?, tipo = ? WHERE id_docente = ?
+        } else {
+          UPDATE docente SET senha = ?, nome = ? WHERE id_docente = ?
+        }
+    deleteDocente:
+        DELETE FROM docente WHERE id_docente=?
+}
+
+QUERIES estudante{
+    createEstudante:
+        INSERT INTO estudante (nome, email, telefone, data_criacao, status, numero_aluno, fk_id_turma) VALUES (?, ?, ?, ?, ?, ?, ?)
+    readEstudante:
+        SELECT * FROM estudante
+    getEstudanteByID:
+        SELECT * FROM estudante WHERE id_estudante=?
+    getEstudanteByNumero: 
+        SELECT * FROM estudante WHERE numero_aluno=?
+    getEstudanteByName: 
+        SELECT * FROM estudante WHERE nome LIKE ? 
+        value = [`%${nome}%`];
+    updateEstudante:
+        UPDATE estudante SET nome=?, email=?, telefone=?, data_criacao=?, status=?, numero_aluno=?, fk_id_turma=? WHERE id_estudante=?
+    deleteEstudante:
+        DELETE FROM estudante WHERE id_estudante=?
+}
+QUERIES turma {
+    createTurma:
+        INSERT INTO turma (nome, fk_id_docente) VALUES (?, ?)
+    readTurma:
+        SELECT * FROM turma
+    getTurmaByDocenteID:
+        SELECT * FROM turma WHERE fk_id_docente = ?
+    getTurmaByName:
+        SELECT * FROM turma WHERE nome LIKE ?`;
+        value = [`%${nome}%`];
+    updateTurma:
+        UPDATE turma SET nome = ? WHERE id_turma = ?
+    deleteTurma:
+        DELETE FROM turma WHERE id_turma=?
+} 
