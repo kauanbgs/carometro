@@ -178,7 +178,7 @@
     position: relative;
     top: -10px;
     margin-bottom: 20px;
-    
+
 }
 
 .search {
@@ -215,7 +215,7 @@
     border-radius: 10px;
     background-color: var(--background);
     color: rgba(0, 0, 0, 0.5);
-    
+
 }
 
 .adicionar-aluno {
@@ -318,4 +318,107 @@
     font-size: 0.9rem;
     line-height: 1;
     width: fit-content;
+}
+
+.controle-modal {
+    display: none;
+}
+
+.fundo-modal,
+.caixa-modal {
+    display: none;
+}
+
+.fundo-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.caixa-modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--background, #fff);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
+    padding: 28px 30px 34px;
+    width: 720px;
+    max-width: 94vw;
+    z-index: 1001;
+}
+
+#abrir-modal:checked~.fundo-modal,
+#abrir-modal:checked~.caixa-modal {
+    display: block;
+}
+
+.caixa-modal h2 {
+    margin: 0 0 22px 0;
+    text-align: center;
+    color: var(--preto, #111);
+    font-weight: 600;
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+}
+
+.fechar-modal {
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    font-size: 26px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, .6);
+}
+
+.formulario-aluno {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 22px;
+    row-gap: 18px;
+}
+
+.campo,
+.campo-largo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo-largo {
+    grid-column: 1 / -1;
+}
+
+
+.formulario-aluno label {
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 500;
+}
+
+.formulario-aluno input,
+.formulario-aluno select {
+    border: .5px solid rgba(0, 0, 0, 0.35);
+    border-radius: 10px;
+    background: var(--background, #fff);
+    padding: 14px 15px;
+    font-size: 1rem;
+    min-height: 50px;
+    color: #222;
+    outline: none;
+}
+
+.botao-criar {
+    grid-column: 1 / -1;
+    margin-top: 8px;
+    background: #4c80f6;
+    color: #fff;
+    border: 0;
+    border-radius: 10px;
+    padding: 14px 22px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: min(360px, 80%);
+    justify-self: center;
+    cursor: pointer;
 }

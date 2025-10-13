@@ -2,20 +2,63 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/components.css">
-    <link rel="stylesheet" href="../css/editarTurma.css">
-    <title>Editar Turma - Carometro </title>
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/components.css" />
+    <link rel="stylesheet" href="../css/editarTurma.css" />
+    <title>Editar Turma - Carometro</title>
+
 </head>
 
 <body>
-
     <main class="container">
+
+
+        <input type="checkbox" id="abrir-modal" class="controle-modal" />
+
+        <label for="abrir-modal" class="fundo-modal"></label>
+
+        <div class="caixa-modal">
+            <label for="abrir-modal" class="fechar-modal"></label>
+
+            <h2>Criando Aluno</h2>
+
+            <form class="formulario-aluno">
+                <div class="campo-largo">
+                    <label for="nome-aluno">Nome do aluno</label>
+                    <input id="nome-aluno" type="text" required>
+                </div>
+
+                <div class="campo">
+                    <label for="turma-aluno">Turma</label>
+                    <select id="turma-aluno">
+                        <option>1C - DS</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="numero-aluno">Numero</label>
+                    <input id="numero-aluno" type="number" inputmode="numeric" required>
+                </div>
+
+                <div class="campo-largo">
+                    <label for="email-aluno">Email</label>
+                    <input id="email-aluno" type="email" required>
+                </div>
+
+                <div class="campo">
+                    <label for="telefone-aluno">Telefone</label>
+                    <input id="telefone-aluno" type="number" required>
+                </div>
+
+                <button type="submit" class="botao-criar">Criar</button>
+            </form>
+        </div>
+
         <div class="sub-container">
 
             <div class="voltar2">
@@ -29,7 +72,8 @@
             <div class="inputs">
                 <div class="campo">
                     <label for="nome_turma">Nome da turma</label>
-                    <input type="text" name="nome_turma" id="nome_turma" placeholder="1-C Desenvolvimento de Sistemas">
+                    <input type="text" name="nome_turma" id="nome_turma"
+                        placeholder="1-C Desenvolvimento de Sistemas" />
                 </div>
 
                 <div class="campo2">
@@ -53,7 +97,7 @@
             <div class="separador2"></div>
 
             <div class="search">
-                <input type="text" name="nome_aluno" id="nome_aluno" placeholder="Nome do aluno">
+                <input type="text" name="nome_aluno" id="nome_aluno" placeholder="Nome do aluno" />
                 <select id="numero" name="numero-aluno">
                     <option value="">Número</option>
                 </select>
@@ -68,10 +112,10 @@
 
                 <div class="separador-vertical"></div>
 
-                <button class="adicionar-aluno">
+                <label for="abrir-modal" class="adicionar-aluno" role="button">
                     <i class="fa-etch fa-solid fa-circle-plus fa-lg"></i>
                     <p>Adicionar Aluno</p>
-                </button>
+                </label>
             </div>
 
             <div class="alunos">
@@ -164,22 +208,20 @@
         </div>
 
         <div class="linha-paginacao">
-                <span class="seta"></span>
-
-                <div class="paginacao">
-                    <div class="box">0</div>
-                    <a href="#" class="box ativo">1</a>
-                    <div class="box">0</div>
-                </div>
-
-                <span class="seta"></span>
+            <span class="seta"></span>
+            <div class="paginacao">
+                <div class="box">0</div>
+                <a href="#" class="box ativo">1</a>
+                <div class="box">0</div>
             </div>
+            <span class="seta"></span>
+        </div>
 
     </main>
 
     <aside class="sidebar">
         <header class="sidebar-header">
-            <img class="logo" src="../images/SenaiLogo.png" alt="Imagem da Logo">
+            <img class="logo" src="../images/SenaiLogo.png" alt="Imagem da Logo" />
         </header>
 
         <nav class="sidebar-nav">
@@ -191,9 +233,7 @@
             </button>
 
             <div></div>
-
             <div></div>
-
 
             <div class="separador"></div>
 
@@ -214,6 +254,7 @@
                     <a onclick="window.location.href='#'">Gerenciar Docente</a>
                 </span>
             </button>
+
             <h2 class="titulos-sidebar">DEV</h2>
             <button>
                 <span>
@@ -222,6 +263,7 @@
                 </span>
             </button>
         </nav>
+
         <div class="foot">
             <div class="termos">
                 <h6>Termos de seviços</h6>
@@ -229,12 +271,11 @@
             </div>
 
             <div class="perfil">
-                <img src="../images/fallen.jpg" alt="Imagem de perfil">
+                <img src="../images/fallen.jpg" alt="Imagem de perfil" />
                 <h6>Fallen Borges</h6>
                 <i class="fa-etch fa-solid fa-chevron-down"></i>
             </div>
         </div>
-
     </aside>
 
 </body>

@@ -72,7 +72,6 @@
     width: 500px;
     display: flex;
     align-items: center;
-    /* border: 2px solid black; */
 }
 #icons i {
     display: flex;
@@ -119,10 +118,8 @@
     cursor: pointer;
     transition: background 0.3s;
     margin-top: 20px;
-    /* display: flex; */
     text-align: center;
     width: 70%;
-    /* border: 2px solid black; */
     margin-left: 15%;
 }
 

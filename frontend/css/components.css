@@ -32,9 +32,7 @@ i {
 .sidebar nav button span {
     display: flex;
     align-items: center;
-    /* centraliza verticalmente ícone e texto */
     gap: 18px;
-    /* espaço entre o ícone e o texto */
 }
 
 
@@ -46,7 +44,6 @@ i {
     height: 100%;
     background-color: var(--background);
     border-radius: 0px 5vh 0px 0px;
-    /* border: 2px solid rgb(89, 255, 0); */
     justify-self: flex-start;
     align-self: flex-start;
     position: fixed;
@@ -75,13 +72,11 @@ i {
     height: fit-content;
     margin-top: 3rem;
     align-items: center;
-    /* border: 2px solid red; */
 
 }
 
 .titulos-sidebar {
     color: var(--azulPrincipal);
-    /* border: 2px solid red; */
     font-size: medium;
 
 }
@@ -123,12 +118,9 @@ i {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    /* border: 2px solid red; */
     gap: 10px;
     align-items: center;
     color: var(--preto);
-    /* border: 2px solid rgb(89, 255, 0); */
-
 }
 
 .perfil h6 {
@@ -170,7 +162,6 @@ i {
 body {
     display: flex;
     flex-direction: row-reverse;
-    /* border: 3px solid rgb(255, 251, 6); */
     background-color: var(--back);
     justify-content: space-between;
 }

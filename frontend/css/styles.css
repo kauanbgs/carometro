@@ -28,12 +28,12 @@ body{
 }
 
 footer {
-  background-color: transparent; /* Cor de fundo escura */
-  color: white; /* Cor do texto do rodapé */
-  text-align: center; /* Centraliza o texto */
-  padding: 15px 0; /* Espaçamento interno no topo e na base */
-  width: 100%; /* Faz com que o rodapé ocupe toda a largura */
-  position: absolute; /* Posiciona o rodapé de forma absoluta */
-  bottom: 0; /* Posiciona o rodapé na parte inferior da página */
+  background-color: transparent; 
+  color: white; 
+  text-align: center; 
+  padding: 15px 0;
+  width: 100%; 
+  position: absolute; 
+  bottom: 0; 
   font-size: xx-small;
 }
