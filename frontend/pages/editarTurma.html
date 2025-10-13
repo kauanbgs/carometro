@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/editarTurma.css">
+    <title>Editar Turma - Carometro </title>
+</head>
+
+<body>
+
+    <main class="container">
+        <div class="sub-container">
+
+            <div class="voltar2">
+                <i onclick="window.location.href='../pages/home.html'" style="width: 500;"
+                    class="fa-etch fa-solid fa-chevron-left fa-2x"></i>
+                <a onclick="window.location.href='../pages/home.html'">Voltar</a>
+            </div>
+
+            <h1>Editar Turma</h1>
+
+            <div class="inputs">
+                <div class="campo">
+                    <label for="nome_turma">Nome da turma</label>
+                    <input type="text" name="nome_turma" id="nome_turma" placeholder="1-C Desenvolvimento de Sistemas">
+                </div>
+
+                <div class="campo2">
+                    <label for="professor">Professor da turma</label>
+                    <select id="professor" name="professor">
+                        <option value="">Euller</option>
+                    </select>
+                </div>
+
+                <button class="anotacoes">
+                    <i class="fa-regular fa-solid fa-pen-to-square fa-lg"></i>
+                </button>
+
+                <button class="excluir-turma">
+                    <p>Excluir Turma</p>
+                </button>
+            </div>
+
+            <h1>Ver Turma</h1>
+
+            <div class="separador2"></div>
+
+            <div class="search">
+                <input type="text" name="nome_aluno" id="nome_aluno" placeholder="Nome do aluno">
+                <select id="numero" name="numero-aluno">
+                    <option value="">Número</option>
+                </select>
+
+                <select id="status" name="status-aluno">
+                    <option value="">Status</option>
+                </select>
+
+                <button class="pesquisa">
+                    <i class="fa-etch fa-solid fa-search fa-lg"></i>
+                </button>
+
+                <div class="separador-vertical"></div>
+
+                <button class="adicionar-aluno">
+                    <i class="fa-etch fa-solid fa-circle-plus fa-lg"></i>
+                    <p>Adicionar Aluno</p>
+                </button>
+            </div>
+
+            
+        </div>
+
+    </main>
+
+    <aside class="sidebar">
+        <header class="sidebar-header">
+            <img class="logo" src="../images/SenaiLogo.png" alt="Imagem da Logo">
+        </header>
+
+        <nav class="sidebar-nav">
+            <button>
+                <span>
+                    <i class="fa-etch fa-solid fa-house "></i>
+                    <a onclick="window.location.href='../pages/home.html'">Home</a>
+                </span>
+            </button>
+
+            <div></div>
+
+            <div></div>
+
+
+            <div class="separador"></div>
+
+            <h2 class="titulos-sidebar">ALUNOS</h2>
+            <button>
+                <span>
+                    <i class="fa-etch fa-solid fa-users"></i>
+                    <a onclick="window.location.href='../pages/gerenciarTurmas.html'"> Gerenciar Turmas</a>
+                </span>
+            </button>
+
+            <div class="separador"></div>
+
+            <h2 class="titulos-sidebar">DOCENTE</h2>
+            <button>
+                <span>
+                    <i class="fa-etch fa-solid fa-users"> </i>
+                    <a onclick="window.location.href='#'">Gerenciar Docente</a>
+                </span>
+            </button>
+            <h2 class="titulos-sidebar">DEV</h2>
+            <button>
+                <span>
+                    <i class="fa-etch fa-solid fa-users"> </i>
+                    <a onclick="window.location.href='../pages/gerenciarADMS.html'">Criar ou Editar Docentes </a>
+                </span>
+            </button>
+        </nav>
+        <div class="foot">
+            <div class="termos">
+                <h6>Termos de seviços</h6>
+                <h6>Politicas de privacidade</h6>
+            </div>
+
+            <div class="perfil">
+                <img src="../images/fallen.jpg" alt="Imagem de perfil">
+                <h6>Fallen Borges</h6>
+                <i class="fa-etch fa-solid fa-chevron-down"></i>
+            </div>
+        </div>
+
+    </aside>
+
+</body>
+
+</html>
