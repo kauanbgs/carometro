@@ -146,7 +146,7 @@ module.exports = class estudanteController {
   }
 
   static async updateEstudante(req, res) {
-    console.log("rs");
+    // console.log("rs");
     const {
       nome,
       email,
