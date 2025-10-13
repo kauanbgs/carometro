@@ -83,7 +83,6 @@ module.exports = class estudanteController {
     const value = [id_estudante];
     try {
       connect.query(query, value, function (err, results) {
-        if (err.code == "")
           if (err) {
             console.log(err);
             return res.status(500).json({ error: "Erro interno no servidor" });
@@ -211,7 +210,7 @@ module.exports = class estudanteController {
     }
   }
   static async deleteEstudante(req, res) {
-    const identificador_id_estudante = req.params.id_estudante;
+    const id_estudante = req.params;
     const query = `DELETE FROM estudante WHERE id_estudante=?`;
 
     if (!id_estudante) {
@@ -222,7 +221,7 @@ module.exports = class estudanteController {
     try {
       connect.query(
         query,
-        [identificador_id_estudante],
+        [id_estudante],
         function (err, results) {
           if (err) {
             console.log(err);
@@ -235,7 +234,7 @@ module.exports = class estudanteController {
           }
           return res.status(200).json({
             message: "Estudante deletado com sucesso: ",
-            identificador_id_estudante,
+            id_estudante,
           });
         }
       );
