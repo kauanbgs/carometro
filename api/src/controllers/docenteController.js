@@ -10,7 +10,7 @@ module.exports = class docenteController {
     }
     let query;
     let value;
-    if (tipo) {
+    if (tipo) { //se chega um tipo, ele define a query com o tipo. se nao chega, define sem.
       query = `INSERT INTO docente (email, senha, nome, tipo) VALUES (?,?,?,?)`;
       value = [email, senha, nome, tipo];
     } else {
@@ -22,7 +22,7 @@ module.exports = class docenteController {
       connect.query(query, value, function (err, results) {
         if (err) {
           console.log(err);
-          if (err.code === "ER_DUP_ENTRY") {
+          if (err.code === "ER_DUP_ENTRY") { //se o erro que chegar for de entrada duplicada, entra no if e retorna status 409.
             return res
               .status(409)
               .json({ error: "Email já cadastrado. Tente outro." });
@@ -76,7 +76,7 @@ module.exports = class docenteController {
   static async getDocenteByName(req, res) {
     const { nome } = req.params;
     const query = `SELECT * FROM docente WHERE nome LIKE ?`;
-    const value = [`%${nome}%`];
+    const value = [`%${nome}%`]; //seleciona independente do lugar em que está o nome
     try {
       connect.query(query, value, function (err, results) {
         if (err) {
@@ -106,7 +106,7 @@ module.exports = class docenteController {
     let query;
     let values;
 
-    if (tipo) {
+    if (tipo) { //se chega um tipo, ele define a query com o tipo. se nao chega, define sem.
       query = `UPDATE docente SET senha = ?, nome = ?, tipo = ? WHERE id_docente = ?`;
       values = [senha, nome, tipo, id_docente];
     } else {
