@@ -6,7 +6,7 @@ CREATE TABLE docente (
 	nome VARCHAR(100) NOT NULL,
 	email VARCHAR(150) UNIQUE NOT NULL,
 	senha VARCHAR(100) NOT NULL,
-	tipo ENUM("dev", "doc") DEFAULT "doc"
+	tipo ENUM("adm", "doc") DEFAULT "doc"
 );
 
 CREATE TABLE turma(
