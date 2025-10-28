@@ -49,8 +49,8 @@ module.exports = class docenteController {
   static async getDocenteByName(req, res, next) {
     const { nome } = req.params;
     try {
-      docente = await connect("docente").where("nome", "like", `%${nome}%`)
-      return res.status(200).json({message: "Docente atualizado com sucesso!"})
+      const docente = await connect("docente").where("nome", "like", `%${nome}%`)
+      return res.status(200).json({docente})
     } catch (error) {
       next(error)
     }
@@ -65,7 +65,7 @@ module.exports = class docenteController {
         .json({ error: "Todos os campos devem ser preenchidos" });
     }
     try {
-      const docenteData = { email, senha, nome}
+      const docenteData = { senha, nome}
       if(tipo){
         docenteData.tipo = tipo
       }

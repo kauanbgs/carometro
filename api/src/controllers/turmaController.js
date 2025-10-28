@@ -1,90 +1,38 @@
 const connect = require("../db/connect");
 
 module.exports = class turmaController {
-  static async createTurma(req, res) {
+  static async createTurma(req, res, next) {
     const { nome, fk_id_docente } = req.body;
-
     if (!nome || !fk_id_docente) {
-      return res
-        .status(400)
-        .json({ error: "Todos os campos devem ser preenchidos" });
+      return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     }
-
-    const query = `INSERT INTO turma (nome, fk_id_docente) VALUES (?, ?)`;
-    const values = [nome, fk_id_docente];
-
-    connect.query(query, values, function (err, results) {
-      if (err) {
-        if (err.code === "ER_DUP_ENTRY") {
-          return res
-            .status(400)
-            .json({ error: "Turma já cadastrada no sistema!" });
-        } else {
-          console.log(err);
-          return res.status(500).json({
-            error: "Erro interno no servidor... Turma não foi cadastrada!",
-          });
-        }
-      }
-
-      return res.status(201).json({ message: "Turma cadastrada com sucesso!" });
-    });
-  }
-  static async readTurma(req, res) {
-    const query = `SELECT * FROM turma`;
-
+    const turmaData = { nome, fk_id_docente }
     try {
-      connect.query(query, function (err, results) {
-        if (err) {
-          res.status(500).json({ error: "Erro interno no servidor!" });
-        }
-
-        return res.status(200).json({
-          message: "Obtendo turmas:",
-          turma: results,
-        });
-      });
+      await connect("turma").insert(turmaData)
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ error: "Erro interno no servidor!" });
+      if (error.code === "ER_DUP_ENTRY") {
+          return res.status(400).json({ error: "Turma já cadastrada no sistema!" });
+        }
+        next(error)
+    }
+      return res.status(201).json({ message: "Turma cadastrada com sucesso!" });
+    };
+  static async readTurma(req, res, next) {
+    try {
+      const turmas = await connect('turma').select("*")
+      return res.status(200).json(turmas)
+    } catch (error) {
+      
     }
   }
-  // static async getTurmaById(req, res) {
-  //   const { id_turma } = req.params;
-  //   const query = `SELECT * FROM turma WHERE id_turma=?`;
-  //   const value = [id_turma];
-  //   try {
-  //     connect.query(query, value, function (err, results) {
-  //       if (err) {
-  //         console.log(err);
-  //         return res.status(500).json({ error: "Erro interno no servidor" });
-  //       }
-  //       return res.status(200).json({ message: "Turma: ", turma: results});
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //     return res.status(500).json({ error: "Erro interno no servidor" });
-  //   }
-  // }
 
   static async GetTurmaByDocenteID(req, res) {
     const { fk_id_docente } = req.params;
-
-    // Verificação de parâmetro
     if (!fk_id_docente) {
       return res.status(400).json({ error: "ID do docente é obrigatório!" });
     }
-
-    const query = `SELECT * FROM turma WHERE fk_id_docente = ?`;
-    const value = [fk_id_docente];
-
     try {
-      connect.query(query, value, function (err, results) {
-        if (err) {
-          console.log(err);
-          return res
-            .status(500)
-            .json({ error: "Erro interno no servidor ao buscar turmas." });
+      
         }
 
         if (results.length === 0) {

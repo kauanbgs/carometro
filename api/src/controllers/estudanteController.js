@@ -2,40 +2,14 @@ const connect = require("../db/connect");
 
 module.exports = class estudanteController {
   static async createEstudante(req, res) {
-    const {
-      nome,
-      email,
-      telefone,
-      data_criacao,
-      status,
-      numero_aluno,
-      fk_id_turma,
-    } = req.body;
+    const { nome,email,telefone,data_criacao,status,numero_aluno,fk_id_turma } = req.body;
 
-    if (
-      !nome ||
-      !email ||
-      !telefone ||
-      !data_criacao ||
-      !status ||
-      !numero_aluno ||
-      !fk_id_turma
-    ) {
-      return res
-        .status(400)
-        .json({ error: "Todos os campos devem ser preenchidos" });
+    if (!nome ||!email ||!telefone ||!data_criacao ||!status ||!numero_aluno ||!fk_id_turma) {
+      return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     }
 
     const query = `INSERT INTO estudante (nome, email, telefone, data_criacao, status, numero_aluno, fk_id_turma) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-    const values = [
-      nome,
-      email,
-      telefone,
-      data_criacao,
-      status,
-      numero_aluno,
-      fk_id_turma,
-    ];
+    const values = [nome,email,telefone,data_criacao,status,numero_aluno,fk_id_turma];
 
     connect.query(query, values, function (err, results) {
       if (err) {
