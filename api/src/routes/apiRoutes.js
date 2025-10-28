@@ -3,9 +3,6 @@ const docenteController = require("../controllers/docenteController");
 const estudanteController = require("../controllers/estudanteController");
 const turmaController = require("../controllers/turmaController");
 
-router.get("/health", (req, res) => {
-  res.send({ status: "OK", message: "API funcionando" });
-});
 
 //      CONTROLLER DOCENTE (DOC & DEV)       //
 router.post("/docente", docenteController.createDocente);
