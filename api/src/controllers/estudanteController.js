@@ -1,220 +1,103 @@
+//NAO USAR PRETTIER
+
 const connect = require("../db/connect");
 
 module.exports = class estudanteController {
-  static async createEstudante(req, res) {
+  static async createEstudante(req,res,next) {
     const { nome,email,telefone,data_criacao,status,numero_aluno,fk_id_turma } = req.body;
-
     if (!nome ||!email ||!telefone ||!data_criacao ||!status ||!numero_aluno ||!fk_id_turma) {
       return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     }
+    const estudanteData = { nome, email, telefone, data_criacao, status, numero_aluno, fk_id_turma };
+    try {
+      await connect("estudante").insert(estudanteData)
+      return res.status(201).json({ message: "Estudante criado com sucesso!"})
+    } catch (error) {
+      next(error)
+    }
+}
 
-    const query = `INSERT INTO estudante (nome, email, telefone, data_criacao, status, numero_aluno, fk_id_turma) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-    const values = [nome,email,telefone,data_criacao,status,numero_aluno,fk_id_turma];
-
-    connect.query(query, values, function (err, results) {
-      if (err) {
-        if (err.code === "ER_DUP_ENTRY") {
-          return res
-            .status(400)
-            .json({ error: "Estudante já cadastrado no sistema!" });
-        } else {
-          console.log(err);
-          return res.status(500).json({
-            error: "Erro interno no servidor... Estudante não foi cadastrado!",
-          });
-        }
+  static async readEstudante(req,res,next) {
+    try {
+      estudanteData = connect("estudante").select("*")
+      if (estudanteData.length === 0) {
+        return res.status(404).json({ error: "Nenhum estudante encontrado!" });
       }
-
-      return res
-        .status(201)
-        .json({ message: "Estudante cadastrado com sucesso!" });
-    });
-  }
-
-  static async readEstudante(req, res) {
-    const query = `SELECT * FROM estudante`;
-
-    try {
-      connect.query(query, function (err, results) {
-        if (err) {
-          res.status(500).json({ error: "Erro interno no servidor!" });
-        }
-
-        return res.status(200).json({
-          message: "Obtendo estudantes:",
-          alunos: results,
-        });
-      });
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({ error: "Erro interno no servidor!" });
+      return res.status(200).json({message: "Obtendo estudantes:", alunos: results,});
+      }catch (error) {
+        next(error)
     }
   }
 
-  static async getEstudanteByID(req, res) {
+  static async getEstudanteByID(req,res,next) {
     const { id_estudante } = req.params;
-    const query = `SELECT * FROM estudante WHERE id_estudante=?`;
-    const value = [id_estudante];
     try {
-      connect.query(query, value, function (err, results) {
-          if (err) {
-            console.log(err);
-            return res.status(500).json({ error: "Erro interno no servidor" });
-          }
-        if (results.length === 0) {
-          return res.status(404).json({ error: "Estudante não encontrado" });
-        }
-        return res
-          .status(200)
-          .json({ message: "Estudante: ", estudante: results });
-      });
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({ error: "Erro interno no servidor" });
+      estudanteData = connect("estudante").select("*").where("id_estudante", "=", id_estudante)
+      if (estudanteData.length === 0) {
+        return res.status(404).json({ error: "Estudante não encontrado!" });
+      }
+      return res.status(200).json({ message: "Estudante: ", estudante: results });
+      }catch (error) {
+        next(error)
     }
   }
-  static async getEstudanteByNumero(req, res) {
+  static async getEstudanteByNumero(req,res,next) {
     const { numero_aluno } = req.params;
-    const query = `SELECT * FROM estudante WHERE numero_aluno=?`;
-    const value = [numero_aluno];
     try {
-      connect.query(query, value, function (err, results) {
-        if (err) {
-          console.log(err);
-          return res.status(500).json({ error: "Erro interno no servidor" });
-        }
-        if (results.length === 0) {
-          return res.status(404).json({ error: "Estudante não encontrado" });
-        }
-        return res
-          .status(200)
-          .json({ message: "Estudante: ", estudante: results });
-      });
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({ error: "Erro interno no servidor" });
+      estudanteData = connect("estudante").select("*").where("numero_aluno", "=", numero_aluno)
+      if (estudanteData.length === 0) {
+        return res.status(404).json({ error: "Estudante não encontrado!" });
+      }
+        return res.status(200).json({ message: "Estudante: ", estudante: results });
+      }catch (error) {
+        next(error)
     }
   }
 
   static async getEstudanteByName(req, res) {
     const { nome } = req.params;
-    const query = `SELECT * FROM estudante WHERE nome LIKE ?`;
-    const value = [`%${nome}%`];
     try {
-      connect.query(query, value, function (err, results) {
-        if (err) {
-          console.log(err);
-          return res.status(500).json({ error: "Erro interno no servidor" });
-        }
-        if (results.length === 0) {
-          return res.status(404).json({ error: "Usuario não encontrado!" });
-        }
-        return res
-          .status(200)
-          .json({ message: "Estudante: ", docente: results });
-      });
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({ error: "Erro interno no servidor" });
+      estudanteData = connect("estudante").select("*").where("nome", "LIKE", `%${nome}%`)
+      if (estudanteData.length === 0) {
+        return res.status(404).json({ error: "Estudante não encontrado!" });
+      }
+      return res.status(200).json({ message: "Estudante: ", docente: results });
+      }catch (error) {
+        next(error)
     }
   }
 
-  static async updateEstudante(req, res) {
-    // console.log("rs");
-    const {
-      nome,
-      email,
-      telefone,
-      data_criacao,
-      status,
-      numero_aluno,
-      fk_id_turma,
-      id_estudante,
-    } = req.body;
-    if (
-      !nome ||
-      !email ||
-      !telefone ||
-      !data_criacao ||
-      !status ||
-      !numero_aluno ||
-      !fk_id_turma ||
-      !id_estudante
-    ) {
-      return res
-        .status(400)
-        .json({ error: "Todos os campos devem ser preenchidos" });
+  static async updateEstudante(req,res,next) {
+    const { id_estudante } = req.params;
+    const { nome,email,telefone,data_criacao,status,numero_aluno,fk_id_turma } = req.body;
+    if (!nome ||!email ||!telefone ||!data_criacao ||!status ||!numero_aluno ||!fk_id_turma ||!id_estudante) {
+      return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     }
-
-    const query = `UPDATE estudante SET nome=?, email=?, telefone=?, data_criacao=?, status=?, numero_aluno=?, fk_id_turma=? WHERE id_estudante=?`;
-    const value = [
-      nome,
-      email,
-      telefone,
-      data_criacao,
-      status,
-      numero_aluno,
-      fk_id_turma,
-      id_estudante,
-    ];
+    const estudanteData = { nome, email, telefone, data_criacao, status, numero_aluno, fk_id_turma };
 
     try {
-      connect.query(query, value, function (err, results) {
-        if (err) {
-          if (err.code === "ER_DUP_ENTRY") {
-            return res
-              .status(400)
-              .json({ error: "Estudante já cadastrado no sistema!" });
-          } else {
-            console.log(err);
-            return res.status(500).json({ error: "Erro interno no servidor!" });
-          }
-        }
-        if (results.affectedRows === 0) {
-          res.status(404).json({ error: "Estudante não encontrado!" });
-        }
-        res.status(200).json({
-          message: "Estudante atualizado com sucesso com o ID! ->",
-          id: id_estudante,
-        });
-      });
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: "Erro interno no servidor!" });
+      updatedRows = await connect("estudante").where("id_estudante", id_estudante).update(estudanteData)
+      if (updatedRows === 0) {
+        return res.status(404).json({ error: "Estudante não encontrado!" });
+      }
+      return res.status(200).json({ message: "Estudante atualizado: ", id_estudante });
+    }catch (error) {
+      next(error)
     }
   }
   static async deleteEstudante(req, res) {
     const id_estudante = req.params;
-    const query = `DELETE FROM estudante WHERE id_estudante=?`;
-
     if (!id_estudante) {
-      return res
-        .status(400)
-        .json({ error: "O ID do estudante deve ser fornecido!" });
+      return res.status(400).json({ error: "O ID do estudante deve ser fornecido!" });
     }
     try {
-      connect.query(
-        query,
-        [id_estudante],
-        function (err, results) {
-          if (err) {
-            console.log(err);
-            return res.status(500).json({
-              error: "Erro interno no servidor! Aluno não foi deletado!",
-            });
-          }
-          if (results.affectedRows === 0) {
-            return res.status(404).json({ error: "Estudante não encontrado!" });
-          }
-          return res.status(200).json({
-            message: "Estudante deletado com sucesso: ",
-            id_estudante,
-          });
-        }
-      );
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: "Erro interno no servidor!" });
+      updatedRows = await connect("estudante").where("id_estudante", id_estudante).delete()
+      if (updatedRows === 0) {
+        return res.status(404).json({ error: "Estudante não encontrado!" });
+      }
+      return res.status(200).json({ message: "Estudante deletado com sucesso: ",identificador_id_estudante,});
+    }catch (error) {
+      next(error)
     }
   }
 };

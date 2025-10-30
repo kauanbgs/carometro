@@ -1,12 +1,14 @@
+//NAO USAR PRETTIER
+
+
+
 const connect = require("../db/connect");
 
 module.exports = class docenteController {
   static async createDocente(req, res, next) {
     const { email, senha, nome, tipo } = req.body;
     if (!email || !senha || !nome) {
-      return res
-        .status(400)
-        .json({ error: "Todos os campos devem ser preenchidos" });
+      return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     }
     try {
       const docenteData = { email, senha, nome}
@@ -22,18 +24,20 @@ module.exports = class docenteController {
       next(error)
     }
   }
+
   static async readDocente(req, res, next) {
     try {
       const docentes = await connect('docente').select("*")
 
       if (docentes.length === 0) {
-        return res.status(404).json({ error: 'Usuário não encontrado!' });
+        return res.status(404).json({ error: 'Nenhum docente encontrado!' });
       }
       return res.status(200).json(docentes);
     } catch (error) {
       next(error)
     }
   }
+
   static async getDocenteById(req, res, next) {
     const { id_docente } = req.params;
     try {
@@ -46,6 +50,7 @@ module.exports = class docenteController {
       next(error)
     }
   }
+
   static async getDocenteByName(req, res, next) {
     const { nome } = req.params;
     try {
@@ -60,9 +65,7 @@ module.exports = class docenteController {
     const { id_docente } = req.params
     const { senha, nome, tipo } = req.body;
     if (!senha || !nome || !id_docente) {
-      return res
-        .status(400)
-        .json({ error: "Todos os campos devem ser preenchidos" });
+      return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     }
     try {
       const docenteData = { senha, nome}
