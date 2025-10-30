@@ -36,11 +36,11 @@ module.exports = class turmaController {
       return res.status(400).json({ error: "ID do docente é obrigatório!" });
     }
     try {
-        turmaData = await connect("turma").select("*").where("fk_id_docente", "=", fk_id_docente)
+        const turmaData = await connect("turma").select("*").where("fk_id_docente", "=", fk_id_docente)
         if (turmaData.length === 0) {
           return res.status(404).json({ message: "Nenhuma turma encontrada para este docente." });
         }
-        return res.status(200).json({ message: "Turmas encontradas:",turmas: results })
+        return res.status(200).json({ message: "Turmas encontradas:",turmas: turmaData })
       } catch (error) {
           next(error)
         };
@@ -49,7 +49,7 @@ module.exports = class turmaController {
   static async GetTurmaByName(req, res, next) {
     const { nome } = req.params;
     try {
-      turmaData = await connect("turma").select("*").where("nome", "LIKE", `%${nome}%`)
+      const turmaData = await connect("turma").select("*").where("nome", "LIKE", `%${nome}%`)
       if (turmaData.length === 0) {
         return res.status(404).json({ message: "Nenhuma turma encontrada com este nome." });
       }
@@ -83,11 +83,11 @@ module.exports = class turmaController {
       return res.status(400).json({ error: "O ID da turma deve ser fornecido!" });
     }
     try {
-      updatedRows = await connect("turma").where("id_turma", id_turma).del()
+      const updatedRows = await connect("turma").where("id_turma", id_turma).del()
           if (updatedRows === 0) {
             return res.status(404).json({ error: "Turma não encontrada!" });
           }
-          return res.status(200).json({message: "Turma deletada com sucesso: ",identificador_id_turma,});
+          return res.status(200).json({message: "Turma deletada com sucesso: ", id_turma});
         } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Erro interno no servidor!" });

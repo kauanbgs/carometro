@@ -17,26 +17,29 @@ module.exports = class estudanteController {
     }
 }
 
-  static async readEstudante(req,res,next) {
-    try {
-      estudanteData = connect("estudante").select("*")
-      if (estudanteData.length === 0) {
-        return res.status(404).json({ error: "Nenhum estudante encontrado!" });
+    static async readEstudante(req,res,next) {
+      try {
+        const estudanteData = await connect("estudante").select("*")
+        if (estudanteData.length === 0) {
+          return res.status(404).json({ error: "Nenhum estudante encontrado!" });
+        }
+        return res.status(200).json({message: "Obtendo estudantes:", alunos: estudanteData});
+        }catch (error) {
+          next(error)
       }
-      return res.status(200).json({message: "Obtendo estudantes:", alunos: results,});
-      }catch (error) {
-        next(error)
     }
-  }
 
   static async getEstudanteByID(req,res,next) {
     const { id_estudante } = req.params;
+    if (!id_estudante) {
+      return res.status(400).json({ error: "ID do estudante é obrigatório!" });
+    }
     try {
-      estudanteData = connect("estudante").select("*").where("id_estudante", "=", id_estudante)
+      const estudanteData = await connect("estudante").select("*").where("id_estudante", "=", id_estudante)
       if (estudanteData.length === 0) {
         return res.status(404).json({ error: "Estudante não encontrado!" });
       }
-      return res.status(200).json({ message: "Estudante: ", estudante: results });
+      return res.status(200).json({ message: "Estudante: ", estudante: estudanteData });
       }catch (error) {
         next(error)
     }
@@ -44,11 +47,11 @@ module.exports = class estudanteController {
   static async getEstudanteByNumero(req,res,next) {
     const { numero_aluno } = req.params;
     try {
-      estudanteData = connect("estudante").select("*").where("numero_aluno", "=", numero_aluno)
+      const estudanteData = await connect("estudante").select("*").where("numero_aluno", "=", numero_aluno)
       if (estudanteData.length === 0) {
         return res.status(404).json({ error: "Estudante não encontrado!" });
       }
-        return res.status(200).json({ message: "Estudante: ", estudante: results });
+        return res.status(200).json({ message: "Estudante: ", estudante: estudanteData });
       }catch (error) {
         next(error)
     }
@@ -57,11 +60,11 @@ module.exports = class estudanteController {
   static async getEstudanteByName(req, res) {
     const { nome } = req.params;
     try {
-      estudanteData = connect("estudante").select("*").where("nome", "LIKE", `%${nome}%`)
+      const estudanteData = await connect("estudante").select("*").where("nome", "LIKE", `%${nome}%`)
       if (estudanteData.length === 0) {
         return res.status(404).json({ error: "Estudante não encontrado!" });
       }
-      return res.status(200).json({ message: "Estudante: ", docente: results });
+      return res.status(200).json({ message: "Estudante: ", estudante: estudanteData });
       }catch (error) {
         next(error)
     }
@@ -76,7 +79,7 @@ module.exports = class estudanteController {
     const estudanteData = { nome, email, telefone, data_criacao, status, numero_aluno, fk_id_turma };
 
     try {
-      updatedRows = await connect("estudante").where("id_estudante", id_estudante).update(estudanteData)
+      const updatedRows = await connect("estudante").where("id_estudante", id_estudante).update(estudanteData)
       if (updatedRows === 0) {
         return res.status(404).json({ error: "Estudante não encontrado!" });
       }
@@ -85,17 +88,17 @@ module.exports = class estudanteController {
       next(error)
     }
   }
-  static async deleteEstudante(req, res) {
-    const id_estudante = req.params;
+  static async deleteEstudante(req, res, next) {
+    const{id_estudante } = req.params;
     if (!id_estudante) {
       return res.status(400).json({ error: "O ID do estudante deve ser fornecido!" });
     }
     try {
-      updatedRows = await connect("estudante").where("id_estudante", id_estudante).delete()
+      const updatedRows = await connect("estudante").where("id_estudante", id_estudante).delete()
       if (updatedRows === 0) {
         return res.status(404).json({ error: "Estudante não encontrado!" });
       }
-      return res.status(200).json({ message: "Estudante deletado com sucesso: ",identificador_id_estudante,});
+      return res.status(200).json({ message: "Estudante deletado com sucesso: ",id_estudante,});
     }catch (error) {
       next(error)
     }
