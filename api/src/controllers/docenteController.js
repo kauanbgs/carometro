@@ -2,7 +2,10 @@
 
 
 
-const connect = require("../db/knexfile");
+
+const knexConfig = require("../db/knexfile");  // Carrega a configuração
+const knex = require('knex');  // Importa o Knex
+const connect = knex(knexConfig);  // Cria a instância do Knex
 
 module.exports = class docenteController {
   static async createDocente(req, res, next) {
