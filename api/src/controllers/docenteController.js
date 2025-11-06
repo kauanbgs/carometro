@@ -2,7 +2,7 @@
 
 
 
-const connect = require("../db/connect");
+const connect = require("../db/knexfile");
 
 module.exports = class docenteController {
   static async createDocente(req, res, next) {

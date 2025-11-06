@@ -1,6 +1,6 @@
 //NAO USAR PRETTIER
 
-const connect = require("../db/connect");
+const connect = require("../db/knexfile");
 
 module.exports = class turmaController {
 

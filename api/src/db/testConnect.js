@@ -1,17 +1,13 @@
-const connect = require("./connect");
+const connect = require('./knexfile');
 
-module.exports = function testConnect(){
-    // Tenta conectar com o banco
+module.exports = async function testConnect() {
     try {
-        const query = `SELECT 'Conexao bem-sucedida' AS Mensagem`; // Seleciona uma mensagem de sucesso :)
-        connect.query(query, function(err){
-            if(err){
-                console.log("Conexão não realizada " + err)
-                return;
-            }
-            console.log("Conexão realizada com MySQL")
-        })
+        const result = await connect.raw("SELECT 'Conexao bem-sucedida' AS Mensagem");
+        
+        //result[0] é a primeira linha e result[0][0] é a primeira coluna dessa linha
+        console.log(result[0][0].Mensagem);
+
     } catch (error) {
-        console.error("Erro ao executar a consulta SQL:" , error)
+        console.error("Erro ao executar a consulta SQL:", error);
     }
-}
+};
