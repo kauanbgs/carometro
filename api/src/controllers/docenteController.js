@@ -2,10 +2,10 @@
 
 
 
-
 const knexConfig = require("../db/knexfile");  // Carrega a configuração
 const knex = require('knex');  // Importa o Knex
 const connect = knex(knexConfig);  // Cria a instância do Knex
+const bcrypt = require("bcrypt");
 
 module.exports = class docenteController {
   static async createDocente(req, res, next) {
@@ -13,6 +13,9 @@ module.exports = class docenteController {
     if (!email || !senha || !nome) {
       return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     }
+    const SALT_ROUNDS = 10;
+    const hashedPassword = await bcrypt.hash(senha, SALT_ROUNDS);
+
     try {
       const docenteData = { email, senha, nome}
       if(tipo){
@@ -94,6 +97,29 @@ module.exports = class docenteController {
       return res.status(200).json({ message: `Usuario excluido: ${id_docente}`})
     } catch (error) {
       next(error)
+    }
+  }
+
+  static async login(req, res, next){
+    const {email, senha} = req.body;
+
+    if(!email || !senha){
+      return res.status(400).json({ error: "Email e senha são obrigatórios" });
+    }
+    try {
+      const docenteLogado = await connect("docente").select("*").where("email", "=", email) 
+      if (docenteLogado.length === 0) {
+          return res.status(401).json({ error: "Docente não cadastrado" });
+        }
+
+      const docente = docenteLogado[0];
+      const senhaCorreta = await bcrypt.compare(hashedPassword, docente.senha);
+      if(!senhaCorreta){
+        return res.status(401).json({error: "Senha incorreta"})
+      }
+      return res.status(200).json({ message: "Login bem-sucedido", docenteLogado });
+    } catch (error) {
+      next(error);
     }
   }
 };
