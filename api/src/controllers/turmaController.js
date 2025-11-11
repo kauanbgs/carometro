@@ -1,6 +1,6 @@
 //NAO USAR PRETTIER
 
-const knexConfig = require("../db/knexfile");  // Carrega a configuração
+const knexConfig = require("../../knexfile");  // Carrega a configuração
 const knex = require('knex');  // Importa o Knex
 const connect = knex(knexConfig);  // Cria a instância do Knex
 

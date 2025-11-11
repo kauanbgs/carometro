@@ -1,4 +1,4 @@
-const connect = require('./knexfile');
+const connect = require('../../knexfile');
 
 module.exports = async function testConnect() {
     try {
