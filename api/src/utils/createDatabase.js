@@ -1,13 +1,13 @@
 const knex = require('knex');
-const knexConfig = require('../db/knexfile'); // Importa o knexfile
+const knexConfig = require('../../knexfile'); // Importa o knexfile
 
 // Criação de um pool de conexões sem especificar o banco de dados
 const knexNoDB = knex({
-  client: 'mysql2',
+  client: knexConfig.client,
   connection: {
-    host: 'localhost',
-    user: 'alunods',
-    password: 'senai@604',
+    host: knexConfig.connection.host,
+    user: knexConfig.connection.user,
+    password: knexConfig.connection.password,
     database: null, // Não especificamos o banco aqui, pois vamos criar
   }
 });
