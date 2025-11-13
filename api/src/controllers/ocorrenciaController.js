@@ -5,8 +5,6 @@
 const knexConfig = require("../../knexfile");  // Carrega a configuração
 const knex = require('knex');  // Importa o Knex
 const connect = knex(knexConfig);  // Cria a instância do Knex
-const bcrypt = require("bcrypt");
-const SALT_ROUNDS = 10;
 
 module.exports = class ocorrenciaController {
   static async createOcorrencia(req, res, next) {
@@ -30,96 +28,17 @@ module.exports = class ocorrenciaController {
     }
   }
 
-  static async readDocente(req, res, next) {
+  static async getOcorrenciaByIdAluno(req, res, next) {
+    const { fk_id_estudante } = req.params;
     try {
-      const docentes = await connect('docente').select("*")
-
-      if (docentes.length === 0) {
-        return res.status(404).json({ error: 'Nenhum docente encontrado!' });
+      const ocorrencias = await connect("ocorrencia").where('fk_  id_estudante', fk_id_estudante)
+      if (ocorrencias.length === 0) {
+        return res.status(404).json({ error: 'Nenhuma ocorrência registrada!' });
       }
-      return res.status(200).json(docentes);
+      return res.status(200).json(ocorrencias)
     } catch (error) {
       next(error)
     }
   }
 
-  static async getDocenteById(req, res, next) {
-    const { id_docente } = req.params;
-    try {
-      const docente = await connect("docente").where('id_docente', id_docente)
-      if (docente.length === 0) {
-        return res.status(404).json({ error: 'Usuário não encontrado!' });
-      }
-      return res.status(200).json(docente)
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  static async getDocenteByName(req, res, next) {
-    const { nome } = req.params;
-    try {
-      const docente = await connect("docente").where("nome", "like", `%${nome}%`)
-      return res.status(200).json({docente})
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  static async updateDocente(req, res, next) {
-    const { id_docente } = req.params
-    let { senha, nome, tipo } = req.body;
-    if (!senha || !nome || !id_docente) {
-      return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
-    }
-    senha = await bcrypt.hash(senha, SALT_ROUNDS);
-    try {
-      const docenteData = { senha, nome}
-      if(tipo){
-        docenteData.tipo = tipo
-      }
-      const updatedRows = await connect("docente").where("id_docente", id_docente).update(docenteData)
-      if (updatedRows == 0 ) {
-        return res.status(404).json({error: "Docente nao encontrado!"})
-      }
-      return res.status(200).json({ message: "Docente atualizado com sucesso!" });
-    } catch (error) {
-      next(error)
-    }
-  }
-  static async deleteDocente(req, res, next) {
-    const { id_docente } = req.params
-    try {
-      const deletedCount = await connect('docente').where({id_docente}).del()
-      if (deletedCount == 0){
-        return res.status(404).json({ error: "Usuario não encontrado!"})
-      }
-      return res.status(200).json({ message: `Usuario excluido: ${id_docente}`})
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  static async login(req, res, next){
-    const {email, senha} = req.body;
-
-    if(!email || !senha){
-      return res.status(400).json({ error: "Email e senha são obrigatórios" });
-    }
-    try {
-      const docenteLogado = await connect("docente").select("*").where("email", "=", email) 
-      if (docenteLogado.length === 0) {
-          return res.status(401).json({ error: "Docente não cadastrado" });
-        }
-
-      const docente = docenteLogado[0];
-      const senhaCorreta = await bcrypt.compare(senha, docente.senha);
-      if(!senhaCorreta){
-        return res.status(401).json({error: "Senha incorreta"})
-      }
-      return res.status(200).json({ message: "Login bem-sucedido", docenteLogado });
-    } catch (error) {
-      next(error);
-    }
-  }
 };

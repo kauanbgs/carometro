@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const docenteController = require("../controllers/docenteController");
 const estudanteController = require("../controllers/estudanteController");
+const ocorrenciaController = require("../controllers/ocorrenciaController");
 const turmaController = require("../controllers/turmaController");
 
 
@@ -33,5 +34,8 @@ router.get("/turma/nome/:nome", turmaController.GetTurmaByName); // GetByName
 router.put("/turma/id/:id_turma", turmaController.updateTurma)
 router.delete("/turma/:id_turma", turmaController.deleteTurma)
 
+//      CONTROLLER OCORRÊNCIA       //
+router.post("/ocorrencia", ocorrenciaController.createOcorrencia);
+router.get("/ocorrencia/:fk_id_estudante", ocorrenciaController.getOcorrenciaByIdAluno);
 
 module.exports = router;
