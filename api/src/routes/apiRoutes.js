@@ -36,6 +36,9 @@ router.delete("/turma/:id_turma", turmaController.deleteTurma)
 
 //      CONTROLLER OCORRÊNCIA       //
 router.post("/ocorrencia", ocorrenciaController.createOcorrencia);
+router.get("/ocorrencia", ocorrenciaController.readOcorrencias);
 router.get("/ocorrencia/:fk_id_estudante", ocorrenciaController.getOcorrenciaByIdAluno);
+router.put("/ocorrencia/:id_ocorrencia", ocorrenciaController.updateOcorrencia);
+router.delete("/ocorrencia/:id_ocorrencia", ocorrenciaController.deleteOcorrencia)
 
 module.exports = router;
