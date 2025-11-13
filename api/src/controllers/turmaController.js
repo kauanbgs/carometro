@@ -25,7 +25,9 @@ module.exports = class turmaController {
 
   static async readTurma(req, res, next) {
     try {
-      const turmas = await connect('turma').select("*")
+      const turmas = await connect('turma')
+      .join('docente', 'turma.fk_id_docente', '=', 'docente.id_docente') // Faz o JOIN entre turma e docente
+      .select('turma.nome as nome_turma', 'docente.nome as nome_docente')
       return res.status(200).json(turmas)
     } catch (error) {
       next(error)

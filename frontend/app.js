@@ -110,3 +110,41 @@ if (alunoRegisterForm) {
         }
     });
 }
+document.addEventListener("DOMContentLoaded", async () => {
+    const nav = document.getElementById("turmas");
+    nav.innerHTML = ""; // Limpa as turmas antes de adicionar novas
+
+    try {
+        // Faz a requisição para a API
+        const resposta = await fetch(`http://localhost:5000/carometro/turma`);
+        const dados = await resposta.json(); // Corrige a chamada da função json()
+        console.log(dados);
+
+        // Verifica se a requisição foi bem-sucedida
+        if (resposta.ok) {
+            dados.forEach((turma) => {
+                // Cria uma nova div para cada turma
+                const div = document.createElement("div");
+                div.classList.add("linha-turma"); // Adiciona a classe 'linha-turma'
+                
+                // Adiciona o conteúdo dentro da div
+                div.innerHTML = `
+                    <p class="nome-turma">${turma.nome_turma}</p>
+                    <p class="nome-professor">${turma.nome_docente || 'Sem professor'}</p>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                `;
+                
+                // Adiciona a div ao container
+                nav.appendChild(div);
+            });
+        } else {
+            // Se a resposta não for ok, exibe uma mensagem de erro
+            console.error("Erro na requisição: ", dados.error);
+            nav.innerHTML = "<p>Não foi possível carregar as turmas.</p>";
+        }
+    } catch (error) {
+        // Em caso de erro de requisição
+        console.log("Erro na requisição GET: ", error);
+        nav.innerHTML = "<p>Erro interno do servidor.</p>";
+    }
+});
