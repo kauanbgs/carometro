@@ -41,3 +41,70 @@ if (loginForm) {
         }
     });
 }
+
+const cadastroForm = document.getElementById("cadastroForm");
+if (cadastroForm) {
+    cadastroForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const dados = Object.fromEntries(new FormData(cadastroForm));
+        console.log("Dados convertidos: ", dados);
+
+        try {
+            const response = await fetch(`${ApiUrl}/docente`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dados),
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                console.log("Bem-sucedido:", result);
+                cadastroForm.reset();
+            } else {
+                console.error("Erro:", result.error);
+                msg.textContent = (result.error || 'Erro ao cadastrar');
+                msg.style.color = "red"
+            }
+        } catch (error) {
+            console.error("Erro ao enviar dados:", error);
+            msg.textContent = ('Erro ao tentar cadastrar: ', error);
+            msg.style.color = "red"
+        }
+    });
+}
+const alunoRegisterForm = document.getElementById("alunoRegisterForm");
+if (alunoRegisterForm) {
+    alunoRegisterForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const dados = Object.fromEntries(new FormData(alunoRegisterForm));
+        console.log("Dados convertidos: ", dados);
+
+        try {
+            const response = await fetch(`${ApiUrl}/estudante`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dados),
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                console.log("Bem-sucedido:", result);
+                cadastroForm.reset();
+            } else {
+                console.error("Erro:", result.error);
+                msg.textContent = (result.error || 'Erro ao cadastrar');
+                msg.style.color = "red"
+            }
+        } catch (error) {
+            console.error("Erro ao enviar dados:", error);
+            msg.textContent = ('Erro ao tentar cadastrar: ', error);
+            msg.style.color = "red"
+        }
+    });
+}
