@@ -3,6 +3,7 @@
 const ApiUrl = "http://localhost:5000/carometro";  // Defina a URL da sua API
 
 const loginForm = document.getElementById("loginForm");
+const msg = document.getElementById("mensagem")
 
 if (loginForm) {
     // Corrigindo a sintaxe do evento `submit` e usando `async` corretamente
@@ -15,7 +16,7 @@ if (loginForm) {
 
         try {
             // Enviar os dados para a API usando `fetch`
-            const response = await fetch(ApiUrl, {
+            const response = await fetch(`${ApiUrl}/docente/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',  // Definir o tipo de conteúdo como JSON
@@ -27,15 +28,16 @@ if (loginForm) {
             const result = await response.json();
             if (response.ok) {
                 console.log("Login bem-sucedido:", result);
-                // Aqui, você pode redirecionar o usuário ou tratar o resultado
                 window.location.href = './pages/home.html';  // Redirecionamento (se necessário)
             } else {
-                console.error("Erro no login:", result);
-                alert(result.message || 'Erro ao realizar login');
+                console.error("Erro no login:", result.error);
+                msg.textContent = (result.error || 'Erro ao realizar login');
+                msg.style.color = "red"
             }
         } catch (error) {
             console.error("Erro ao enviar dados:", error);
-            alert('Erro ao tentar fazer login. Tente novamente.');
+            msg.textContent = ('Erro ao tentar fazer login: ', error);
+            msg.style.color = "red"
         }
     });
 }

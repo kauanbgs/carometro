@@ -114,7 +114,7 @@ module.exports = class docenteController {
         }
 
       const docente = docenteLogado[0];
-      const senhaCorreta = await bcrypt.compare(hashedPassword, docente.senha);
+      const senhaCorreta = await bcrypt.compare(senha, docente.senha);
       if(!senhaCorreta){
         return res.status(401).json({error: "Senha incorreta"})
       }

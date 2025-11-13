@@ -381,12 +381,17 @@ label {
   width: fit-content;
   justify-content: flex-end;
   align-self: center;
+  margin-top: 25px;
 }
 
 .register-link strong {
   font-weight: 600;
   color: var(--preto);
   text-decoration: underline;
+}
+
+#mensagem {
+  color: var(--preto);
 }
 /* FIM ARQUIVO LOGIN */
 
