@@ -6,15 +6,15 @@ const knexConfig = require("../../knexfile");  // Carrega a configuração
 const knex = require('knex');  // Importa o Knex
 const connect = knex(knexConfig);  // Cria a instância do Knex
 const bcrypt = require("bcrypt");
+const SALT_ROUNDS = 10;
 
 module.exports = class docenteController {
   static async createDocente(req, res, next) {
-    const { email, senha, nome, tipo } = req.body;
+    let { email, senha, nome, tipo } = req.body;
     if (!email || !senha || !nome) {
       return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     }
-    const SALT_ROUNDS = 10;
-    const hashedPassword = await bcrypt.hash(senha, SALT_ROUNDS);
+    senha = await bcrypt.hash(senha, SALT_ROUNDS);
 
     try {
       const docenteData = { email, senha, nome}
@@ -69,10 +69,11 @@ module.exports = class docenteController {
 
   static async updateDocente(req, res, next) {
     const { id_docente } = req.params
-    const { senha, nome, tipo } = req.body;
+    let { senha, nome, tipo } = req.body;
     if (!senha || !nome || !id_docente) {
       return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     }
+    senha = await bcrypt.hash(senha, SALT_ROUNDS);
     try {
       const docenteData = { senha, nome}
       if(tipo){
