@@ -3,7 +3,7 @@ exports.up = function(knex) {
       table.increments('id_ocorrencia').primary();
       table.string('tipo', 100).notNullable();
       table.string('descricao', 150).notNullable();
-      table.timestamp('data_criacao').notNullable();
+      table.timestamp('data_criacao').defaultTo(knex.fn.now()).notNullable();
       table.integer('fk_id_estudante').unsigned().notNullable();
       table.foreign('fk_id_estudante').references('id_estudante').inTable('estudante');
     });

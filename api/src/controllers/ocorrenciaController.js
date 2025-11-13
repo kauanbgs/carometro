@@ -8,13 +8,12 @@ const connect = knex(knexConfig);  // Cria a instância do Knex
 
 module.exports = class ocorrenciaController {
   static async createOcorrencia(req, res, next) {
-    let { tipo, descricao, data_criacao, fk_id_estudante } = req.body;
-    if (!tipo || !descricao || !data_criacao || !fk_id_estudante) {
+    let { tipo, descricao, fk_id_estudante } = req.body;
+    if (!tipo || !descricao || !fk_id_estudante) {
       return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     }
-
     try {
-      const dadosOcorrencia = { tipo, descricao, data_criacao, fk_id_estudante };
+      const dadosOcorrencia = { tipo, descricao, fk_id_estudante };
       if(tipo){
         dadosOcorrencia.tipo = tipo
       }
@@ -31,7 +30,7 @@ module.exports = class ocorrenciaController {
   static async getOcorrenciaByIdAluno(req, res, next) {
     const { fk_id_estudante } = req.params;
     try {
-      const ocorrencias = await connect("ocorrencia").where('fk_  id_estudante', fk_id_estudante)
+      const ocorrencias = await connect("ocorrencia").where('fk_id_estudante', fk_id_estudante)
       if (ocorrencias.length === 0) {
         return res.status(404).json({ error: 'Nenhuma ocorrência registrada!' });
       }
@@ -41,4 +40,48 @@ module.exports = class ocorrenciaController {
     }
   }
 
+  static async readOcorrencias(req, res, next) {
+    try {
+      const ocorrencia = await connect('ocorrencia').select("*")
+
+      if (ocorrencia.length === 0) {
+        return res.status(404).json({ error: 'Nenhum docente encontrado!' });
+      }
+      return res.status(200).json(ocorrencia);
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  static async updateOcorrencia(req, res, next) {
+      const { id_ocorrencia } = req.params
+      let { tipo, descricao, fk_id_estudante } = req.body;
+      if (!tipo || !descricao || !fk_id_estudante) {
+        return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
+      }
+      const ocorrencia = { tipo, descricao, fk_id_estudante} = req.body;
+      try {
+        const updatedRows = await connect("ocorrencia").where("id_ocorrencia", id_ocorrencia).update(ocorrencia)
+        if(updatedRows === 0){
+          return res.status(404).json({error: "Ocorrência não encontrada!"});
+        }
+        return res.status(200).json({ message: "Ocorrência atualizada: ", id_ocorrencia });
+      } catch (error) {
+        next(error)
+      }
+    }
+
+    static async deleteOcorrencia(req, res, next) {
+      const { id_ocorrencia } = req.params
+      try {
+        const deletedOcorrencia = await connect('ocorrencia').where("id_ocorrencia", id_ocorrencia).del()
+        if (deletedOcorrencia == 0){
+          return res.status(404).json({ error: "Ocorrência não encontrada!"})
+        }
+        return res.status(200).json({ message: `Ocorrência excluida: ${id_ocorrencia}`})
+      } catch (error) {
+        next(error)
+      }
+    }
+  
 };
