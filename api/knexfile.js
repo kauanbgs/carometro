@@ -1,6 +1,6 @@
 // knexfile.js
 module.exports = {
-  client: 'mysql2', // ou 'mysql', dependendo do seu banco
+  client: 'mysql2',
   connection: {
     host: 'localhost',
     user: 'alunods',
