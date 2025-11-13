@@ -4,7 +4,7 @@ exports.up = function(knex) {
       table.string('nome', 100).notNullable();
       table.string('email', 150).unique().notNullable();
       table.string('telefone', 11).notNullable();
-      table.timestamp('data_criacao').notNullable() ;
+      table.timestamp('data_criacao').defaultTo(knex.fn.now()).notNullable() ;
       table.boolean('status').defaultTo(1).notNullable();
       table.integer('numero_aluno').notNullable();
       table.integer('fk_id_turma').unsigned().notNullable();

@@ -1,5 +1,4 @@
 // Feito por Luiz Felipe
-
 const ApiUrl = "http://localhost:5000/carometro";  // Defina a URL da sua API
 
 const loginForm = document.getElementById("loginForm");
@@ -80,7 +79,14 @@ if (alunoRegisterForm) {
     alunoRegisterForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const dados = Object.fromEntries(new FormData(alunoRegisterForm));
+        const dados = {
+            nome: alunoRegisterForm.nome.value,
+            email: alunoRegisterForm.email.value,
+            telefone: alunoRegisterForm.telefone.value,
+            status: 1,
+            numero_aluno: alunoRegisterForm.numero_aluno.value,
+            fk_id_turma: alunoRegisterForm.fk_id_turma.value,
+        };
         console.log("Dados convertidos: ", dados);
 
         try {
