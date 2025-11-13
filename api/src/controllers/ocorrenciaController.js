@@ -10,22 +10,21 @@ const SALT_ROUNDS = 10;
 
 module.exports = class ocorrenciaController {
   static async createOcorrencia(req, res, next) {
-    let { email, senha, nome, tipo } = req.body;
-    if (!email || !senha || !nome) {
+    let { tipo, descricao, data_criacao, fk_id_estudante } = req.body;
+    if (!tipo || !descricao || !data_criacao || !fk_id_estudante) {
       return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     }
-    senha = await bcrypt.hash(senha, SALT_ROUNDS);
 
     try {
-      const docenteData = { email, senha, nome}
+      const dadosOcorrencia = { tipo, descricao, data_criacao, fk_id_estudante };
       if(tipo){
-        docenteData.tipo = tipo
+        dadosOcorrencia.tipo = tipo
       }
-      await connect("docente").insert(docenteData)
-      return res.status(201).json({ message: "Docente criado com sucesso!"})
+      await connect("ocorrencia").insert(dadosOcorrencia)
+      return res.status(201).json({ message: "Ocorrencia Criada com sucesso!"})
     } catch (error) {
       if (error.code === 'ER_DUP_ENTRY') {
-        return res.status(409).json({ error: "Email já cadastrado. Tente outro." });
+        return res.status(409).json({ error: "Ocorrencia já cadastrada. Tente outro." });
       }
       next(error)
     }

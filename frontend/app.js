@@ -95,16 +95,12 @@ if (alunoRegisterForm) {
             const result = await response.json();
             if (response.ok) {
                 console.log("Bem-sucedido:", result);
-                cadastroForm.reset();
+                alunoRegisterForm.reset();
             } else {
                 console.error("Erro:", result.error);
-                msg.textContent = (result.error || 'Erro ao cadastrar');
-                msg.style.color = "red"
             }
         } catch (error) {
             console.error("Erro ao enviar dados:", error);
-            msg.textContent = ('Erro ao tentar cadastrar: ', error);
-            msg.style.color = "red"
         }
     });
 }

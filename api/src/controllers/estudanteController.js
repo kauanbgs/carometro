@@ -11,7 +11,7 @@ module.exports = class estudanteController {
     if (!nome ||!email ||!telefone ||!data_criacao ||!status ||!numero_aluno ||!fk_id_turma) {
       return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
     }
-    const estudanteData = { nome, email, telefone, data_criacao, status, numero_aluno, fk_id_turma };
+    const estudanteData = { nome, email, telefone, data_criacao: data_criacao || knex.fn.now(), status, numero_aluno, fk_id_turma };
     try {
       await connect("estudante").insert(estudanteData)
       return res.status(201).json({ message: "Estudante criado com sucesso!"})
