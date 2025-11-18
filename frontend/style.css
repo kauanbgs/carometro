@@ -892,7 +892,7 @@ label {
 
 .linha-turma {
     display: grid;
-    grid-template-columns: 8fr 2fr 48px;
+    grid-template-columns: 5.3fr 2fr 48px;
     align-items: center;
     padding: 18px 12px;
     column-gap: 75px;
@@ -904,6 +904,7 @@ label {
 
 .nome-professor {
     text-align: center;
+    text-wrap: nowrap;
 }
 
 .linha-turma i {
@@ -1502,11 +1503,7 @@ label {
     color: var(--textoSelecionado);
     background-color: var(--azulSecundario);
     border-radius: 8px;
-<<<<<<< HEAD
     width: 100%;
-=======
-    width: 65%;
->>>>>>> 7bf5acb88ac0de4b68028622645da203d5f922f7
     height: 50px;
     border: none;
     font-size: large;
