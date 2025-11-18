@@ -1449,11 +1449,13 @@ label {
 }
 
 
-.input-group{
+.input-group {
+    /* display: flex; */
+    flex-direction: column;
     gap: 15px;
-    height: 50%;
     width: 100%;
 }
+
 
 .input-group input{
     border: .5px solid rgba(0, 0, 0, 0.174);
@@ -1461,7 +1463,35 @@ label {
     width: 100%;
     height: 8vh;
     background-color: var(--background);
+}
+
+#turma-aluno {   
+    width: 100%;
+    height: 8vh;
+    padding: 10px;
     
+    border: .5px solid rgba(0, 0, 0, 0.174);
+    border-radius: 8px;
+    
+    background-color: var(--background);
+    color: var(--preto);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+
+    cursor: pointer;
+    appearance: none; /* remove estilo padrão do navegador */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='15' viewBox='0 0 20 20' width='15' xmlns='http://www.w3.org/2000/svg'><polygon points='0,0 20,0 10,10'/></svg>");
+    background-repeat: no-repeat;
+    background-position: 95% center; /* seta à direita */
+    background-size: 12px;
+}
+
+#turma-aluno:focus {
+    outline: none;
+    border-color: var(--azulSecundario);
 }
 
 .input-group input:focus{
@@ -1472,11 +1502,16 @@ label {
     color: var(--textoSelecionado);
     background-color: var(--azulSecundario);
     border-radius: 8px;
+<<<<<<< HEAD
+    width: 100%;
+=======
     width: 65%;
-    height: 160px;
+>>>>>>> 7bf5acb88ac0de4b68028622645da203d5f922f7
+    height: 50px;
     border: none;
     font-size: large;
     font-weight: 400;
+    margin-top: 70px;
     margin-bottom: 20px;
     cursor: pointer;
 }

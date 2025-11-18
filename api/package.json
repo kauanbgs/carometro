@@ -7,7 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "migrate": "node ./src/utils/createDatabase.js",
     "drop-all": "node ./src/utils/dropDatabase.js",
     "populate": "npx knex seed:run",
     "createDB": "node ./src/utils/createDatabase.js && npx knex seed:run"
