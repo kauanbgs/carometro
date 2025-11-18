@@ -3,7 +3,7 @@
  * @returns { Promise<void> } 
  */
 exports.seed = async function(knex) {
-  // Deletes ALL existing entries
+//Deleta todas as instancias existentes
   await knex('estudante').del()
   await knex('estudante').insert([
     { nome: 'Aluanan Angel de Sousa', email: 'aluanan.sousa@aluno.senai.br', telefone: '11900000001', data_criacao: '2025-01-01 08:00:00', status: 1, numero_aluno: 1, fk_id_turma: 1 },

@@ -1,10 +1,7 @@
 //NAO USAR PRETTIER
-
-
-
-const knexConfig = require("../../knexfile");  // Carrega a configuração
-const knex = require('knex');  // Importa o Knex
-const connect = knex(knexConfig);  // Cria a instância do Knex
+const knexConfig = require("../../knexfile");
+const knex = require('knex');
+const connect = knex(knexConfig); 
 
 module.exports = class ocorrenciaController {
   static async createOcorrencia(req, res, next) {
@@ -43,7 +40,6 @@ module.exports = class ocorrenciaController {
   static async readOcorrencias(req, res, next) {
     try {
       const ocorrencia = await connect('ocorrencia').select("*")
-
       if (ocorrencia.length === 0) {
         return res.status(404).json({ error: 'Nenhum docente encontrado!' });
       }

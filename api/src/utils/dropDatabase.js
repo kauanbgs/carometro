@@ -1,7 +1,6 @@
 const knex = require('knex');
 const knexConfig = require('../../knexfile');
 
-// Criação de um pool de conexões sem especificar o banco de dados
 const knexNoDB = knex({
   client: knexConfig.client,
   connection: {
@@ -12,14 +11,13 @@ const knexNoDB = knex({
   }
 });
 
-// Função para remover o banco de dados
 async function dropDatabaseIfExists() {
   try {
     const dbName = 'carometro';
 
     const result = await knexNoDB.raw(`SHOW DATABASES LIKE '${dbName}'`);
     if (result[0].length > 0) {
-      // Banco de dados existe, vamos deletá-lo
+      //banco existe? se sim:
       await knexNoDB.raw(`DROP DATABASE ${dbName}`);
       console.log(`Banco de dados '${dbName}' deletado com sucesso!`);
     } else {
@@ -28,7 +26,7 @@ async function dropDatabaseIfExists() {
   } catch (error) {
     console.error("Erro ao deletar o banco de dados:", error);
   } finally {
-    await knexNoDB.destroy(); // Fechar a conexão
+    await knexNoDB.destroy();//fecha conexao
   }
 }
 
@@ -37,12 +35,12 @@ async function rollbackMigrations() {
 
   try {
     console.log('Revertendo todas as migrações...');
-    await knexWithDB.migrate.rollback(); // Reverter as migrações
+    await knexWithDB.migrate.rollback(); //reverte migrações
     console.log('Todas as migrações revertidas com sucesso!');
   } catch (error) {
     console.error('Erro ao reverter as migrações:', error);
   } finally {
-    await knexWithDB.destroy(); // Fechar a conexão com o banco
+    await knexWithDB.destroy();//fecha conexao
   }
 }
 

@@ -4,7 +4,7 @@ const cors = require('cors');
 
 // Configuração do CORS com origens permitidas
 const corsOptions = {
-  origin: '*', // Substitua pela origem permitida
+  origin: '*', //substituir no deploy
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,

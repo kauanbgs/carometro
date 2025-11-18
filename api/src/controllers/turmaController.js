@@ -1,8 +1,7 @@
 //NAO USAR PRETTIER
-
-const knexConfig = require("../../knexfile");  // Carrega a configuração
-const knex = require('knex');  // Importa o Knex
-const connect = knex(knexConfig);  // Cria a instância do Knex
+const knexConfig = require("../../knexfile");
+const knex = require('knex');
+const connect = knex(knexConfig);
 
 module.exports = class turmaController {
 

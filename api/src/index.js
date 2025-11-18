@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-// const testConnect = require("./db/testConnect");
 
 class appcontroler {
   constructor() {
@@ -8,12 +7,11 @@ class appcontroler {
     this.middlewares();
     this.routes();
     this.exceptionHandler();
-    // testConnect();
   }
   middlewares() {
     this.express.use(express.json());
     this.express.use(cors());
-    this.express.use(express.urlencoded({ extended: true })); // Necessário para receber dados de formulários HTML
+    this.express.use(express.urlencoded({ extended: true })); //necessário para receber dados de formulários HTML
   }
   routes() {
     const apiRoutes = require("./routes/apiRoutes");

@@ -1,5 +1,5 @@
 const knex = require('knex');
-const knexConfig = require('../../knexfile'); // Importa o knexfile
+const knexConfig = require('../../knexfile');
 
 // Criação de um pool de conexões sem especificar o banco de dados
 const knexNoDB = knex({
@@ -8,19 +8,18 @@ const knexNoDB = knex({
     host: knexConfig.connection.host,
     user: knexConfig.connection.user,
     password: knexConfig.connection.password,
-    database: null, // Não especificamos o banco aqui, pois vamos criar
+    database: null,
   }
 });
 
-// Função para verificar se o banco existe, e se não, criá-lo
 async function createDatabaseIfNotExists() {
   try {
     const dbName = 'carometro';
 
-    // Verificar se o banco existe
+    //banco existe?
     const result = await knexNoDB.raw(`SHOW DATABASES LIKE '${dbName}'`);
     if (result[0].length === 0) {
-      // Banco de dados não existe, vamos criar
+      //se entrou aqui nao existe
       await knexNoDB.raw(`CREATE DATABASE ${dbName}`);
       console.log(`Banco de dados '${dbName}' criado com sucesso!`);
     } else {
@@ -29,25 +28,23 @@ async function createDatabaseIfNotExists() {
   } catch (error) {
     console.error("Erro ao verificar ou criar o banco de dados:", error);
   } finally {
-    await knexNoDB.destroy(); // Fechar a conexão sem banco
+    await knexNoDB.destroy();//fecha conexao com o banco
   }
 }
 
-// Função para rodar as migrações
 async function runMigrations() {
-  await createDatabaseIfNotExists(); // Criar o banco caso não exista
-  const knexWithDB = knex(knexConfig); // Agora, conecte-se com o banco real
+  await createDatabaseIfNotExists();//se nao tem banco, ele cria
+  const knexWithDB = knex(knexConfig);
 
   try {
     console.log('Rodando migrações...');
-    await knexWithDB.migrate.latest(); // Rodar as migrações
+    await knexWithDB.migrate.latest();//roda migrações
     console.log('Migrações aplicadas com sucesso!');
   } catch (error) {
     console.error('Erro ao rodar as migrações:', error);
   } finally {
-    await knexWithDB.destroy(); // Fechar a conexão com o banco
+    await knexWithDB.destroy();//fecha conexao
   }
 }
 
-// Rodar as migrações ao executar o script
 runMigrations();
