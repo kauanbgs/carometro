@@ -143,3 +143,35 @@ document.addEventListener("DOMContentLoaded", async (e) => {
         nav.innerHTML = "<p>Erro interno do servidor.</p>";
     }
 });
+
+const formDelecao = document.getElementById("formDelecao")
+if(formDelecao){
+formDelecao.addEventListener("submit", async (e)=>{
+    e.preventDefault()
+    const email = formDelecao.email.value
+    const msg = document.getElementById("mensagem")
+    try {
+        if (!email){
+            msg.textContent = "Nenhum email informado!"
+            msg.style.color = "red"
+            return
+        }
+        const resposta = await fetch(`http://localhost:5000/carometro/docente/${email}`, {
+            method: "DELETE"
+        })
+        const resultado = await resposta.json()
+        if(resposta.ok){
+        msg.textContent = resultado.message
+        msg.style.color = "green"
+        formDelecao.reset()
+      } else {
+        msg.textContent = resultado.error
+        msg.style.color = "red"
+      }
+    } catch (error) {
+        msg.textContent = "Erro ao conectar com o servidor"
+        msg.style.color = "red"
+        console.log("ERRO na requisição DELETE: ", error)
+    }
+})
+}

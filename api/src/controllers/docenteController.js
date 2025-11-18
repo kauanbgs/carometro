@@ -89,16 +89,21 @@ module.exports = class docenteController {
     }
   }
   static async deleteDocente(req, res, next) {
-    const { id_docente } = req.params
+    const { email } = req.params
     try {
-      const deletedCount = await connect('docente').where({id_docente}).del()
+      const deletedCount = await connect('docente').where({email}).del()
       if (deletedCount == 0){
         return res.status(404).json({ error: "Usuario não encontrado!"})
       }
-      return res.status(200).json({ message: `Usuario excluido: ${id_docente}`})
+      return res.status(200).json({ message: `Usuario excluido: ${email}`})
     } catch (error) {
-      next(error)
+      if (error.code === "ER_ROW_IS_REFERENCED_2") {
+        return res.status(400).json({
+        error: "Não é possível excluir o docente: ele está vinculado a uma ou mais turmas."
+      })
     }
+    next(error)
+   }
   }
 
   static async login(req, res, next){

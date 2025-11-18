@@ -1502,7 +1502,11 @@ label {
     color: var(--textoSelecionado);
     background-color: var(--azulSecundario);
     border-radius: 8px;
+<<<<<<< HEAD
     width: 100%;
+=======
+    width: 65%;
+>>>>>>> 7bf5acb88ac0de4b68028622645da203d5f922f7
     height: 50px;
     border: none;
     font-size: large;
