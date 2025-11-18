@@ -54,3 +54,5 @@ QUERIES turma {
     deleteTurma:
         DELETE FROM turma WHERE id_turma=?
 } 
+
+
