@@ -73,6 +73,19 @@ module.exports = class estudanteController {
     }
   }
 
+  static async getEstudanteBystatus(req, res) {
+    const { status } = req.params;
+    try {
+      const estudanteData = await connect("estudante").select("*").where("status", "=", status)
+      if (estudanteData.length === 0) {
+        return res.status(404).json({ error: "Estudante não encontrado!" });
+      }
+      return res.status(200).json({ message: "Estudante: ", estudante: estudanteData });
+      }catch (error) {
+        next(error)
+    }
+  }
+
   static async updateEstudante(req,res,next) {
     const { id_estudante } = req.params;
     const { nome,email,telefone,data_criacao,status,numero_aluno,fk_id_turma } = req.body;

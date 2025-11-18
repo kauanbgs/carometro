@@ -21,6 +21,7 @@ router.get("/estudante", estudanteController.readEstudante);
 router.get("/estudante/:id_estudante", estudanteController.getEstudanteByID);
 router.get("/estudante/numero/:numero_aluno", estudanteController.getEstudanteByNumero);
 router.get("/estudante/nome/:nome", estudanteController.getEstudanteByName);
+router.get("/estudante/status/:status", estudanteController.getEstudanteBystatus);
 router.put("/estudante/:id_estudante", estudanteController.updateEstudante);
 router.delete("/estudante/:id_estudante", estudanteController.deleteEstudante);
 

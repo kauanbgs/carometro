@@ -35,6 +35,7 @@ exports.seed = async function(knex) {
     { nome: 'Sofia Siqueira Belchior', email: 'sofia.belchior@aluno.senai.br', telefone: '11900000027', data_criacao: '2025-01-01 08:00:00', status: 1, numero_aluno: 27, fk_id_turma: 1 },
     { nome: 'Sophia de Oliveira Ferreira', email: 'sophia.ferreira@aluno.senai.br', telefone: '11900000028', data_criacao: '2025-01-01 08:00:00', status: 1, numero_aluno: 28, fk_id_turma: 1 },
     { nome: 'Ulisses Santini Gomes', email: 'ulisses.gomes@aluno.senai.br', telefone: '11900000029', data_criacao: '2025-01-01 08:00:00', status: 1, numero_aluno: 29, fk_id_turma: 1 },
-    { nome: 'Vinicius Soares Peroni', email: 'vinicius.peroni@aluno.senai.br', telefone: '11900000030', data_criacao: '2025-01-01 08:00:00', status: 1, numero_aluno: 30, fk_id_turma: 1 }
+    { nome: 'Vinicius Soares Peroni', email: 'vinicius.peroni@aluno.senai.br', telefone: '11900000030', data_criacao: '2025-01-01 08:00:00', status: 1, numero_aluno: 30, fk_id_turma: 1 },
+    { nome: 'Antonio', email: 'acintra504@gmail.com', telefone: '11900000031', data_criacao: '2025-01-01 08:00:00', status: 0, numero_aluno: 31, fk_id_turma: 1 }
   ]);
 };
