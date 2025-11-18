@@ -97,8 +97,13 @@ module.exports = class docenteController {
       }
       return res.status(200).json({ message: `Usuario excluido: ${email}`})
     } catch (error) {
-      next(error)
+      if (error.code === "ER_ROW_IS_REFERENCED_2") {
+        return res.status(400).json({
+        error: "Não é possível excluir o docente: ele está vinculado a uma ou mais turmas."
+      })
     }
+    next(error)
+   }
   }
 
   static async login(req, res, next){

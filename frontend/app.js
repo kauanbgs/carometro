@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 
 const formDelecao = document.getElementById("formDelecao")
 if(formDelecao){
-formDelecao.addEventListener("click", async (e)=>{
+formDelecao.addEventListener("submit", async (e)=>{
     e.preventDefault()
     const email = formDelecao.email.value
     const msg = document.getElementById("mensagem")
