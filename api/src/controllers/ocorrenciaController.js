@@ -5,24 +5,32 @@ const connect = knex(knexConfig);
 
 module.exports = class ocorrenciaController {
   static async createOcorrencia(req, res, next) {
-    let { tipo, descricao, fk_id_estudante } = req.body;
-    if (!tipo || !descricao || !fk_id_estudante) {
-      return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
-    }
-    try {
-      const dadosOcorrencia = { tipo, descricao, fk_id_estudante };
-      if(tipo){
-        dadosOcorrencia.tipo = tipo
-      }
-      await connect("ocorrencia").insert(dadosOcorrencia)
-      return res.status(201).json({ message: "Ocorrencia Criada com sucesso!"})
-    } catch (error) {
-      if (error.code === 'ER_DUP_ENTRY') {
-        return res.status(409).json({ error: "Ocorrencia já cadastrada. Tente outro." });
-      }
-      next(error)
-    }
+  let { tipo, descricao, fk_id_estudante } = req.body;
+
+  if (!tipo || !descricao || !fk_id_estudante) {
+    return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
   }
+
+  try {
+    // CHAMANDO A PROCEDURE
+    await connect.raw(`
+      CALL criarOcorrencia(?, ?, ?)
+    `, [tipo, descricao, fk_id_estudante]);
+
+    return res.status(201).json({
+      message: "Ocorrência criada com sucesso! (com procedure) "
+    });
+
+  } catch (error) {
+    if (error.code === 'ER_DUP_ENTRY') {
+      return res.status(409).json({
+        error: "Ocorrência já cadastrada. Tente outro."
+      });
+    }
+    next(error);
+  }
+}
+  
 
   static async getOcorrenciaByIdAluno(req, res, next) {
     const { fk_id_estudante } = req.params;
