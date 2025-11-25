@@ -175,3 +175,38 @@ formDelecao.addEventListener("submit", async (e)=>{
     }
 })
 }
+
+
+document.addEventListener("DOMContentLoaded", async (e) => {
+    e.preventDefault()
+    console.log("chegou aqui")
+    const nav = document.getElementById("docentes");
+    nav.innerHTML = "";
+
+    try {
+        const resposta = await fetch(`http://localhost:5000/carometro/docente`);
+        const dados = await resposta.json(); 
+        console.log(dados);
+
+        if (resposta.ok) {
+            dados.forEach((docente) => {
+                const div = document.createElement("div");
+                div.classList.add("linha-docente");
+                
+                div.innerHTML = `
+                    <p class="nome-docente">${docente.nome}</p>
+                    <p class="id-docente">${docente.id_docente || 'Sem professor'}</p>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                `;
+                
+                nav.appendChild(div);
+            });
+        } else {
+            console.error("Erro na requisição: ", dados.error);
+            nav.innerHTML = "<p>Não foi possível carregar os docentes.</p>";
+        }
+    } catch (error) {
+        console.log("Erro na requisição GET: ", error);
+        nav.innerHTML = "<p>Erro interno do servidor.</p>";
+    }
+});
