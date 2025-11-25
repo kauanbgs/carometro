@@ -87,5 +87,4 @@ module.exports = class ocorrenciaController {
         next(error)
       }
     }
-  
 };

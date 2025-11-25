@@ -796,6 +796,19 @@ label {
     color: rgba(0, 0, 0, 0.5);
 }
 
+#id_docente{
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    border: .5px solid rgba(0, 0, 0, 0.359);
+    padding: 15px;
+    font-size: medium;
+    font-weight: 200;
+    border-radius: 10px;
+    background-color: var(--background);
+    color: rgba(0, 0, 0, 0.5);
+}
+
 .pesquisa {
     display: flex;
     align-items: center;
@@ -1180,7 +1193,6 @@ label {
     padding: 18px 12px;
     font-size: larger;
     margin-top: 45px;
-
 }
 
 .cabecalho-alunos p {
@@ -1517,3 +1529,39 @@ label {
     width: 40%;
 }
 /* FIM CriandoDocente.CSS */
+
+/* gerenciarAdmDev.CSS */
+
+#docentes {
+    display: grid;
+    grid-auto-rows: auto;
+    margin-left: 25px;
+    color: var(--preto);
+}
+
+
+.excluir-docente {
+    display: flex;
+    padding: 15px;
+    gap: 15px;
+    border-radius: 10px;
+    border: .5px solid red;
+    cursor: pointer;
+    padding-right: 35px;
+    padding-left: 35px;
+    height: 50px;
+    align-items: center;
+    text-wrap: nowrap;
+}
+.cabecalho-docente {
+display: grid;
+    grid-template-columns: 1fr 70px 90px 70px 32px;
+    align-items: center;
+    column-gap: 60px;
+    padding: 18px 12px;
+    font-size: larger;
+    margin-top: 45px;
+}
+
+
+/* FIM gerenciarAdmDev.CSS */

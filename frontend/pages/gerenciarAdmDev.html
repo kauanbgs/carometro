@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GerenciarAdms - Carometro</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <main class="container">
+        <div class="sub-container">
+
+            <div class="voltar2">
+                <i onclick="window.location.href='../pages/home.html'" style="width: 500;"
+                    class="fa-etch fa-solid fa-chevron-left fa-2x"></i>
+                <a onclick="window.location.href='../pages/home.html'">Voltar</a>
+            </div>
+
+            <h1>Gerenciar Docentes</h1>
+            <div class="separador2"></div>
+
+            <div class="inputs">
+                <div class="campo">
+                    <label for="nome_turma">Nome do Docente</label>
+                    <input type="text" name="nome_turma" id="nome_turma"
+                        placeholder="Euller"/>
+                </div>
+
+                <div class="campo2">
+                    <label for="id_docente">Id</label>
+                    <select id="id_docente" name="id-docente">
+                        <option value="">Euller</option>
+                    </select>
+                </div>
+                <button class="anotacoes">
+                    <i class="fa-etch fa-solid fa-search fa-lg"></i>
+                </button>
+
+                <button class="excluir-docente">
+                    <p>Excluir Docente</p>
+                </button>
+            </div>
+
+
+            <div class="docentes">
+                <header class="cabecalho-docente">
+                    <p>Nome <i class="fa-solid fa-chevron-down"></i></p>
+                    <p>Id <i class="fa-solid fa-chevron-down"></i></p>
+                    <p>Ação</p>
+                </header>
+
+                <div class="separador2"></div>
+
+                <nav id="alunos" class="lista-alunos">
+                    <div class="linha-docente">
+                        <p class="nome-aluno">Aluanna Angel de Sousa</p>
+                        <p class="turma">1C - DS</p>
+                        <p class="numero">1</p><span class="staus-ativo">Ativo</span><i
+                            class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                    <div class="linha-aluno">
+                        <p class="nome-aluno">Ana Carolina de Oliveira M.</p>
+                        <p class="turma">1C - DS</p>
+                        <p class="numero">2</p><span class="staus-ativo">Ativo</span><i
+                            class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                    <div class="linha-aluno">
+                        <p class="nome-aluno">Anna Vitória Martins Ramos</p>
+                        <p class="turma">1C - DS</p>
+                        <p class="numero">3</p><span class="staus-ativo">Ativo</span><i
+                            class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                    <div class="linha-aluno">
+                        <p class="nome-aluno">Arthur Cintra de Lacerda</p>
+                        <p class="turma">1C - DS</p>
+                        <p class="numero">4</p><span class="staus-ativo">Ativo</span><i
+                            class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                    <div class="linha-aluno">
+                        <p class="nome-aluno">Arthur Cintra Faleiros</p>
+                        <p class="turma">1C - DS</p>
+                        <p class="numero">5</p><span class="staus-ativo">Ativo</span><i
+                            class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                    <div class="linha-aluno">
+                        <p class="nome-aluno">Arthur Marques Santos</p>
+                        <p class="turma">1C - DS</p>
+                        <p class="numero">6</p><span class="staus-ativo">Ativo</span><i
+                            class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                    <div class="linha-aluno">
+                        <p class="nome-aluno">Bryan Miguel Moreira</p>
+                        <p class="turma">1C - DS</p>
+                        <p class="numero">7</p><span class="staus-ativo">Ativo</span><i
+                            class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                    <div class="linha-aluno">
+                        <p class="nome-aluno">Davi Azevedo Gonçalves</p>
+                        <p class="turma">1C - DS</p>
+                        <p class="numero">8</p><span class="staus-ativo">Ativo</span><i
+                            class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                    <div class="linha-aluno">
+                        <p class="nome-aluno">Eduardo Augusto Tognati</p>
+                        <p class="turma">1C - DS</p>
+                        <p class="numero">9</p><span class="staus-ativo">Ativo</span><i
+                            class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                    <div class="linha-aluno">
+                        <p class="nome-aluno">Flavio Henrique de Souza Filho</p>
+                        <p class="turma">1C - DS</p>
+                        <p class="numero">10</p><span class="staus-ativo">Ativo</span><i
+                            class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                    <div class="linha-aluno">
+                        <p class="nome-aluno">Gabriel Braz Menezes</p>
+                        <p class="turma">1C - DS</p>
+                        <p class="numero">11</p><span class="staus-ativo">Ativo</span><i
+                            class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                    <div class="linha-aluno">
+                        <p class="nome-aluno">Gabriel Rossi Ventura</p>
+                        <p class="turma">1C - DS</p>
+                        <p class="numero">12</p><span class="staus-ativo">Ativo</span><i
+                            class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                </nav>
+            </div>
+
+        </div>
+
+        <div class="linha-paginacao">
+            <span class="seta"></span>
+            <div class="paginacao">
+                <div class="box">0</div>
+                <a href="#" class="box ativo">1</a>
+                <div class="box">0</div>
+            </div>
+            <span class="seta"></span>
+        </div>
+
+    </main>
+    <aside class="sidebar">
+      <header class="sidebar-header">
+        <img class="logo" src="../images/SenaiLogo.png" alt="Imagem da Logo" />
+      </header>
+
+      <nav class="sidebar-nav">
+        <button>
+          <span>
+            <i class="fa-etch fa-solid fa-house"></i>
+            <a onclick="window.location.href='../pages/home.html'">Home</a>
+          </span>
+        </button>
+
+        <div></div>
+
+        <div></div>
+
+        <div class="separador"></div>
+
+        <h2 class="titulos-sidebar">ALUNOS</h2>
+        <button>
+          <span>
+            <i class="fa-etch fa-solid fa-users"></i>
+            <a onclick="window.location.href='../pages/gerenciarTurmas.html'">
+              Gerenciar Turmas</a
+            >
+          </span>
+        </button>
+
+        <div class="separador"></div>
+
+        <h2 class="titulos-sidebar">DOCENTE</h2>
+        <button>
+          <span>
+            <i class="fa-etch fa-solid fa-users"> </i>
+            <a onclick="window.location.href='#'">Gerenciar Docente</a>
+          </span>
+        </button>
+        <h2 class="titulos-sidebar">DEV</h2>
+        <button>
+          <span>
+            <i class="fa-etch fa-solid fa-users"> </i>
+            <a onclick="window.location.href='../pages/gerenciarADMS.html'"
+              >Criar ou Editar Docentes
+            </a>
+          </span>
+        </button>
+      </nav>
+      <div class="foot">
+        <div class="termos">
+          <h6>Termos de seviços</h6>
+          <h6>Politicas de privacidade</h6>
+        </div>
+
+        <div class="perfil">
+          <img src="../images/fallen.jpg" alt="Imagem de perfil" />
+          <h6>Fallen Borges</h6>
+          <i class="fa-etch fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+    </aside>
+    <footer></footer>
+    <script src="../app.js"></script>
+  </body>
+</html>
