@@ -5,17 +5,17 @@ const connect = knex(knexConfig);
 
 module.exports = class ocorrenciaController {
   static async createOcorrencia(req, res, next) {
-  let { tipo, descricao, fk_id_estudante } = req.body;
+  let { tipo, descricao, fk_id_estudante, id_docente } = req.body;
 
-  if (!tipo || !descricao || !fk_id_estudante) {
+  if (!tipo || !descricao || !fk_id_estudante || !id_docente) {
     return res.status(400).json({ error: "Todos os campos devem ser preenchidos" });
   }
 
   try {
     // CHAMANDO A PROCEDURE
     await connect.raw(`
-      CALL criarOcorrencia(?, ?, ?)
-    `, [tipo, descricao, fk_id_estudante]);
+      CALL criarOcorrencia(?, ?, ?, ?)
+    `, [tipo, descricao, fk_id_estudante, id_docente]);
 
     return res.status(201).json({
       message: "Ocorrência criada com sucesso! (com procedure) "
@@ -87,4 +87,5 @@ module.exports = class ocorrenciaController {
         next(error)
       }
     }
+  
 };
