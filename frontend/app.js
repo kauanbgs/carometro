@@ -1,4 +1,3 @@
-// Feito por Luiz Felipe
 const ApiUrl = "http://localhost:5000/carometro";  // Defina a URL da sua API
 
 const loginForm = document.getElementById("loginForm");
@@ -42,6 +41,7 @@ if (loginForm) {
 }
 
 const cadastroForm = document.getElementById("cadastroForm");
+msgFormDoc = document.getElementById("mensagemCadastroDocente")
 if (cadastroForm) {
     cadastroForm.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -61,17 +61,20 @@ if (cadastroForm) {
             const result = await response.json();
             if (response.ok) {
                 console.log("Bem-sucedido:", result);
+                msgFormDoc.textContent = 'Cadastro realizado com sucesso!';
+                msgFormDoc.style.color = "green"
                 cadastroForm.reset();
             } else {
                 console.error("Erro:", result.error);
-                msg.textContent = (result.error || 'Erro ao cadastrar');
-                msg.style.color = "red"
+                msgFormDoc.textContent = (result.error || 'Erro ao cadastrar');
+                msgFormDoc.style.color = "red"
             }
         } catch (error) {
             console.error("Erro ao enviar dados:", error);
-            msg.textContent = ('Erro ao tentar cadastrar: ', error);
-            msg.style.color = "red"
+            msgFormDoc.textContent = ('Erro ao tentar cadastrar: ', error);
+            msgFormDoc.style.color = "red"
         }
+        onsubmit.window.location.href = '../pages/gerenciarAdmDev.html'
     });
 }
 const alunoRegisterForm = document.getElementById("alunoRegisterForm");

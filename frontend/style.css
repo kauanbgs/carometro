@@ -49,6 +49,7 @@ footer {
   height: 0.5px;
   position: relative;
   top: -10px;
+  align-self: auto;
 }
 
 i {
@@ -1517,6 +1518,7 @@ label {
   color: var(--preto);
 }
 .cabecalho-docente {
+  color: var(--preto);
   display: grid;
   grid-template-columns: 1fr 70px 90px 70px 32px;
   align-items: center;
