@@ -3,6 +3,8 @@ const ApiUrl = "http://localhost:5000/carometro";  // Defina a URL da sua API
 const loginForm = document.getElementById("loginForm");
 const msg = document.getElementById("mensagem")
 
+
+// FORM DO LOGIN - DOCENTES
 if (loginForm) {
     // Corrigindo a sintaxe do evento `submit` e usando `async` corretamente
     loginForm.addEventListener("submit", async (e) => {
@@ -40,6 +42,7 @@ if (loginForm) {
     });
 }
 
+// CADASTRO DE DOCENTES
 const cadastroForm = document.getElementById("cadastroForm");
 msgFormDoc = document.getElementById("mensagemCadastroDocente")
 if (cadastroForm) {
@@ -77,6 +80,8 @@ if (cadastroForm) {
         onsubmit.window.location.href = '../pages/gerenciarAdmDev.html'
     });
 }
+
+// FORM PARA CRIAR ALUNOS
 const alunoRegisterForm = document.getElementById("alunoRegisterForm");
 if (alunoRegisterForm) {
     alunoRegisterForm.addEventListener("submit", async (e) => {
@@ -113,6 +118,8 @@ if (alunoRegisterForm) {
         }
     });
 }
+
+// GERENCIAR TURMAS CRIADAS
 document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault()
     console.log("chegou aqui")
@@ -132,7 +139,9 @@ document.addEventListener("DOMContentLoaded", async (e) => {
                 div.innerHTML = `
                     <p class="nome-turma">${turma.nome_turma}</p>
                     <p class="nome-professor">${turma.nome_docente || 'Sem professor'}</p>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                    <a href="editarTurma.html">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </a>
                 `;
                 
                 nav.appendChild(div);
@@ -147,6 +156,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     }
 });
 
+// DELEÇÃO DOS DOCENTES POR E-MAIL
 const formDelecao = document.getElementById("formDelecao")
 if(formDelecao){
 formDelecao.addEventListener("submit", async (e)=>{
@@ -179,7 +189,7 @@ formDelecao.addEventListener("submit", async (e)=>{
 })
 }
 
-
+// GERENCIAR DOCENTES CRIADOS
 document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault()
     console.log("chegou aqui")

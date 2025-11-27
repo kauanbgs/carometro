@@ -39,6 +39,10 @@ footer {
   bottom: 0;
   font-size: xx-small;
 }
+
+i {
+  color: var(--preto);
+}
 /* FIM ARQUIVO STYLE */
 
 /* ARQUIVO COMPONENTES */
@@ -48,7 +52,6 @@ footer {
   width: 70%;
   height: 0.5px;
   position: relative;
-  top: -10px;
   align-self: auto;
 }
 
