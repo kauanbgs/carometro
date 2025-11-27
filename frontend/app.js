@@ -247,7 +247,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     nav.innerHTML = "";
 
     try {
-        const resposta = await fetch(`http://localhost:5000/carometro/turma`);
+        const resposta = await fetch(`http://localhost:5000/carometro/turma/`);
         const dados = await resposta.json(); 
         console.log(dados);
 
@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
                 div.innerHTML = `
                     <p class="nome-turma">${turma.nome_turma}</p>
                     <p class="nome-professor">${turma.nome_docente || 'Sem professor'}</p>
-                    <a href="editarTurma.html">
+                    <a href=editarTurma.html?id=${turma.id_turma}>
                         <i class="fa-solid fa-ellipsis-vertical"></i>
                     </a>
                 `;
@@ -343,3 +343,50 @@ document.addEventListener("DOMContentLoaded", async (e) => {
         nav.innerHTML = "<p>Erro interno do servidor.</p>";
     }
 });
+
+document.addEventListener("DOMContentLoaded", async (e) => {
+    e.preventDefault()
+    console.log("chegou aqui")
+    const nav = document.getElementById("alunos")
+    nav.innerHTML = "";
+    const params = new URLSearchParams(window.location.search);
+    const id_turma = params.get("id")
+
+    try {
+        const resposta = await fetch(`http://localhost:5000/carometro/turma/id/${id_turma}`);
+        const dados = await resposta.json(); 
+        console.log(dados);
+
+        if (resposta.ok) {
+            dados.forEach((turma) => {
+                const div = document.createElement("div");
+                div.classList.add("linha-turma");
+                
+                div.innerHTML = `
+                    <p class="nome-turma">${turma.nome_turma}</p>
+                    <p class="nome-professor">${turma.nome_docente || 'Sem professor'}</p>
+                    <a href=editarTurma.html?id=${turma.id_turma}>
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </a>
+                `;
+                
+                nav.appendChild(div);
+            });
+        } else {
+            console.error("Erro na requisição: ", dados.error);
+            nav.innerHTML = "<p>Não foi possível carregar as turmas.</p>";
+        }
+    } catch (error) {
+        console.log("Erro na requisição GET: ", error);
+        nav.innerHTML = "<p>Erro interno do servidor.</p>";
+    }
+});
+
+
+
+
+
+
+
+
+

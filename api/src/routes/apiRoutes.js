@@ -30,6 +30,7 @@ router.delete("/estudante/:id_estudante", estudanteController.deleteEstudante);
 //      CONTROLLER TURMA       //
 router.post("/turma", turmaController.createTurma);
 router.get("/turma", turmaController.readTurma);
+router.get("/turma/id/:id_turma", turmaController.readTurmaByID)
 router.get("/turma/:fk_id_docente", turmaController.GetTurmaByDocenteID);
 router.get("/turma/nome/:nome", turmaController.GetTurmaByName); // GetByName
 router.put("/turma/id/:id_turma", turmaController.updateTurma)

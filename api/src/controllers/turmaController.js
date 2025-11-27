@@ -26,12 +26,28 @@ module.exports = class turmaController {
     try {
       const turmas = await connect('turma')
       .join('docente', 'turma.fk_id_docente', '=', 'docente.id_docente') // Faz o JOIN entre turma e docente
-      .select('turma.nome as nome_turma', 'docente.nome as nome_docente')
+      .select('turma.nome as nome_turma', 'docente.nome as nome_docente', 'id_turma as id_turma')
       return res.status(200).json(turmas)
     } catch (error) {
       next(error)
     }
   }
+  static async readTurmaByID(req, res, next) {
+    const { id_turma } = req.query;
+    console.log(id_turma);
+    if(!id_turma){
+      return res.status(400).json({ error: "ID da turma é obrigatório!" });
+    }
+    try {
+      const turmas = await connect('turma')
+      .join('docente', 'turma.fk_id_docente', '=', 'docente.id_docente') // Faz o JOIN entre turma e docente
+      .select('turma.nome as nome_turma', 'docente.nome as nome_docente', 'id_turma as id_turma').where("id_turma", id_turma)
+      return res.status(200).json(turmas)
+    } catch (error) {
+      next(error)
+    }
+  }
+
 
   static async GetTurmaByDocenteID(req, res, next) {
     const { fk_id_docente } = req.params;
