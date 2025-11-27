@@ -119,6 +119,126 @@ if (alunoRegisterForm) {
     });
 }
 
+// GERENCIAR TODOS ALUNOS CRIADOS
+document.addEventListener("DOMContentLoaded", async (e) => {
+    e.preventDefault()
+    console.log("chegou aqui")
+    const nav = document.getElementById("alunos");
+    nav.innerHTML = "";
+
+    try {
+        const resposta = await fetch(`http://localhost:5000/carometro/estudante`);
+        const dados = await resposta.json(); 
+        console.log(dados);
+        if(!resposta.ok){
+        }
+        
+        if (resposta.ok) {
+            dados.alunos.forEach((alunos) => {
+                console.log("chegou aq ")
+                let status;
+                const div = document.createElement("div");
+                if(alunos.status === 1){
+                    status = `
+                        <p class = "status-ativo">
+                            Ativo
+                        </p>
+                    `;  
+                }
+                else{
+                    status = `
+                    <p class = "status-inativo">
+                        Inativo
+                    </p>
+                    `;
+                }
+                div.classList.add("linha-aluno");
+
+                div.innerHTML = `
+                    <p class="nome-aluno">${alunos.nome}</p>
+                    <p class="turma">${alunos.fk_id_turma || 'Sem professor'}</p>
+                    <p class = "numero">${alunos.numero_aluno || 'Sem número'}</p>
+                    ${status}
+                    <a href="alunoOcorrencia.html">
+                        <i class="fa-solid fa-ellipsis-vertical" id="acao_aluno"></i>
+                    </a>
+                `;
+            
+                
+                nav.appendChild(div);
+            });
+        } else {
+            console.error("Erro na requisição: ", dados.error);
+            nav.innerHTML = "<p>Não foi possível carregar as turmas.</p>";
+        }
+    } catch (error) {
+        console.log("Erro na requisição GET: ", error);
+        nav.innerHTML = "<p>Erro interno do servidor.</p>";
+    }
+});
+
+// GERENCIAR ALUNOS POR NOME
+const alunoBuscaNome = document.getElementById("nome_aluno");
+const pesquisa = document.getElementById("pesquisa");
+
+if (alunoBuscaNome) {
+    pesquisa.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const nav = document.getElementById("alunos");
+        nav.innerHTML = "";
+
+        const nome = alunoBuscaNome.value
+    
+        console.log("Dados convertidos: ", nome);
+
+        try {
+            const response = await fetch(`${ApiUrl}/estudante/nome/${nome}`)
+
+            const result = await response.json();
+            if (response.ok) {
+                console.log("Bem-sucedido:", result);
+            } else {
+                console.error("Erro:", result.error);
+            }
+            result.estudante.forEach((alunos) => {
+                console.log("chegou aq ")
+                let status;
+                if(alunos.status === 1){
+                    status = `
+                        <p class = "status-ativo">
+                            Ativo
+                        </p>
+                    `;  
+                }
+                else{
+                    status = `
+                    <p class = "status-inativo">
+                        Inativo
+                    </p>
+                    `;
+                }
+                const div = document.createElement("div");
+                div.classList.add("linha-aluno");
+
+                div.innerHTML = `
+                    <p class="nome-aluno">${alunos.nome}</p>
+                    <p class="turma">${alunos.fk_id_turma || 'Sem professor'}</p>
+                    <p class = "numero">${alunos.numero_aluno || 'Sem número'}</p>
+                    ${status}
+                    <a href="alunoOcorrencia.html">
+                        <i class="fa-solid fa-ellipsis-vertical" id="acao_aluno"></i>
+                    </a>
+                `;
+            
+                
+                nav.appendChild(div);
+            });
+        } catch (error) {
+            console.error("Erro ao enviar dados:", error);
+        }
+    });
+}
+
 // GERENCIAR TURMAS CRIADAS
 document.addEventListener("DOMContentLoaded", async (e) => {
     e.preventDefault()
