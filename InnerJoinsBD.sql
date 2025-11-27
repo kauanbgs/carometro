@@ -27,8 +27,8 @@ JOIN turma t ON t.id_turma = e.fk_id_turma;
 -- ======================================
 CREATE OR REPLACE VIEW vw_gerenciar_docentes AS
 SELECT
-  d.id_docente,
-  d.nome AS nome_docente
+  d.nome AS nome_docente,
+  d.id_docente
 FROM docente d;
 
 
