@@ -1,11 +1,18 @@
--- GERENCIAR TURMAS
+-- ======================================
+-- VIEW: GERENCIAR TURMAS
+-- ======================================
+CREATE OR REPLACE VIEW vw_gerenciar_turmas AS
 SELECT
   t.nome AS nome_turma,
   d.nome AS nome_docente
 FROM turma t
 JOIN docente d ON d.id_docente = t.fk_id_docente;
 
--- EDITAR TURMA 
+
+-- ======================================
+-- VIEW: EDITAR TURMA (LISTA DE ALUNOS)
+-- ======================================
+CREATE OR REPLACE VIEW vw_editar_turma AS
 SELECT
   e.nome AS nome_aluno,
   t.nome AS nome_turma,
@@ -14,13 +21,20 @@ SELECT
 FROM estudante e
 JOIN turma t ON t.id_turma = e.fk_id_turma;
 
--- GERENCIAR DOCENTE
-SELECT
-  id_docente,
-  nome AS nome_docente
-FROM docente;
 
--- PROCEDURE de criar ocorrência
+-- ======================================
+-- VIEW: GERENCIAR DOCENTES
+-- ======================================
+CREATE OR REPLACE VIEW vw_gerenciar_docentes AS
+SELECT
+  d.id_docente,
+  d.nome AS nome_docente
+FROM docente d;
+
+
+-- ======================================
+-- PROCEDURE: criarOcorrencia
+-- ======================================
 DELIMITER $$
 
 CREATE PROCEDURE criarOcorrencia(
@@ -36,7 +50,7 @@ BEGIN
     INSERT INTO ocorrencia (tipo, descricao, data_criacao, fk_id_estudante)
     VALUES (p_tipo, p_descricao, NOW(), p_id_estudante);
 
-    -- Capturar o ID gerado
+    -- Captura do ID gerado automaticamente
     SET nova_ocorrencia_id = LAST_INSERT_ID();
 
     -- Registrar LOG
