@@ -11,7 +11,7 @@ class appcontroler {
   middlewares() {
     this.express.use(express.json());
     this.express.use(cors());
-    this.express.use(express.urlencoded({ extended: true })); //necessário para receber dados de formulários HTML
+    this.express.use(express.urlencoded({ extended: true }));
   }
   routes() {
     const apiRoutes = require("./routes/apiRoutes");
