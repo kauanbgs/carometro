@@ -175,9 +175,9 @@ module.exports = class estudanteController {
       !fk_id_turma ||
       !id_estudante
     ) {
-      return next(res
-        .status(400)
-        .json({ error: "Todos os campos devem ser preenchidos" }));
+      return next(
+        res.status(400).json({ error: "Todos os campos devem ser preenchidos" })
+      );
     }
 
     const query = `UPDATE estudante SET nome=?, email=?, telefone=?, data_criacao=?, status=?, numero_aluno=?, fk_id_turma=? WHERE id_estudante=?`;
@@ -199,7 +199,9 @@ module.exports = class estudanteController {
           return next(err);
         }
         if (results.affectedRows === 0) {
-          return next(res.status(404).json({ error: "Estudante não encontrado!" }));
+          return next(
+            res.status(404).json({ error: "Estudante não encontrado!" })
+          );
         }
         return res
           .status(200)
@@ -224,10 +226,14 @@ module.exports = class estudanteController {
       connect.query(query, values, function (err, results) {
         if (err) {
           console.error(err);
-          return next(res.status(500).json({ error: "Erro interno no servidor" }));
+          return next(
+            res.status(500).json({ error: "Erro interno no servidor" })
+          );
         }
         if (results.affectedRows === 0) {
-          return next(res.status(404).json({ error: "Estudante não encontrado!" }));
+          return next(
+            res.status(404).json({ error: "Estudante não encontrado!" })
+          );
         }
         return res
           .status(200)
@@ -236,6 +242,30 @@ module.exports = class estudanteController {
     } catch (error) {
       console.error(error);
       return next(res.status(500).json({ error: "Erro interno no servidor" }));
+    }
+  }
+  static async getEstudantesByTurma(req, res) {
+    const { fk_id_turma } = req.params;
+    const query = "SELECT * FROM estudante WHERE fk_id_turma = ?";
+    const values = [fk_id_turma];
+    try {
+      connect.query(query, values, function (err, results) {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: "Erro interno no servidor" });
+        }
+        if (results.length === 0) {
+          return res
+            .status(404)
+            .json({ error: "Nenhum estudante encontrado nesta turma!" });
+        }
+        return res
+          .status(200)
+          .json({ message: "Estudantes encontrados:", alunos: results });
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Erro interno no servidor" });
     }
   }
 };
