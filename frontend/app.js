@@ -330,9 +330,8 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     const resposta = await fetch(`http://localhost:5000/carometro/docente`);
     const dados = await resposta.json();
     console.log(dados);
-
     if (resposta.ok) {
-      dados.forEach((docente) => {
+      dados.docentes.forEach((docente) => {
         const div = document.createElement("div");
         div.classList.add("linha-docente");
 
@@ -340,6 +339,9 @@ document.addEventListener("DOMContentLoaded", async (e) => {
                     <p class="nome-docente">${docente.nome}</p>
                     <p class="id-docente">${
                       docente.id_docente || "Sem professor"
+                    }</p>
+                    <p class="tipo">${
+                      docente.tipo.toUpperCase() || "Sem tipo"
                     }</p>
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                 `;
