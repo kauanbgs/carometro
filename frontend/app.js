@@ -343,8 +343,10 @@ document.addEventListener("DOMContentLoaded", async (e) => {
                     <p class="tipo">${
                       docente.tipo.toUpperCase() || "Sem tipo"
                     }</p>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                `;
+                    <a href="clicarDocente.html">
+                      <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </a>
+                      `;
 
         nav.appendChild(div);
       });
