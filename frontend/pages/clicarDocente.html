@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../style.css" />
+
+    <title>Perfil Docente - Carometro</title>
+  </head>
+
+  <body>
+    <main class="container">
+      <div class="sub-container">
+        <div class="voltar2">
+          <i
+            onclick="window.location.href='gerenciarAdmDev.html'"
+            style="width: 500"
+            class="fa-etch fa-solid fa-chevron-left fa-2x"
+          ></i>
+          <a onclick="window.location.href='gerenciarAdmDev.html'">Voltar</a>
+        </div>
+
+        <h1>Kauan Borges Plaza</h1>
+        <p>kauan.plaza@docente.senai.br</p>
+
+        <div class="inputsDocente">
+          <div class="excluir-docente">
+            <p>Excluir Perfil</p>
+          </div>
+          <div class="nome-docente">
+            <label for="nome-docente">Nome do Docente</label>
+            <input
+              type="text"
+              name="nome-docente"
+              id="nome-docente"
+              maxlength="255"
+              placeholder="Kauan Borges Plaza"
+            />
+          </div>
+
+          <div class="tipo-docente">
+            <label for="tipo-docente">Tipo</label>
+            <select id="tipo-docente" name="tipo-docente">
+              <option value="">Dev</option>
+              <option value="">Doc</option>
+            </select>
+          </div>
+          <button class="anotacoesDocente">
+            <i class="fa-regular fa-solid fa-pen-to-square fa-lg"></i>
+          </button>
+        </div>
+
+        <div class="inputs2">
+          <div class="status-docente">
+            <label for="status-docente">Status</label>
+            <select name="status" id="status-docente">
+              <option value="">Ativo</option>
+              <option value="">Inativo</option>
+            </select>
+          </div>
+
+          <div class="email-docente">
+            <label for="email_docente">Email do Docente</label>
+            <input
+              type="email"
+              name="email_docente"
+              id="email_docente"
+              maxlength="255"
+              placeholder="kauan.plaza@docente.senai.br"
+            />
+          </div>
+
+          <div class="telefone-docente">
+            <label for="telefone">Telefone</label>
+            <input
+              type="tel"
+              name="telefone"
+              id="telefone"
+              maxlength="11"
+              placeholder="1699270-8106"
+            />
+          </div>
+        </div>
+
+        <h1 id="TR">Turmas Relacionadas</h1>
+
+        <div class="separadorTurma"></div>
+      </div>
+    </main>
+
+    <aside class="sidebar">
+      <header class="sidebar-header">
+        <img class="logo" src="../images/SenaiLogo.png" alt="Imagem da Logo" />
+      </header>
+
+      <nav class="sidebar-nav">
+        <button>
+          <span>
+            <i class="fa-etch fa-solid fa-house"></i>
+            <a onclick="window.location.href='../pages/home.html'">Home</a>
+          </span>
+        </button>
+
+        <div></div>
+        <div></div>
+
+        <div class="separador"></div>
+
+        <h2 class="titulos-sidebar">ALUNOS</h2>
+        <button>
+          <span>
+            <i class="fa-regular fa-address-book"></i>
+            <a onclick="window.location.href='../pages/gerenciarTurmas.html'">
+              Gerenciar Turmas</a
+            >
+          </span>
+        </button>
+
+        <div class="separador"></div>
+
+        <h2 class="titulos-sidebar">DOCENTE</h2>
+        <button>
+          <span>
+            <i class="fa-solid fa-user"></i>
+            <a onclick="window.location.href='../pages/gerenciarAdmDev.html'"
+              >Gerenciar Docente</a
+            >
+          </span>
+        </button>
+
+        <h2 class="titulos-sidebar">DEV</h2>
+        <button>
+          <span>
+            <i class="fa-etch fa-solid fa-users"> </i>
+            <a onclick="window.location.href='../pages/gerenciarADMS.html'"
+              >Criar ou Editar Docentes
+            </a>
+          </span>
+        </button>
+      </nav>
+
+      <div class="foot">
+        <div class="termos">
+          <h6>Termos de seviços</h6>
+          <h6>Politicas de privacidade</h6>
+        </div>
+
+        <div class="perfil">
+          <img src="../images/fallen.jpg" alt="Imagem de perfil" />
+          <h6>Fallen Borges</h6>
+          <i class="fa-etch fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+    </aside>
+    <script src="../app.js"></script>
+  </body>
+</html>

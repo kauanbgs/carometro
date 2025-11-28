@@ -10,7 +10,7 @@
   --azulSecundario: #4f89df;
   --laranjaPrincipal: #d95d36;
   --laranjaSecundario: #df804d;
-  --erro: #FF7F7F;
+  --erro: #ff7f7f;
   --sucesso: #caf6a7;
   --preto: #000000;
   --textoNotificacoes: #606060;
@@ -42,7 +42,6 @@ footer {
 
 i {
   color: var(--preto);
-
 }
 /* FIM ARQUIVO STYLE */
 
@@ -857,7 +856,7 @@ label {
 
 .cabecalho-turmas {
   display: grid;
-  grid-template-columns: 270px 140px 48px;
+  grid-template-columns: 270px 500px 10px;
   align-items: center;
   column-gap: 85px;
   padding: 18px 12px;
@@ -886,7 +885,7 @@ label {
   display: block;
   height: 1px;
   background: rgba(0, 0, 0, 0.15);
-  width:100%;
+  width: 100%;
   margin: 6px 0 10px 0;
 }
 
@@ -910,19 +909,133 @@ label {
 }
 
 .nome-professor {
-  text-align: center;
   text-wrap: nowrap;
+  margin-right: 200px;
+  text-align: left;
 }
 
 .linha-turma i {
   text-align: right;
   cursor: pointer;
+  text-align: left;
+
 }
 
 .lista-turmas {
   font-size: medium;
   margin-bottom: 50px;
+  margin-right: 190px;
+
 }
+
+/* ESTILIZAÇÃO MODAL TURMA */
+.modalTurma {
+  color: var(--preto);
+  display: none; /* Oculto por padrão */
+  position: fixed; /* Fica no topo de tudo */
+  z-index: 1000; /* Alto valor para sobrepor outros elementos */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 120%;
+  overflow: auto; /* Habilita rolagem se o conteúdo for muito longo */
+  background-color: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente */
+}
+
+/* Conteúdo/Caixa do Modal */
+.modalInput {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% do topo e centralizado horizontalmente */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Pode ajustar conforme necessário */
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Botão de Fechar */
+.fechar {
+  color: var(--textoCinzaSuporte);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.fechar:hover,
+.fechar:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modalInput h2 {
+  display: block;
+  margin-top: 30px;
+  justify-self: center;
+  text-decoration: none;
+}
+
+.nomeTurma {
+  margin-top: 20px;
+}
+
+.nomeTurma label {
+  margin-left: 20px;
+}
+
+.nomeTurma #nomeTurma {
+  display: flex;
+  width: 90%;
+  max-width: none;
+  border: 0.5px solid rgba(0, 0, 0, 0.359);
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: medium;
+  font-weight: 200;
+  border-radius: 10px;
+  background-color: var(--branco);
+  min-height: 50px;
+  margin-left: 20px;
+}
+
+.nomeProfessores {
+  margin-top: 20px;
+}
+.nomeProfessores label {
+  margin-left: 20px;
+}
+
+.nomeProfessores #nomeProfessores {
+  display: flex;
+  width: 90%;
+  max-width: none;
+  border: 0.5px solid rgba(0, 0, 0, 0.359);
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: medium;
+  font-weight: 200;
+  border-radius: 10px;
+  background-color: var(--branco);
+  min-height: 50px;
+  margin-left: 20px;
+}
+
+#cadastroTurma .criar-turma {
+  color: var(--textoSelecionado);
+  background-color: var(--azulSecundario);
+  border-radius: 8px;
+  width: 100%;
+  height: 50px;
+  border: none;
+  font-size: large;
+  font-weight: 400;
+  margin-top: 70px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+/* FIM DO MODAL */
 /* FIM GERENCIAR TURMAS */
 
 /* EDITAR TURMA */
@@ -1354,7 +1467,7 @@ label {
   cursor: pointer;
 }
 
-.status-ativo{
+.status-ativo {
   width: 110px;
   padding: 4px;
   background-color: var(--sucesso);
@@ -1363,7 +1476,7 @@ label {
   text-align: center;
 }
 
-.status-inativo{
+.status-inativo {
   width: 110px;
   padding: 4px;
   background-color: var(--erro);
@@ -1372,10 +1485,9 @@ label {
   text-align: center;
 }
 
-#acao_aluno{
+#acao_aluno {
   margin-left: 70px;
 }
-
 
 /* FIM EDITAR TURMA */
 
@@ -1569,7 +1681,11 @@ label {
   text-align: left;
 }
 
-.divParaOSeparador{
+.divParaOSeparador {
   width: 100%;
-  }
+}
 /* FIM gerenciarAdmDev.CSS */
+
+/*  */
+
+/*  */
