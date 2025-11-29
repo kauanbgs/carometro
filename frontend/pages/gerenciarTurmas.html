@@ -59,7 +59,12 @@
               <form method="POST" id="cadastroTurma">
                 <div class="nomeTurma">
                   <label for="nomeTurma">Nome da Turma</label>
-                  <input type="text" id="nomeTurma" name="nomeTurma" maxlength="255"/>
+                  <input
+                    type="text"
+                    id="nomeTurma"
+                    name="nomeTurma"
+                    maxlength="255"
+                  />
                 </div>
 
                 <div class="nomeProfessores">
@@ -172,6 +177,26 @@
         </div>
       </div>
     </aside>
+    <script>
+      // MODAL PARA CRIAÇÃO DE TURMA
+      const modal = document.getElementById("modalTurma");
+      const btn = document.getElementById("adicionar-turma");
+      const span = document.getElementsByClassName("fechar")[0]; // O primeiro (e único) botão de fechar
+
+      btn.onclick = function () {
+        modal.style.display = "block";
+      };
+
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
     <script src="../app.js"></script>
   </body>
 </html>

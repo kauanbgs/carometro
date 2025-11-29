@@ -283,25 +283,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
   }
 });
 
-// MODAL PARA CRIAÇÃO DE TURMA
-const modal = document.getElementById('modalTurma');
-const btn = document.getElementById('adicionar-turma');
-const span = document.getElementsByClassName('fechar')[0]; // O primeiro (e único) botão de fechar
-
-btn.onclick = function() {
-    modal.style.display = 'block';
-}
-
-span.onclick = function() {
-    modal.style.display = 'none';
-}
-
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = 'none';
-    }
-}
-
 // DELEÇÃO DOS DOCENTES POR E-MAIL
 const formDelecao = document.getElementById("formDelecao");
 if (formDelecao) {
