@@ -262,9 +262,9 @@ document.addEventListener("DOMContentLoaded", async (e) => {
         div.classList.add("linha-turma");
 
         div.innerHTML = `
-                    <p class="nome-turma">${turma.nome_turma}</p>
+                    <p class="nome-turma">${turma.nome_turma.toUpperCase()}</p>
                     <p class="nome-professor">${
-                      turma.nome_docente || "Sem professor"
+                      turma.nome_docente.toUpperCase() || "Sem professor"
                     }</p>
                     <a href=editarTurma.html?id=${turma.id_turma}>
                         <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -336,7 +336,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
         div.classList.add("linha-docente");
 
         div.innerHTML = `
-                    <p class="nome-docente">${docente.nome}</p>
+                    <p class="nome-docente">${docente.nome.toUpperCase()}</p>
                     <p class="id-docente">${
                       docente.id_docente || "Sem professor"
                     }</p>
@@ -400,7 +400,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
         div.classList.add("linha-aluno");
 
         div.innerHTML = `
-                    <p class="nome-aluno">${alunos.nome}</p>
+                    <p class="nome-aluno">${alunos.nome.toUpperCase()}</p>
                     <p class="turma">${
                       alunos.fk_id_turma || "Sem professor"
                     }</p>
@@ -418,6 +418,46 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     } else {
       console.error("Erro na requisição: ", dados.error);
       nav.innerHTML = "<p>Não foi possível carregar os alunos.</p>";
+    }
+  } catch (error) {
+    console.log("Erro na requisição GET: ", error);
+    nav.innerHTML = "<p>Erro interno do servidor.</p>";
+  }
+});
+
+// GERENCIAR TURMAS POR DOCENTE
+document.addEventListener("DOMContentLoaded", async (e) => {
+  e.preventDefault();
+  console.log("chegou aqui");
+  const nav = document.getElementById("row-turma");
+  nav.innerHTML = "";
+
+  try {
+    const resposta = await fetch(`http://localhost:5000/carometro/turma/`);
+    const dados = await resposta.json();
+    console.log(dados);
+
+    if (resposta.ok) {
+      dados.forEach((turma) => {
+        const div = document.createElement("div");
+        div.classList.add("row-turma");
+
+        div.innerHTML = `
+                    <div class="nome-turma-docente">
+                      <p id="nome-turma-docente">${turma.nome_turma.toUpperCase()}</p>
+                      <div class="linkTurmaDocente">
+                        <a href=editarTurma.html?id=${turma.id_turma}>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </a>
+                      </div>
+                    </div>
+                `;
+
+        nav.appendChild(div);
+      });
+    } else {
+      console.error("Erro na requisição: ", dados.error);
+      nav.innerHTML = "<p>Não foi possível carregar as turmas.</p>";
     }
   } catch (error) {
     console.log("Erro na requisição GET: ", error);

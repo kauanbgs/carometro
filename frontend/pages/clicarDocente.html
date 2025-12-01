@@ -28,27 +28,27 @@
           <a onclick="window.location.href='gerenciarAdmDev.html'">Voltar</a>
         </div>
 
-        <h1>Kauan Borges Plaza</h1>
-        <p>kauan.plaza@docente.senai.br</p>
+        <h1 id="kauanbgs">Kauan Borges Plaza</h1>
+        <p id="kauanbgs-email">kauan.plaza@docente.senai.br</p>
 
         <div class="inputsDocente">
           <div class="excluir-docente">
             <p>Excluir Perfil</p>
           </div>
-          <div class="nome-docente">
+          <div class="nome-docente2">
             <label for="nome-docente">Nome do Docente</label>
             <input
               type="text"
               name="nome-docente"
-              id="nome-docente"
+              id="nome-docente2"
               maxlength="255"
               placeholder="Kauan Borges Plaza"
             />
           </div>
 
-          <div class="tipo-docente">
+          <div class="tipo-docente2">
             <label for="tipo-docente">Tipo</label>
-            <select id="tipo-docente" name="tipo-docente">
+            <select id="tipo-docente2" name="tipo-docente">
               <option value="">Dev</option>
               <option value="">Doc</option>
             </select>
@@ -83,7 +83,7 @@
             <input
               type="tel"
               name="telefone"
-              id="telefone"
+              id="telefone2"
               maxlength="11"
               placeholder="1699270-8106"
             />
@@ -92,7 +92,11 @@
 
         <h1 id="TR">Turmas Relacionadas</h1>
 
-        <div class="separadorTurma"></div>
+        <div class="separadorTurma">
+          <h1>Nome</h1>
+          <h1 id="acao">Ação</h1>
+          <div id="row-turma"></div>
+        </div>
       </div>
     </main>
 

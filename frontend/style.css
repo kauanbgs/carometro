@@ -736,17 +736,6 @@ label {
   margin-top: 50px;
 }
 
-.voltar2 {
-  display: flex;
-  align-items: center;
-  align-self: flex-start;
-  color: var(--textoNotificacoes);
-  cursor: pointer;
-  gap: 15px;
-  font-size: large;
-  margin-left: 5px;
-}
-
 .sub-container h1 {
   margin-top: 15px;
   display: flex;
@@ -764,7 +753,7 @@ label {
   gap: 15px;
 }
 
-#nome_turma {
+#nome_docente {
   display: flex;
   flex-direction: row;
   width: fit-content;
@@ -881,11 +870,11 @@ label {
   text-align: right;
 }
 
-.separador2 {
+.separadorTurmaAluno {
   display: block;
   height: 1px;
-  background: rgba(0, 0, 0, 0.15);
-  width: 100%;
+  background: var(--preto);
+  width: 106%;
   margin: 6px 0 10px 0;
 }
 
@@ -918,14 +907,12 @@ label {
   text-align: right;
   cursor: pointer;
   text-align: left;
-
 }
 
 .lista-turmas {
   font-size: medium;
   margin-bottom: 50px;
   margin-right: 190px;
-
 }
 
 /* ESTILIZAÇÃO MODAL TURMA */
@@ -1211,7 +1198,7 @@ label {
 .separador2 {
   display: flex;
   background-color: var(--preto);
-  width: 100%;
+  width: 87%;
   height: 0.5px;
   position: relative;
   top: -10px;
@@ -1686,6 +1673,231 @@ label {
 }
 /* FIM gerenciarAdmDev.CSS */
 
-/*  */
+/* clicarDocente */
+#kauanbgs {
+  display: flex;
+  margin-left: 9rem;
+  color: var(--preto);
+}
 
-/*  */
+#kauanbgs-email {
+  display: flex;
+  margin-left: 9rem;
+  margin-bottom: 3rem;
+  color: var(--preto);
+  position: absolute;
+  margin-top: 135px;
+}
+
+.excluir-docente {
+  display: flex;
+  color: var(--preto);
+  padding: 15px;
+  gap: 15px;
+  border-radius: 10px;
+  border: 0.5px solid red;
+  cursor: pointer;
+  padding-right: 35px;
+  padding-left: 35px;
+  height: 50px;
+  width: 170px;
+  align-items: center;
+  text-wrap: nowrap;
+  margin-left: 36rem;
+  position: absolute;
+  top: 135px;
+}
+
+.inputsDocente {
+  display: flex;
+  width: 100%;
+  gap: 15px;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  margin-bottom: 25px;
+}
+
+.nome-docente2 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 320px;
+  margin-left: 9rem;
+  margin-top: 0.5rem;
+}
+
+#nome-docente2 {
+  display: flex;
+  width: 27.1rem;
+  max-width: none;
+  border: 0.5px solid rgba(0, 0, 0, 0.359);
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: medium;
+  font-weight: 200;
+  border-radius: 10px;
+  background-color: var(--background);
+  min-height: 50px;
+}
+.tipo-docente2 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: fit-content;
+  margin-right: 65px;
+  color: var(--preto);
+}
+
+#tipo-docente2 {
+  display: flex;
+  width: 8.6rem;
+  border: 0.5px solid rgba(0, 0, 0, 0.359);
+  padding: 15px;
+  font-size: medium;
+  font-weight: 200;
+  border-radius: 10px;
+  background-color: var(--background);
+}
+.status-docente {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-left: 9rem;
+  color: var(--preto);
+  margin-top: -1rem;
+}
+#status-docente {
+  display: flex;
+  width: 8rem;
+  border: 0.5px solid rgba(0, 0, 0, 0.359);
+  padding: 15px;
+  font-size: medium;
+  font-weight: 200;
+  border-radius: 10px;
+  background-color: var(--background);
+}
+
+.email-docente {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-left: 18rem;
+  color: var(--preto);
+  margin-top: -4.9rem;
+}
+#email_docente {
+  display: flex;
+  width: 18rem;
+  max-width: none;
+  border: 0.5px solid rgba(0, 0, 0, 0.359);
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: medium;
+  font-weight: 200;
+  border-radius: 10px;
+  background-color: var(--background);
+  min-height: 50px;
+}
+
+.telefone-docente {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-left: 37rem;
+  color: var(--preto);
+  margin-top: -4.9rem;
+}
+
+#telefone2 {
+  display: flex;
+  width: 10rem;
+  max-width: none;
+  border: 0.5px solid rgba(0, 0, 0, 0.359);
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: medium;
+  font-weight: 200;
+  border-radius: 10px;
+  background-color: var(--background);
+  min-height: 50px;
+}
+
+.anotacoesDocente {
+  display: grid;
+  align-items: center;
+  background-color: var(--textoNotificacoes);
+  justify-content: center;
+  border-radius: 10px;
+  border: none;
+  padding: 15px 25px;
+  cursor: pointer;
+  height: 50px;
+  position: absolute 30rem;
+  margin-bottom: -5rem;
+}
+
+.anotacoesDocente i {
+  color: white;
+}
+
+#TR {
+  margin-left: 26rem;
+  margin-top: 4rem;
+}
+
+.row-turma{
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.separadorTurma {
+  display: flex;
+  background-color: var(--preto);
+  width: 70%;
+  height: 0.5px;
+  position: relative;
+  align-self: auto;
+  top: 4rem;
+  margin-left: 10rem;
+}
+
+.separadorTurma h1{
+  display: flex;
+  color: var(--preto);
+  margin-top: -3rem;
+  font-weight: 400;
+  font-size: x-large;
+}
+
+#acao{
+  margin-left: 35rem;
+}
+
+.separadorTurma p {
+  display: flex;
+  font-size: large;
+  color: var(--preto);
+  margin-top: 2rem;
+  margin-left: -4rem;
+  flex-direction: column;
+}
+
+.nome-turma-docente {
+  display: flex;
+  flex-direction: row;
+  font-size: medium;
+  color: var(--preto);
+  margin-top: 0.5rem;
+  margin-left: -39rem;
+  justify-content: space-between;
+}
+
+.linkTurmaDocente i{
+  position: fixed;
+  display: block;
+  margin-top: 2.1rem;
+  margin-left: 37rem;
+  flex-direction: column;
+}
+/* FIM clicarDocente  */
