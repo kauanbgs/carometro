@@ -49,7 +49,9 @@ CREATE TABLE log_ocorrencias(
 	id_log_ocorrencia INT AUTO_INCREMENT PRIMARY KEY,
 	data_log DATETIME NOT NULL,
 	fk_id_ocorrencia INT NOT NULL,
-	fk_id_docente INT NOT NULL
+	fk_id_docente INT NOT NULL,
+	FOREIGN KEY (fk_id_ocorrencia) REFERENCES ocorrencia(id_ocorrencia),
+	FOREIGN KEY (fk_id_docente) REFERENCES docente(id_docente)
 );
 
 INSERT INTO docente (nome, email, senha, tipo)
