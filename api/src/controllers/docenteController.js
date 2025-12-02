@@ -154,7 +154,7 @@ module.exports = class docenteController {
         }
         return res
           .status(200)
-          .json({ message: "Usuário excluido: " + identificadorDocente });
+          .json({ message: "Usuário excluido!"});
       });
     } catch (error) {
       console.log(error);

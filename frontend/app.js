@@ -122,7 +122,6 @@ if (alunoRegisterForm) {
 document.addEventListener("DOMContentLoaded", async (e) => {
   if (window.location.pathname.includes("editarTurma.html")) return;
   e.preventDefault();
-  console.log("chegou aqui");
   const nav = document.getElementById("alunos");
   if (!nav) return; // Also good practice to check if element exists
   nav.innerHTML = "";
@@ -136,7 +135,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 
     if (resposta.ok) {
       dados.alunos.forEach((alunos) => {
-        console.log("chegou aq ");
         let status;
         const div = document.createElement("div");
         if (alunos.status === 1) {
@@ -204,7 +202,6 @@ if (alunoBuscaNome) {
         console.error("Erro:", result.error);
       }
       result.estudante.forEach((alunos) => {
-        console.log("chegou aq ");
         let status;
         if (alunos.status === 1) {
           status = `
@@ -247,7 +244,6 @@ if (alunoBuscaNome) {
 // GERENCIAR TURMAS
 document.addEventListener("DOMContentLoaded", async (e) => {
   e.preventDefault();
-  console.log("chegou aqui");
   const nav = document.getElementById("turmas");
   nav.innerHTML = "";
 
@@ -322,7 +318,6 @@ if (formDelecao) {
 // GERENCIAR DOCENTES CRIADOS
 document.addEventListener("DOMContentLoaded", async (e) => {
   e.preventDefault();
-  console.log("chegou aqui");
   const nav = document.getElementById("docentes");
   nav.innerHTML = "";
 
@@ -363,7 +358,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 // GERENCIAR ALUNOS POR TURMA
 document.addEventListener("DOMContentLoaded", async (e) => {
   e.preventDefault();
-  console.log("chegou aqui");
   const nav = document.getElementById("alunos");
   if (!nav) return;
   nav.innerHTML = "";
@@ -381,7 +375,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 
     if (resposta.ok) {
       dados.alunos.forEach((alunos) => {
-        console.log("chegou aq ");
         let status;
         const div = document.createElement("div");
         if (alunos.status === 1) {
@@ -428,7 +421,6 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 // GERENCIAR TURMAS POR DOCENTE
 document.addEventListener("DOMContentLoaded", async (e) => {
   e.preventDefault();
-  console.log("chegou aqui");
   const nav = document.getElementById("row-turma");
   nav.innerHTML = "";
 
