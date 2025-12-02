@@ -30,6 +30,8 @@ router.get("/turma", turmaController.readTurma);
 router.get("/turma/id/:id_turma", turmaController.readTurmaByID);
 router.get("/turma/:fk_id_docente", turmaController.GetTurmaByDocenteID);
 router.get("/turma/nome/:nome", turmaController.GetTurmaByName); // GetByName
+router.get("/turmas-docentes", turmaController.readTurmaDocente); // ReadTurmaDocente view
+router.get("/turmas-alunos", turmaController.readAlunosTurma); // ReadAlunosTurma view
 router.put("/turma/id/:id_turma", turmaController.updateTurma);
 router.delete("/turma/:id_turma", turmaController.deleteTurma);
 

@@ -189,4 +189,40 @@ module.exports = class turmaController {
       return next(error);
     }
   }
+
+  static async readTurmaDocente(req, res, next) {
+    const query = `
+      SELECT * FROM vw_gerenciar_turmas;
+    `;
+    try {
+      connect.query(query, function (err, results) {
+        if (err) {
+          console.error(err);
+          return next(err);
+        }
+        return res.status(200).json(results);
+      });
+    } catch (error) {
+      console.error(error);
+      return next(error);
+    }
+  }
+
+  static async readAlunosTurma(req, res, next) {
+    const query = `
+      SELECT * FROM vw_editar_turma;
+    `;
+    try {
+      connect.query(query, function (err, results) {
+        if (err) {
+          console.error(err);
+          return next(err);
+        }
+        return res.status(200).json(results);
+      });
+    } catch (error) {
+      console.error(error);
+      return next(error);
+    }
+  }
 };
