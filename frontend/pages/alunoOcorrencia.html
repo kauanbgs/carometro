@@ -27,14 +27,14 @@
           ></i>
           <a onclick="window.location.href='gerenciarturmas.html'">Voltar</a>
         </div>
-
-        <h1 id="kauanbgsAluno">Kauan Borges Plaza</h1>
-        <p id="kauanbgsAluno-email">kauan.plaza@docente.senai.br</p>
-
+        <div class="infosPerfilAluno">
+          <h1 id="kauanbgsAluno">Kauan Borges Plaza</h1>
+          <p id="kauanbgsAluno-email">kauan.plaza@docente.senai.br</p>
+        </div>
+        <div class="excluir-aluno">
+          <p>Excluir Perfil</p>
+        </div>
         <div class="inputsAluno">
-          <div class="excluir-aluno">
-            <p>Excluir Perfil</p>
-          </div>
           <div class="nome-aluno2">
             <label for="nome-aluno2">Nome do Aluno</label>
             <input
@@ -67,36 +67,34 @@
           </button>
         </div>
 
-        <div class="inputs2">
-          <div class="status-aluno">
-            <label for="status-aluno">Status</label>
-            <select name="status" id="status-aluno">
-              <option value="">Ativo</option>
-              <option value="">Inativo</option>
-            </select>
-          </div>
+        <div class="status-aluno">
+          <label for="status-aluno">Status</label>
+          <select name="status" id="status-aluno">
+            <option value="">Ativo</option>
+            <option value="">Inativo</option>
+          </select>
+        </div>
 
-          <div class="email-aluno">
-            <label for="email-aluno">Email do Aluno</label>
-            <input
-              type="email"
-              name="email-aluno"
-              id="email-aluno"
-              maxlength="255"
-              placeholder="kauan.plaza@aluno.senai.br"
-            />
-          </div>
+        <div class="email-aluno">
+          <label for="email-aluno">Email do Aluno</label>
+          <input
+            type="email"
+            name="email-aluno"
+            id="email-aluno"
+            maxlength="255"
+            placeholder="kauan.plaza@aluno.senai.br"
+          />
+        </div>
 
-          <div class="telefone-aluno">
-            <label for="telefone">Telefone</label>
-            <input
-              type="tel"
-              name="telefone"
-              id="telefone-aluno"
-              maxlength="11"
-              placeholder="1699270-8106"
-            />
-          </div>
+        <div class="telefone-aluno">
+          <label for="telefone">Telefone</label>
+          <input
+            type="tel"
+            name="telefone"
+            id="telefone-aluno"
+            maxlength="11"
+            placeholder="1699270-8106"
+          />
         </div>
       </div>
 
@@ -125,8 +123,22 @@
           </div>
           <input type="submit" value="Enviar" class="criar-ocorrencia" />
         </div>
+        <h1 id="UC">Ultimas Ocorrências</h1>
         <div class="gerenciarOcorrenciasAluno">
-            <h1>Ultimas Ocorrências</h1>
+            <div class="caixaOcorrencias">
+              <div class="ocorrenciasListaAluno">
+              <div id="ocorrenciasAluno">
+                Euller aplicou uma ocorrência em Kauan por má conduta
+                <span class="fa-solid fa-chevron-down"></span>
+              </div>
+            </div>
+            <div class="ocorrenciasListaAluno">
+              <div id="ocorrenciasAluno">
+                Adriano aplicou uma ocorrência em Kauan por má conduta
+                <span class="fa-solid fa-chevron-down"></span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>

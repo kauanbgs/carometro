@@ -1942,9 +1942,10 @@ label {
   display: flex;
   margin-left: 9rem;
   margin-bottom: 3rem;
+  margin-top: -25px;
   color: var(--preto);
-  position: absolute;
-  margin-top: 135px;
+  padding: 5px 0;
+  z-index: 999;
 }
 
 .excluir-aluno {
@@ -1962,8 +1963,9 @@ label {
   align-items: center;
   text-wrap: nowrap;
   margin-left: 36rem;
-  position: absolute;
-  top: 135px;
+  margin-top: -110px;
+  position: static;
+  top: 0px;
 }
 
 .inputsAluno {
@@ -1981,7 +1983,7 @@ label {
   gap: 8px;
   min-width: 320px;
   margin-left: 9rem;
-  margin-top: 0.5rem;
+  margin-top: 2rem;
 }
 
 #nome-aluno2 {
@@ -2023,7 +2025,7 @@ label {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-right: 65px;
+  margin-right: 70px;
   color: var(--preto);
 }
 
@@ -2191,6 +2193,7 @@ label {
   height: 100%;
   align-items: start;
   margin-top: -200px;
+  padding-top: 130px;
 }
 
 .enviarOcorrencia h1 {
@@ -2202,10 +2205,73 @@ label {
   display: flex;
   border-radius: 15px;
   font-family: "Montserrat", sans-serif;
-  width: fit-content;
-  flex-direction: row;
+  width: 48rem;
   box-shadow: 2px 4px 25px 1px;
-  padding: 0;
+  height: 34rem;
+  margin-top: 5rem;
+  padding-bottom: 20rem;
+  margin-left: 9.2rem;
+}
+
+#UC {
+  display: flex;
+  position: sticky;
+  flex-direction: row;
+  margin-left: 24.2rem;
+  margin-top: 110px;
+  margin-bottom: -160px;
+}
+.gerenciarOcorrenciasAluno h1 {
+  display: flex;
+  color: var(--preto);
+  flex-direction: column-reverse;
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 400;
+  margin-top: 40px;
+  margin-right: -600px;
+  flex-direction: column;
+  padding-bottom: 22rem;
+}
+
+.ocorrenciasListaAluno {
+  font-size: medium;
+  border-radius: 25px;
+  margin: 15px;
+  padding: 15px;
+  color: var(--preto);
+  border: 0.5px solid rgba(0, 0, 0, 0.52);
+}
+
+#ocorrenciasAluno {
+  display: sticky;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 100px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.caixaOcorrencias {
+  display: flex;
+  position: relative;
+  height: auto;
+}
+.caixaOcorrencias {
+  flex-direction: column;
+  margin: 15px;
+  margin-bottom: 500px;
+  border-radius: 15px;
+  background-color: var(--back);
+  box-shadow: 2px 4px 25px 1px;
+  gap: 10px;
+  width: 43rem;
+  margin-left: 2.3rem;
+  margin-top: 6rem;
+}
+
+#ocorrenciasAluno span{
+  cursor: pointer;
 }
 
 /* FIM clicarAluno */
