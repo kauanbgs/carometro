@@ -26,32 +26,77 @@ JOIN turma t ON t.id_turma = e.fk_id_turma;
 -- ======================================
 -- PROCEDURE: criarOcorrencia
 -- ======================================
+-- DELIMITER $$
+
+-- CREATE PROCEDURE criarOcorrencia(
+--   IN p_tipo VARCHAR(100),
+--   IN p_descricao VARCHAR(150),
+--   IN p_id_estudante INT,
+--   IN p_id_docente INT
+-- )
+-- BEGIN
+--     DECLARE nova_ocorrencia_id INT;
+
+--     -- Criar ocorrência
+--     INSERT INTO ocorrencia (tipo, descricao, data_criacao, fk_id_estudante)
+--     VALUES (p_tipo, p_descricao, NOW(), p_id_estudante);
+
+--     -- Captura do ID gerado automaticamente
+--     SET nova_ocorrencia_id = LAST_INSERT_ID();
+
+--     -- Registrar LOG
+--     INSERT INTO log_ocorrencias (data_log, fk_id_ocorrencia, fk_id_docente)
+--     VALUES (NOW(), nova_ocorrencia_id, p_id_docente);
+--   END;
+
+-- END$$
+
+-- DELIMITER ;
+
+
+-- ======================================
+-- PROCEDURE: criarOcorrencia
+-- ======================================
+
 DELIMITER $$
-
-CREATE PROCEDURE criarOcorrencia(
-  IN p_tipo VARCHAR(100),
-  IN p_descricao VARCHAR(150),
-  IN p_id_estudante INT,
-  IN p_id_docente INT
+CREATE PROCEDURE criar_ocorrencia(
+    IN p_id_ocorrencia INT,
+    IN p_tipo VARCHAR (100),
+    IN p_descricao VARCHAR (150),
+    IN p_id_estudante INT,
+    IN p_id_docente INT 
 )
-BEGIN
-    DECLARE nova_ocorrencia_id INT;
+BEGIN 
+    DECLARE v_ocorrencia_id INT;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN 
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Erro ao criar a ocorrência.';
+    END;
 
-    -- Criar ocorrência
-    INSERT INTO ocorrencia (tipo, descricao, data_criacao, fk_id_estudante)
-    VALUES (p_tipo, p_descricao, NOW(), p_id_estudante);
+    START TRANSACTION;
+      IF NOT EXISTS(
+        SELECT 1 FROM estudante WHERE id_estudante = p_id_estudante
+      )THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Erro ao encontrar o aluno';
+      END IF;
 
-    -- Captura do ID gerado automaticamente
-    SET nova_ocorrencia_id = LAST_INSERT_ID();
+      IF NOT EXISTS(
+        SELECT 1 FROM docente WHERE id_docente = p_id_docente
+      )THEN 
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Erro ao encontrar o docente';
+      END IF;
 
-    -- Registrar LOG
-    INSERT INTO log_ocorrencias (data_log, fk_id_ocorrencia, fk_id_docente)
-    VALUES (NOW(), nova_ocorrencia_id, p_id_docente);
 
-END$$
+
+
+
+    
 
 DELIMITER ;
-
 
 -- ======================================
 -- TRIGGER: verificarreincidencia
