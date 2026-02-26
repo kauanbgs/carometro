@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+:root {
+  --back: #e4e4e4;
+  --background: #efefef;
+  --textoCinza: #f2f2f2;
+  --textoCinzaSuporte: #bababa;
+  --textoSelecionado: #ffffff;
+  --branco: #ffffff;
+  --azulPrincipal: #2957a4;
+  --azulSecundario: #4f89df;
+  --laranjaPrincipal: #d95d36;
+  --laranjaSecundario: #df804d;
+  --erro: #ff7f7f;
+  --sucesso: #caf6a7;
+  --preto: #000000;
+  --textoNotificacoes: #606060;
+}
