@@ -27,7 +27,6 @@ exports.seed = async function(knex) {
     { nome: 'Leonardo Alves da Silva', email: 'leonardo.silva@aluno.senai.br', telefone: '11900000019', data_criacao: '2025-01-01 08:00:00', status: 1, numero_aluno: 19, fk_id_turma: 1 },
     { nome: 'Luís Pedro França Paulino', email: 'luis.paulino@aluno.senai.br', telefone: '11900000020', data_criacao: '2025-01-01 08:00:00', status: 1, numero_aluno: 20, fk_id_turma: 1 },
     { nome: 'Luiz Felipe Campos Margato', email: 'luiz.margato@aluno.senai.br', telefone: '11900000021', data_criacao: '2025-01-01 08:00:00', status: 1, numero_aluno: 21, fk_id_turma: 1 },
-    { nome: 'Maria Vitória Sampaio Souza', email: 'maria.souza@aluno.senai.br', telefone: '11900000022', data_criacao: '2025-01-01 08:00:00', status: 1, numero_aluno: 22, fk_id_turma: 1 },
     { nome: 'Pedro Galindo Tavares', email: 'pedro.tavares@aluno.senai.br', telefone: '11900000023', data_criacao: '2025-01-01 08:00:00', status: 1, numero_aluno: 23, fk_id_turma: 1 },
     { nome: 'Rafael Caíres dos Santos', email: 'rafael.santos@aluno.senai.br', telefone: '11900000024', data_criacao: '2025-01-01 08:00:00', status: 1, numero_aluno: 24, fk_id_turma: 1 },
     { nome: 'Rafael Mendes Neves', email: 'rafael.neves@aluno.senai.br', telefone: '11900000025', data_criacao: '2025-01-01 08:00:00', status: 1, numero_aluno: 25, fk_id_turma: 1 },

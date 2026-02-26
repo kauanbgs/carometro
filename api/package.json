@@ -11,7 +11,7 @@
     "populate": "npx knex seed:run",
     "createDB": "node ./src/utils/createDatabase.js && npx knex seed:run"
   },
-  "author": "Arthur Cintra de Lacerda, Kauan Borges Plaza e Luiz Felipe Campos Margato",
+  "author": "Arthur Cintra de Lacerda, Arthur Marques Santos, Kauan Borges Plaza e Luiz Felipe Campos Margato",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.11.0",
