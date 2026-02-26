@@ -51,3 +51,31 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+
+-- ======================================
+-- TRIGGER: verificarreincidencia
+-- ======================================
+DELIMITER $$ 
+CREATE TRIGGER tr_verificar_reincidencia;
+AFTER INSERT ON ocorrencia
+FOR EACH ROW
+BEGIN
+    DECLARE v_total INT;
+    SELECT COUNT(*) INTO v_total
+    FROM ocorrencia
+    WHERE fk_id_estudante = NEW.fk_id_estudante
+
+    IF v_total >= 3 THEN
+        UPDATE estudante
+        SET status = 0
+        WHERE id_estudante = NEW.fk_id_estudante
+    END IF;
+  END$$
+DELIMITER ;
+
+
+INSERT INTO ocorrencia (tipo,descricao,data_criacao,fk_id_estudante)
+VALUES ('Advertência','Testando trigger',NOW(),1);
+
+
