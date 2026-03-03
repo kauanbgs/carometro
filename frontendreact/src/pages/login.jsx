@@ -1,6 +1,6 @@
 import "../index.css"
-import Button from "../components/button"
-import Input from "../components/input"
+import Button from "../components/button.jsx"
+import Input from "../components/input.jsx"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import api from "../axios/axios.js"
@@ -29,7 +29,7 @@ export default function Login() {
       alert(response.data.message)
       return navigate('/home')
     } catch (error) {
-      alert(error.response.data.message)
+      alert(error.response.data.error)
     }
   }
 

@@ -22,7 +22,7 @@ class appcontroler {
       console.log(err);
       res
         .status(err.status || 500)
-        .json({ message: err.message || "Erro interno de servidor!" });
+        .json({ error: err.message || "Erro interno de servidor!" });
     });
   }
 }
