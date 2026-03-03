@@ -7,7 +7,6 @@ const pool = mysql.createPool({
   user: 'aluno', //Usuário do MySQL
   password: 'senai@604', //Senha do MySQL
   database: 'carometro' //Mude para o seu database criado la no Shell/Workbench
-
 });
 
 module.exports = pool;

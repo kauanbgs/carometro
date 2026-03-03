@@ -16,42 +16,42 @@ export default function Login() {
 
   const navigate = useNavigate()
 
-  const onChange=(e)=>{
-    const {name, value} = e.target
-    setUser({...user,[name]:value})
+  const onChange = (e) => {
+    const { name, value } = e.target
+    setUser({ ...user, [name]: value })
     console.log(user)
   }
 
-  const handleSubmit = async (e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault()
     try {
       const response = await api.postLogin(user)
       alert(response.data.message)
       return navigate('/home')
     } catch (error) {
-      alert(error.response.data.error)
+      alert(error.response.data.message)
     }
   }
 
 
 
-  
+
   return (
     <div className="bg-[url('/FundoLogin.png')] bg-cover bg-center min-h-screen items-center flex align-center justify-center flex-col">
       <main className="w-[31%] bg-white rounded-lg items-center align-center justify-center min-h-125 w-[80%] max-w-105">
         <div className="flex flex-col items-center justify-center p-10">
-        <img src="/SenaiLogo.png" alt="" className="w-32"/>
+          <img src="/SenaiLogo.png" alt="" className="w-32" />
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col p-6">
           <div className="flex flex-col mb-3">
-          <h1 className="text-sm">Email</h1>
-          <Input type="text" placeholder="Kauanbgs13@gmail.com" fill onChange={onChange} id="email" name="email" value={user.email}/>
+            <h1 className="text-sm">Email</h1>
+            <Input type="text" placeholder="Kauanbgs13@gmail.com" fill onChange={onChange} id="email" name="email" value={user.email} />
           </div>
           <div className="flex flex-col mb-6">
-          <h1 className="text-sm">Senha</h1>
-          <Input type="password" placeholder="Senha" fill onChange={onChange} id="senha" name="senha" value={user.senha}/>
+            <h1 className="text-sm">Senha</h1>
+            <Input type="password" placeholder="Senha" fill onChange={onChange} id="senha" name="senha" value={user.senha} />
           </div>
-          <Button type="submit" text="Entrar"/>
+          <Button type="submit" text="Entrar" />
           <h1 className="text-sm mt-2">Esqueceu sua senha? <a href="#" className="text-[var(--azulPrincipal)]">Recuperar senha</a></h1>
         </form>
         <div className="flex flex-col p-7 justify-center items-center gap-12">
