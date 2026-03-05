@@ -35,6 +35,7 @@ export default function Login() {
       const msgErro =
         error.response.data.error || "Erro ao conectar com o servidor.";
       setFeedback({ message: msgErro, type: "error" });
+      setTimeout(() => setFeedback({ message: "", type: "" }), 1500);
     }
   };
 

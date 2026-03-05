@@ -39,8 +39,7 @@ export default function AdicionarDocente() {
             <SideBar />
             <main className="flex-1 w-78%] ml-[22%] p-10 bg-white h-full rounded-l-3xl">
                 <div className="flex gap-2">
-                    <ArrowLeft />
-                    <h1>Voltar</h1>
+                    <Link className="flex gap-2" to="/gerenciarDocentes"> <ArrowLeft /> Voltar</Link>
                 </div>
                 <div className="flex flex-col items-center justify-center mt-10">
                     <h1 className="text-lg">Criando Docente</h1>
