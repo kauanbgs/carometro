@@ -1,4 +1,5 @@
 import { House, UsersRound, GraduationCap, Shield } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 
 export default function SideBar() {
@@ -22,7 +23,7 @@ export default function SideBar() {
                 <h1 className="text-sm self-center text-blue-400 font-semibold mt-3">DOCENTES</h1>
                 <div className="flex items-center gap-2">
                     <GraduationCap />
-                    <h1 className="text-sm">Gerenciar Docentes</h1>
+                    <Link to="/gerenciarDocentes" className="text-sm">Gerenciar Docentes</Link>
                 </div>
                 <hr className="border-t-1 border-gray-800 mt-5 w-[85%] self-center" />
 
