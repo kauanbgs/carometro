@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../axios/axios";
 import items from "../../utils/itemSideBar";
+import Alert from "../../components/alert";
 
 
 export default function RemoverDocente() {
@@ -17,6 +18,8 @@ export default function RemoverDocente() {
 
     const navigate = useNavigate()
 
+    const [feedback, setFeedback] = useState({ message: "", type: "" })
+
     const onChange = (e) => {
         const { name, value } = e.target
         setUser({ ...user, [name]: value })
@@ -27,10 +30,9 @@ export default function RemoverDocente() {
         e.preventDefault()
         try {
             const response = await api.deleteDocente(user)
-            alert(response.data.message)
-            return navigate('/gerenciarDocentes')
+            setFeedback({ message: response.data.message, type: "success" })
         } catch (error) {
-            alert(error.response.data.error)
+            setFeedback({ message: error.response.data.error, type: "error" })
         }
     }
     return (
@@ -40,9 +42,16 @@ export default function RemoverDocente() {
                 <div className="flex gap-2">
                     <Link className="flex gap-2" to="/gerenciarDocentes"> <ArrowLeft /> Voltar</Link>
                 </div>
-                <div className="flex flex-col items-center justify-center mt-10">
+
+                <Alert
+                    type={feedback.type}
+                    message={feedback.message}
+                    onClose={() => setFeedback({ message: "", type: "" })}
+                />
+
+                <div className="flex flex-col items-center justify-center mt-7">
                     <h1 className="text-lg">Excluir Docente</h1>
-                    <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4 w-[50%] mt-10">
+                    <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4 w-[50%] mt-3">
                         <Input type="text" placeholder="Email do Docente" onChange={onChange} id="email" name="email" value={user.email} />
                         <Input type="text" placeholder="Senha do Docente" onChange={onChange} id="senha" name="senha" value={user.senha} />
 
