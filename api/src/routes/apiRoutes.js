@@ -10,7 +10,7 @@ router.get("/docente", docenteController.readDocente);
 router.get("/docente/:id_docente", docenteController.getDocenteById);
 router.get("/docente/nome/:nome", docenteController.getDocenteByName);
 router.put("/docente/", docenteController.updateDocente);
-router.delete("/docente/:email", docenteController.deleteDocente);
+router.delete("/docente", docenteController.deleteDocente);
 router.post("/docente/login", docenteController.login);
 
 //      CONTROLLER ESTUDANTE       //

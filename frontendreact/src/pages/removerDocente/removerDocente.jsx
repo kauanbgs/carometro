@@ -2,45 +2,40 @@ import SideBar from "../../components/sideBar";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Input from "../../components/input";
-import Alert from "../../components/alert";
-import Button from "../../components/button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../axios/axios";
 import items from "../../utils/itemSideBar";
+import Alert from "../../components/alert";
 import Text from "../../components/text";
 
 
-export default function AdicionarDocente() {
+export default function RemoverDocente() {
 
     const [user, setUser] = useState({
         email: "",
-        senha: "",
-        nome: "",
-        tipo: ""
+        senha: ""
     })
 
-    const [feedback, setFeedback] = useState({ message: "", type: "" })
-
     const navigate = useNavigate()
+
+    const [feedback, setFeedback] = useState({ message: "", type: "" })
 
     const onChange = (e) => {
         const { name, value } = e.target
         setUser({ ...user, [name]: value })
+        console.log(user)
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        setFeedback({ message: "", type: "" })
         try {
-            const response = await api.postCadastro(user)
+            const response = await api.deleteDocente(user)
             setFeedback({ message: response.data.message, type: "success" })
         } catch (error) {
-            const msgErro = error.response?.data?.error || "Erro ao conectar com o servidor."
-            setFeedback({ message: msgErro, type: "error" })
+            setFeedback({ message: error.response.data.error, type: "error" })
         }
     }
-
     return (
         <div className="bg-[var(--back)] h-screen w-screen">
             <SideBar items={items} />
@@ -56,17 +51,12 @@ export default function AdicionarDocente() {
                 />
 
                 <div className="flex flex-col items-center justify-center mt-7">
-                    <Text variant="subtitle">Criando Docente</Text>
+                    <Text variant="subtitle">Excluir Docente</Text>
                     <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4 w-[50%] mt-3">
-                        <Input type="text" placeholder="Nome do docente" onChange={onChange} id="nome" name="nome" value={user.nome} />
-                        <Input type="text" placeholder="Email" onChange={onChange} id="email" name="email" value={user.email} />
-                        <Input type="password" placeholder="Senha" onChange={onChange} id="senha" name="senha" value={user.senha} />
-                        <select id="tipo" name="tipo" value={user.tipo} onChange={onChange} className="p-2 h-12 rounded-lg text-sm border-1 border-zinc-300">
-                            <option value="doc">doc</option>
-                            <option value="adm">adm</option>
-                        </select>
+                        <Input type="text" placeholder="Email do Docente" onChange={onChange} id="email" name="email" value={user.email} />
+                        <Input type="text" placeholder="Senha do Docente" onChange={onChange} id="senha" name="senha" value={user.senha} />
 
-                        <Button type="submit" text="Adicionar" color="azulPrincipal" fill={true} />   
+                        <button type="submit" className="bg-[var(--erro)] text-white p-2 rounded-lg mt-2">Excluir</button>
                     </form>
                 </div>
             </main>

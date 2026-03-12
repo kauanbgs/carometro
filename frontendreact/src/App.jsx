@@ -4,6 +4,7 @@ import Login from "./pages/login"
 import Home from "./pages/Home/home"
 import GerenciarDocentes from "./pages/GerenciarDocentes/gerenciarDocentes"
 import AdicionarDocente from "./pages/adicionarDocente/adicionarDocente"
+import RemoverDocente from "./pages/removerDocente/removerDocente"
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/home" element={<Home/>}/>
           <Route path="/gerenciarDocentes" element={<GerenciarDocentes/>}/>
           <Route path="/adicionarDocente" element={<AdicionarDocente/>}/>
+          <Route path="/removerDocente" element={<RemoverDocente/>}/>
         </Routes>
       </BrowserRouter>
     </div>
