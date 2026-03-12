@@ -4,6 +4,9 @@ import Input from "../components/input.jsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../axios/axios.js";
+import Text from "../components/text.jsx";
+import { Link } from "react-router-dom";
+
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -46,7 +49,7 @@ export default function Login() {
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col p-6">
           <div className="flex flex-col mb-3">
-            <h1 className="text-sm">Email</h1>
+            <Text variant="text">Email</Text>
             <Input
               type="text"
               placeholder="Kauanbgs13@gmail.com"
@@ -58,7 +61,7 @@ export default function Login() {
             />
           </div>
           <div className="flex flex-col mb-6">
-            <h1 className="text-sm">Senha</h1>
+            <Text variant="text">Senha</Text>
             <Input
               type="password"
               placeholder="Senhaboa123!"
@@ -69,13 +72,13 @@ export default function Login() {
               value={user.senha}
             />
           </div>
-          <Button type="submit" text="Entrar" />
-          <h1 className="text-sm mt-2">
+          <Button type="submit" text="Entrar" fill />
+          <Text variant="text" className="mt-4">
             Esqueceu sua senha?{" "}
-            <a href="#" className="text-[var(--azulPrincipal)] cursor-pointer hover:underline">
+            <Link to="/" className="text-[var(--azulPrincipal)] cursor-pointer hover:underline">
               Recuperar senha
-            </a>
-          </h1>
+            </Link>
+          </Text>
           <div className="min-h-[1.25rem] mt-2">
             {feedback.message && (
               <span className={`text-sm ${feedback.type === "error" ? "text-red-500" : "text-green-500"}`}>
@@ -85,12 +88,12 @@ export default function Login() {
           </div>
         </form>
         <div className="flex flex-col p-7 justify-center items-center gap-12">
-          <h1 className="text-sm mt-8 ">
+          <Text variant="text" className="text-sm mt-8 ">
             Não tem uma conta?{" "}
-            <a href="#" className="text-[var(--azulPrincipal)] cursor-pointer hover:underline">
+            <Link to="/" className="text-[var(--azulPrincipal)] cursor-pointer hover:underline">
               Cadastre-se
-            </a>
-          </h1>
+            </Link>
+          </Text>
         </div>
       </main>
     </div>

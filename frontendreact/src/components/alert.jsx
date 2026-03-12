@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import Text from "./text";
 
-export default function Alert({ type, message, onClose }) {
+export default function Alert({ type, message, }) {
     const [visible, setVisible] = useState(false);
 
     useEffect(() => {
@@ -15,7 +16,7 @@ export default function Alert({ type, message, onClose }) {
 
     return (
         <div
-            className={`flex items-center p-4 rounded-xl border w-[50%] h-12 mx-auto
+            className={`flex items-center p-4 rounded-xl border w-[50%] h-12 mx-auto justify-center
                 ${isSuccess
                     ? "bg-green-50 border-green-300 text-green-800"
                     : "bg-red-100 border-red-300 text-red-800"
@@ -23,7 +24,7 @@ export default function Alert({ type, message, onClose }) {
                 ${visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"}
             `}
         >
-            <span className="text-sm flex-1 text-center">{message}</span>
+            <Text variant="text" className="text-center">{message}</Text>
         </div>
     );
 }

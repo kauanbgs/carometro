@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../../axios/axios";
 import items from "../../utils/itemSideBar";
 import Alert from "../../components/alert";
+import Text from "../../components/text";
 
 
 export default function RemoverDocente() {
@@ -50,7 +51,7 @@ export default function RemoverDocente() {
                 />
 
                 <div className="flex flex-col items-center justify-center mt-7">
-                    <h1 className="text-lg">Excluir Docente</h1>
+                    <Text variant="subtitle">Excluir Docente</Text>
                     <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4 w-[50%] mt-3">
                         <Input type="text" placeholder="Email do Docente" onChange={onChange} id="email" name="email" value={user.email} />
                         <Input type="text" placeholder="Senha do Docente" onChange={onChange} id="senha" name="senha" value={user.senha} />

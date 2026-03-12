@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../axios/axios";
 import items from "../../utils/itemSideBar";
+import Text from "../../components/text";
 
 
 export default function AdicionarDocente() {
@@ -55,7 +56,7 @@ export default function AdicionarDocente() {
                 />
 
                 <div className="flex flex-col items-center justify-center mt-7">
-                    <h1 className="text-lg">Criando Docente</h1>
+                    <Text variant="subtitle">Criando Docente</Text>
                     <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4 w-[50%] mt-3">
                         <Input type="text" placeholder="Nome do docente" onChange={onChange} id="nome" name="nome" value={user.nome} />
                         <Input type="text" placeholder="Email" onChange={onChange} id="email" name="email" value={user.email} />
