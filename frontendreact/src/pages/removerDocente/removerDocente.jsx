@@ -5,6 +5,7 @@ import Input from "../../components/input";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../axios/axios";
+import items from "../../utils/itemSideBar";
 
 
 export default function RemoverDocente() {
@@ -33,9 +34,9 @@ export default function RemoverDocente() {
         }
     }
     return (
-        <div className="bg-[var(--background)] h-screen w-screen">
-            <SideBar />
-            <main className="flex-1 w-78%] ml-[22%] p-10 bg-white h-full rounded-l-3xl">
+        <div className="bg-[var(--back)] h-screen w-screen">
+            <SideBar items={items} />
+            <main className="flex-1 w-78%] ml-[22%] p-10 bg-[var(--background)] h-full rounded-l-3xl">
                 <div className="flex gap-2">
                     <Link className="flex gap-2" to="/gerenciarDocentes"> <ArrowLeft /> Voltar</Link>
                 </div>
@@ -45,7 +46,7 @@ export default function RemoverDocente() {
                         <Input type="text" placeholder="Email do Docente" onChange={onChange} id="email" name="email" value={user.email} />
                         <Input type="text" placeholder="Senha do Docente" onChange={onChange} id="senha" name="senha" value={user.senha} />
 
-                        <button type="submit" className="bg-[var(--erro)] text-white p-2 rounded-lg mt-10">Excluir</button>
+                        <button type="submit" className="bg-[var(--erro)] text-white p-2 rounded-lg mt-2">Excluir</button>
                     </form>
                 </div>
             </main>

@@ -1,13 +1,14 @@
 import SideBar from "../../components/sideBar";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import items from "../../utils/itemSideBar";
 
 
 export default function GerenciarDocentes() {
     return (
-        <div className="bg-[var(--background)] h-screen w-screen">
-            <SideBar />
-            <main className="flex-1 w-78%] ml-[22%] p-10 bg-white h-full rounded-l-3xl">
+        <div className="bg-[var(--back)] h-screen w-screen">
+            <SideBar items={items} />
+            <main className="flex-1 w-78%] ml-[22%] p-10 bg-[var(--background)] h-full rounded-l-3xl">
                 <div className="flex gap-2">
                     <Link className="flex gap-2" to="/home">
                         <ArrowLeft />

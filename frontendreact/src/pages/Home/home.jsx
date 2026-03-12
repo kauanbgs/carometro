@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SideBar from "../../components/sideBar";
 import api from "../../axios/axios";
+import items from "../../utils/itemSideBar";
 
 export default function Home() {
     const [docentes, setDocentes] = useState([]);
@@ -21,9 +22,9 @@ export default function Home() {
     }, []);
 
     return (
-        <div className="h-screen w-screen bg-[var(--background)] flex">
-            <SideBar />
-            <main className="flex-1 ml-[22%] p-10 overflow-y-auto">
+        <div className="h-screen w-screen bg-[var(--back)] flex">
+            <SideBar items={items} />
+            <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-[var(--background)] rounded-l-3xl">
 
                 {/* TIRAR ISSO DPS */}
                 <h1 className="text-2xl font-bold text-[var(--azulPrincipal)] mb-8">
