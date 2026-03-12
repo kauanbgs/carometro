@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from "react-native";
 import { useState } from "react";
-import api from "../axios/axios";
+import api from "../services/api";
 
 export default function Login({ navigation }) {
   const [user, setUser] = useState({ email: "", senha: "" });
@@ -20,7 +20,7 @@ export default function Login({ navigation }) {
     try {
       const response = await api.postLogin(user);
       Alert.alert(response.data.message);
-      navigation.navigate("Home");
+      navigation.navigate("HomeScreen");
     } catch (error) {
       Alert.alert(error.response.data.error);
       console.log(error.response.data.error);
