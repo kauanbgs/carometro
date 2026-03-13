@@ -1,6 +1,5 @@
 import React from "react";
 import { View, StyleSheet, Text, Image, Button, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 export default function Home() {

@@ -22,7 +22,7 @@ export default function Login({ navigation }) {
     try {
       const response = await api.postLogin(docente);
       Alert.alert(response.data.message);
-      navigation.navigate("Home");
+      navigation.navigate("HomeScreen");
     } catch (error) {
       Alert.alert(error.response.data.error);
       console.log(error.response.data);
