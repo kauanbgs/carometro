@@ -19,13 +19,18 @@ export default function Home( { navigation } ) {
           size={40}
           color="black"
         />
-        <Image />
+        <Image
+            source={require("../../image/SenaiLogo.png")}
+            style={styles.logo}
+          />
       </View>
       <View style={styles.content}>
+        
         <Text style={styles.titulo}>
           Deseja <Text style={styles.editar}>editar</Text> uma{"\n"}
           turma?
         </Text>
+        
         <Text style={styles.texto}>
           Alguma nova notificação ou{"\n"}alteração na turma? gerencie{"\n"}agora!
         </Text>
@@ -33,10 +38,25 @@ export default function Home( { navigation } ) {
         <TouchableOpacity style={styles.botoes} onPress={() => navigation.navigate("Suporte")}>
           <Text style={styles.buttonText}>Clique aqui e comece</Text>
         </TouchableOpacity>
-        <View style={styles.linhaFinaPreta}>
 
-        </View>
+        <View style={styles.linhaFinaPreta}></View>
+
+        <Text style={styles.titulo}>
+          Pronto para <Text style={styles.editar}>criar</Text> {"\n"}uma
+          turma?
+        </Text>
+        
+        <Text style={styles.texto}>
+          Usuários com permissão de{"\n"}administrador podem editar{"\n"}e/ou criar turmas.
+        </Text>
+
+        <TouchableOpacity style={styles.botoes} onPress={() => navigation.navigate("Suporte")}>
+          <Text style={styles.buttonText}>Clique aqui e comece</Text>
+        </TouchableOpacity>
       </View>
+
+      {/* <View style={styles.footer}></View> // FOOTER SE NECESSÁRIO */}
+
     </View>
   );
 }
@@ -74,6 +94,9 @@ const styles = StyleSheet.create({
     width: 120,
     height: 40,
     resizeMode: "contain",
+    marginLeft: 10,
+    marginTop:30,
+    marginRight: 15,
   },
 
   // Conteudo
@@ -90,15 +113,6 @@ const styles = StyleSheet.create({
     marginTop: 15,
     fontSize: 20,
     textAlign: "left",
-    paddingHorizontal: 3,
-  },
-  botoes: {
-    display: "flex",
-    alignItems: "center",
-    fontSize: 15,
-    color: "black",
-    height: 50,
-    width: 150,
   },
   buttonText: {
     width: 270,
@@ -108,17 +122,22 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
     fontSize: 15,
-    backgroundColor: "#DF804D",
-    color: "black",
+    backgroundColor: "#10c7d4ff",
+    color: "#000000a8",
     padding: 10,
     marginTop: 30,
-    marginLeft: 160
   },
   linhaFinaPreta: {
-    width: 240,
+    width: 280,
     height: 1.3,
     backgroundColor: "black",
-    marginTop: 70,
-    marginLeft: 40
-  }
+    marginTop: 50,
+    marginBottom: 50
+  },
+
+  // FOOTER
+  footer: {
+    height: 50,
+    backgroundColor: 'lightcoral',
+  },
 });
