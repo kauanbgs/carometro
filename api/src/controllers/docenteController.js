@@ -187,7 +187,7 @@ module.exports = class docenteController {
         if (!senhaCorreta) {
           return next(new Error("Senha incorreta!"));
         }
-        return res.status(200).json({ message: "Usuario encontrado!", docente });
+        return res.status(200).json({ message: "Login efetuado com sucesso!", docente });
       });
     } catch (error) {
       next(error);

@@ -1,21 +1,25 @@
 import React from "react";
-import { View, StyleSheet, Text, Image, Button, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
-export default function Home() {
+export default function Home( { navigation } ) {
   return (
     <View style={styles.container}>
-        <View style={styles.header}>
-          <AntDesign
-            style={styles.botaosidebar}
-            name="bars"
-            size={40}
-            color="black"
-          />
-          <Image
-            source={require("../../image/SenaiLogo.png")}
-            style={styles.logo}
-          />
+      <View style={styles.header}>
+        <AntDesign
+          style={styles.botaosidebar}
+          name="bars"
+          size={40}
+          color="black"
+        />
+        <Image />
       </View>
       <View style={styles.content}>
         <Text style={styles.titulo}>
@@ -23,13 +27,15 @@ export default function Home() {
           turma?
         </Text>
         <Text style={styles.texto}>
-          Alguma nova notificação ou alteração na turma? gerencie agora!
+          Alguma nova notificação ou{"\n"}alteração na turma? gerencie{"\n"}agora!
         </Text>
 
-        <TouchableOpacity style={styles.botoes} onPress={"/"}>
+        <TouchableOpacity style={styles.botoes} onPress={() => navigation.navigate("Suporte")}>
           <Text style={styles.buttonText}>Clique aqui e comece</Text>
         </TouchableOpacity>
+        <View style={styles.linhaFinaPreta}>
 
+        </View>
       </View>
     </View>
   );
@@ -59,8 +65,10 @@ const styles = StyleSheet.create({
   // AQUI QUE COMEÇA A ESTILIZAÇÃO
   // Header
   botaosidebar: {
-    marginLeft: "20",
-    marginRight: "50%",
+    flex:1,
+    justifyContent: "flex-start",
+    marginLeft: 20,
+    marginTop:30
   },
   logo: {
     width: 120,
@@ -71,9 +79,9 @@ const styles = StyleSheet.create({
   // Conteudo
   titulo: {
     fontSize: 40,
-    fontWeight: "bold",
-    textAlign: "center",
-    
+    fontWeight: "100",
+    textAlign: "left",
+    flexDirection: "row"
   },
   editar: {
     color: "orange",
@@ -82,7 +90,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     fontSize: 20,
     textAlign: "left",
-    paddingHorizontal: 20,
+    paddingHorizontal: 3,
   },
   botoes: {
     display: "flex",
@@ -90,6 +98,27 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "black",
     height: 50,
-    width: 150
+    width: 150,
+  },
+  buttonText: {
+    width: 270,
+    height: 50,
+    fontWeight: "bold",
+    borderRadius: 10,
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: 15,
+    backgroundColor: "#DF804D",
+    color: "black",
+    padding: 10,
+    marginTop: 30,
+    marginLeft: 160
+  },
+  linhaFinaPreta: {
+    width: 240,
+    height: 1.3,
+    backgroundColor: "black",
+    marginTop: 70,
+    marginLeft: 40
   }
 });
