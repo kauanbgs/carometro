@@ -6,7 +6,7 @@ export default function Suporte({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        // source={require("../../image/SenaiLogo.png")}
+        source={require("../../image/LogoCarometro-v2.png")}
         style={styles.logo}
         resizeMode="contain"
       />
@@ -59,17 +59,17 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   logo: {
-    width: 150,
-    height: 60,
+    width: 250,
+    height: 270,
     alignSelf: "center",
-    marginBottom: 150,
+    marginBottom: -20,
   },
   title: {
     fontSize: 40,
     color: "#2A5699",
     fontWeight: "100",
     marginBottom: 20,
-    lineHeight: 40,
+    lineHeight: 44,
   },
   subtitle: {
     fontSize: 15,

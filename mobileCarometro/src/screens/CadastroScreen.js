@@ -44,9 +44,8 @@ export default function CadastroUser({ navigation }) {
         </TouchableOpacity>
 
         <Image
-          source={require("../assets/senai-logo.png")}
+          source={require("../../image/LogoCarometro-v2.png")}
           style={styles.logo}
-          resizeMode="contain"
         />
       </View>
 
@@ -85,7 +84,7 @@ export default function CadastroUser({ navigation }) {
           onValueChange={(itemValue) => onChange("tipo", itemValue)}
           style={styles.picker}
         >
-          <Picker.Item label="Tipo" value="" color="#bababa" />
+          <Picker.Item label="Tipo" value="" color="#bababa"/>
           <Picker.Item label="Docente" value="doc" />
           <Picker.Item label="Administrador" value="adm" />
         </Picker>
@@ -158,10 +157,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   picker: {
-    width: "100%",
+    width: "100% + (10%)", // Adicionei o 10% para mexer a setinha para a direita (alinhar)
     height: 45,
-    color: "#333",
-    
-    marginLeft: -10, 
+    color: "#bababa",
+    marginLeft: -3, 
+    padding: 27
   }
 });

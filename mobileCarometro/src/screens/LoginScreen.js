@@ -4,6 +4,7 @@ import {
   Text,
   TextInput,
   Alert,
+  Image,
   StyleSheet,
 } from "react-native";
 import Checkbox from "expo-checkbox";
@@ -33,48 +34,56 @@ export default function Login({ navigation }) {
   //   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Olá! Já Tem {"\n"}Uma Conta?</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email Educacional"
-        placeholderTextColor="#bababa"
-        value={docente.email}
-        onChangeText={(value) => onChange("email", value)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Senha"
-        placeholderTextColor="#bababa"
-        value={docente.senha}
-        onChangeText={(value) => onChange("senha", value)}
-      />
-
-      <TouchableOpacity
-        style={styles.checkboxContainer}
-        activeOpacity={0.8}
-        onPress={() => setLembrarMe(!lembrarMe)}
-      >
-        <Checkbox
-          style={styles.checkbox}
-          value={lembrarMe}
-          onValueChange={setLembrarMe}
-          color={"#2957a4"}
+    <>
+      <View style={styles.header}>
+        <Image
+          source={require("../../image/LogoCarometro-v2.png")}
+          style={styles.logo}
         />
-        <Text style={styles.checkboxLabel}>Lembrar de mim</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.buttonEntrar} onPress={login}>
-        <Text style={styles.buttonText}>Entrar</Text>
-      </TouchableOpacity>
-
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>Não tem uma conta? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Suporte")}>
-          <Text style={styles.linkText}>Cadastre-se!</Text>
-        </TouchableOpacity>
       </View>
-    </View>
+      <View style={styles.container}>
+        <Text style={styles.title}>Olá! Já Tem {"\n"}Uma Conta?</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Email Educacional"
+          placeholderTextColor="#bababa"
+          value={docente.email}
+          onChangeText={(value) => onChange("email", value)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Senha"
+          placeholderTextColor="#bababa"
+          value={docente.senha}
+          onChangeText={(value) => onChange("senha", value)}
+        />
+
+        <TouchableOpacity
+          style={styles.checkboxContainer}
+          activeOpacity={0.8}
+          onPress={() => setLembrarMe(!lembrarMe)}
+        >
+          <Checkbox
+            style={styles.checkbox}
+            value={lembrarMe}
+            onValueChange={setLembrarMe}
+            color={"#2957a4"}
+          />
+          <Text style={styles.checkboxLabel}>Lembrar de mim</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonEntrar} onPress={login}>
+          <Text style={styles.buttonText}>Entrar</Text>
+        </TouchableOpacity>
+
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>Não tem uma conta? </Text>
+          <TouchableOpacity onPress={() => navigation.navigate("Suporte")}>
+            <Text style={styles.linkText}>Cadastre-se!</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </>
   );
 }
 
@@ -84,6 +93,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 30,
+  },
+  header: {
+    width: "100%",
+    alignItems: "center", 
+    justifyContent: "center",
+    paddingTop: 50, 
+    marginBottom: -200,
+  },
+  logo: {
+    width: 250, 
+    height: 150, 
   },
   title: {
     fontSize: 40,
@@ -128,7 +148,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 10,
-    left: -85
+    left: -85,
   },
   footer: {
     flexDirection: "row",
