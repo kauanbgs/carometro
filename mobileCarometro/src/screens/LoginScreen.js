@@ -11,7 +11,7 @@ import { useState } from "react";
 import api from "../services/api";
 
 export default function Login({ navigation }) {
-  const [docente, setDocente] = useState({ email: "", senha: "" });
+  const [docente, setDocente] = useState({ nome: "", senha: "" });
   const [lembrarMe, setLembrarMe] = useState(false);
 
   function onChange(name, value) {

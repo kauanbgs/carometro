@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL:"http://10.89.240.100:5000/carometro",
+    baseURL:"http://192.168.100.75:5000/carometro",
     headers:{
         'Accept':'application/json',
     }
@@ -9,7 +9,8 @@ const api = axios.create({
 
 const sheets = {
 
-    postLogin: (docente) => api.post('/docente/login', docente)
+    postLogin: (docente) => api.post('/docente/login', docente),
+    postCadastro:(docente) => api.post('/docente',docente)
 
 }
 
