@@ -15,14 +15,14 @@ class appcontroler {
   }
   routes() {
     const apiRoutes = require("./routes/apiRoutes");
-    this.express.use("/carometro", apiRoutes);
+    this.express.use("/sigo", apiRoutes);
   }
   exceptionHandler() {
     this.express.use((err, req, res, next) => {
       console.log(err);
       res
         .status(err.status || 500)
-        .json({ error: err.message || "Erro interno de servidor!" });
+        .json({ error: err.message || "Internal server error" });
     });
   }
 }

@@ -1,16 +1,16 @@
 //NAO USAR PRETTIER
 const connect = require("../connect");
 
-module.exports = class turmaController {
-  static async createTurma(req, res, next) {
-    const { nome, fk_id_docente } = req.body;
-    if (!nome || !fk_id_docente) {
+module.exports = class classController {
+  static async createClass(req, res, next) {
+    const { name, fk_id_instructor } = req.body;
+    if (!name || !fk_id_instructor) {
       return res
         .status(400)
-        .json({ error: "Todos os campos devem ser preenchidos" });
+        .json({ error: "All fields must be filled" });
     }
-    const query = "INSERT INTO turma (nome, fk_id_docente) VALUES (?, ?)";
-    const values = [nome, fk_id_docente];
+    const query = "INSERT INTO class (name, fk_id_instructor) VALUES (?, ?)";
+    const values = [name, fk_id_instructor];
 
     try {
       connect.query(query, values, function (err, results) {
@@ -18,14 +18,14 @@ module.exports = class turmaController {
           if (err.code === "ER_DUP_ENTRY") {
             return res
               .status(400)
-              .json({ error: "Turma já cadastrada no sistema!" });
+              .json({ error: "class already registered in the system!" });
           }
           console.error(err);
           return next(err);
         }
         return res
           .status(201)
-          .json({ message: "Turma cadastrada com sucesso!" });
+          .json({ message: "class registered successfully!" });
       });
     } catch (error) {
       console.error(error);
@@ -33,11 +33,11 @@ module.exports = class turmaController {
     }
   }
 
-  static async readTurma(req, res, next) {
+  static async readClass(req, res, next) {
     const query = `
-      SELECT turma.nome as nome_turma, docente.nome as nome_docente, turma.id_turma as id_turma 
-      FROM turma 
-      JOIN docente ON turma.fk_id_docente = docente.id_docente
+      SELECT class.name as name_class, instructor.name as name_instructor, class.id_class as id_class 
+      FROM class 
+      JOIN instructor ON class.fk_id_instructor = instructor.id_instructor
     `;
     try {
       connect.query(query, function (err, results) {
@@ -53,18 +53,18 @@ module.exports = class turmaController {
     }
   }
 
-  static async readTurmaByID(req, res, next) {
-    const { id_turma } = req.query;
-    if (!id_turma) {
-      return res.status(400).json({ error: "ID da turma é obrigatório!" });
+  static async readClassByID(req, res, next) {
+    const { id_class } = req.query;
+    if (!id_class) {
+      return res.status(400).json({ error: "ID of class is required!" });
     }
     const query = `
-      SELECT turma.nome as nome_turma, docente.nome as nome_docente, turma.id_turma as id_turma 
-      FROM turma 
-      JOIN docente ON turma.fk_id_docente = docente.id_docente 
-      WHERE turma.id_turma = ?
+      SELECT class.name as name_class, instructor.name as name_instructor, class.id_class as id_class 
+      FROM class 
+      JOIN instructor ON class.fk_id_instructor = instructor.id_instructor 
+      WHERE class.id_class = ?
     `;
-    const values = [id_turma];
+    const values = [id_class];
     try {
       connect.query(query, values, function (err, results) {
         if (err) {
@@ -79,13 +79,13 @@ module.exports = class turmaController {
     }
   }
 
-  static async GetTurmaByDocenteID(req, res, next) {
-    const { fk_id_docente } = req.params;
-    if (!fk_id_docente) {
-      return res.status(400).json({ error: "ID do docente é obrigatório!" });
+  static async getClassByInstructorID(req, res, next) {
+    const { fk_id_instructor } = req.params;
+    if (!fk_id_instructor) {
+      return res.status(400).json({ error: "ID of instructor is required!" });
     }
-    const query = "SELECT * FROM turma WHERE fk_id_docente = ?";
-    const values = [fk_id_docente];
+    const query = "SELECT * FROM class WHERE fk_id_instructor = ?";
+    const values = [fk_id_instructor];
     try {
       connect.query(query, values, function (err, results) {
         if (err) {
@@ -95,11 +95,11 @@ module.exports = class turmaController {
         if (results.length === 0) {
           return res
             .status(404)
-            .json({ message: "Nenhuma turma encontrada para este docente." });
+            .json({ message: "No class found for this instructor." });
         }
         return res
           .status(200)
-          .json({ message: "Turmas encontradas:", turmas: results });
+          .json({ message: "class found:", classs: results });
       });
     } catch (error) {
       console.error(error);
@@ -107,10 +107,10 @@ module.exports = class turmaController {
     }
   }
 
-  static async GetTurmaByName(req, res, next) {
-    const { nome } = req.params;
-    const query = "SELECT * FROM turma WHERE nome LIKE ?";
-    const values = [`%${nome}%`];
+  static async GetClassByName(req, res, next) {
+    const { name } = req.params;
+    const query = "SELECT * FROM class WHERE name LIKE ?";
+    const values = [`%${name}%`];
     try {
       connect.query(query, values, function (err, results) {
         if (err) {
@@ -120,11 +120,11 @@ module.exports = class turmaController {
         if (results.length === 0) {
           return res
             .status(404)
-            .json({ message: "Nenhuma turma encontrada com este nome." });
+            .json({ message: "No class found with this name." });
         }
         return res
           .status(200)
-          .json({ message: "Turmas encontradas:", turmas: results });
+          .json({ message: "class found:", classs: results });
       });
     } catch (error) {
       console.error(error);
@@ -132,17 +132,17 @@ module.exports = class turmaController {
     }
   }
 
-  static async updateTurma(req, res, next) {
-    const { nome } = req.body;
-    const { id_turma } = req.params;
+  static async updateClass(req, res, next) {
+    const { name } = req.body;
+    const { id_class } = req.params;
 
-    if (!nome) {
+    if (!name) {
       return res
         .status(400)
-        .json({ error: "Todos os campos devem ser preenchidos" });
+        .json({ error: "All fields must be filled" });
     }
-    const query = "UPDATE turma SET nome = ? WHERE id_turma = ?";
-    const values = [nome, id_turma];
+    const query = "UPDATE class SET name = ? WHERE id_class = ?";
+    const values = [name, id_class];
     try {
       connect.query(query, values, function (err, results) {
         if (err) {
@@ -150,11 +150,11 @@ module.exports = class turmaController {
           return next(err);
         }
         if (results.affectedRows === 0) {
-          return res.status(404).json({ error: "Turma não encontrada!" });
+          return res.status(404).json({ error: "class not found!" });
         }
         return res
           .status(200)
-          .json({ message: "Turma atualizada com sucesso!", id_turma });
+          .json({ message: "class updated successfully!", id_class });
       });
     } catch (error) {
       console.error(error);
@@ -162,15 +162,15 @@ module.exports = class turmaController {
     }
   }
 
-  static async deleteTurma(req, res, next) {
-    const id_turma = req.params.id_turma;
-    if (!id_turma) {
+  static async deleteClass(req, res, next) {
+    const id_class = req.params.id_class;
+    if (!id_class) {
       return res
         .status(400)
-        .json({ error: "O ID da turma deve ser fornecido!" });
+        .json({ error: "ID of class is required!" });
     }
-    const query = "DELETE FROM turma WHERE id_turma = ?";
-    const values = [id_turma];
+    const query = "DELETE FROM class WHERE id_class = ?";
+    const values = [id_class];
     try {
       connect.query(query, values, function (err, results) {
         if (err) {
@@ -178,11 +178,11 @@ module.exports = class turmaController {
           return next(err);
         }
         if (results.affectedRows === 0) {
-          return res.status(404).json({ error: "Turma não encontrada!" });
+          return res.status(404).json({ error: "class not found!" });
         }
         return res
           .status(200)
-          .json({ message: "Turma deletada com sucesso: ", id_turma });
+          .json({ message: "class deleted successfully: ", id_class });
       });
     } catch (error) {
       console.error(error);
@@ -190,9 +190,9 @@ module.exports = class turmaController {
     }
   }
 
-  static async readTurmaDocente(req, res, next) {
+  static async readClassInstructor(req, res, next) {
     const query = `
-      SELECT * FROM vw_gerenciar_turmas;
+      SELECT * FROM vw_readClassInstructor
     `;
     try {
       connect.query(query, function (err, results) {
@@ -208,9 +208,9 @@ module.exports = class turmaController {
     }
   }
 
-  static async readAlunosTurma(req, res, next) {
+  static async readStudentsClass(req, res, next) {
     const query = `
-      SELECT * FROM vw_editar_turma;
+      SELECT * FROM vw_editClassPage;
     `;
     try {
       connect.query(query, function (err, results) {
