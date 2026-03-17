@@ -8,6 +8,7 @@ import api from "../../axios/axios";
 import items from "../../utils/itemSideBar";
 import Alert from "../../components/alert";
 import Text from "../../components/text";
+import Button from "../../components/button";
 
 
 export default function RemoverDocente() {
@@ -56,7 +57,7 @@ export default function RemoverDocente() {
                         <Input type="text" placeholder="Email do Docente" onChange={onChange} id="email" name="email" value={user.email} />
                         <Input type="text" placeholder="Senha do Docente" onChange={onChange} id="senha" name="senha" value={user.senha} />
 
-                        <button type="submit" className="bg-[var(--erro)] text-white p-2 rounded-lg mt-2">Excluir</button>
+                        <Button type="submit" text="Excluir" color="erro" fill className="w-full" />
                     </form>
                 </div>
             </main>

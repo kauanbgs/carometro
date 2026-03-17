@@ -13,7 +13,7 @@ const colorMap = {
     },
 }
 
-export default function Button({ text, onClick, fill, color = "azulPrincipal", type = "submit" }) {
+export default function Button({ text, onClick, fill, color = "azulPrincipal", type = "submit", className }) {
     const variant = fill ? "fill" : "outline"
     const colorClass = colorMap[color]?.[variant] ?? colorMap.azulPrincipal[variant]
 
@@ -21,7 +21,7 @@ export default function Button({ text, onClick, fill, color = "azulPrincipal", t
         <button
             onClick={onClick}
             type={type}
-            className={`${colorClass} p-2 rounded-full w-full cursor-pointer transition-all duration-200`}
+            className={`${colorClass} p-2 rounded-full cursor-pointer transition-all duration-200 ${className}`}
         >
             {text}
         </button>

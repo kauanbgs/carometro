@@ -72,7 +72,7 @@ export default function Login() {
               value={user.senha}
             />
           </div>
-          <Button type="submit" text="Entrar" fill />
+          <Button type="submit" text="Entrar" fill className="w-full" />
           <Text variant="text" className="mt-4">
             Esqueceu sua senha?{" "}
             <Link to="/" className="text-[var(--azulPrincipal)] cursor-pointer hover:underline">

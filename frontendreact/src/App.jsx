@@ -5,6 +5,7 @@ import Home from "./pages/Home/home"
 import GerenciarDocentes from "./pages/GerenciarDocentes/gerenciarDocentes"
 import AdicionarDocente from "./pages/adicionarDocente/adicionarDocente"
 import RemoverDocente from "./pages/removerDocente/removerDocente"
+import Page404 from "./pages/404/page404"
 
 
 function App() {
@@ -13,11 +14,12 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login/>}/>
-          <Route path="/home" element={<Home/>}/>
-          <Route path="/gerenciarDocentes" element={<GerenciarDocentes/>}/>
-          <Route path="/adicionarDocente" element={<AdicionarDocente/>}/>
-          <Route path="/removerDocente" element={<RemoverDocente/>}/>
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/gerenciarDocentes" element={<GerenciarDocentes />} />
+          <Route path="/adicionarDocente" element={<AdicionarDocente />} />
+          <Route path="/removerDocente" element={<RemoverDocente />} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
     </div>
