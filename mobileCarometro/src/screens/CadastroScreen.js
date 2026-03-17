@@ -12,6 +12,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
 import api from "../services/api";
 import useSideBar from "../utils/onChangeSideBar";
+import AntDesign from "@expo/vector-icons/AntDesign";
+
 
 export default function CadastroUser({ navigation }) {
   const [docente, setDocente] = useState({
@@ -37,79 +39,97 @@ export default function CadastroUser({ navigation }) {
       console.log(error.response?.data);
     }
   }
-  
-  
+
   return (
     <View style={styles.container}>
-
+      {sidebar}
 
       <View style={styles.header}>
-        <TouchableOpacity onPress={abrirSidebar}>
-          <Ionicons name="menu" size={32} color="#333" />
+        <TouchableOpacity style={styles.botaosidebar} onPress={abrirSidebar}>
+          <AntDesign name="bars" size={40} color="black" />
         </TouchableOpacity>
-
         <Image
           source={require("../../image/LogoCarometro-v2.png")}
           style={styles.logo}
-          />
+        />
       </View>
 
-      <Text style={styles.title}>Criando Docente</Text>
+      <View style={styles.content}>
+        <Text style={styles.title}>Criando Docente</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Nome"
-        placeholderTextColor="#bababa"
-        value={docente.nome}
-        onChangeText={(value) => onChange("nome", value)}
+        <TextInput
+          style={styles.input}
+          placeholder="Nome"
+          placeholderTextColor="#bababa"
+          value={docente.nome}
+          onChangeText={(value) => onChange("nome", value)}
         />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Email Educacional"
-        placeholderTextColor="#bababa"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        value={docente.email}
-        onChangeText={(value) => onChange("email", value)}
+        <TextInput
+          style={styles.input}
+          placeholder="Email Educacional"
+          placeholderTextColor="#bababa"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          value={docente.email}
+          onChangeText={(value) => onChange("email", value)}
         />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Senha"
-        placeholderTextColor="#bababa"
-        secureTextEntry={true}
-        value={docente.senha}
-        onChangeText={(value) => onChange("senha", value)}
+        <TextInput
+          style={styles.input}
+          placeholder="Senha"
+          placeholderTextColor="#bababa"
+          secureTextEntry={true}
+          value={docente.senha}
+          onChangeText={(value) => onChange("senha", value)}
         />
-     
 
-      <View style={styles.pickerContainer}>
-        <Picker
-          selectedValue={docente.tipo}
-          onValueChange={(itemValue) => onChange("tipo", itemValue)}
-          style={styles.picker}
+        <View style={styles.pickerContainer}>
+          <Picker
+            selectedValue={docente.tipo}
+            onValueChange={(itemValue) => onChange("tipo", itemValue)}
+            style={styles.picker}
           >
-          <Picker.Item label="Tipo" value="" color="#bababa"/>
-          <Picker.Item label="Docente" value="doc" />
-          <Picker.Item label="Administrador" value="adm" />
-        </Picker>
-      </View>
-      {sidebar}
+            <Picker.Item label="Tipo" value="" color="#bababa" />
+            <Picker.Item label="Docente" value="doc" />
+            <Picker.Item label="Administrador" value="adm" />
+          </Picker>
+        </View>
 
-      <TouchableOpacity style={styles.buttonCriar} onPress={Cadastro}>
-        <Text style={styles.buttonText}>Criar</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonCriar} onPress={Cadastro}>
+          <Text style={styles.buttonText}>Criar</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  header: {
+    display: "flex",
+    paddingTop: "20",
+    height: "150",
+    flexDirection: "row",
+    marginTop: 30,
+  },
+  content: {
     flex: 1,
+    paddingRight: 25,
+    paddingTop: 15,
     padding: 30,
     backgroundColor: "#fff",
-    
+  },
+
+  botaosidebar: {
+    flex: 1,
+    justifyContent: "flex-start",
+    marginLeft: 20,
+    marginTop: 30,
+  },
+  
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
   },
   header: {
     flexDirection: "row",
@@ -172,5 +192,3 @@ const styles = StyleSheet.create({
     padding: 27
   }
 });
-
-// a
