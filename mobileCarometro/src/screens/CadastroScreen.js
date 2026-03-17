@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   TouchableOpacity,
   View,
@@ -11,6 +11,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
 import api from "../services/api";
+import useSideBar from "../utils/onChangeSideBar";
 
 export default function CadastroUser({ navigation }) {
   const [docente, setDocente] = useState({
@@ -20,7 +21,8 @@ export default function CadastroUser({ navigation }) {
     tipo: "",
   });
 
-  
+  const { sidebar, abrirSidebar } = useSideBar(navigation);
+
   function onChange(name, value) {
     setDocente({ ...docente, [name]: value });
   }
@@ -35,18 +37,21 @@ export default function CadastroUser({ navigation }) {
       console.log(error.response?.data);
     }
   }
-
+  
+  
   return (
     <View style={styles.container}>
+
+
       <View style={styles.header}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={abrirSidebar}>
           <Ionicons name="menu" size={32} color="#333" />
         </TouchableOpacity>
 
         <Image
           source={require("../../image/LogoCarometro-v2.png")}
           style={styles.logo}
-        />
+          />
       </View>
 
       <Text style={styles.title}>Criando Docente</Text>
@@ -57,7 +62,7 @@ export default function CadastroUser({ navigation }) {
         placeholderTextColor="#bababa"
         value={docente.nome}
         onChangeText={(value) => onChange("nome", value)}
-      />
+        />
 
       <TextInput
         style={styles.input}
@@ -67,7 +72,7 @@ export default function CadastroUser({ navigation }) {
         autoCapitalize="none"
         value={docente.email}
         onChangeText={(value) => onChange("email", value)}
-      />
+        />
 
       <TextInput
         style={styles.input}
@@ -76,19 +81,21 @@ export default function CadastroUser({ navigation }) {
         secureTextEntry={true}
         value={docente.senha}
         onChangeText={(value) => onChange("senha", value)}
-      />
+        />
+     
 
       <View style={styles.pickerContainer}>
         <Picker
           selectedValue={docente.tipo}
           onValueChange={(itemValue) => onChange("tipo", itemValue)}
           style={styles.picker}
-        >
+          >
           <Picker.Item label="Tipo" value="" color="#bababa"/>
           <Picker.Item label="Docente" value="doc" />
           <Picker.Item label="Administrador" value="adm" />
         </Picker>
       </View>
+      {sidebar}
 
       <TouchableOpacity style={styles.buttonCriar} onPress={Cadastro}>
         <Text style={styles.buttonText}>Criar</Text>
@@ -102,12 +109,13 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 30,
     backgroundColor: "#fff",
+    
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 40,
+    marginTop: 50,
     marginBottom: 40,
   },
   logoText: {

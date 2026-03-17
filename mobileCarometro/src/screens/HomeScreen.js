@@ -1,24 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
   Text,
   Image,
-  Button,
   TouchableOpacity,
 } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import useSideBar from "../utils/onChangeSideBar";
 
 export default function Home({ navigation }) {
+
+  const { sidebar, abrirSidebar } = useSideBar(navigation);
+
   return (
     <View style={styles.container}>
+
+      {sidebar}
+
       <View style={styles.header}>
-        <AntDesign
-          style={styles.botaosidebar}
-          name="bars"
-          size={40}
-          color="black"
-        />
+        <TouchableOpacity style={styles.botaosidebar} onPress={abrirSidebar}>
+          <AntDesign name="bars" size={40} color="black" />
+        </TouchableOpacity>
         <Image
           source={require("../../image/LogoCarometro-v2.png")}
           style={styles.logo}
@@ -37,7 +40,7 @@ export default function Home({ navigation }) {
 
         <TouchableOpacity
           style={styles.botoes}
-          onPress={() => navigation.navigate("Cadastro")}
+          onPress={() => navigation.navigate("Suporte")}
         >
           <Text style={styles.buttonText}>Clique aqui e comece</Text>
         </TouchableOpacity>
@@ -77,6 +80,7 @@ const styles = StyleSheet.create({
     paddingTop: "20",
     height: "150",
     flexDirection: "row",
+    marginTop: 30,
   },
   content: {
     flex: 1,
