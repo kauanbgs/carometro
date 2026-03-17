@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `carometro` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `carometro`;
--- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.44, for Win64 (x86_64)
 --
 -- Host: localhost    Database: carometro
 -- ------------------------------------------------------
--- Server version	8.0.45
+-- Server version	8.0.44
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -74,7 +74,7 @@ CREATE TABLE `estudante` (
 
 LOCK TABLES `estudante` WRITE;
 /*!40000 ALTER TABLE `estudante` DISABLE KEYS */;
-INSERT INTO `estudante` VALUES (1,'Aluanan Angel de Sousa','aluanan.sousa@aluno.senai.br','11900000001','2025-01-01 11:00:00',1,1,1),(2,'Ana Carolina de Oliveira Monteiro','ana.monteiro@aluno.senai.br','11900000002','2025-01-01 11:00:00',1,2,1),(3,'Anna Vitória Martins Ramos','anna.ramos@aluno.senai.br','11900000003','2025-01-01 11:00:00',1,3,1),(4,'Arthur Cintra de Lacerda','arthur.lacerda@aluno.senai.br','11900000004','2025-01-01 11:00:00',1,4,1),(5,'Arthur Cintra Faleiros','arthur.faleiros@aluno.senai.br','11900000005','2025-01-01 11:00:00',1,5,1),(6,'Arthur Marques Santos','arthur.santos@aluno.senai.br','11900000006','2025-01-01 11:00:00',1,6,1),(7,'Bryan Miguel Moreira','bryan.moreira@aluno.senai.br','11900000007','2025-01-01 11:00:00',1,7,1),(8,'Davi Azevedo Gonçalves','davi.goncalves@aluno.senai.br','11900000008','2025-01-01 11:00:00',1,8,1),(9,'Eduardo Augusto Tognati','eduardo.tognati@aluno.senai.br','11900000009','2025-01-01 11:00:00',1,9,1),(10,'Flávio Henrique de Souza Filho','flavio.souza@aluno.senai.br','11900000010','2025-01-01 11:00:00',1,10,1),(11,'Gabriel Braz Menezes','gabriel.menezes@aluno.senai.br','11900000011','2025-01-01 11:00:00',1,11,1),(12,'Gabriel Rossi Ventura','gabriel.ventura@aluno.senai.br','11900000012','2025-01-01 11:00:00',1,12,1),(13,'Guilherme Bason Garcia Neves','guilherme.neves@aluno.senai.br','11900000013','2025-01-01 11:00:00',1,13,1),(14,'João Victor Oliveira Silva','joao.silva@aluno.senai.br','11900000014','2025-01-01 11:00:00',1,14,1),(15,'José Victor Faccirolli','jose.faccirolli@aluno.senai.br','11900000015','2025-01-01 11:00:00',1,15,1),(16,'Kauan Borges Plaza','kauan.plaza@aluno.senai.br','11900000016','2025-01-01 11:00:00',1,16,1),(17,'Kauan Henrique Melo Silva','kauan.silva@aluno.senai.br','11900000017','2025-01-01 11:00:00',1,17,1),(18,'Keliyah Cristine de Oliveira Martins','keliyah.martins@aluno.senai.br','11900000018','2025-01-01 11:00:00',1,18,1),(19,'Leonardo Alves da Silva','leonardo.silva@aluno.senai.br','11900000019','2025-01-01 11:00:00',1,19,1),(20,'Luís Pedro França Paulino','luis.paulino@aluno.senai.br','11900000020','2025-01-01 11:00:00',1,20,1),(21,'Luiz Felipe Campos Margato','luiz.margato@aluno.senai.br','11900000021','2025-01-01 11:00:00',1,21,1),(22,'Pedro Galindo Tavares','pedro.tavares@aluno.senai.br','11900000023','2025-01-01 11:00:00',1,23,1),(23,'Rafael Caíres dos Santos','rafael.santos@aluno.senai.br','11900000024','2025-01-01 11:00:00',1,24,1),(24,'Rafael Mendes Neves','rafael.neves@aluno.senai.br','11900000025','2025-01-01 11:00:00',1,25,1),(25,'Renan Vieira Mobrise','renan.mobrise@aluno.senai.br','11900000026','2025-01-01 11:00:00',1,26,1),(26,'Sofia Siqueira Belchior','sofia.belchior@aluno.senai.br','11900000027','2025-01-01 11:00:00',1,27,1),(27,'Sophia de Oliveira Ferreira','sophia.ferreira@aluno.senai.br','11900000028','2025-01-01 11:00:00',1,28,1),(28,'Ulisses Santini Gomes','ulisses.gomes@aluno.senai.br','11900000029','2025-01-01 11:00:00',1,29,1),(29,'Vinicius Soares Peroni','vinicius.peroni@aluno.senai.br','11900000030','2025-01-01 11:00:00',1,30,1),(30,'Antonio','acintra504@gmail.com','11900000031','2025-01-01 11:00:00',0,31,1);
+INSERT INTO `estudante` VALUES (1,'Aluanan Angel de Sousa','aluanan.sousa@aluno.senai.br','11900000001','2025-01-01 11:00:00',1,1,1),(2,'Ana Carolina de Oliveira Monteiro','ana.monteiro@aluno.senai.br','11900000002','2025-01-01 11:00:00',1,2,1),(3,'Anna Vitória Martins Ramos','anna.ramos@aluno.senai.br','11900000003','2025-01-01 11:00:00',1,3,2),(4,'Arthur Cintra de Lacerda','arthur.lacerda@aluno.senai.br','11900000004','2025-01-01 11:00:00',1,4,1),(5,'Arthur Cintra Faleiros','arthur.faleiros@aluno.senai.br','11900000005','2025-01-01 11:00:00',1,5,1),(6,'Arthur Marques Santos','arthur.santos@aluno.senai.br','11900000006','2025-01-01 11:00:00',1,6,1),(7,'Bryan Miguel Moreira','bryan.moreira@aluno.senai.br','11900000007','2025-01-01 11:00:00',1,7,1),(8,'Davi Azevedo Gonçalves','davi.goncalves@aluno.senai.br','11900000008','2025-01-01 11:00:00',1,8,1),(9,'Eduardo Augusto Tognati','eduardo.tognati@aluno.senai.br','11900000009','2025-01-01 11:00:00',1,9,1),(10,'Flávio Henrique de Souza Filho','flavio.souza@aluno.senai.br','11900000010','2025-01-01 11:00:00',1,10,1),(11,'Gabriel Braz Menezes','gabriel.menezes@aluno.senai.br','11900000011','2025-01-01 11:00:00',1,11,1),(12,'Gabriel Rossi Ventura','gabriel.ventura@aluno.senai.br','11900000012','2025-01-01 11:00:00',1,12,1),(13,'Guilherme Bason Garcia Neves','guilherme.neves@aluno.senai.br','11900000013','2025-01-01 11:00:00',1,13,1),(14,'João Victor Oliveira Silva','joao.silva@aluno.senai.br','11900000014','2025-01-01 11:00:00',1,14,1),(15,'José Victor Faccirolli','jose.faccirolli@aluno.senai.br','11900000015','2025-01-01 11:00:00',1,15,1),(16,'Kauan Borges Plaza','kauan.plaza@aluno.senai.br','11900000016','2025-01-01 11:00:00',1,16,1),(17,'Kauan Henrique Melo Silva','kauan.silva@aluno.senai.br','11900000017','2025-01-01 11:00:00',1,17,1),(18,'Keliyah Cristine de Oliveira Martins','keliyah.martins@aluno.senai.br','11900000018','2025-01-01 11:00:00',1,18,1),(19,'Leonardo Alves da Silva','leonardo.silva@aluno.senai.br','11900000019','2025-01-01 11:00:00',1,19,1),(20,'Luís Pedro França Paulino','luis.paulino@aluno.senai.br','11900000020','2025-01-01 11:00:00',1,20,1),(21,'Luiz Felipe Campos Margato','luiz.margato@aluno.senai.br','11900000021','2025-01-01 11:00:00',1,21,1),(22,'Pedro Galindo Tavares','pedro.tavares@aluno.senai.br','11900000023','2025-01-01 11:00:00',1,23,1),(23,'Rafael Caíres dos Santos','rafael.santos@aluno.senai.br','11900000024','2025-01-01 11:00:00',1,24,1),(24,'Rafael Mendes Neves','rafael.neves@aluno.senai.br','11900000025','2025-01-01 11:00:00',1,25,1),(25,'Renan Vieira Mobrise','renan.mobrise@aluno.senai.br','11900000026','2025-01-01 11:00:00',1,26,1),(26,'Sofia Siqueira Belchior','sofia.belchior@aluno.senai.br','11900000027','2025-01-01 11:00:00',1,27,1),(27,'Sophia de Oliveira Ferreira','sophia.ferreira@aluno.senai.br','11900000028','2025-01-01 11:00:00',1,28,1),(28,'Ulisses Santini Gomes','ulisses.gomes@aluno.senai.br','11900000029','2025-01-01 11:00:00',1,29,1),(29,'Vinicius Soares Peroni','vinicius.peroni@aluno.senai.br','11900000030','2025-01-01 11:00:00',1,30,1),(30,'Antonio','acintra504@gmail.com','11900000031','2025-01-01 11:00:00',0,31,1);
 /*!40000 ALTER TABLE `estudante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,7 +128,7 @@ CREATE TABLE `knex_migrations` (
 
 LOCK TABLES `knex_migrations` WRITE;
 /*!40000 ALTER TABLE `knex_migrations` DISABLE KEYS */;
-INSERT INTO `knex_migrations` VALUES (1,'1_create_docente_table.js',1,'2026-03-05 16:11:54'),(2,'20251106175102_create_docente_table.js',1,'2026-03-05 16:11:54'),(3,'2_create_turma_table.js',1,'2026-03-05 16:11:54'),(4,'3_create_estudante_table.js',1,'2026-03-05 16:11:54'),(5,'4_create_ocorrencia_table.js',1,'2026-03-05 16:11:54'),(6,'5_create_estudantes_ocorrencias_table.js',1,'2026-03-05 16:11:54'),(7,'6_create_log_ocorrencias_table.js',1,'2026-03-05 16:11:54'),(8,'7_create_procedures.js',1,'2026-03-05 16:11:54'),(9,'8_create_views_editarTurma.js',1,'2026-03-05 16:11:54'),(10,'9_create_view_gerenciarTurma.js',1,'2026-03-05 16:11:54');
+INSERT INTO `knex_migrations` VALUES (1,'1_create_docente_table.js',1,'2026-03-16 21:54:57'),(2,'20251106175102_create_docente_table.js',1,'2026-03-16 21:54:57'),(3,'2_create_turma_table.js',1,'2026-03-16 21:54:57'),(4,'3_create_estudante_table.js',1,'2026-03-16 21:54:57'),(5,'4_create_ocorrencia_table.js',1,'2026-03-16 21:54:57'),(6,'5_create_estudantes_ocorrencias_table.js',1,'2026-03-16 21:54:57'),(7,'6_create_log_ocorrencias_table.js',1,'2026-03-16 21:54:57'),(8,'7_create_procedures.js',1,'2026-03-16 21:54:57'),(9,'8_create_views_editarTurma.js',1,'2026-03-16 21:54:57'),(10,'9_create_view_gerenciarTurma.js',1,'2026-03-16 21:54:57');
 /*!40000 ALTER TABLE `knex_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,7 +201,7 @@ CREATE TABLE `ocorrencia` (
   PRIMARY KEY (`id_ocorrencia`),
   KEY `ocorrencia_fk_id_estudante_foreign` (`fk_id_estudante`),
   CONSTRAINT `ocorrencia_fk_id_estudante_foreign` FOREIGN KEY (`fk_id_estudante`) REFERENCES `estudante` (`id_estudante`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,8 +210,37 @@ CREATE TABLE `ocorrencia` (
 
 LOCK TABLES `ocorrencia` WRITE;
 /*!40000 ALTER TABLE `ocorrencia` DISABLE KEYS */;
+INSERT INTO `ocorrencia` VALUES (1,'Advertência','Testando trigger 2','2026-03-16 23:23:38',30),(3,'Transferência','Transferido. A nova turma agora possui 29 alunos ativos.','2026-03-16 23:51:44',2),(4,'Transferência','Transferido. A nova turma agora possui 29 alunos ativos.','2026-03-16 23:51:46',2),(5,'Transferência','Transferido. A nova turma agora possui 1 alunos ativos.','2026-03-16 23:53:03',3);
 /*!40000 ALTER TABLE `ocorrencia` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `trg_impedir_ocorrencia_aluno_inativo` BEFORE INSERT ON `ocorrencia` FOR EACH ROW BEGIN
+    DECLARE v_status TINYINT;
+
+    -- Busca o status atual do estudante que está recebendo a ocorrência
+    SELECT status INTO v_status
+    FROM estudante
+    WHERE id_estudante = NEW.fk_id_estudante;
+
+    -- Se o status for 0 (inativo), aborta a inserção com uma mensagem de erro
+    IF v_status = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Operação negada: Não é possível registrar uma nova ocorrência para um estudante inativo.';
+    END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `turma`
@@ -227,7 +256,7 @@ CREATE TABLE `turma` (
   PRIMARY KEY (`id_turma`),
   KEY `turma_fk_id_docente_foreign` (`fk_id_docente`),
   CONSTRAINT `turma_fk_id_docente_foreign` FOREIGN KEY (`fk_id_docente`) REFERENCES `docente` (`id_docente`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,7 +265,7 @@ CREATE TABLE `turma` (
 
 LOCK TABLES `turma` WRITE;
 /*!40000 ALTER TABLE `turma` DISABLE KEYS */;
-INSERT INTO `turma` VALUES (1,'1C - DS',1);
+INSERT INTO `turma` VALUES (1,'1C - DS',1),(2,'Eletrônica',1);
 /*!40000 ALTER TABLE `turma` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -286,7 +315,7 @@ SET character_set_client = @saved_cs_client;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`aluno`@`%` PROCEDURE `criarOcorrencia`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `criarOcorrencia`(
   IN p_tipo VARCHAR(100),
   IN p_descricao VARCHAR(150),
   IN p_id_estudante INT,
@@ -312,6 +341,64 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `transferirComLogDeLotacao` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `transferirComLogDeLotacao`(
+    IN p_id_estudante INT,
+    IN p_id_nova_turma INT
+)
+BEGIN 
+    DECLARE v_total_alunos INT;
+    DECLARE erro_secundario TINYINT DEFAULT 0;
+
+    -- Se der erro em algum INSERT ou SELECT, muda a variável para 1 e não trava o banco
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION 
+    BEGIN
+        SET erro_secundario = 1;
+    END;
+    
+    START TRANSACTION;
+
+    UPDATE estudante 
+    SET fk_id_turma = p_id_nova_turma 
+    WHERE id_estudante = p_id_estudante;
+
+    -- Salvando o Update
+    SAVEPOINT sp_aluno_transferido;
+
+    -- COUNT para saber o novo tamanho da turma 
+    SELECT COUNT(id_estudante) INTO v_total_alunos
+    FROM estudante
+    WHERE fk_id_turma = p_id_nova_turma AND status = 1;
+
+    INSERT INTO ocorrencia (tipo, descricao, data_criacao, fk_id_estudante)
+    VALUES (
+        'Transferência', 
+        CONCAT('Transferido. A nova turma agora possui ', v_total_alunos, ' alunos ativos.'), 
+        NOW(), 
+        p_id_estudante
+    );
+    
+    -- Se o SELECT COUNT ou o INSERT falharem (erro de sintaxe)
+    IF erro_secundario = 1 THEN
+        -- Desfaz a contagem e o log, mas MANTÉM a transferência de turma
+        ROLLBACK TO sp_aluno_transferido;
+    END IF;
+    COMMIT;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Final view structure for view `vw_editar_turma`
@@ -325,7 +412,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`aluno`@`%` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `vw_editar_turma` AS select `e`.`nome` AS `nome_aluno`,`t`.`nome` AS `nome_turma`,`e`.`numero_aluno` AS `numero_chamada`,`e`.`status` AS `status` from (`estudante` `e` join `turma` `t` on((`t`.`id_turma` = `e`.`fk_id_turma`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -343,7 +430,7 @@ DELIMITER ;
 /*!50001 SET character_set_results     = utf8mb4 */;
 /*!50001 SET collation_connection      = utf8mb4_unicode_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`aluno`@`%` SQL SECURITY DEFINER */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `vw_gerenciar_turmas` AS select `t`.`nome` AS `nome_turma`,`d`.`nome` AS `nome_docente`,`d`.`id_docente` AS `id_docente` from (`turma` `t` join `docente` `d` on((`d`.`id_docente` = `t`.`fk_id_docente`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
@@ -358,4 +445,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-05 13:15:04
+-- Dump completed on 2026-03-16 20:55:15
