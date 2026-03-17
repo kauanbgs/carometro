@@ -1,47 +1,46 @@
 const router = require("express").Router();
-const docenteController = require("../controllers/docenteController");
-const estudanteController = require("../controllers/estudanteController");
-const ocorrenciaController = require("../controllers/ocorrenciaController");
-const turmaController = require("../controllers/turmaController");
+const studentController = require("../controllers/studentController");
+const instructorController = require("../controllers/instructorController");
+const classController = require("../controllers/classController");
+const occurrenceController = require("../controllers/occurrenceController");
 
-//      CONTROLLER DOCENTE (DOC & DEV)       //
-router.post("/docente", docenteController.createDocente);
-router.get("/docente", docenteController.readDocente);
-router.get("/docente/:id_docente", docenteController.getDocenteById);
-router.get("/docente/nome/:nome", docenteController.getDocenteByName);
-router.put("/docente/", docenteController.updateDocente);
-router.delete("/docente", docenteController.deleteDocente);
-router.post("/docente/login", docenteController.login);
+//      CONTROLLER instructor (INST & DEV)       //
+router.post("/instructor", instructorController.createInstructor);
+router.get("/instructor", instructorController.readInstructors);
+router.get("/instructor/:id_instructor", instructorController.getInstructorById);
+router.get("/instructor/name/:name", instructorController.getInstructorByName);
+router.put("/instructor/", instructorController.updateInstructor);
+router.delete("/instructor", instructorController.deleteInstructor);
+router.post("/instructor/login", instructorController.login);
 
-//      CONTROLLER ESTUDANTE       //
-router.post("/estudante", estudanteController.createEstudante);
-router.get("/estudante", estudanteController.readEstudante);
-router.get("/estudante/:id_estudante", estudanteController.getEstudanteByID);
-router.get("/estudante/numero/:numero_aluno", estudanteController.getEstudanteByNumero);
-router.get("/estudante/nome/:nome", estudanteController.getEstudanteByName);
-router.get("/estudante/status/:status", estudanteController.getEstudanteBystatus);
-router.put("/estudante/:id_estudante", estudanteController.updateEstudante);
-router.delete("/estudante/:id_estudante", estudanteController.deleteEstudante);
-router.get("/estudante/turma/:fk_id_turma", estudanteController.getEstudantesByTurma);
+//      CONTROLLER student       //
+router.post("/student", studentController.createStudent);
+router.get("/student", studentController.readStudents);
+router.get("/student/:id_student", studentController.getStudentByID);
+router.get("/student/number/:number_student", studentController.getStudentBynumber);
+router.get("/student/name/:name", studentController.getStudentByName);
+router.get("/student/status/:status", studentController.getStudentsByStatus);
+router.put("/student/:id_student", studentController.updateStudent);
+router.delete("/student/:id_student", studentController.deleteStudent);
+router.get("/student/class/:fk_id_class", studentController.getStudentsByClass);
 
-//      CONTROLLER TURMA       //
-router.post("/turma", turmaController.createTurma);
-router.get("/turma", turmaController.readTurma);
-router.get("/turma/id/:id_turma", turmaController.readTurmaByID);
-router.get("/turma/:fk_id_docente", turmaController.GetTurmaByDocenteID);
-router.get("/turma/nome/:nome", turmaController.GetTurmaByName); // GetByName
-router.get("/turmas-docentes", turmaController.readTurmaDocente); // ReadTurmaDocente view
-router.get("/turmas-alunos", turmaController.readAlunosTurma); // ReadAlunosTurma view
-router.put("/turma/id/:id_turma", turmaController.updateTurma);
-router.delete("/turma/:id_turma", turmaController.deleteTurma);
+//      CONTROLLER class       //
+router.post("/class", classController.createClass);
+router.get("/class", classController.readClass);
+router.get("/class/id/:id_class", classController.readClassByID);
+router.get("/class/instructor/:fk_id_instructor", classController.getClassByInstructorID);
+router.get("/class/name/:name", classController.GetClassByName);
+router.get("/class/instructors", classController.readClassInstructor);
+router.get("/class/student", classController.readStudentsClass);
+router.put("/class/id/:id_class", classController.updateClass);
+router.delete("/class/:id_class", classController.deleteClass);
 
-//      CONTROLLER OCORRÊNCIA       //
-router.post("/ocorrencia", ocorrenciaController.createOcorrencia);
-router.get("/ocorrencia", ocorrenciaController.readOcorrencias);
-router.get("/ocorrencia/:fk_id_estudante",ocorrenciaController.getOcorrenciaByIdAluno
+//      CONTROLLER occurrence       //
+router.post("/occurrence", occurrenceController.createOccurrence);
+router.get("/occurrence", occurrenceController.readOccurrences);
+router.get("/occurrence/:fk_id_student",occurrenceController.getOccurrenceByStudentId
 );
-router.put("/ocorrencia/:id_ocorrencia", ocorrenciaController.updateOcorrencia);
-router.delete("/ocorrencia/:id_ocorrencia",ocorrenciaController.deleteOcorrencia
-);
+router.put("/occurrence/:id_occurrence", occurrenceController.updateOccurrence);
+router.delete("/occurrence/:id_occurrence",occurrenceController.deleteOccurrence);
 
 module.exports = router;
