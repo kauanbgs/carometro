@@ -1,7 +1,6 @@
 const knex = require('knex');
 const knexConfig = require('../../knexfile');
 
-// Criação de um pool de conexões sem especificar o banco de dados
 const knexNoDB = knex({
   client: knexConfig.client,
   connection: {
@@ -16,34 +15,34 @@ async function createDatabaseIfNotExists() {
   try {
     const dbName = 'sigo';
 
-    //banco existe?
+    //db exists?
     const result = await knexNoDB.raw(`SHOW DATABASES LIKE '${dbName}'`);
     if (result[0].length === 0) {
-      //se entrou aqui nao existe
+      //if here, db doesn't exist
       await knexNoDB.raw(`CREATE DATABASE ${dbName}`);
-      console.log(`Banco de dados '${dbName}' criado com sucesso!`);
+      console.log(`Database '${dbName}' created successfully!`);
     } else {
-      console.log(`O banco de dados '${dbName}' já existe.`);
+      console.log(`Database '${dbName}' already exists.`);
     }
   } catch (error) {
-    console.error("Erro ao verificar ou criar o banco de dados:", error);
+    console.error("Error creating database:", error);
   } finally {
-    await knexNoDB.destroy();//fecha conexao com o banco
+    await knexNoDB.destroy();//close db connection
   }
 }
 
 async function runMigrations() {
-  await createDatabaseIfNotExists();//se nao tem banco, ele cria
+  await createDatabaseIfNotExists();//if db doesn't exist, it creates it
   const knexWithDB = knex(knexConfig);
 
   try {
-    console.log('Rodando migrações...');
-    await knexWithDB.migrate.latest();//roda migrações
-    console.log('Migrações aplicadas com sucesso!');
+    console.log('Running migrations...');
+    await knexWithDB.migrate.latest();//run migrations
+    console.log('Migrations applied successfully!');
   } catch (error) {
-    console.error('Erro ao rodar as migrações:', error);
+    console.error('Error running migrations:', error);
   } finally {
-    await knexWithDB.destroy();//fecha conexao
+    await knexWithDB.destroy();//close db connection
   }
 }
 
