@@ -2,7 +2,7 @@ const connect = require("../connect");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-module.exports = class docenteController {
+module.exports = class instructorController {
   static async createInstructor(req, res, next) {
     const { email, password, name, type } = req.body;
     if (!email || !password || !name) {
@@ -101,10 +101,10 @@ module.exports = class docenteController {
     let values;
 
     if (type) {
-      query = `UPDATE docente SET password = ?, name = ?, type = ? WHERE id_instructor = ?`;
+      query = `UPDATE instructor SET password = ?, name = ?, type = ? WHERE id_instructor = ?`;
       values = [password, name, type, id_instructor];
     } else {
-      query = `UPDATE docente SET password = ?, name = ? WHERE id_instructor = ?`;
+      query = `UPDATE instructor SET password = ?, name = ? WHERE id_instructor = ?`;
       values = [password, name, id_instructor];
     }
     const hash = await bcrypt.hash(password, saltRounds);
@@ -145,8 +145,8 @@ module.exports = class docenteController {
           return next(new Error("Instructor not found"));
         }
 
-        const docente = results[0];
-        const senhaCorreta = await bcrypt.compare(password, docente.password);
+        const instructor = results[0];
+        const senhaCorreta = await bcrypt.compare(password, instructor.password);
         if (!senhaCorreta) {
           return next(new Error("Password incorrect"));
         }
@@ -182,12 +182,12 @@ module.exports = class docenteController {
         if (results.length === 0) {
           return next(new Error("Instructor not found"));
         }
-        const docente = results[0];
-        const senhaCorreta = await bcrypt.compare(password, docente.password);
+        const instructor = results[0];
+        const senhaCorreta = await bcrypt.compare(password, instructor.password);
         if (!senhaCorreta) {
           return next(new Error("Password incorrect"));
         }
-        return res.status(200).json({ message: "Successful login", docente });
+        return res.status(200).json({ message: "Successful login", instructor });
       });
     } catch (error) {
       next(error);

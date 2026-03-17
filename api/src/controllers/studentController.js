@@ -84,7 +84,7 @@ module.exports = class studentController {
     }
   }
 
-  static async getStudentByNumero(req, res, next) {
+  static async getStudentByNumber(req, res, next) {
     const { student_number } = req.params;
     const query = "SELECT * FROM student WHERE student_number = ?";
     const values = [student_number];
@@ -238,7 +238,6 @@ module.exports = class studentController {
       return next(error);
     }
   }
-  
   static async getStudentsByClass(req, res, next) {
     const { fk_id_class } = req.params;
     const query = "SELECT * FROM student WHERE fk_id_class = ?";

@@ -17,16 +17,16 @@ async function dropDatabaseIfExists() {
 
     const result = await knexNoDB.raw(`SHOW DATABASES LIKE '${dbName}'`);
     if (result[0].length > 0) {
-      //banco existe? se sim:
+      //db exists? if yes:
       await knexNoDB.raw(`DROP DATABASE ${dbName}`);
-      console.log(`Banco de dados '${dbName}' deletado com sucesso!`);
+      console.log(`Database '${dbName}' deleted successfully!`);
     } else {
-      console.log(`O banco de dados '${dbName}' não existe.`);
+      console.log(`Database '${dbName}' doesn't exist.`);
     }
   } catch (error) {
-    console.error("Erro ao deletar o banco de dados:", error);
+    console.error("Error deleting database:", error);
   } finally {
-    await knexNoDB.destroy();//fecha conexao
+    await knexNoDB.destroy();//close db connection
   }
 }
 
@@ -34,13 +34,13 @@ async function rollbackMigrations() {
   const knexWithDB = knex(knexConfig);
 
   try {
-    console.log('Revertendo todas as migrações...');
-    await knexWithDB.migrate.rollback(); //reverte migrações
-    console.log('Todas as migrações revertidas com sucesso!');
+    console.log('Reverting migrations...');
+    await knexWithDB.migrate.rollback(); //revert migrations
+    console.log('All migrations reverted successfully!');
   } catch (error) {
-    console.error('Erro ao reverter as migrações:', error);
+    console.error('Error reverting migrations:', error);
   } finally {
-    await knexWithDB.destroy();//fecha conexao
+    await knexWithDB.destroy();//close db connection
   }
 }
 

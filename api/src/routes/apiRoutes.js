@@ -17,7 +17,7 @@ router.post("/instructor/login", instructorController.login);
 router.post("/student", studentController.createStudent);
 router.get("/student", studentController.readStudents);
 router.get("/student/:id_student", studentController.getStudentByID);
-router.get("/student/number/:number_student", studentController.getStudentBynumber);
+router.get("/student/number/:number_student", studentController.getStudentByNumber);
 router.get("/student/name/:name", studentController.getStudentByName);
 router.get("/student/status/:status", studentController.getStudentsByStatus);
 router.put("/student/:id_student", studentController.updateStudent);
