@@ -17,31 +17,31 @@ import useSideBar from "../utils/onChangeSideBar";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 export default function CadastroUser({ navigation }) {
-  const [docente, setDocente] = useState({
-    nome: "",
+  const [instructor, setInstructor] = useState({
+    name: "",
     email: "",
-    senha: "",
-    tipo: "",
+    password: "",
+    type: "",
   });
 
   const { sidebar, abrirSidebar } = useSideBar(navigation);
 
   function onChange(name, value) {
-    setDocente({ ...docente, [name]: value });
+    setInstructor({ ...instructor, [name]: value });
   }
 
   async function Cadastro() {
-    if (!docente.nome || !docente.email || !docente.senha || !docente.tipo) {
-      Alert.alert("Erro", "Por favor, preencha todos os campos.");
+    if (!instructor.name || !instructor.email || !instructor.password || !instructor.type) {
+      Alert.alert("Erro", "All fields must be filled");
       return;
     }
 
     try {
-      const response = await api.postCadastro(docente);
+      const response = await api.postCadastro(instructor);
       Alert.alert("Sucesso", response.data.message);
       navigation.navigate("HomeScreen");
     } catch (error) {
-      Alert.alert("Erro", error.response?.data?.error || "Erro ao cadastrar");
+      Alert.alert("Erro", error.response?.data?.error);
       console.log(error.response?.data);
     }
   }
@@ -71,8 +71,8 @@ export default function CadastroUser({ navigation }) {
             style={styles.input}
             placeholder="Nome"
             placeholderTextColor="#bababa"
-            value={docente.nome}
-            onChangeText={(value) => onChange("nome", value)}
+            value={instructor.name}
+            onChangeText={(value) => onChange("name", value)}
           />
 
           <TextInput
@@ -81,7 +81,7 @@ export default function CadastroUser({ navigation }) {
             placeholderTextColor="#bababa"
             keyboardType="email-address"
             autoCapitalize="none"
-            value={docente.email}
+            value={instructor.email}
             onChangeText={(value) => onChange("email", value)}
           />
 
@@ -90,8 +90,8 @@ export default function CadastroUser({ navigation }) {
             placeholder="Senha"
             placeholderTextColor="#bababa"
             secureTextEntry={true}
-            value={docente.senha}
-            onChangeText={(value) => onChange("senha", value)}
+            value={instructor.password}
+            onChangeText={(value) => onChange("password", value)}
           />
 
           {/* Container do Picker com estilização condicional */}
@@ -99,13 +99,13 @@ export default function CadastroUser({ navigation }) {
             <Text style={styles.pickerLabel}>Tipo de Usuário:</Text>
             <View style={styles.pickerContainer}>
               <Picker
-                selectedValue={docente.tipo}
-                onValueChange={(itemValue) => onChange("tipo", itemValue)}
+                selectedValue={instructor.type}
+                onValueChange={(itemValue) => onChange("type", itemValue)}
                 style={styles.picker}
                 itemStyle={styles.pickerItem} // Estilo específico para itens no iOS
               >
                 <Picker.Item label="Selecione..." value="" color="#bababa" />
-                <Picker.Item label="Docente" value="doc" />
+                <Picker.Item label="Docente" value="inst" />
                 <Picker.Item label="Administrador" value="adm" />
               </Picker>
             </View>

@@ -4,7 +4,7 @@ exports.up = function(knex) {
       table.timestamp('log_date').notNullable();
       table.integer('fk_id_occurrence').unsigned().notNullable();
       table.integer('fk_id_instructor').unsigned().notNullable();
-      table.foreign('fk_id_occurrence').references('id_occurrence').inTable('occurrence');
+      table.foreign('fk_id_occurrence').references('id_occurrence').inTable('occurrence').onDelete('CASCADE').onUpdate('CASCADE');
       table.foreign('fk_id_instructor').references('id_instructor').inTable('instructor');
     });
   };

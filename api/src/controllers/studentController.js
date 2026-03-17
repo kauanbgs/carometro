@@ -2,12 +2,13 @@ const connect = require("../connect");
 
 module.exports = class studentController {
   static async createStudent(req, res, next) {
-    const { name, email, phone, status, student_number, fk_id_class } =
+    const { name, email, phone, create_date, status, student_number, fk_id_class } =
       req.body;
     if (
       !name ||
       !email ||
       !phone ||
+      !create_date ||
       !status ||
       !student_number ||
       !fk_id_class
@@ -16,8 +17,8 @@ module.exports = class studentController {
         .status(400)
         .json({ error: "All fields must be filled" });
     }
-    const query = `INSERT INTO student (name, email, phone, status, student_number, fk_id_class) VALUES (?, ?, ?, ?, ?, ?)`;
-    const values = [name, email, phone, status, student_number, fk_id_class];
+    const query = `INSERT INTO student (name, email, phone, create_date, status, student_number, fk_id_class) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+    const values = [name, email, phone, create_date, status, student_number, fk_id_class];
 
     try {
       connect.query(query, values, function (err, results) {
@@ -86,6 +87,7 @@ module.exports = class studentController {
 
   static async getStudentByNumber(req, res, next) {
     const { student_number } = req.params;
+    console.log("ID recebido:", student_number); // <--- Adicione isto
     const query = "SELECT * FROM student WHERE student_number = ?";
     const values = [student_number];
     try {

@@ -15,7 +15,7 @@ class appcontroler {
   }
   routes() {
     const apiRoutes = require("./routes/apiRoutes");
-    this.express.use("/carometro", apiRoutes);
+    this.express.use("/sigo", apiRoutes);
   }
   exceptionHandler() {
     this.express.use((err, req, res, next) => {

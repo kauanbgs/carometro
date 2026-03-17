@@ -17,7 +17,7 @@ BEGIN
     SET new_occurrence_id = LAST_INSERT_ID();
 
     -- Registrar LOG
-    INSERT INTO occurrence_log (log_date, fk_id_occurrence, fk_id_insructor)
+    INSERT INTO occurrence_log (log_date, fk_id_occurrence, fk_id_instructor)
     VALUES (NOW(), new_occurrence_id, p_id_instructor);
 
 END 

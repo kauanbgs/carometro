@@ -12,16 +12,16 @@ import { useState } from "react";
 import api from "../services/api";
 
 export default function Login({ navigation }) {
-  const [docente, setDocente] = useState({ nome: "", senha: "" });
+  const [instructor, setInstructor] = useState({ name: "", password: "" });
   const [lembrarMe, setLembrarMe] = useState(false);
 
   function onChange(name, value) {
-    setDocente({ ...docente, [name]: value });
+    setInstructor({ ...instructor, [name]: value });
   }
 
   async function login() {
     try {
-      const response = await api.postLogin(docente);
+      const response = await api.postLogin(instructor);
       Alert.alert(response.data.message);
       navigation.navigate("HomeScreen");
     } catch (error) {
@@ -29,9 +29,6 @@ export default function Login({ navigation }) {
       console.log(error.response.data);
     }
   }
-  //   async function cadastrar() {
-  //     navigation.navigate("cadastroUser");
-  //   }
 
   return (
     <>
@@ -47,15 +44,15 @@ export default function Login({ navigation }) {
           style={styles.input}
           placeholder="Email Educacional"
           placeholderTextColor="#bababa"
-          value={docente.email}
+          value={instructor.email}
           onChangeText={(value) => onChange("email", value)}
         />
         <TextInput
           style={styles.input}
           placeholder="Senha"
           placeholderTextColor="#bababa"
-          value={docente.senha}
-          onChangeText={(value) => onChange("senha", value)}
+          value={instructor.password}
+          onChangeText={(value) => onChange("password", value)}
         />
 
         <TouchableOpacity

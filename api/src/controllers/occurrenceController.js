@@ -2,16 +2,12 @@ const connect = require("../connect");
 
 module.exports = class OccurrenceController {
   static async createOccurrence(req, res, next) {
-    let { type, description, fk_id_student, id_instructor } = req.body;
-
-    if (!type || !description || !fk_id_student || !id_instructor) {
-      return res
-        .status(400)
-        .json({ error: "All fields must be filled" });
+    let { type, description, fk_id_student, fk_id_instructor } = req.body;
+    if (!type || !description || !fk_id_student || !fk_id_instructor) {
+      return res.status(400).json({ error: "All fields must be filled" });
     }
-
     const query = `CALL createOccurrence(?, ?, ?, ?)`;
-    const values = [type, description, fk_id_student, id_instructor];
+    const values = [type, description, fk_id_student, fk_id_instructor];
 
     try {
       connect.query(query, values, function (err, results) {
@@ -43,9 +39,7 @@ module.exports = class OccurrenceController {
           return next(err);
         }
         if (results.length === 0) {
-          return res
-            .status(404)
-            .json({ error: "No occurrences registered!" });
+          return res.status(404).json({ error: "No occurrences registered!" });
         }
         return res.status(200).json(results);
       });
@@ -72,17 +66,15 @@ module.exports = class OccurrenceController {
   }
 
   static async updateOccurrence(req, res, next) {
-    const { id_Occurrence } = req.params;
+    const { id_occurrence } = req.params;
     let { type, description, fk_id_student } = req.body;
     if (!type || !description || !fk_id_student) {
-      return res
-        .status(400)
-        .json({ error: "All fields must be filled" });
+      return res.status(400).json({ error: "All fields must be filled" });
     }
 
     const query =
-      "UPDATE occurrence SET type=?, description=?, fk_id_student=? WHERE id_Occurrence=?";
-    const values = [type, description, fk_id_student, id_Occurrence];
+      "UPDATE occurrence SET type=?, description=?, fk_id_student=? WHERE id_occurrence=?";
+    const values = [type, description, fk_id_student, id_occurrence];
 
     try {
       connect.query(query, values, function (err, results) {
@@ -94,7 +86,7 @@ module.exports = class OccurrenceController {
         }
         return res
           .status(200)
-          .json({ message: "Occurrence updated: ", id_Occurrence });
+          .json({ message: "Occurrence updated: ", id_occurrence });
       });
     } catch (error) {
       return next(error);
@@ -102,9 +94,9 @@ module.exports = class OccurrenceController {
   }
 
   static async deleteOccurrence(req, res, next) {
-    const { id_Occurrence } = req.params;
-    const query = "DELETE FROM occurrence WHERE id_Occurrence = ?";
-    const values = [id_Occurrence];
+    const { id_occurrence } = req.params;
+    const query = "DELETE FROM occurrence WHERE id_occurrence = ?";
+    const values = [id_occurrence];
 
     try {
       connect.query(query, values, function (err, results) {
@@ -114,9 +106,7 @@ module.exports = class OccurrenceController {
         if (results.affectedRows === 0) {
           return res.status(404).json({ error: "Occurrence not found!" });
         }
-        return res
-          .status(200)
-          .json({ message: "Occurrence deleted" });
+        return res.status(200).json({ message: "Occurrence deleted" });
       });
     } catch (error) {
       return next(error);
