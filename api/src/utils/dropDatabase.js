@@ -13,7 +13,7 @@ const knexNoDB = knex({
 
 async function dropDatabaseIfExists() {
   try {
-    const dbName = 'carometro';
+    const dbName = 'sigo';
 
     const result = await knexNoDB.raw(`SHOW DATABASES LIKE '${dbName}'`);
     if (result[0].length > 0) {

@@ -1,29 +1,29 @@
 exports.up = function (knex) {
   return knex.raw(`
-CREATE PROCEDURE criarOcorrencia(
-  IN p_tipo VARCHAR(100),
-  IN p_descricao VARCHAR(150),
-  IN p_id_estudante INT,
-  IN p_id_docente INT
+CREATE PROCEDURE createOccurrence(
+  IN p_type VARCHAR(100),
+  IN p_description VARCHAR(150),
+  IN p_id_student INT,
+  IN p_id_instructor INT
 )
 BEGIN
-    DECLARE nova_ocorrencia_id INT;
+    DECLARE new_occurrence_id INT;
 
     -- Criar ocorrência
-    INSERT INTO ocorrencia (tipo, descricao, data_criacao, fk_id_estudante)
-    VALUES (p_tipo, p_descricao, NOW(), p_id_estudante);
+    INSERT INTO occurrence (type, description, create_date, fk_id_student)
+    VALUES (p_type, p_description, NOW(), p_id_student);
 
     -- Captura do ID gerado automaticamente
-    SET nova_ocorrencia_id = LAST_INSERT_ID();
+    SET new_occurrence_id = LAST_INSERT_ID();
 
     -- Registrar LOG
-    INSERT INTO log_ocorrencias (data_log, fk_id_ocorrencia, fk_id_docente)
-    VALUES (NOW(), nova_ocorrencia_id, p_id_docente);
+    INSERT INTO occurrence_log (log_date, fk_id_occurrence, fk_id_insructor)
+    VALUES (NOW(), new_occurrence_id, p_id_instructor);
 
 END 
         `);
 };
 
 exports.down = function(knex){
-  return knex.schema.dropProcedureIfExists('criarOcorrencia')
+  return knex.schema.dropProcedureIfExists('createOccurrence')
 };

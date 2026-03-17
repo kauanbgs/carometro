@@ -5,7 +5,7 @@ module.exports = {
     host: 'localhost',
     user: 'aluno',
     password: 'senai@604',
-    database: 'carometro',
+    database: 'sigo',
   },
   migrations: {
     tableName: 'knex_migrations',

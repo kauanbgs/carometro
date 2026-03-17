@@ -4,8 +4,9 @@
  */
 exports.seed = async function(knex) {
 //Deleta todas as instancias existentes
-  await knex('turma').del()
-  await knex('turma').insert([
-    {nome: "1C - DS", fk_id_docente: 1}
+  await knex('class').del()
+  await knex('class').insert([
+    {name: "1C - DS", fk_id_instructor: 1},
+    {name: "Eletrônica", fk_id_instructor: 1}
   ]);
 };

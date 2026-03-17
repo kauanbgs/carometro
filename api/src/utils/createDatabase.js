@@ -14,7 +14,7 @@ const knexNoDB = knex({
 
 async function createDatabaseIfNotExists() {
   try {
-    const dbName = 'carometro';
+    const dbName = 'sigo';
 
     //banco existe?
     const result = await knexNoDB.raw(`SHOW DATABASES LIKE '${dbName}'`);

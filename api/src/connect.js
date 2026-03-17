@@ -6,7 +6,7 @@ const pool = mysql.createPool({
   host: "localhost", //Minha máquina (local) -> IP DE ONDE ESTÁ O BCD
   user: 'aluno', //Usuário do MySQL
   password: 'senai@604', //Senha do MySQL
-  database: 'carometro' //Mude para o seu database criado la no Shell/Workbench
+  database: 'sigo' //Mude para o seu database criado la no Shell/Workbench
 });
 
 module.exports = pool;
