@@ -124,3 +124,87 @@ INSERT INTO ocorrencia (tipo,descricao,data_criacao,fk_id_estudante)
 VALUES ('Advertência','Testando trigger',NOW(),1);
 
 
+
+-- ======================================
+-- TRIGGER: impedir_ocorrencia_aluno_inativo
+-- ======================================
+
+DELIMITER $$
+
+CREATE TRIGGER trg_impedir_ocorrencia_aluno_inativo
+BEFORE INSERT ON ocorrencia
+FOR EACH ROW
+BEGIN
+    DECLARE v_status TINYINT;
+
+    -- Busca o status atual do estudante que está recebendo a ocorrência
+    SELECT status INTO v_status
+    FROM estudante
+    WHERE id_estudante = NEW.fk_id_estudante;
+
+    -- Se o status for 0 (inativo), aborta a inserção com uma mensagem de erro
+    IF v_status = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Operação negada: Não é possível registrar uma nova ocorrência para um estudante inativo.';
+    END IF;
+END $$
+
+DELIMITER ;
+
+INSERT INTO ocorrencia (tipo,descricao,data_criacao,fk_id_estudante)
+VALUES ('Advertência','Testando trigger 2',NOW(),30);
+
+
+-- ======================================
+-- PROCEDURE: transferir_aluno_turma
+-- ======================================
+
+DELIMITER //
+
+CREATE PROCEDURE transferirComLogDeLotacao(
+    IN p_id_estudante INT,
+    IN p_id_nova_turma INT
+)
+-- PROCEDURE ( INICIO :) )
+BEGIN 
+    DECLARE v_total_alunos INT;
+    DECLARE erro_secundario TINYINT DEFAULT 0;
+
+    -- Se der erro em algum INSERT ou SELECT, muda a variável para 1 e não trava o banco
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION 
+    BEGIN
+        SET erro_secundario = 1;
+    END;
+    
+    START TRANSACTION;
+
+    UPDATE estudante, numero_aluno
+    SET fk_id_turma = p_id_nova_turma
+    WHERE id_estudante = p_id_estudante;
+
+    -- Salvando o Update
+    SAVEPOINT sp_aluno_transferido;
+
+    -- COUNT para saber o novo tamanho da turma 
+    SELECT COUNT(id_estudante) INTO v_total_alunos
+    FROM estudante
+    WHERE fk_id_turma = p_id_nova_turma AND status = 1;
+
+    INSERT INTO ocorrencia (tipo, descricao, data_criacao, fk_id_estudante)
+    VALUES (
+        'Transferência', 
+        CONCAT('Transferido. A nova turma agora possui ', v_total_alunos, ' alunos ativos.'), 
+        NOW(), 
+        p_id_estudante
+    );
+
+    -- Se o SELECT COUNT ou o INSERT falharem (erro de sintaxe)
+    IF erro_secundario = 1 THEN
+        -- Desfaz a contagem e o log, mas MANTÉM a transferência de turma
+        ROLLBACK TO sp_aluno_transferido;
+    END IF;
+    COMMIT;
+END // 
+-- PROCEDURE ( FIM :) )
+
+DELIMITER ;
