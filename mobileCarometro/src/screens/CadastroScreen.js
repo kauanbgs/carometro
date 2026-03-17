@@ -14,7 +14,7 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import api from "../services/api";
 import useSideBar from "../utils/onChangeSideBar";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import Header from "../components/Header";
 
 export default function CadastroUser({ navigation }) {
   const [instructor, setInstructor] = useState({
@@ -52,17 +52,8 @@ export default function CadastroUser({ navigation }) {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <ScrollView contentContainerStyle={styles.container}>
-        {sidebar}
-
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.botaosidebar} onPress={abrirSidebar}>
-            <AntDesign name="bars" size={40} color="black" />
-          </TouchableOpacity>
-          <Image
-            source={require("../../image/LogoCarometro-v2.png")}
-            style={styles.logo}
-          />
-        </View>
+        
+        <Header navigation={navigation} />
 
         <View style={styles.content}>
           <Text style={styles.title}>Criando Docente</Text>

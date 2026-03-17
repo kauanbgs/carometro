@@ -1,32 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   StyleSheet,
   Text,
-  Image,
   TouchableOpacity,
 } from "react-native";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import useSideBar from "../utils/onChangeSideBar";
+import Header from "../components/Header";
 
 export default function Home({ navigation }) {
-
-  const { sidebar, abrirSidebar } = useSideBar(navigation);
-
   return (
     <View style={styles.container}>
+      
+      <Header navigation={navigation} />
 
-      {sidebar}
-
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.botaosidebar} onPress={abrirSidebar}>
-          <AntDesign name="bars" size={40} color="black" />
-        </TouchableOpacity>
-        <Image
-          source={require("../../image/LogoCarometro-v2.png")}
-          style={styles.logo}
-        />
-      </View>
       <View style={styles.content}>
         <Text style={styles.titulo}>
           Deseja <Text style={styles.editar}>editar</Text> uma{"\n"}
@@ -75,42 +61,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  header: {
-    display: "flex",
-    paddingTop: "20",
-    height: "150",
-    flexDirection: "row",
-    marginTop: 30,
-  },
   content: {
     flex: 1,
     paddingRight: 25,
     paddingTop: 15,
   },
-  text: {
-    fontSize: 16,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-
-  // AQUI QUE COMEÇA A ESTILIZAÇÃO
-  // Header
-  botaosidebar: {
-    flex: 1,
-    justifyContent: "flex-start",
-    marginLeft: 20,
-    marginTop: 30,
-  },
-  logo: {
-    width: 150,
-    height: 70,
-    resizeMode: "contain",
-    marginLeft: 10,
-    marginTop: 15,
-    marginRight: 15,
-  },
-
-  // Conteudo
   titulo: {
     marginTop: -20,
     fontSize: 34,
@@ -126,6 +81,9 @@ const styles = StyleSheet.create({
     marginTop: 15,
     fontSize: 20,
     textAlign: "left",
+  },
+  botoes: {
+    alignSelf: 'flex-start' 
   },
   buttonText: {
     width: 250,
@@ -148,11 +106,5 @@ const styles = StyleSheet.create({
     marginTop: 34,
     marginBottom: 50,
     marginLeft: 33,
-  },
-
-  // FOOTER
-  footer: {
-    height: 50,
-    backgroundColor: "lightcoral",
   },
 });
