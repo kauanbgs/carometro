@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://localhost:5000/carometro",
+    baseURL: "http://localhost:5000/sigo",
     headers: {
         'accept': 'application/json',
         'Content-Type': 'application/json'
@@ -9,10 +9,10 @@ const api = axios.create({
 })
 
 const sheets = {
-    postLogin: (user) => api.post("/docente/login", user),
-    postCadastro: (user) => api.post("/docente", user),
-    getDocentes: () => api.get("/docente"),
-    deleteDocente: (user) => api.delete("/docente", { data: user }),
+    postLogin: (user) => api.post("/instructor/login", user),
+    postCadastro: (user) => api.post("/instructor", user),
+    getDocentes: () => api.get("/instructor"),
+    deleteDocente: (user) => api.delete("/instructor", { data: user }),
 }
 
 export default sheets

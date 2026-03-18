@@ -15,9 +15,9 @@ export default function AdicionarDocente() {
 
     const [user, setUser] = useState({
         email: "",
-        senha: "",
-        nome: "",
-        tipo: ""
+        password: "",
+        name: "",
+        type: ""
     })
 
     const [feedback, setFeedback] = useState({ message: "", type: "" })
@@ -58,11 +58,11 @@ export default function AdicionarDocente() {
                 <div className="flex flex-col items-center justify-center mt-7">
                     <Text variant="subtitle">Criando Docente</Text>
                     <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4 w-[50%] mt-3">
-                        <Input type="text" placeholder="Nome do docente" onChange={onChange} id="nome" name="nome" value={user.nome} />
+                        <Input type="text" placeholder="Nome do docente" onChange={onChange} id="name" name="name" value={user.name} />
                         <Input type="text" placeholder="Email" onChange={onChange} id="email" name="email" value={user.email} />
-                        <Input type="password" placeholder="Senha" onChange={onChange} id="senha" name="senha" value={user.senha} />
-                        <select id="tipo" name="tipo" value={user.tipo} onChange={onChange} className="p-2 h-12 rounded-lg text-sm border-1 border-zinc-300">
-                            <option value="doc">doc</option>
+                        <Input type="password" placeholder="Senha" onChange={onChange} id="password" name="password" value={user.password} />
+                        <select id="type" name="type" value={user.type} onChange={onChange} className="p-2 h-12 rounded-lg text-sm border-1 border-zinc-300">
+                            <option value="inst">inst</option>
                             <option value="adm">adm</option>
                         </select>
 

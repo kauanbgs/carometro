@@ -15,7 +15,7 @@ export default function RemoverDocente() {
 
     const [user, setUser] = useState({
         email: "",
-        senha: ""
+        password: ""
     })
 
     const navigate = useNavigate()
@@ -55,7 +55,7 @@ export default function RemoverDocente() {
                     <Text variant="subtitle">Excluir Docente</Text>
                     <form action="" onSubmit={handleSubmit} className="flex flex-col gap-4 w-[50%] mt-3">
                         <Input type="text" placeholder="Email do Docente" onChange={onChange} id="email" name="email" value={user.email} />
-                        <Input type="text" placeholder="Senha do Docente" onChange={onChange} id="senha" name="senha" value={user.senha} />
+                        <Input type="text" placeholder="Senha do Docente" onChange={onChange} id="password" name="password" value={user.password} />
 
                         <Button type="submit" text="Excluir" color="erro" fill className="w-full" />
                     </form>

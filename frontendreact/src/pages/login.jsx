@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 export default function Login() {
   const [user, setUser] = useState({
     email: "",
-    senha: "",
+    password: "",
   });
 
   const [feedback, setFeedback] = useState({ message: "", type: "" });
@@ -67,9 +67,9 @@ export default function Login() {
               placeholder="Senhaboa123!"
               fill
               onChange={onChange}
-              id="senha"
-              name="senha"
-              value={user.senha}
+              id="password"
+              name="password"
+              value={user.password}
             />
           </div>
           <Button type="submit" text="Entrar" fill className="w-full" />

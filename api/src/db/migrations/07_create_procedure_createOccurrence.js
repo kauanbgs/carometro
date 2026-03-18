@@ -25,5 +25,5 @@ END
 };
 
 exports.down = function(knex){
-  return knex.schema.dropProcedureIfExists('createOccurrence')
+  return knex.raw('DROP PROCEDURE IF EXISTS createOccurrence');
 };
