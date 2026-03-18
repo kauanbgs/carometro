@@ -14,10 +14,10 @@ import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 export default function SideBar({ visible, onClose, navigation }) {
   return (
     <Modal
-      visible={visible}
-      transparent={true}
+      visible={visible} // Define se a Sidebar está visível ou não (True ou False)
+      transparent={true} // Permite que o fundo da tela original (sua Home) continue visível por trás do Modal.
       animationType="fade" // Deixa a transição mais suave
-      onRequestClose={onClose}
+      onRequestClose={onClose} // É uma configuração obrigatória para Android (se o usuario apertar no botao fisico de voltar) 
     >
       <View style={styles.overlay}>
         <View style={styles.sidebar}>
@@ -99,7 +99,7 @@ export default function SideBar({ visible, onClose, navigation }) {
 
 const styles = StyleSheet.create({
   overlay: {
-    flex: 1,
+    flex: 1, // Faz com que o overlay ocupe toda a tela
     flexDirection: "row",
     backgroundColor: "rgba(0,0,0,0.4)", // Fundo levemente escurecido
   },
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 100,
     height: 35,
-    resizeMode: "contain",
+    resizeMode: "contain", // Ajusta a imagem para caber inteira na tela
   },
   menu: {
     flex: 1,

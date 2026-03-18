@@ -13,7 +13,6 @@ import {
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import api from "../services/api";
-import useSideBar from "../utils/onChangeSideBar";
 import Header from "../components/Header";
 
 export default function CadastroUser({ navigation }) {
@@ -23,8 +22,6 @@ export default function CadastroUser({ navigation }) {
     password: "",
     type: "",
   });
-
-  const { sidebar, abrirSidebar } = useSideBar(navigation);
 
   function onChange(name, value) {
     setInstructor({ ...instructor, [name]: value });

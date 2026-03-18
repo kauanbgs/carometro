@@ -4,6 +4,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import SideBar from "./SideBar"; // Ajuste o caminho se a Sidebar estiver em outra pasta
 
 export default function Header({ navigation }) {
+  
   // Estado local para controlar a Sidebar
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
