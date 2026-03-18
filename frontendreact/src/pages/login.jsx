@@ -45,7 +45,7 @@ export default function Login() {
     <div className="bg-[url('/FundoLogin.png')] bg-cover bg-center min-h-screen items-center flex align-center justify-center flex-col">
       <main className="w-[31%] bg-white rounded-lg items-center align-center justify-center min-h-125 w-[80%] max-w-105">
         <div className="flex flex-col items-center justify-center p-10">
-          <img src="/SenaiLogo.png" alt="" className="w-40" />
+          <img src="/LogoCarometro-v2.png" alt="" className="w-48" />
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col p-6">
           <div className="flex flex-col mb-3">

@@ -7,7 +7,7 @@ export default function SideBar({ items }) {
     return (
         <div className="w-[20%] bg-[var(--background)] border-r border-gray-200 flex flex-col h-screen fixed left-0 top-0 rounded-r-3xl">
             <header className="flex items-center justify-center p-4">
-                <img src="/SenaiLogo.png" alt="" className="w-42 mt-5 " />
+                <img src="/LogoCarometro-v2.png" alt="" className="w-42 mt-5 " />
             </header>
             <main className="flex flex-col gap-2 mt-4 p-4">
                 {items.map((item, index) => {
