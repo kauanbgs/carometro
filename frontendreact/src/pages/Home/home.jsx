@@ -4,9 +4,15 @@ import Text from "../../components/text";
 import Button from "../../components/button";
 import Separator from "../../components/separator";
 import Logs from "../../components/logs";
+import { useNavigate } from "react-router-dom";
+
 
 
 export default function Home() {
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate("/editarTurma");
+    }
     return (
         <div className="h-screen w-screen bg-[var(--back)] flex">
             <SideBar items={items} />
@@ -17,7 +23,7 @@ export default function Home() {
                     <div className="flex flex-col">
                         <Text variant="subtitle">Deseja <a className="text-[var(--laranjaSecundario)]">editar</a> uma turma?</Text>
                         <Text variant="text">Alguma nova notificação ou alteração na <br /> turma? gerencie agora!</Text>
-                        <Button fill color="laranjaSecundario" className="mt-5" text="Clique aqui e comece" />
+                        <Button onClick={() => handleClick()} fill color="laranjaSecundario" className="mt-5" text="Clique aqui e comece" />
                     </div>
                     <Separator horizontal={false} />
                     <div className="flex flex-col">

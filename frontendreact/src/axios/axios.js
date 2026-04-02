@@ -13,6 +13,10 @@ const sheets = {
     postCadastro: (user) => api.post("/instructor", user),
     getDocentes: () => api.get("/instructor"),
     deleteDocente: (user) => api.delete("/instructor", { data: user }),
+
+    getTurmas: () => api.get("/class"),
+    getTurmaByName: (name) => api.get(`/class/name/${name}`),
+    getTurmaByInstructor: (instructor) => api.get(`/class/instructor/${instructor}`),
 }
 
 export default sheets

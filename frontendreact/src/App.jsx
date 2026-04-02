@@ -6,6 +6,7 @@ import GerenciarDocentes from "./pages/GerenciarDocentes/gerenciarDocentes"
 import AdicionarDocente from "./pages/adicionarDocente/adicionarDocente"
 import RemoverDocente from "./pages/removerDocente/removerDocente"
 import Page404 from "./pages/404/page404"
+import EditarTurma from "./pages/editarTurma/editarTurma"
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/gerenciarDocentes" element={<GerenciarDocentes />} />
           <Route path="/adicionarDocente" element={<AdicionarDocente />} />
           <Route path="/removerDocente" element={<RemoverDocente />} />
+          <Route path="/editarTurma" element={<EditarTurma />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
