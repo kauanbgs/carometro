@@ -1,4 +1,5 @@
 const variants = {
+    megaTitle: "text-3xl font-normal",
     title: "text-xl font-semibold",
     subtitle: "text-lg font-normal",
     text: "text-sm font-normal",
