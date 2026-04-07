@@ -1,19 +1,8 @@
 import React, { useState } from "react";
-import {
-  TouchableOpacity,
-  View,
-  Text,
-  TextInput,
-  Alert,
-  StyleSheet,
-  Image,
-  Platform, 
-  KeyboardAvoidingView,
-  ScrollView,
-} from "react-native";
-import { Picker } from "@react-native-picker/picker";
+import { TouchableOpacity, View, Text, TextInput, Alert } from "react-native";
 import api from "../services/api";
 import Header from "../components/Header";
+import styles from "../components/Styles";
 
 export default function DeleteDocente({ navigation }) {
   const [instructor, setInstructor] = useState({
@@ -21,8 +10,8 @@ export default function DeleteDocente({ navigation }) {
     password: "",
   });
 
-  function onChange(email, value) {
-    setInstructor({ ...instructor, [email]: value });
+  function onChange(field, value) {
+    setInstructor({ ...instructor, [field]: value });
   }
 
   async function Delete() {
@@ -39,64 +28,37 @@ export default function DeleteDocente({ navigation }) {
       console.log(error.response?.data);
     }
   }
+
   return (
     <>
       <View style={styles.header}>
         <Header navigation={navigation} />
       </View>
-      <View style={styles.container}>
-        <Text style={styles.title}>Removendo Docente</Text>
+
+      <View style={styles.deleteContainer}>
+        <Text style={styles.formTitle}>Removendo Docente</Text>
+
         <TextInput
-          style={styles.input}
+          style={styles.deleteInput}
           placeholder="Email do docente"
           placeholderTextColor="#bababa"
           value={instructor.email}
-          onChange={(value) => onChange("email", value)}
+          onChangeText={(value) => onChange("email", value)}
         />
-      </View>
-      <View style={styles.container}>
+
         <TextInput
-          style={styles.input}
+          style={styles.formInput}
           placeholder="Senha Docente"
           placeholderTextColor="#bababa"
-          
+          secureTextEntry
           value={instructor.password}
-          onChange={(value) => onChange("password", value)}
+          onChangeText={(value) => onChange("password", value)}
         />
+
+        <TouchableOpacity style={styles.deleteButtonDelete} onPress={Delete}>
+          <Text style={styles.buttonWhiteText}>Remover</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.buttonDelete} onPress={Delete}>
-        <Text style={styles.buttonText}>Remover</Text>
-      </TouchableOpacity>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-
-    title: {
-    fontSize: 22,
-    fontWeight: "500",
-    color: "#333",
-    marginBottom: 30,
-  },
- input: {
-    width: "100%",
-    height: 40,
-    borderBottomWidth: 1,
-    marginBottom: 20,
-    paddingHorizontal: 10,
-  },
-  
-    buttonDelete: {
-    alignItems: "center",
-    color:"#fff",
-    width: "100%",
-    backgroundColor: "#2957a4",
-    padding: 20,
-    borderRadius: 8,
-    marginTop: 10,
-  },
-  buttonText:{
-    color:"#fff"
-  }
-})

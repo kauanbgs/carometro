@@ -1,18 +1,11 @@
-import {
-  TouchableOpacity,
-  View,
-  Text,
-  TextInput,
-  Alert,
-  Image,
-  StyleSheet,
-} from "react-native";
+import { TouchableOpacity, View, Text, TextInput, Alert, Image } from "react-native";
 import Checkbox from "expo-checkbox";
 import { useState } from "react";
 import api from "../services/api";
+import styles from "../components/Styles";
 
 export default function Login({ navigation }) {
-  const [instructor, setInstructor] = useState({ name: "", password: "" });
+  const [instructor, setInstructor] = useState({ email: "", password: "" });
   const [lembrarMe, setLembrarMe] = useState(false);
 
   function onChange(name, value) {
@@ -32,137 +25,56 @@ export default function Login({ navigation }) {
 
   return (
     <>
-      <View style={styles.header}>
+      <View style={styles.loginHeader}>
         <Image
           source={require("../../image/LogoCarometro-v2.png")}
-          style={styles.logo}
+          style={styles.loginLogo}
         />
       </View>
-      <View style={styles.container}>
-        <Text style={styles.title}>Olá! Já Tem {"\n"}Uma Conta?</Text>
+      <View style={styles.loginContainer}>
+        <Text style={styles.loginTitle}>Olá! Já Tem {"\n"}Uma Conta?</Text>
+
         <TextInput
-          style={styles.input}
+          style={styles.formInput}
           placeholder="Email Educacional"
           placeholderTextColor="#bababa"
           value={instructor.email}
           onChangeText={(value) => onChange("email", value)}
         />
         <TextInput
-          style={styles.input}
+          style={styles.formInput}
           placeholder="Senha"
           placeholderTextColor="#bababa"
+          secureTextEntry
           value={instructor.password}
           onChangeText={(value) => onChange("password", value)}
         />
 
         <TouchableOpacity
-          style={styles.checkboxContainer}
+          style={styles.loginCheckboxContainer}
           activeOpacity={0.8}
           onPress={() => setLembrarMe(!lembrarMe)}
         >
           <Checkbox
-            style={styles.checkbox}
+            style={styles.loginCheckbox}
             value={lembrarMe}
             onValueChange={setLembrarMe}
             color={"#2957a4"}
           />
-          <Text style={styles.checkboxLabel}>Lembrar de mim</Text>
+          <Text style={styles.loginCheckboxLabel}>Lembrar de mim</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.buttonEntrar} onPress={login}>
-          <Text style={styles.buttonText}>Entrar</Text>
+        <TouchableOpacity style={styles.loginButtonEntrar} onPress={login}>
+          <Text style={styles.buttonWhiteText}>Entrar</Text>
         </TouchableOpacity>
 
         <View style={styles.footer}>
-          <Text style={styles.footerText}>Não tem uma conta? </Text>
+          <Text style={styles.loginFooterText}>Não tem uma conta? </Text>
           <TouchableOpacity onPress={() => navigation.navigate("Suporte")}>
-            <Text style={styles.linkText}>Cadastre-se!</Text>
+            <Text style={styles.loginLinkText}>Cadastre-se!</Text>
           </TouchableOpacity>
         </View>
       </View>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 30,
-  },
-  header: {
-    width: "100%",
-    alignItems: "center", 
-    justifyContent: "center",
-    paddingTop: 50, 
-    marginBottom: -200,
-  },
-  logo: {
-    width: 250, 
-    height: 150, 
-  },
-  title: {
-    fontSize: 40,
-    fontWeight: "100",
-    marginRight: 70,
-    marginBottom: 30,
-    color: "#2957a4",
-    width: "260",
-  },
-  input: {
-    width: "100%",
-    height: 40,
-    borderBottomWidth: 1,
-    marginBottom: 20,
-    paddingHorizontal: 10,
-  },
-  buttonEntrar: {
-    alignItems: "center",
-    width: 320,
-    backgroundColor: "#2957a4",
-    padding: 7,
-    borderRadius: 3,
-    marginTop: 20,
-  },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
-  },
-  checkbox: {
-    width: 20,
-    height: 20,
-    borderWidth: 1,
-    borderColor: "#333",
-  },
-  checkboxLabel: {
-    marginLeft: 10,
-    color: "#bababa",
-    fontSize: 16,
-  },
-  checkboxContainer: {
-    color: "#333",
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 10,
-    left: -85,
-  },
-  footer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    position: "absolute",
-    bottom: 50,
-    left: 0,
-    right: 0,
-  },
-  footerText: {
-    color: "#bababa",
-    fontSize: 16,
-  },
-  linkText: {
-    color: "#333",
-    fontSize: 16,
-    textDecorationLine: "underline",
-    fontWeight: "bold",
-  },
-});

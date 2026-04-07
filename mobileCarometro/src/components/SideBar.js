@@ -81,7 +81,7 @@ export default function SideBar({ visible, onClose, navigation }) {
               style={styles.menuItem}
               onPress={() => {
                 onClose();
-                navigation.navigate("Cadastro");
+                navigation.navigate("GerenciarDocentes");
               }}
             >
               <MaterialIcons name="groups" size={26} color="#333" />

@@ -4,6 +4,7 @@ import LoginScreen from "./src/screens/LoginScreen";
 import SuporteScreen from "./src/screens/SuporteScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 import CadastroScreen from "./src/screens/CadastroScreen";
+import GerenciarDocentesScreen from "./src/screens/GerenciarDocentesScreen";
 
 import DeleteScreen from "./src/screens/DeleteScreen";
 export default function App() {
@@ -12,7 +13,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Delete"
+        initialRouteName="GerenciarDocentes"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Login" component={LoginScreen} />
@@ -20,6 +21,7 @@ export default function App() {
         <Stack.Screen name="Suporte" component={SuporteScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="Delete" component={DeleteScreen} />
+        <Stack.Screen name="GerenciarDocentes" component={GerenciarDocentesScreen} />
 
       </Stack.Navigator>
     </NavigationContainer>
