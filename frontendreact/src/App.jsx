@@ -7,7 +7,7 @@ import AdicionarDocente from "./pages/adicionarDocente/adicionarDocente"
 import RemoverDocente from "./pages/removerDocente/removerDocente"
 import Page404 from "./pages/404/page404"
 import EditarTurma from "./pages/editarTurma/editarTurma"
-
+import CadastroTemp from "./pages/cadastrotemp/cadastroTemp"
 
 function App() {
 
@@ -21,6 +21,7 @@ function App() {
           <Route path="/adicionarDocente" element={<AdicionarDocente />} />
           <Route path="/removerDocente" element={<RemoverDocente />} />
           <Route path="/editarTurma" element={<EditarTurma />} />
+          <Route path="/cadastrotemp" element={<CadastroTemp />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>

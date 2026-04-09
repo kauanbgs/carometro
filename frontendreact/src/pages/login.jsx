@@ -93,6 +93,9 @@ export default function Login() {
             <Link to="/" className="text-[var(--azulPrincipal)] cursor-pointer hover:underline">
               Cadastre-se
             </Link>
+            <Link to="/cadastrotemp" className="text-[var(--azulPrincipal)] cursor-pointer hover:underline">
+              TEMPORARIO PRA TESTES
+            </Link>
           </Text>
         </div>
       </main>

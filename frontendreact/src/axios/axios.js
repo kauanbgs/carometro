@@ -11,12 +11,14 @@ const api = axios.create({
 const sheets = {
     postLogin: (user) => api.post("/instructor/login", user),
     postCadastro: (user) => api.post("/instructor", user),
+    postCadastroUser: (user) => api.post("/instructor", user),
     getDocentes: () => api.get("/instructor"),
     deleteDocente: (user) => api.delete("/instructor", { data: user }),
 
     getTurmas: () => api.get("/class"),
     getTurmaByName: (name) => api.get(`/class/name/${name}`),
-    getTurmaByInstructor: (instructor) => api.get(`/class/instructor/${instructor}`),
+    getTurmaByInstructorName: (name) => api.get(`/class/instructor/${name}`),
+    postCriarTurma: (turma) => api.post("/class", turma),
 }
 
 export default sheets

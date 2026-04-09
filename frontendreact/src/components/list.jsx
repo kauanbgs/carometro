@@ -22,8 +22,8 @@ export default function List({ classes = [] }) {
                     key={turma.id_class}
                     className="grid grid-cols-[1fr_1fr_1fr] px-6 py-3.5"
                 >
-                    <div className="text-sm text-zinc-800">{turma.name_class}</div>
-                    <div className="text-sm text-zinc-800">{turma.name_instructor}</div>
+                    <div className="text-sm text-zinc-800">{turma.name}</div>
+                    <div className="text-sm text-zinc-800">{turma.instructor_name}</div>
                     <div className="text-sm text-zinc-800 "><EllipsisVertical className="w-5 h-5" /></div>
                 </div>
             ))}
