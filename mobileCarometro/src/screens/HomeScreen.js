@@ -5,44 +5,44 @@ import styles from "../components/Styles";
 
 export default function Home({ navigation }) {
   return (
-    <View style={styles.homeContainer}>
+    <View style={styles.pageContainer}>
       <Header navigation={navigation} />
 
-      <View style={styles.homeContent}>
-        <Text style={styles.homeTitulo}>
-          Deseja <Text style={styles.homeEditar}>editar</Text> uma{"\n"}turma?
+      <View style={styles.pageContent}>
+        <Text style={styles.titleMedium}>
+          Deseja <Text style={styles.textHighlight}>editar</Text> uma{"\n"}turma?
         </Text>
 
-        <Text style={styles.homeTexto}>
+        <Text style={styles.textNormal}>
           Alguma nova notificação ou{"\n"}alteração na turma? gerencie{"\n"}agora!
         </Text>
 
         <TouchableOpacity
-          style={styles.homeBotoes}
+          style={styles.primaryButton}
           onPress={() => navigation.navigate("Suporte")}
         >
-          <Text style={styles.homeButtonText}>Clique aqui e comece</Text>
-        <View style={styles.homeLinhaFinaPreta} />
+          <Text style={styles.buttonWhiteText}>Clique aqui e comece</Text>
         </TouchableOpacity>
 
+        <View style={styles.divider} />
 
-        <Text style={styles.homeTitulo}>
-          Pronto para <Text style={styles.homeEditar}>criar</Text>{"\n"}uma turma?
+        <Text style={styles.titleMedium}>
+          Pronto para <Text style={styles.textHighlight}>criar</Text>{"\n"}uma turma?
         </Text>
 
-        <Text style={styles.homeTexto}>
+        <Text style={styles.textNormal}>
           Usuários com permissão de{"\n"}administrador podem editar{"\n"}e/ou criar turmas.
         </Text>
 
         <TouchableOpacity
-          style={styles.homeBotoes}
+          style={styles.primaryButton}
           onPress={() => navigation.navigate("Suporte")}
         >
-          <Text style={styles.homeButtonText}>Clique aqui e comece</Text>
+          <Text style={styles.buttonWhiteText}>Clique aqui e comece</Text>
         </TouchableOpacity>
       </View>
 
-      <View style={styles.homeFooter} />
+      <View style={styles.footer} />
     </View>
   );
 }

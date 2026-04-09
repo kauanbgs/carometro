@@ -30,13 +30,13 @@ export default function DeleteDocente({ navigation }) {
   }
 
   return (
-    <>
+    <View style={styles.pageContainer}>
       <View style={styles.header}>
         <Header navigation={navigation} />
       </View>
 
-      <View style={styles.deleteContainer}>
-        <Text style={styles.formTitle}>Removendo Docente</Text>
+      <View style={styles.pageContent}>
+        <Text style={styles.titleMedium}>Removendo Docente</Text>
 
         <TextInput
           style={styles.deleteInput}
@@ -55,10 +55,10 @@ export default function DeleteDocente({ navigation }) {
           onChangeText={(value) => onChange("password", value)}
         />
 
-        <TouchableOpacity style={styles.deleteButtonDelete} onPress={Delete}>
+        <TouchableOpacity style={styles.primaryButton} onPress={Delete}>
           <Text style={styles.buttonWhiteText}>Remover</Text>
         </TouchableOpacity>
       </View>
-    </>
+    </View>
   );
 }

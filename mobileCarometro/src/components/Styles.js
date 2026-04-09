@@ -31,6 +31,64 @@ export default StyleSheet.create({
     fontWeight: "bold",
   },
 
+  // ─── Estilos Globais Padronizados ──────────────────────────
+  pageContainer: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  pageContent: {
+    flex: 1,
+    paddingHorizontal: 30,
+    paddingTop: 20,
+    justifyContent: "flex-start",
+  },
+  pageContentCenter: {
+    flex: 1,
+    paddingHorizontal: 30,
+    paddingVertical: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  titleLarge: {
+    fontSize: 40,
+    fontWeight: "100",
+    color: "#2957a4",
+    marginBottom: 20,
+    lineHeight: 44,
+  },
+  titleMedium: {
+    fontSize: 30,
+    fontWeight: "500",
+    color: "#333",
+    marginBottom: 10,
+  },
+  textNormal: {
+    fontSize: 16,
+    fontWeight: "normal",
+    color: "#555",
+    marginBottom: 20,
+  },
+  textHighlight: {
+    color: "orange",
+  },
+  primaryButton: {
+    width: "100%",
+    backgroundColor: "#2957a4",
+    padding: 15,
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+  },
+  divider: {
+    width: "80%",
+    height: 1.6,
+    backgroundColor: "gray",
+    marginTop: 30,
+    marginBottom: 30,
+    alignSelf: "center",
+  },
+
   // ─── Header (componente Header.js) ────────────────────────
   header: {
     paddingTop: 20,
@@ -108,6 +166,7 @@ export default StyleSheet.create({
   },
 
   // ─── HomeScreen ───────────────────────────────────────────
+  // (Usa pageContainer, pageContent, titleLarge, primaryButton)
   homeContainer: {
     flex: 1,
     justifyContent: "center",
@@ -118,46 +177,6 @@ export default StyleSheet.create({
     paddingRight: 25,
     paddingTop: 15,
   },
-  homeTitulo: {
-    marginTop: -20,
-    fontSize: 34,
-    fontWeight: "100",
-    textAlign: "left",
-  },
-  homeEditar: {
-    color: "orange",
-  },
-  homeTexto: {
-    fontWeight: "normal",
-    marginTop: 15,
-    fontSize: 20,
-    textAlign: "left",
-  },
-  homeBotoes: {
-    alignSelf: "flex-start",
-  },
-  homeButtonText: {
-    width: 250,
-    height: 50,
-    fontWeight: "bold",
-    borderRadius: 14,
-    textAlign: "center",
-    textAlignVertical: "center",
-    fontSize: 20,
-    backgroundColor: "#f0854cff",
-    color: "#000000a8",
-    padding: 11,
-    marginTop: 30,
-    marginLeft: 20,
-  },
-  homeLinhaFinaPreta: {
-    width: 225,
-    height: 1.6,
-    backgroundColor: "gray",
-    marginTop: 34,
-    marginBottom: 50,
-    marginLeft: 33,
-  },
 
   // ─── LoginScreen ──────────────────────────────────────────
   loginHeader: {
@@ -165,32 +184,11 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 50,
-    marginBottom: -200,
+    marginBottom: -50,
   },
   loginLogo: {
     width: 250,
     height: 150,
-  },
-  loginContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 30,
-  },
-  loginTitle: {
-    fontSize: 40,
-    fontWeight: "100",
-    marginRight: 70,
-    marginBottom: 30,
-    color: "#2957a4",
-  },
-  loginButtonEntrar: {
-    alignItems: "center",
-    width: 320,
-    backgroundColor: "#2957a4",
-    padding: 7,
-    borderRadius: 3,
-    marginTop: 20,
   },
   loginCheckbox: {
     width: 20,
@@ -221,14 +219,14 @@ export default StyleSheet.create({
   },
 
   // ─── CadastroScreen ───────────────────────────────────────
-  cadastroContainer: {
-    flexGrow: 1,
-    backgroundColor: "#fff",
-  },
-  cadastroContent: {
-    flex: 1,
-    paddingHorizontal: 30,
-    paddingBottom: 40,
+  // (Containeres padronizados sendo utilizados)
+  cadastroButtonCriar: {
+    alignItems: "center",
+    width: "100%",
+    backgroundColor: "#2957a4",
+    padding: 15,
+    borderRadius: 8,
+    marginTop: 20
   },
   cadastroInput: {
     width: "100%",
@@ -272,57 +270,18 @@ export default StyleSheet.create({
     fontSize: 16,
     height: 150,
   },
-  cadastroButtonCriar: {
-    alignItems: "center",
-    width: "100%",
-    backgroundColor: "#2957a4",
-    padding: 15,
-    borderRadius: 8,
-    marginTop: 20
-  },
 
   // ─── DeleteScreen ─────────────────────────────────────────
-  deleteContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 30,
-  },
-  deleteButtonDelete: {
-    alignItems: "center",
-    width: "100%",
-    backgroundColor: "#2957a4",
-    padding: 20,
-    borderRadius: 8,
-    marginTop: 10,
-  },
+  // Usa pageContainer e pageContent
 
-  // ─── SuporteScreen ────────────────────────────────────────
-  suporteContainer: {
-    flex: 1,
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 44,
-    justifyContent: "flex-start",
-  },
+  // ─── SuporteScreen 
+  // Usa pageContainer, pageContent, titleLarge
   suporteLogo: {
     width: 250,
     height: 270,
     alignSelf: "center",
-    marginBottom: -20,
+    marginBottom: 0,
     resizeMode: "contain",
-  },
-  suporteTitle: {
-    fontSize: 40,
-    color: "#2A5699",
-    fontWeight: "100",
-    marginBottom: 20,
-    lineHeight: 44,
-  },
-  suporteSubtitle: {
-    fontSize: 15,
-    color: "#555555",
-    marginBottom: 40,
-    lineHeight: 20,
   },
   suporteContactRow: {
     flexDirection: "row",
@@ -342,19 +301,8 @@ export default StyleSheet.create({
     fontSize: 14,
     color: "#555555",
   },
-  suporteButtonVoltar: {
-    marginTop: 40,
-  },
-  suporteButtonVoltarText: {
-    width: 287,
-    backgroundColor: "#2957a4",
-    color: "white",
-    fontSize: 13,
-    padding: 7,
-    textAlign: "center",
-  },
-
-  // ESTILIZAÇÃO GerenciarDocentesScreen ────────────────────────────────────────
+  // ESTILIZAÇÃO GerenciarDocentesScreen 
+  // Usa primaryButton, titleMedium, textNormal
   titulo: {
     fontSize: 30,
     fontWeight: "500",
@@ -364,5 +312,5 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: "normal",
     color: "#333"
-  }
+  },
 });

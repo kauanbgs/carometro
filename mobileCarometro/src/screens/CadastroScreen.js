@@ -34,13 +34,13 @@ export default function CadastroUser({ navigation }) {
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1 }}
+      style={styles.pageContainer}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <ScrollView contentContainerStyle={styles.cadastroContainer}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Header navigation={navigation} />
 
-        <View style={styles.cadastroContent}>
+        <View style={styles.pageContent}>
           <Text style={styles.formTitle}>Criando Docente</Text>
 
           <TextInput
@@ -87,7 +87,7 @@ export default function CadastroUser({ navigation }) {
             </View>
           </View>
 
-          <TouchableOpacity style={styles.cadastroButtonCriar} onPress={Cadastro}>
+          <TouchableOpacity style={styles.primaryButton} onPress={Cadastro}>
             <Text style={styles.buttonWhiteText}>Criar</Text>
           </TouchableOpacity>
         </View>

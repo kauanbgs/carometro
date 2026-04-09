@@ -24,15 +24,15 @@ export default function Login({ navigation }) {
   }
 
   return (
-    <>
+    <View style={styles.pageContainer}>
       <View style={styles.loginHeader}>
         <Image
           source={require("../../image/LogoCarometro-v2.png")}
           style={styles.loginLogo}
         />
       </View>
-      <View style={styles.loginContainer}>
-        <Text style={styles.loginTitle}>Olá! Já Tem {"\n"}Uma Conta?</Text>
+      <View style={styles.pageContentCenter}>
+        <Text style={styles.titleLarge}>Olá! Já Tem {"\n"}Uma Conta?</Text>
 
         <TextInput
           style={styles.formInput}
@@ -64,7 +64,7 @@ export default function Login({ navigation }) {
           <Text style={styles.loginCheckboxLabel}>Lembrar de mim</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.loginButtonEntrar} onPress={login}>
+        <TouchableOpacity style={styles.primaryButton} onPress={login}>
           <Text style={styles.buttonWhiteText}>Entrar</Text>
         </TouchableOpacity>
 
@@ -75,6 +75,6 @@ export default function Login({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
-    </>
+    </View>
   );
 }
