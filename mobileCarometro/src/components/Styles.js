@@ -282,19 +282,31 @@ export default StyleSheet.create({
   },
 
   // ─── DeleteScreen ─────────────────────────────────────────
-  deleteContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 30,
+     title: {
+    fontSize: 22,
+    fontWeight: "500",
+    color: "#333",
+    marginBottom: 30,
   },
-  deleteButtonDelete: {
+ input: {
+    width: "100%",
+    height: 40,
+    borderBottomWidth: 1,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+  },
+  
+    buttonDelete: {
     alignItems: "center",
+    color:"#fff",
     width: "100%",
     backgroundColor: "#2957a4",
     padding: 20,
     borderRadius: 8,
     marginTop: 10,
+  },
+  buttonText:{
+    color:"#fff"
   },
 
   // ─── SuporteScreen ────────────────────────────────────────
@@ -364,5 +376,13 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: "normal",
     color: "#333"
-  }
+  },
+   // ESTILIZAÇÃO GerenciarTurma ────────────────────────────────────────
+    buttonGreyText:{
+      color:"#2222",
+      alignItems: "center",
+      color:"#fff",
+      width: "100%"
+    }
+
 });

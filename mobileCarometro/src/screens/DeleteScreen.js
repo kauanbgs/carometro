@@ -1,5 +1,17 @@
 import React, { useState } from "react";
-import { TouchableOpacity, View, Text, TextInput, Alert } from "react-native";
+import {
+  TouchableOpacity,
+  View,
+  Text,
+  TextInput,
+  Alert,
+  StyleSheet,
+  Image,
+  Platform, 
+  KeyboardAvoidingView,
+  ScrollView,
+} from "react-native";
+import { Picker } from "@react-native-picker/picker";
 import api from "../services/api";
 import Header from "../components/Header";
 import styles from "../components/Styles";
@@ -10,8 +22,8 @@ export default function DeleteDocente({ navigation }) {
     password: "",
   });
 
-  function onChange(field, value) {
-    setInstructor({ ...instructor, [field]: value });
+  function onChange(email, value) {
+    setInstructor({ ...instructor, [email]: value });
   }
 
   async function Delete() {
@@ -28,37 +40,33 @@ export default function DeleteDocente({ navigation }) {
       console.log(error.response?.data);
     }
   }
-
   return (
-    <>
-      <View style={styles.header}>
+    <View style={styles.deleteContainer}>
+
         <Header navigation={navigation} />
-      </View>
-
+  
       <View style={styles.deleteContainer}>
-        <Text style={styles.formTitle}>Removendo Docente</Text>
-
+        <Text style={styles.title}>Removendo Docente</Text>
         <TextInput
-          style={styles.deleteInput}
+          style={styles.input}
           placeholder="Email do docente"
           placeholderTextColor="#bababa"
           value={instructor.email}
-          onChangeText={(value) => onChange("email", value)}
+          onChange={(value) => onChange("email", value)}
         />
-
         <TextInput
-          style={styles.formInput}
+          style={styles.input}
           placeholder="Senha Docente"
           placeholderTextColor="#bababa"
-          secureTextEntry
+          
           value={instructor.password}
-          onChangeText={(value) => onChange("password", value)}
+          onChange={(value) => onChange("password", value)}
         />
-
-        <TouchableOpacity style={styles.deleteButtonDelete} onPress={Delete}>
-          <Text style={styles.buttonWhiteText}>Remover</Text>
-        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonDelete} onPress={Delete}>
+        <Text style={styles.buttonText}>Remover</Text>
+      </TouchableOpacity>
       </View>
-    </>
+      
+    </View>
   );
 }
