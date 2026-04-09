@@ -1,6 +1,7 @@
 const connect = require("../connect");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+const jwt = require("jsonwebtoken")
 
 module.exports = class instructorController {
   static async createInstructor(req, res, next) {
@@ -186,8 +187,14 @@ module.exports = class instructorController {
         const senhaCorreta = await bcrypt.compare(password, instructor.password);
         if (!senhaCorreta) {
           return next(new Error("Password incorrect"));
+        }else {
+          const token = jwt.sign({ id_instructor: instructor.id_instructor }, process.env.SECRET, /* O secret vai decodificar e codificar, isso evita invasões com token de outras pessoas */ {
+            expiresIn: "1h",
+          });
+          // Remover o atributo senha do objeto user
+          delete instructor.password;
+          return res.status(200).json({ message: "Successful login", instructor, token });
         }
-        return res.status(200).json({ message: "Successful login", instructor });
       });
     } catch (error) {
       next(error);
