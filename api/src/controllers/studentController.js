@@ -255,7 +255,7 @@ module.exports = class studentController {
         }
         return res
           .status(200)
-          .json({ message: "Students found successfully", students: results });
+          .json({ students: results });
       });
     } catch (error) {
       console.error(error);

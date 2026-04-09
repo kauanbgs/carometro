@@ -28,7 +28,7 @@ router.get("/student/class/:fk_id_class", studentController.getStudentsByClass);
 router.post("/class", classController.createClass);
 router.get("/class", classController.readClass);
 router.get("/class/id/:id_class", classController.readClassByID);
-router.get("/class/instructor/:fk_id_instructor", classController.getClassByInstructorID);
+router.get("/class/instructor/:name", classController.getClassByInstructorName);
 router.get("/class/name/:name", classController.GetClassByName);
 router.get("/class/instructors", classController.readClassInstructor);
 router.get("/class/student", classController.readStudentsClass);
