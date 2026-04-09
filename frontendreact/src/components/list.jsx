@@ -1,7 +1,8 @@
 import { ChevronDown, EllipsisVertical } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 export default function List({ classes = [] }) {
-
+    const navigate = useNavigate();
 
     return (
         <div className="w-full mt-5">
@@ -24,7 +25,7 @@ export default function List({ classes = [] }) {
                 >
                     <div className="text-sm text-zinc-800">{turma.name}</div>
                     <div className="text-sm text-zinc-800">{turma.instructor_name}</div>
-                    <div className="text-sm text-zinc-800 "><EllipsisVertical className="w-5 h-5" /></div>
+                    <div className="text-sm text-zinc-800 "><EllipsisVertical className="w-5 h-5 cursor-pointer" onClick={() => navigate(`/verTurma/${turma.id_class}`)} /></div>
                 </div>
             ))}
 
