@@ -14,7 +14,7 @@ function verifyJWT(req, res, next) {
       if(err.name === "TokenExpiredError"){
         return res
         .status(401)
-        .json({auth: false, message: "Token Expirado!"})
+        .json({auth: false, message: "Expired Token!"})
       }
 
       return res

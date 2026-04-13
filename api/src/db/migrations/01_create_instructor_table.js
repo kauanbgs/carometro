@@ -4,7 +4,7 @@ exports.up = function(knex) {
       table.string('name', 100).notNullable();
       table.string('email', 150).unique().notNullable();
       table.string('password', 100).notNullable();
-      table.enum('type', ['adm', 'inst']).defaultTo('inst');
+      table.enum('role', ['adm', 'inst']).defaultTo('inst');
     });
   };
   

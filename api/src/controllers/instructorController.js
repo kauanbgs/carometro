@@ -1,19 +1,25 @@
 const connect = require("../connect");
 const bcrypt = require("bcrypt");
+const validateInstructor = require("../services/validateInstructor");
+
+const jwt = require("jsonwebtoken");
+
 const saltRounds = 10;
-const jwt = require("jsonwebtoken")
 
 module.exports = class instructorController {
   static async createInstructor(req, res, next) {
-    const { email, password, name, type } = req.body;
-    if (!email || !password || !name) {
-      return next(new Error("All fields must be filled"));
+    const { email, password, name, role } = req.body;
+
+    const validationError = validateInstructor(req.body);
+    if (validationError) {
+      return res.status(400).json(validationError);
     }
+
     let query;
     let value;
-    if (type) {
-      query = `INSERT INTO instructor (email, password, name, type) VALUES (?,?,?,?)`;
-      value = [email, password, name, type];
+    if (role) {
+      query = `INSERT INTO instructor (email, password, name, role) VALUES (?,?,?,?)`;
+      value = [email, password, name, role];
     } else {
       query = `INSERT INTO instructor (email, password, name) VALUES (?,?,?)`;
       value = [email, password, name];
@@ -45,9 +51,10 @@ module.exports = class instructorController {
           console.log(err);
           return next(err);
         }
-        return res
-          .status(200)
-          .json({ message: "Instructors retrieved successfully", instructors: results });
+        return res.status(200).json({
+          message: "Instructors retrieved successfully",
+          instructors: results,
+        });
       });
     } catch (error) {
       next(error);
@@ -64,7 +71,10 @@ module.exports = class instructorController {
           console.log(err);
           return next(err);
         }
-        return res.status(200).json({ message: "Instructor retrieved successfully", instructor: results });
+        return res.status(200).json({
+          message: "Instructor retrieved successfully",
+          instructor: results,
+        });
       });
     } catch (error) {
       next(error);
@@ -84,7 +94,10 @@ module.exports = class instructorController {
         if (results.length === 0) {
           return next(new Error("Instructor not found"));
         }
-        return res.status(200).json({ message: "Instructor retrieved successfully", instructor: results });
+        return res.status(200).json({
+          message: "Instructor retrieved successfully",
+          instructor: results,
+        });
       });
     } catch (error) {
       next(error);
@@ -92,18 +105,19 @@ module.exports = class instructorController {
   }
 
   static async updateInstructor(req, res, next) {
-    const { id_instructor, password, name, type } = req.body;
+    const { id_instructor, password, name, role } = req.body;
 
-    if (!password || !name || !id_instructor) {
-      return next(new Error("All fields must be filled"));
+    const validationError = validateInstructor(req.body);
+    if (validationError) {
+      return res.status(400).json(validationError);
     }
 
     let query;
     let values;
 
-    if (type) {
-      query = `UPDATE instructor SET password = ?, name = ?, type = ? WHERE id_instructor = ?`;
-      values = [password, name, type, id_instructor];
+    if (role) {
+      query = `UPDATE instructor SET password = ?, name = ?, role = ? WHERE id_instructor = ?`;
+      values = [password, name, role, id_instructor];
     } else {
       query = `UPDATE instructor SET password = ?, name = ? WHERE id_instructor = ?`;
       values = [password, name, id_instructor];
@@ -147,7 +161,10 @@ module.exports = class instructorController {
         }
 
         const instructor = results[0];
-        const senhaCorreta = await bcrypt.compare(password, instructor.password);
+        const senhaCorreta = await bcrypt.compare(
+          password,
+          instructor.password,
+        );
         if (!senhaCorreta) {
           return next(new Error("Password incorrect"));
         }
@@ -158,14 +175,15 @@ module.exports = class instructorController {
             console.error(errDel);
             return next(errDel);
           }
-          return res.status(200).json({ message: "Instructor deleted successfully!" });
+          return res
+            .status(200)
+            .json({ message: "Instructor deleted successfully!" });
         });
       });
     } catch (error) {
       next(error);
     }
   }
-
 
   static async login(req, res, next) {
     const { email, password } = req.body;
@@ -184,16 +202,25 @@ module.exports = class instructorController {
           return next(new Error("Instructor not found"));
         }
         const instructor = results[0];
-        const senhaCorreta = await bcrypt.compare(password, instructor.password);
+        const senhaCorreta = await bcrypt.compare(
+          password,
+          instructor.password,
+        );
         if (!senhaCorreta) {
           return next(new Error("Password incorrect"));
-        }else {
-          const token = jwt.sign({ id_instructor: instructor.id_instructor }, process.env.SECRET, /* O secret vai decodificar e codificar, isso evita invasões com token de outras pessoas */ {
-            expiresIn: "1h",
-          });
+        } else {
+          const token = jwt.sign(
+            { id_instructor: instructor.id_instructor },
+            process.env.SECRET,
+            /* O secret vai decodificar e codificar, isso evita invasões com token de outras pessoas */ {
+              expiresIn: "24h",
+            },
+          );
           // Remover o atributo senha do objeto user
           delete instructor.password;
-          return res.status(200).json({ message: "Successful login", instructor, token });
+          return res
+            .status(200)
+            .json({ message: "Successful login", instructor, token });
         }
       });
     } catch (error) {
