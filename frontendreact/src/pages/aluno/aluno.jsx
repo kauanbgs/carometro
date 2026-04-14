@@ -10,6 +10,7 @@ import { ChevronLeft } from "lucide-react"
 import { Pencil } from "lucide-react"
 import Select from "../../components/select"
 import Occurrence from "../../components/occurrence"
+import { Snackbar } from "../../components/snackbar"
 
 
 import Modal from "../../components/modal"
@@ -37,6 +38,8 @@ export default function Aluno() {
     const [modalExcluirAberto, setModalExcluirAberto] = useState(false);
     const [modalOcorrenciaAberta, setModalOcorrenciaAberta] = useState(false);
 
+    const [snackbar, setSnackbar] = useState({ isOpen: false, message: "", type: "success" });
+
     useEffect(() => {
         const searchStudent = async () => {
             try {
@@ -53,6 +56,7 @@ export default function Aluno() {
                 });
             } catch (error) {
                 console.log(error);
+                setSnackbar({ isOpen: true, message: "Erro ao carregar dados do aluno", type: "error" });
             }
         };
         searchStudent()
@@ -60,15 +64,14 @@ export default function Aluno() {
 
     const handleSave = async () => {
         try {
-            console.log("Sending data:", formData);
             const response = await api.updateStudent(id_student, formData);
             if(response.status === 200) {
-                alert("Aluno atualizado com sucesso!");
+                setSnackbar({ isOpen: true, message: "Cadastro atualizado com sucesso!", type: "success" });
                 setStudent({ ...student, name: formData.name });
             }
         } catch (error) {
             console.log(error);
-            alert("Erro ao atualizar aluno: " + (error.response?.data?.error || error.message));
+            setSnackbar({ isOpen: true, message: error.response?.data?.error || "Erro ao salvar alterações", type: "error" });
         }
     }
 
@@ -88,12 +91,12 @@ export default function Aluno() {
         try {
             const response = await api.deleteStudent(id_student);
             if(response.status === 200) {
-                alert("Aluno excluído com sucesso!");
+                // Não mostramos snackbar aqui porque vamos navegar para trás
                 window.history.back();
             }
         } catch (error) {
             console.log(error);
-            alert("Erro ao excluir aluno: " + (error.response?.data?.error || error.message));
+            setSnackbar({ isOpen: true, message: error.response?.data?.error || "Erro ao excluir aluno", type: "error" });
         }
     }
 
@@ -108,17 +111,17 @@ export default function Aluno() {
 
     const handleSaveOccurrence = async () => {
         if (!occurrence.type || !occurrence.description) {
-            alert("Preencha todos os campos da ocorrência!");
+            setSnackbar({ isOpen: true, message: "Preencha todos os campos da ocorrência!", type: "warning" });
             return;
         }
         try {
             await api.createOccurrence(occurrence);
-            alert("Ocorrência registrada com sucesso!");
+            setSnackbar({ isOpen: true, message: "Ocorrência registrada!", type: "success" });
             setOccurrence({ ...occurrence, type: "", description: "" });
             fetchOccurrences();
         } catch (error) {
             console.log(error);
-            alert("Erro ao registrar ocorrência: " + (error.response?.data?.error || error.message));
+            setSnackbar({ isOpen: true, message: error.response?.data?.error || "Erro ao registrar", type: "error" });
         }
     }
 
@@ -135,13 +138,13 @@ export default function Aluno() {
         try {
             const response = await api.deleteOccurrence(id_occurrence);
             if(response.status === 200) {
-                alert("Ocorrência excluída com sucesso!");
+                setSnackbar({ isOpen: true, message: "Ocorrência removida", type: "success" });
                 fetchOccurrences();
                 setModalOcorrenciaAberta(false);
             }
         } catch (error) {
             console.log(error);
-            alert("Erro ao excluir ocorrência: " + (error.response?.data?.error || error.message));
+            setSnackbar({ isOpen: true, message: "Erro ao excluir ocorrência", type: "error" });
         }
     }
 
@@ -149,13 +152,13 @@ export default function Aluno() {
         try {
             const response = await api.updateOccurrence(selectedOccurrence.id_occurrence, selectedOccurrence);
             if(response.status === 200) {
-                alert("Ocorrência atualizada com sucesso!");
+                setSnackbar({ isOpen: true, message: "Ocorrência alterada com sucesso!", type: "success" });
                 fetchOccurrences();
                 setModalOcorrenciaAberta(false);
             }
         } catch (error) {
             console.log(error);
-            alert("Erro ao atualizar ocorrência: " + (error.response?.data?.error || error.message));
+            setSnackbar({ isOpen: true, message: "Erro ao atualizar ocorrência", type: "error" });
         }
     }
 
@@ -164,7 +167,6 @@ export default function Aluno() {
             <SideBar items={items} />
             <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-[var(--background)] rounded-l-3xl">
                 
-                {/* Modal de Exclusão */}
                 <Modal 
                     isOpen={modalExcluirAberto} 
                     onClose={() => setModalExcluirAberto(false)} 
@@ -172,7 +174,7 @@ export default function Aluno() {
                 >
                     <div className="flex flex-col">
                         <Text variant="text" className="text-zinc-600 mb-6">
-                            Tem certeza que deseja excluir o aluno <strong>{student.name}</strong>? Esta ação não pode ser desfeita.
+                            Tem certeza que deseja excluir o aluno {student.name}? Esta ação não pode ser desfeita.
                         </Text>
                         <div className="flex gap-3 justify-end">
                             <Button color="preto" rounded="lg" text="Cancelar" onClick={() => setModalExcluirAberto(false)} />
@@ -218,18 +220,18 @@ export default function Aluno() {
                         </div>
                     )}
                 </Modal>
-
+                
                 <div className="flex items-center gap-2">
                     <ChevronLeft className="w-6 h-6 cursor-pointer" onClick={() => window.history.back()} />
                     <Text variant="megaTitle" className="font-bold">{student.name}</Text>
                     <Button color="erro" rounded="lg" text="Excluir Aluno" className="ml-auto mr-4" onClick={() => setModalExcluirAberto(true)} />
                 </div>
-                
+                <Text variant="title" className="text-lg font-bold mt-4">Informações do Aluno</Text>
                 <div className="grid grid-cols-[3fr_2fr_1fr] gap-4 mt-5 w-[80%]">
                     <Input label="Nome do aluno" placeholder="Nome" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="placeholder:text-zinc-400 w-full" />
                     <div>
                         <Text variant="text" className="text-zinc-500 text-sm">Turma</Text>
-                        <select className="w-full p-2 h-12 rounded-lg text-sm border border-zinc-300 focus:outline-nonex'" 
+                        <select className="w-full p-2 h-12 rounded-lg text-sm border border-zinc-300 focus:outline-none" 
                                 value={formData.fk_id_class} 
                                 onChange={(e) => setFormData({ ...formData, fk_id_class: e.target.value })}>
                             <option value="">Selecione uma turma</option>
@@ -259,7 +261,7 @@ export default function Aluno() {
                 </div>
                 
                 <div className="mt-12 flex flex-col w-full">
-                    <div className="w-[80%] border-t border-zinc-200 pt-8">
+                    <div className="w-[80%]">
                         <Text variant="title" className="text-zinc-700 font-semibold mb-6">Registrar Ocorrência</Text>
                         
                         <div className="grid grid-cols-[1.5fr_3fr_auto] gap-4 items-end">
@@ -291,7 +293,7 @@ export default function Aluno() {
                     </div>
                 </div>
 
-                <div className="p-10 rounded-3xl mt-12 w-[80%]">
+                <div className="p-10 rounded-3xl mt-4 w-[80%]">
                     <Text variant="title" className="text-zinc-700 font-semibold mb-8 text-center">Histórico de Ocorrências</Text>
                     <div className="flex flex-col gap-3">
                         {occurrences.length > 0 ? occurrences.map((occ) => (
@@ -310,6 +312,13 @@ export default function Aluno() {
                     </div>
                 </div>
             </main>
+
+            <Snackbar 
+                isOpen={snackbar.isOpen} 
+                message={snackbar.message} 
+                type={snackbar.type} 
+                onClose={() => setSnackbar({ ...snackbar, isOpen: false })} 
+            />
         </div>
     )
 }
