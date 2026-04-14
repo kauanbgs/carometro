@@ -22,6 +22,8 @@ const sheets = {
     postCriarTurma: (turma) => api.post("/class", turma),
 
     getAlunosByTurma: (id_class) => api.get(`/student/class/${id_class}`),
+    getAlunosByName: (name) => api.get(`/student/name/${name}`),
+    getAlunosByNumber: (student_number) => api.get(`/student/number/${student_number}`),
 }
 
 export default sheets

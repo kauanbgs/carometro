@@ -17,11 +17,10 @@ export default function List({ classes = [] }) {
                     Ações <ChevronDown className="w-4 h-4" />
                 </div>
             </div>
-
             {classes.map((turma) => (
                 <div
                     key={turma.id_class}
-                    className="grid grid-cols-[1fr_1fr_1fr] px-6 py-3.5"
+                    className="grid grid-cols-[1fr_1fr_1fr] px-6 py-3.5 border-b border-zinc-100 hover:bg-zinc-50 transition-colors"
                 >
                     <div className="text-sm text-zinc-800">{turma.name}</div>
                     <div className="text-sm text-zinc-800">{turma.instructor_name}</div>

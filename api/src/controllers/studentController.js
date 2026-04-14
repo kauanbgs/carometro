@@ -51,7 +51,7 @@ module.exports = class studentController {
         }
         return res
           .status(200)
-          .json({ message: "Students retrieved successfully", students: results });
+          .json({ students: results });
       });
     } catch (error) {
       console.error(error);
@@ -77,7 +77,7 @@ module.exports = class studentController {
         }
         return res
           .status(200)
-          .json({ message: "Student retrieved successfully", student: results });
+          .json({ students: results });
       });
     } catch (error) {
       console.error(error);
@@ -101,7 +101,7 @@ module.exports = class studentController {
         }
         return res
           .status(200)
-          .json({ message: "Student retrieved successfully", student: results });
+          .json({ students: results });
       });
     } catch (error) {
       console.error(error);
@@ -124,7 +124,7 @@ module.exports = class studentController {
         }
         return res
           .status(200)
-          .json({ message: "student: ", student: results });
+          .json({ students: results });
       });
     } catch (error) {
       console.error(error);
@@ -242,7 +242,7 @@ module.exports = class studentController {
   }
   static async getStudentsByClass(req, res, next) {
     const { fk_id_class } = req.params;
-    const query = "SELECT * FROM student WHERE fk_id_class = ?";
+    const query = "SELECT student.name, class.name as class_name, student.status, student.id_student, student.student_number FROM student INNER JOIN class ON student.fk_id_class = class.id_class WHERE fk_id_class = ?";
     const values = [fk_id_class];
     try {
       connect.query(query, values, function (err, results) {
