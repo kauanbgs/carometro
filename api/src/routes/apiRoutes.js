@@ -40,6 +40,7 @@ router.post("/occurrence", occurrenceController.createOccurrence);
 router.get("/occurrence", occurrenceController.readOccurrences);
 router.get("/occurrence/:fk_id_student",occurrenceController.getOccurrenceByStudentId
 );
+router.get("/occurrence/id/:id_occurrence", occurrenceController.getOccurrenceById);
 router.put("/occurrence/:id_occurrence", occurrenceController.updateOccurrence);
 router.delete("/occurrence/:id_occurrence",occurrenceController.deleteOccurrence);
 
