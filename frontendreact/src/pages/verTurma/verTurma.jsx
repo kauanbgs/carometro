@@ -17,6 +17,8 @@ export default function VerTurma() {
     const [students, setStudents] = useState([]);
     const [nomeDoAluno, setNomeDoAluno] = useState("");
     const [numeroDoAluno, setNumeroDoAluno] = useState("");
+    const [nomeDaTurma, setNomeDaTurma] = useState("");
+
 
     useEffect(() => {
         api.getAlunosByTurma(id_class).then((response) => {
@@ -24,6 +26,11 @@ export default function VerTurma() {
             console.log(data);
             setStudents(data.students || []);
         }).catch(() => setStudents([]));
+        api.getTurmaById(id_class).then((response) => {
+            const data = response.data.class;
+            console.log(data);
+            setNomeDaTurma(data.name_class || "oii");
+        }).catch(() => setNomeDaTurma(""));
     }, [id_class]);
 
     const handleSearch = () => {
@@ -56,7 +63,7 @@ export default function VerTurma() {
             <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-[var(--background)] rounded-l-3xl">
                 <div className="flex items-center gap-2">
                     <ChevronLeft className="w-6 h-6 cursor-pointer" onClick={() => window.history.back()} />
-                    <Text variant="title">Gerenciar Turmas</Text>
+                    <Text variant="title">{nomeDaTurma}</Text>
                 </div>
                 
                 <div className="flex flex-wrap justify-start gap-5 items-center mt-5">

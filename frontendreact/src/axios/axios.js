@@ -16,7 +16,7 @@ const sheets = {
     deleteDocente: (user) => api.delete("/instructor", { data: user }),
 
     getTurmas: () => api.get("/class"),
-    getTurmaById: (id) => api.get(`/class/id/${id}`),
+    getTurmaById: (id) => api.get(`/class/${id}`),
     getTurmaByName: (name) => api.get(`/class/name/${name}`),
     getTurmaByInstructorName: (name) => api.get(`/class/instructor/${name}`),
     postCriarTurma: (turma) => api.post("/class", turma),
@@ -26,6 +26,7 @@ const sheets = {
     getAlunosByNumber: (student_number) => api.get(`/student/number/${student_number}`),
     getAlunoById: (id_student) => api.get(`/student/${id_student}`),
     updateStudent: (id_student, student) => api.put(`/student/${id_student}`, student),
+    deleteStudent: (id_student) => api.delete(`/student/${id_student}`),
 }
 
 export default sheets

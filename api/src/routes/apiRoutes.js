@@ -27,12 +27,12 @@ router.get("/student/class/:fk_id_class", studentController.getStudentsByClass);
 //      CONTROLLER class       //
 router.post("/class", classController.createClass);
 router.get("/class", classController.readClass);
-router.get("/class/id/:id_class", classController.readClassByID);
+router.get("/class/:id_class", classController.readClassByID);
 router.get("/class/instructor/:name", classController.getClassByInstructorName);
 router.get("/class/name/:name", classController.GetClassByName);
 router.get("/class/instructors", classController.readClassInstructor);
 router.get("/class/student", classController.readStudentsClass);
-router.put("/class/id/:id_class", classController.updateClass);
+router.put("/class/:id_class", classController.updateClass);
 router.delete("/class/:id_class", classController.deleteClass);
 
 //      CONTROLLER occurrence       //
