@@ -41,7 +41,27 @@ module.exports = class OccurrenceController {
         if (results.length === 0) {
           return res.status(404).json({ error: "No occurrences registered!" });
         }
-        return res.status(200).json(results);
+        return res.status(200).json({ occurrences: results });
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  static async getOccurrenceById(req, res, next) {
+    const { id_occurrence } = req.params;
+    const query = "SELECT * FROM occurrence WHERE id_occurrence = ?";
+    const values = [id_occurrence];
+
+    try {
+      connect.query(query, values, function (err, results) {
+        if (err) {
+          return next(err);
+        }
+        if (results.length === 0) {
+          return res.status(404).json({ error: "No occurrences registered!" });
+        }
+        return res.status(200).json({ occurrences: results });
       });
     } catch (error) {
       return next(error);

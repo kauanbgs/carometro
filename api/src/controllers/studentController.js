@@ -51,7 +51,7 @@ module.exports = class studentController {
         }
         return res
           .status(200)
-          .json({ message: "Students retrieved successfully", students: results });
+          .json({ students: results });
       });
     } catch (error) {
       console.error(error);
@@ -64,7 +64,7 @@ module.exports = class studentController {
     if (!id_student) {
       return res.status(400).json({ error: "Student ID is required" });
     }
-    const query = "SELECT * FROM student WHERE id_student = ?";
+    const query = "SELECT student.name, student.email, student.phone, class.name as class_name, student.status, student.id_student, student.student_number FROM student INNER JOIN class ON student.fk_id_class = class.id_class WHERE id_student = ?";
     const values = [id_student];
     try {
       connect.query(query, values, function (err, results) {
@@ -77,7 +77,7 @@ module.exports = class studentController {
         }
         return res
           .status(200)
-          .json({ message: "Student retrieved successfully", student: results });
+          .json({ students: results });
       });
     } catch (error) {
       console.error(error);
@@ -101,7 +101,7 @@ module.exports = class studentController {
         }
         return res
           .status(200)
-          .json({ message: "Student retrieved successfully", student: results });
+          .json({ students: results });
       });
     } catch (error) {
       console.error(error);
@@ -124,7 +124,7 @@ module.exports = class studentController {
         }
         return res
           .status(200)
-          .json({ message: "student: ", student: results });
+          .json({ students: results });
       });
     } catch (error) {
       console.error(error);
@@ -161,7 +161,6 @@ module.exports = class studentController {
       name,
       email,
       phone,
-      create_date,
       status,
       student_number,
       fk_id_class,
@@ -171,7 +170,6 @@ module.exports = class studentController {
       !name ||
       !email ||
       !phone ||
-      !create_date ||
       !status ||
       !student_number ||
       !fk_id_class ||
@@ -182,12 +180,11 @@ module.exports = class studentController {
       );
     }
 
-    const query = `UPDATE student SET name=?, email=?, phone=?, create_date=?, status=?, student_number=?, fk_id_class=? WHERE id_student=?`;
+    const query = `UPDATE student SET name=?, email=?, phone=?, status=?, student_number=?, fk_id_class=? WHERE id_student=?`;
     const values = [
       name,
       email,
       phone,
-      create_date,
       status,
       student_number,
       fk_id_class,
@@ -242,7 +239,7 @@ module.exports = class studentController {
   }
   static async getStudentsByClass(req, res, next) {
     const { fk_id_class } = req.params;
-    const query = "SELECT * FROM student WHERE fk_id_class = ?";
+    const query = "SELECT student.name, class.name as class_name, student.status, student.id_student, student.student_number FROM student INNER JOIN class ON student.fk_id_class = class.id_class WHERE fk_id_class = ?";
     const values = [fk_id_class];
     try {
       connect.query(query, values, function (err, results) {
@@ -255,7 +252,7 @@ module.exports = class studentController {
         }
         return res
           .status(200)
-          .json({ message: "Students found successfully", students: results });
+          .json({ students: results });
       });
     } catch (error) {
       console.error(error);

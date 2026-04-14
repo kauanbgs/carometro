@@ -54,7 +54,7 @@ module.exports = class classController {
   }
 
   static async readClassByID(req, res, next) {
-    const { id_class } = req.query;
+    const { id_class } = req.params;
     if (!id_class) {
       return res.status(400).json({ error: "ID of class is required!" });
     }
@@ -71,7 +71,7 @@ module.exports = class classController {
           console.error(err);
           return next(err);
         }
-        return res.status(200).json(results);
+        return res.status(200).json({ class: results[0] });
       });
     } catch (error) {
       console.error(error);
