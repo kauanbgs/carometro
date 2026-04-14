@@ -1,0 +1,22 @@
+module.exports = function validateInstructor(
+  { name, email, password },
+  isUpdate = false,
+) {
+  if (isUpdate) {
+    if (email) {
+      return { error: "Email cannot be updated" };
+    }
+    if (!name || !password) {
+      return { error: "All fields must be filled" };
+    }
+  } else {
+    if (!name || !email || !password) {
+      return { error: "All fields must be filled" };
+    }
+
+    if (!email.includes("@")) {
+      return { error: "Invalid Email. Need the '@' symbol" };
+    }
+    return null;
+  }
+};
