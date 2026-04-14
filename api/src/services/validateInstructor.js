@@ -3,6 +3,9 @@ module.exports = function validateInstructor(
   isUpdate = false,
 ) {
   if (isUpdate) {
+    if (email) {
+      return { error: "Email cannot be updated" };
+    }
     if (!name || !password) {
       return { error: "All fields must be filled" };
     }
