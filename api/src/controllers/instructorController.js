@@ -15,28 +15,33 @@ module.exports = class instructorController {
       return res.status(400).json(validationError);
     }
 
-    let query;
-    let value;
-    if (role) {
-      query = `INSERT INTO instructor (email, password, name, role) VALUES (?,?,?,?)`;
-      value = [email, password, name, role];
-    } else {
-      query = `INSERT INTO instructor (email, password, name) VALUES (?,?,?)`;
-      value = [email, password, name];
-    }
-    const hash = await bcrypt.hash(password, saltRounds);
-    value[1] = hash; //replace the password with the hash
     try {
-      connect.query(query, value, function (err, results) {
+      const hash = await bcrypt.hash(password, saltRounds);
+
+      let query;
+      let values;
+
+      if (role) {
+        query = `INSERT INTO instructor (email, password, name, role) VALUES (?,?,?,?)`;
+        values = [email, hash, name, role];
+      } else {
+        query = `INSERT INTO instructor (email, password, name) VALUES (?,?,?)`;
+        values = [email, hash, name];
+      }
+
+      connect.query(query, values, function (err, results) {
         if (err) {
-          console.log(err);
-          if (err.code === "ER_DUP_ENTRY") {
-            return next(new Error("Email already exists."));
+          if (err.code === "ER_DUP_ENTRY" || err.errno === 1062) {
+            return res
+              .status(400)
+              .json({ error: "Email already being used by another user" });
           }
           return next(err);
         }
-        console.log("Instructor inserted successfully");
-        res.status(201).json({ message: "Instructor created successfully!" });
+
+        return res
+          .status(201)
+          .json({ message: "Instructor created successfully!" });
       });
     } catch (error) {
       next(error);
@@ -70,6 +75,9 @@ module.exports = class instructorController {
         if (err) {
           console.log(err);
           return next(err);
+        }
+        if (results.length === 0) {
+          return next(new Error("Instructor not found"));
         }
         return res.status(200).json({
           message: "Instructor retrieved successfully",
@@ -105,9 +113,10 @@ module.exports = class instructorController {
   }
 
   static async updateInstructor(req, res, next) {
-    const { id_instructor, password, name, role } = req.body;
+    const { id_instructor } = req.params;
+    const { password, name, role } = req.body;
 
-    const validationError = validateInstructor(req.body);
+    const validationError = validateInstructor(req.body, true);
     if (validationError) {
       return res.status(400).json(validationError);
     }
