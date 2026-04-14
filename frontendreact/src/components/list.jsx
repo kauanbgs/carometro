@@ -20,7 +20,8 @@ export default function List({ classes = [] }) {
             {classes.map((turma) => (
                 <div
                     key={turma.id_class}
-                    className="grid grid-cols-[1fr_1fr_1fr] px-6 py-3.5 border-b border-zinc-100 hover:bg-zinc-50 transition-colors"
+                    className="cursor-pointer grid grid-cols-[1fr_1fr_1fr] px-6 py-3.5 border-b border-zinc-100 hover:bg-zinc-50 transition-colors"
+                    onClick={() => navigate(`/verTurma/${turma.id_class}`)}
                 >
                     <div className="text-sm text-zinc-800">{turma.name}</div>
                     <div className="text-sm text-zinc-800">{turma.instructor_name}</div>

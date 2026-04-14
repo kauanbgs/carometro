@@ -1,6 +1,8 @@
 import { ChevronDown, EllipsisVertical } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 export default function StudentList({ students = [] }) {
+    const navigate = useNavigate();
     return (
         <div className="w-full mt-5">
             <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] px-6 py-4 border-b border-zinc-300">
@@ -24,8 +26,9 @@ export default function StudentList({ students = [] }) {
             {students.map((aluno) => (
                 <div
                     key={aluno.id_student}
-                    className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] px-6 py-3.5 border-b border-zinc-100 hover:bg-zinc-50 transition-colors"
-                >
+                    className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] px-6 py-3.5 hover:bg-zinc-50 transition-colors cursor-pointer"
+                    onClick={() => navigate(`/aluno/${aluno.id_student}`)}
+                    >
                     <div className="text-sm text-zinc-800">{aluno.name}</div>
                     <div className="text-sm text-zinc-800">{aluno.class_name}</div>
                     <div className="text-sm text-zinc-800">{aluno.student_number}</div>

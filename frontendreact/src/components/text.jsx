@@ -16,7 +16,7 @@ const colorMap = {
 
 export default function Text({ variant, children, color = 'preto', className = "" }) {
     return (
-        <p className={`${variants[variant]} ${colorMap[color]} ${className}`}>
+        <p className={`${className} ${variants[variant]} ${colorMap[color]}`}>
             {children}
         </p>
     )

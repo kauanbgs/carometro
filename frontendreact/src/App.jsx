@@ -9,6 +9,8 @@ import Page404 from "./pages/404/page404"
 import EditarTurma from "./pages/editarTurma/editarTurma"
 import VerTurma from "./pages/verTurma/verTurma"
 import CadastroTemp from "./pages/cadastrotemp/cadastroTemp"
+import Aluno from "./pages/aluno/aluno"
+
 
 function App() {
 
@@ -24,6 +26,7 @@ function App() {
           <Route path="/editarTurma" element={<EditarTurma />} />
           <Route path="/verTurma/:id_class" element={<VerTurma />} />
           <Route path="/cadastrotemp" element={<CadastroTemp />} />
+          <Route path="/aluno/:id_student" element={<Aluno />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>

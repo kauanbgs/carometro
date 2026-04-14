@@ -24,6 +24,8 @@ const sheets = {
     getAlunosByTurma: (id_class) => api.get(`/student/class/${id_class}`),
     getAlunosByName: (name) => api.get(`/student/name/${name}`),
     getAlunosByNumber: (student_number) => api.get(`/student/number/${student_number}`),
+    getAlunoById: (id_student) => api.get(`/student/${id_student}`),
+    updateStudent: (id_student, student) => api.put(`/student/${id_student}`, student),
 }
 
 export default sheets

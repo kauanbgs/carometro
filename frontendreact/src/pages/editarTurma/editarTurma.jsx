@@ -9,6 +9,7 @@ import Button from "../../components/button";
 import Modal from "../../components/modal";
 import { useState, useEffect } from "react";
 import api from "../../axios/axios";
+import { ChevronLeft } from "lucide-react";
 
 export default function EditarTurma() {
     const [classes, setClasses] = useState([]);
@@ -76,7 +77,10 @@ export default function EditarTurma() {
         <div className="h-screen w-screen bg-[var(--back)] flex">
             <SideBar items={items} />
             <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-[var(--background)] rounded-l-3xl">
-                <Text variant="title">Gerenciar Turmas</Text>
+                <div className="flex items-center gap-2">
+                    <ChevronLeft className="w-6 h-6 cursor-pointer" onClick={() => window.history.back()} />
+                    <Text variant="title">Gerenciar Turmas</Text>
+                </div>
                 
                 <div className="flex flex-wrap justify-start gap-5 items-center mt-5">
                     <Input placeholder="Nome da turma" value={nomeDaTurma} onChange={(e) => setNomeDaTurma(e.target.value)}/>
