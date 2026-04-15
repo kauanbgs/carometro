@@ -10,14 +10,25 @@ import Input from "../../components/input";
 import Button from "../../components/button";
 import Modal from "../../components/modal";
 import api from "../../axios/axios";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react"; 
+import { Snackbar } from "../../components/snackbar";
 
 export default function VerTurma() {
     const { id_class } = useParams();
     const [students, setStudents] = useState([]);
+    const [nomeDaTurma, setNomeDaTurma] = useState("");
+    const [aluno, setAluno] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        status: 1,
+        student_number: "",
+        fk_id_class: id_class
+    });
     const [nomeDoAluno, setNomeDoAluno] = useState("");
     const [numeroDoAluno, setNumeroDoAluno] = useState("");
-    const [nomeDaTurma, setNomeDaTurma] = useState("");
+    const [snackbar, setSnackbar] = useState({ isOpen: false, message: "", type: "success" });
+
 
 
     useEffect(() => {
@@ -57,10 +68,87 @@ export default function VerTurma() {
         }
     };
 
+    const handleCreateAluno = async () => {
+
+        await api.createStudent({
+            ...aluno,
+            create_date: new Date().toISOString().split('T')[0]
+        }).then((response) => {
+            setSnackbar({ isOpen: true, message: response?.data?.message || "Aluno criado com sucesso", type: "success" });
+            setAluno({
+                name: "",
+                email: "",
+                phone: "",
+                status: 1,
+                student_number: "",
+                fk_id_class: id_class
+            });
+            handleSearch();
+        }).catch((error) => {
+            setSnackbar({ isOpen: true, message: error.response?.data?.error || "Erro ao criar aluno", type: "error" });
+        });
+    }
+    const [modalAberto, setModalAberto] = useState(false);
+
     return (
         <div className="h-screen w-screen bg-[var(--back)] flex">
             <SideBar items={items} />
             <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-[var(--background)] rounded-l-3xl">
+                <Modal isOpen={modalAberto} onClose={() => setModalAberto(false)} title="Criar Aluno">
+                                <div className="flex flex-col gap-4">
+                                    <div className="flex flex-col gap-1.5">
+                                        <label className="text-sm font-medium text-zinc-700">Nome do Aluno</label>
+                                        <Input
+                                            placeholder="Ex: Kauan Borges Plaza"
+                                            value={aluno.name}
+                                            onChange={(e) => setAluno({ ...aluno, name: e.target.value })}
+                                        />
+                                    </div>
+                
+                                    <div className="flex flex-col gap-1.5">
+                                        <label className="text-sm font-medium text-zinc-700">Numero do Aluno</label>
+                                        <Input
+                                            placeholder="Ex: 15"
+                                            value={aluno.student_number}
+                                            onChange={(e) => setAluno({ ...aluno, student_number: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="flex flex-col gap-1.5">
+                                        <label className="text-sm font-medium text-zinc-700">Email do Aluno</label>
+                                        <Input
+                                            placeholder="Ex: kauanbgs13@gmail.com"
+                                            value={aluno.email}
+                                            onChange={(e) => setAluno({ ...aluno, email: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="flex flex-col gap-1.5">
+                                        <label className="text-sm font-medium text-zinc-700">Telefone do Aluno</label>
+                                        <Input
+                                            placeholder="Ex: (11) 99999-9999"
+                                            value={aluno.phone}
+                                            onChange={(e) => setAluno({ ...aluno, phone: e.target.value })}
+                                        />
+                                    </div>
+                
+                                    <div className="flex justify-end gap-3 mt-2">
+                                        <Button 
+                                            color="preto" 
+                                            rounded="lg" 
+                                            text="Cancelar" 
+                                            type="button"
+                                            onClick={() => setModalAberto(false)} 
+                                        />
+                                        <Button 
+                                            color="azulPrincipal" 
+                                            fill 
+                                            rounded="lg" 
+                                            text="Criar" 
+                                            type="button"
+                                            onClick={handleCreateAluno}
+                                        />
+                                    </div>
+                                </div>
+                            </Modal>
                 <div className="flex items-center gap-2">
                     <ChevronLeft className="w-6 h-6 cursor-pointer" onClick={() => window.history.back()} />
                     <Text variant="title">{nomeDaTurma}</Text>
@@ -72,10 +160,17 @@ export default function VerTurma() {
                     <button className="flex items-center gap-2 bg-gray-800 px-5 py-2.5 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors" onClick={handleSearch}>
                         <Search className="text-white w-6 h-6" />
                     </button>
+                    <Button color="preto" text="Adicionar Aluno" className="rounded-lg" onClick={() => setModalAberto(true)} />
                 </div>
 
                 <StudentList students={students} />
             </main>
+            <Snackbar 
+                isOpen={snackbar.isOpen} 
+                message={snackbar.message} 
+                type={snackbar.type} 
+                onClose={() => setSnackbar({ ...snackbar, isOpen: false })} 
+            />
         </div>
     );
 }

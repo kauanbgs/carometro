@@ -8,7 +8,6 @@ module.exports = class studentController {
       !name ||
       !email ||
       !phone ||
-      !create_date ||
       !status ||
       !student_number ||
       !fk_id_class

@@ -28,7 +28,6 @@ export default function EditarTurma() {
         }).catch(() => setClasses([]));
     }, []);
 
-    // Carrega docentes quando o modal abre
     useEffect(() => {
         if (modalAberto) {
             api.getDocentes().then((response) => {

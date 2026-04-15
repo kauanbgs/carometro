@@ -16,9 +16,9 @@ export default function Home() {
     return (
         <div className="h-screen w-screen bg-[var(--back)] flex">
             <SideBar items={items} />
-            <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-[var(--background)] rounded-l-3xl">
+            <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-[var(--background)] rounded-l-3xl flex flex-col items-center">
 
-                <Text variant="megaTitle">Bem vindo ao <a className="text-[var(--azulPrincipal)]">Carometro</a> da <br /> Escola - Franca SP</Text>
+                <Text variant="megaTitle" className="text-left w-full ml-35">Bem vindo ao <a className="text-[var(--azulPrincipal)]">Carometro</a> da <br /> Escola - Franca SP!</Text>
                 <section className=" w-[90%] bg-white/30 mt-5 justify-center flex gap-3 items-center p-10 shadow-lg shadow-zinc-300 rounded-xl items-center">
                     <div className="flex flex-col">
                         <Text variant="subtitle">Deseja <a className="text-[var(--laranjaSecundario)]">editar</a> uma turma?</Text>

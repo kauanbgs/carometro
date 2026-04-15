@@ -27,6 +27,7 @@ const sheets = {
     getAlunoById: (id_student) => api.get(`/student/${id_student}`),
     updateStudent: (id_student, student) => api.put(`/student/${id_student}`, student),
     deleteStudent: (id_student) => api.delete(`/student/${id_student}`),
+    createStudent: (student) => api.post("/student", student),
 
     createOccurrence: (occurrence) => api.post("/occurrence", occurrence),
     getOccurrences: (id_student) => api.get(`/occurrence/${id_student}`),
