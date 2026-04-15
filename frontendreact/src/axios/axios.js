@@ -30,6 +30,7 @@ const sheets = {
     createStudent: (student) => api.post("/student", student),
 
     createOccurrence: (occurrence) => api.post("/occurrence", occurrence),
+    readOccurrences: () => api.get("/occurrence"),
     getOccurrences: (id_student) => api.get(`/occurrence/${id_student}`),
     getOccurrenceById: (id_occurrence) => api.get(`/occurrence/id/${id_occurrence}`),
     deleteOccurrence: (id_occurrence) => api.delete(`/occurrence/${id_occurrence}`),
