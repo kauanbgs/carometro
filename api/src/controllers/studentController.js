@@ -1,34 +1,35 @@
 const connect = require("../connect");
+const validateStudent = require("../services/validateStudent");
+const validateStudEmail = require("../services/validateStudEmail");
 
 module.exports = class studentController {
   static async createStudent(req, res, next) {
-    const { name, email, phone, create_date, status, student_number, fk_id_class } =
-      req.body;
-    if (
-      !name ||
-      !email ||
-      !phone ||
-      !create_date ||
-      !status ||
-      !student_number ||
-      !fk_id_class
-    ) {
-      return res
-        .status(400)
-        .json({ error: "All fields must be filled" });
+    const { name, email, phone, create_date, status, student_number, fk_id_class } = req.body;
+    
+    const validateStudentError = await validateStudent(req.body);
+    if (validateStudentError) {
+      return res.status(400).json(validateStudentError);
     }
+
+    const validateErrorStudEmail = await validateStudEmail(email)
+    if(validateErrorStudEmail){
+      return res.status(400).json(validateErrorStudEmail)
+    }
+
     const query = `INSERT INTO student (name, email, phone, create_date, status, student_number, fk_id_class) VALUES (?, ?, ?, ?, ?, ?, ?)`;
     const values = [name, email, phone, create_date, status, student_number, fk_id_class];
 
     try {
       connect.query(query, values, function (err, results) {
         if (err) {
-          console.error(err);
           return next(err);
         }
+        if (results.affectedRows === 0) {
+          return res.status(404).json({ error: "Student not found!" });
+        }
         return res
-          .status(201)
-          .json({ message: "Student created successfully" });
+          .status(200)
+          .json({ message: "Student created successfully!" });
       });
     } catch (error) {
       console.error(error);
@@ -166,18 +167,14 @@ module.exports = class studentController {
       fk_id_class,
     } = req.body;
 
-    if (
-      !name ||
-      !email ||
-      !phone ||
-      !status ||
-      !student_number ||
-      !fk_id_class ||
-      !id_student
-    ) {
-      return next(
-        res.status(400).json({ error: "All fields must be filled" })
-      );
+    const validateStudentError = await validateStudent(req.body);
+    if (validateStudentError) {
+      return res.status(400).json(validateStudentError);
+    }
+
+    const validateErrorStudEmail = await validateStudEmail(email)
+    if(validateErrorStudEmail){
+      return res.status(400).json(validateErrorStudEmail)
     }
 
     const query = `UPDATE student SET name=?, email=?, phone=?, status=?, student_number=?, fk_id_class=? WHERE id_student=?`;

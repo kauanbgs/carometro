@@ -1,11 +1,8 @@
-module.exports = function validateInstructor(
+module.exports = async function validateInstructor(
   { name, email, password },
   isUpdate = false,
 ) {
   if (isUpdate) {
-    if (email) {
-      return { error: "Email cannot be updated" };
-    }
     if (!name || !password) {
       return { error: "All fields must be filled" };
     }
