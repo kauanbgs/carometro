@@ -1,6 +1,7 @@
 const connect = require("../connect");
 const bcrypt = require("bcrypt");
 const validateInstructor = require("../services/validateInstructor");
+const validateInstEmail = require("../services/validateInstEmail");
 
 const jwt = require("jsonwebtoken");
 
@@ -10,9 +11,14 @@ module.exports = class instructorController {
   static async createInstructor(req, res, next) {
     const { email, password, name, role } = req.body;
 
-    const validationError = validateInstructor(req.body);
-    if (validationError) {
-      return res.status(400).json(validationError);
+    const validationErrorInstructor = await validateInstructor(req.body);
+    if (validationErrorInstructor) {
+      return res.status(400).json(validationErrorInstructor);
+    }
+
+    const validationErrorEmailInst = await validateInstEmail(email);
+    if (validationErrorEmailInst) {
+      return res.status(400).json(validationErrorEmailInst);
     }
 
     try {
@@ -29,20 +35,15 @@ module.exports = class instructorController {
         values = [email, hash, name];
       }
 
-      connect.query(query, values, function (err, results) {
+      connect.query(query, values, (err) => {
         if (err) {
-          if (err.code === "ER_DUP_ENTRY" || err.errno === 1062) {
-            return res
-              .status(400)
-              .json({ error: "Email already being used by another user" });
-          }
-          return next(err);
+          console.error(err);
+          return res.status(500).json({ error: "Internal Server Error" });
         }
 
-        return res
-          .status(201)
-          .json({ message: "Instructor created successfully!" });
+        return res.status(201).json({ message: "Instructor created successfully" });
       });
+
     } catch (error) {
       next(error);
     }
@@ -116,9 +117,9 @@ module.exports = class instructorController {
     const { id_instructor } = req.params;
     const { password, name, role } = req.body;
 
-    const validationError = validateInstructor(req.body, true);
-    if (validationError) {
-      return res.status(400).json(validationError);
+    const validationErrorEmailInst = await validateInstEmail(email);
+    if (validationErrorEmailInst) {
+      return res.status(400).json(validationErrorEmailInst);
     }
 
     let query;

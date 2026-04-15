@@ -1,14 +1,16 @@
 //NAO USAR PRETTIER
 const connect = require("../connect");
+const validateClass = require("../services/validateClass");
 
 module.exports = class classController {
   static async createClass(req, res, next) {
     const { name, fk_id_instructor } = req.body;
-    if (!name || !fk_id_instructor) {
-      return res
-        .status(400)
-        .json({ error: "All fields must be filled" });
+
+    const validationErrorClass = validateClass(req.body);
+    if (validationErrorClass) {
+      return res.status(400).json(validationErrorClass);
     }
+    
     const query = "INSERT INTO class (name, fk_id_instructor) VALUES (?, ?)";
     const values = [name, fk_id_instructor];
 
@@ -84,7 +86,8 @@ module.exports = class classController {
     if (!name) {
       return res.status(400).json({ error: "Name of instructor is required!" });
     }
-    const query = "SELECT class.name, instructor.name as instructor_name, class.id_class FROM class JOIN instructor ON class.fk_id_instructor = instructor.id_instructor WHERE instructor.name LIKE ?";
+    const query =
+      "SELECT class.name, instructor.name as instructor_name, class.id_class FROM class JOIN instructor ON class.fk_id_instructor = instructor.id_instructor WHERE instructor.name LIKE ?";
     const values = [`%${name}%`];
     try {
       connect.query(query, values, function (err, results) {
@@ -97,9 +100,7 @@ module.exports = class classController {
             .status(404)
             .json({ message: "No class found for this instructor." });
         }
-        return res
-          .status(200)
-          .json({ classes: results });
+        return res.status(200).json({ classes: results });
       });
     } catch (error) {
       console.error(error);
@@ -109,7 +110,8 @@ module.exports = class classController {
 
   static async GetClassByName(req, res, next) {
     const { name } = req.params;
-    const query = "SELECT class.name, instructor.name as instructor_name, class.id_class FROM class JOIN instructor ON class.fk_id_instructor = instructor.id_instructor WHERE class.name LIKE ?";
+    const query =
+      "SELECT class.name, instructor.name as instructor_name, class.id_class FROM class JOIN instructor ON class.fk_id_instructor = instructor.id_instructor WHERE class.name LIKE ?";
     const values = [`%${name}%`];
     try {
       connect.query(query, values, function (err, results) {
@@ -122,9 +124,7 @@ module.exports = class classController {
             .status(404)
             .json({ message: "No class found with this name." });
         }
-        return res
-          .status(200)
-          .json({ classes: results });
+        return res.status(200).json({ classes: results });
       });
     } catch (error) {
       console.error(error);
@@ -133,16 +133,17 @@ module.exports = class classController {
   }
 
   static async updateClass(req, res, next) {
-    const { name } = req.body;
+    const { name, fk_id_instructor } = req.body;
     const { id_class } = req.params;
 
-    if (!name) {
-      return res
-        .status(400)
-        .json({ error: "All fields must be filled" });
+    const validationErrorClass = validateClass(req.body);
+    if (validationErrorClass) {
+      return res.status(400).json(validationErrorClass);
     }
-    const query = "UPDATE class SET name = ? WHERE id_class = ?";
-    const values = [name, id_class];
+
+    const query =
+      "UPDATE class SET name = ?, fk_id_instructor = ? WHERE id_class = ?";
+    const values = [name, fk_id_instructor, id_class];
     try {
       connect.query(query, values, function (err, results) {
         if (err) {
@@ -165,9 +166,7 @@ module.exports = class classController {
   static async deleteClass(req, res, next) {
     const id_class = req.params.id_class;
     if (!id_class) {
-      return res
-        .status(400)
-        .json({ error: "ID of class is required!" });
+      return res.status(400).json({ error: "ID of class is required!" });
     }
     const query = "DELETE FROM class WHERE id_class = ?";
     const values = [id_class];
