@@ -19,6 +19,7 @@ export default function Home() {
     const getOccurrences = () => {
         api.readOccurrences().then((response) => {
             const data = response.data;
+            console.log(data);
             setOccurrences(data.slice(0, 5));
         }).catch(() => setOccurrences([]));
     }
@@ -54,7 +55,7 @@ export default function Home() {
                         <div className="flex rounded-3xl gap-3 p-5 flex-col w-full bg-[var(--textoCinzaSuporte)]/10 h-full">
                             {occurrences.map((occurrence) => (
                                 <Logs key={occurrence.id_occurrence} color={occurrence.type}>
-                                    {occurrence.description}
+                                    {occurrence.instructor_name} - {occurrence.description}
                                 </Logs>
                             ))}
                         </div>

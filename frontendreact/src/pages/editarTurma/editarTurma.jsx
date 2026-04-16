@@ -10,12 +10,14 @@ import Modal from "../../components/modal";
 import { useState, useEffect } from "react";
 import api from "../../axios/axios";
 import { ChevronLeft } from "lucide-react";
+import { Snackbar } from "../../components/snackbar.jsx";
 
 export default function EditarTurma() {
     const [classes, setClasses] = useState([]);
     const [nomeDaTurma, setNomeDaTurma] = useState("");
     const [nomeDoProfessor, setNomeDoProfessor] = useState("");
     const [modalAberto, setModalAberto] = useState(false);
+    const [snackbar, setSnackbar] = useState({ message: "", type: "" });
 
     // Estado do formulário do modal
     const [novaTurma, setNovaTurma] = useState("");
@@ -55,7 +57,10 @@ export default function EditarTurma() {
     }
 
     function criarTurma() {
-        if (!novaTurma.trim() || !instrutorSelecionado) return;
+        if (!novaTurma.trim() || !instrutorSelecionado) {
+            setSnackbar({ message: "Preencha todos os campos", type: "error" });
+            return;
+        }
 
         api.postCriarTurma({
             name: novaTurma,
@@ -67,14 +72,21 @@ export default function EditarTurma() {
             api.getTurmas().then((response) => {
                 setClasses(response.data.classes || []);
             }).catch(() => setClasses([]));
+            setSnackbar({ message: "Turma criada com sucesso!", type: "success" });
         }).catch((err) => {
-            alert(err.response?.data?.error || "Erro ao criar turma");
+            setSnackbar({ message: err.response?.data?.error || "Erro ao criar turma", type: "error" });
         });
     }
 
     return (
         <div className="h-screen w-screen bg-[var(--back)] flex">
             <SideBar items={items} />
+            <Snackbar 
+                isOpen={snackbar.message !== ""} 
+                message={snackbar.message} 
+                type={snackbar.type} 
+                onClose={() => setSnackbar({ message: "", type: "" })} 
+            />
             <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-[var(--background)] rounded-l-3xl">
                 <div className="flex items-center gap-2">
                     <ChevronLeft className="w-6 h-6 cursor-pointer" onClick={() => window.history.back()} />

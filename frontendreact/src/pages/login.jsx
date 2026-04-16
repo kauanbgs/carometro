@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../axios/axios.js";
 import Text from "../components/text.jsx";
 import { Link } from "react-router-dom";
+import { Snackbar } from "../components/snackbar.jsx";
 
 
 export default function Login() {
@@ -17,6 +18,7 @@ export default function Login() {
   const [feedback, setFeedback] = useState({ message: "", type: "" });
 
   const navigate = useNavigate();
+  const [snackbar, setSnackbar] = useState({ message: "", type: "" });
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -26,10 +28,10 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setFeedback({ message: "", type: "" });
+    setSnackbar({ message: "", type: "" });
     try {
       const response = await api.postLogin(user);
-      setFeedback({
+      setSnackbar({
         message: response.data.message || "Login realizado com sucesso!",
         type: "success"
       });
@@ -37,12 +39,18 @@ export default function Login() {
     } catch (error) {
       const msgErro =
         error.response.data.error || "Erro ao conectar com o servidor.";
-      setFeedback({ message: msgErro, type: "error" });
+      setSnackbar({ message: msgErro, type: "error" });
     }
   };
 
   return (
     <div className="bg-[url('/FundoLogin.png')] bg-cover bg-center min-h-screen items-center flex align-center justify-center flex-col">
+      <Snackbar 
+        isOpen={snackbar.message !== ""} 
+        message={snackbar.message} 
+        type={snackbar.type} 
+        onClose={() => setSnackbar({ message: "", type: "" })} 
+      />
       <main className="w-[31%] bg-white rounded-lg items-center align-center justify-center min-h-125 w-[80%] max-w-105">
         <div className="flex flex-col items-center justify-center p-10">
           <img src="/LogoCarometro-v2.png" alt="" className="w-48" />
@@ -79,13 +87,6 @@ export default function Login() {
               Recuperar senha
             </Link>
           </Text>
-          <div className="min-h-[1.25rem] mt-2">
-            {feedback.message && (
-              <span className={`text-sm ${feedback.type === "error" ? "text-red-500" : "text-green-500"}`}>
-                {feedback.message}
-              </span>
-            )}
-          </div>
         </form>
         <div className="flex flex-col p-7 justify-center items-center gap-12">
           <Text variant="text" className="text-sm mt-8 ">
