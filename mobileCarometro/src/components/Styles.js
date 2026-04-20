@@ -1,5 +1,4 @@
 import { StyleSheet, Platform } from "react-native";
-import GerenciarDocentes from "../screens/GerenciarDocentesScreen";
 
 export default StyleSheet.create({
 
@@ -330,7 +329,7 @@ export default StyleSheet.create({
   // Usa primaryButton, titleMedium, textNormal
   titulo: {
     fontSize: 30,
-    fontWeight: "500",
+    fontWeight: "400",
     color: "#333"
   },
   texto: {

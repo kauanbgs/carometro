@@ -42,9 +42,7 @@ export default function DeleteDocente({ navigation }) {
   }
   return (
     <View style={styles.pageContainer}>
-      <View style={styles.header}>
-        <Header navigation={navigation} />
-      </View>
+      <Header navigation={navigation} />
 
       <View style={styles.pageContent}>
         <Text style={styles.titleMedium}>Removendo Docente</Text>
