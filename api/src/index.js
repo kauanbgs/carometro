@@ -21,8 +21,8 @@ class appcontroler {
   exceptionHandler() {
     this.express.use((err, req, res, next) => {
       console.log(err);
-      res
-        .status(err.status || 500)
+      return res
+        .status(500)
         .json({ error: err.message || "Erro interno de servidor!" });
     });
   }

@@ -10,7 +10,7 @@ const items = [
         icon: UsersRound,
         dad: "Alunos",
         label: "Gerenciar Turmas",
-        to: "/gerenciarTurmas"
+        to: "/editarTurma"
     },
     {
         icon: GraduationCap,

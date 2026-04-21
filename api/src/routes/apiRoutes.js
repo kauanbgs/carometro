@@ -27,12 +27,12 @@ router.get("/student/class/:fk_id_class", studentController.getStudentsByClass);
 //      CONTROLLER class       //
 router.post("/class", classController.createClass);
 router.get("/class", classController.readClass);
-router.get("/class/id/:id_class", classController.readClassByID);
-router.get("/class/instructor/:fk_id_instructor", classController.getClassByInstructorID);
+router.get("/class/:id_class", classController.readClassByID);
+router.get("/class/instructor/:name", classController.getClassByInstructorName);
 router.get("/class/name/:name", classController.GetClassByName);
 router.get("/class/instructors", classController.readClassInstructor);
 router.get("/class/student", classController.readStudentsClass);
-router.put("/class/id/:id_class", classController.updateClass);
+router.put("/class/:id_class", classController.updateClass);
 router.delete("/class/:id_class", classController.deleteClass);
 
 //      CONTROLLER occurrence       //
@@ -40,6 +40,7 @@ router.post("/occurrence", occurrenceController.createOccurrence);
 router.get("/occurrence", occurrenceController.readOccurrences);
 router.get("/occurrence/:fk_id_student",occurrenceController.getOccurrenceByStudentId
 );
+router.get("/occurrence/id/:id_occurrence", occurrenceController.getOccurrenceById);
 router.put("/occurrence/:id_occurrence", occurrenceController.updateOccurrence);
 router.delete("/occurrence/:id_occurrence",occurrenceController.deleteOccurrence);
 

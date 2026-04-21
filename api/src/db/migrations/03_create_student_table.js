@@ -4,7 +4,7 @@ exports.up = function(knex) {
       table.string('name', 100).notNullable();
       table.string('email', 150).unique().notNullable();
       table.string('phone', 11).notNullable();
-      table.timestamp('create_date').defaultTo(knex.fn.now()).notNullable() ;
+      table.timestamp('create_date').defaultTo(knex.fn.now()) ;
       table.boolean('status').defaultTo(1).notNullable();
       table.integer('student_number').notNullable();
       table.integer('fk_id_class').unsigned().notNullable();

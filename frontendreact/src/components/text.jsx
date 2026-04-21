@@ -1,4 +1,5 @@
 const variants = {
+    megaTitle: "text-3xl font-normal",
     title: "text-xl font-semibold",
     subtitle: "text-lg font-normal",
     text: "text-sm font-normal",
@@ -15,7 +16,7 @@ const colorMap = {
 
 export default function Text({ variant, children, color = 'preto', className = "" }) {
     return (
-        <p className={`${variants[variant]} ${colorMap[color]} ${className}`}>
+        <p className={`${className} ${variants[variant]} ${colorMap[color]}`}>
             {children}
         </p>
     )

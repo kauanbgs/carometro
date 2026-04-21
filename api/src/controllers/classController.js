@@ -35,7 +35,7 @@ module.exports = class classController {
 
   static async readClass(req, res, next) {
     const query = `
-      SELECT class.name as name_class, instructor.name as name_instructor, class.id_class as id_class 
+      SELECT class.name, instructor.name as instructor_name, class.id_class 
       FROM class 
       JOIN instructor ON class.fk_id_instructor = instructor.id_instructor
     `;
@@ -45,7 +45,7 @@ module.exports = class classController {
           console.error(err);
           return next(err);
         }
-        return res.status(200).json(results);
+        return res.status(200).json({ classes: results });
       });
     } catch (error) {
       console.error(error);
@@ -54,7 +54,7 @@ module.exports = class classController {
   }
 
   static async readClassByID(req, res, next) {
-    const { id_class } = req.query;
+    const { id_class } = req.params;
     if (!id_class) {
       return res.status(400).json({ error: "ID of class is required!" });
     }
@@ -65,13 +65,13 @@ module.exports = class classController {
       WHERE class.id_class = ?
     `;
     const values = [id_class];
-    try {
+    try {``
       connect.query(query, values, function (err, results) {
         if (err) {
           console.error(err);
           return next(err);
         }
-        return res.status(200).json(results);
+        return res.status(200).json({ class: results[0] });
       });
     } catch (error) {
       console.error(error);
@@ -79,13 +79,13 @@ module.exports = class classController {
     }
   }
 
-  static async getClassByInstructorID(req, res, next) {
-    const { fk_id_instructor } = req.params;
-    if (!fk_id_instructor) {
-      return res.status(400).json({ error: "ID of instructor is required!" });
+  static async getClassByInstructorName(req, res, next) {
+    const { name } = req.params;
+    if (!name) {
+      return res.status(400).json({ error: "Name of instructor is required!" });
     }
-    const query = "SELECT * FROM class WHERE fk_id_instructor = ?";
-    const values = [fk_id_instructor];
+    const query = "SELECT class.name, instructor.name as instructor_name, class.id_class FROM class JOIN instructor ON class.fk_id_instructor = instructor.id_instructor WHERE instructor.name LIKE ?";
+    const values = [`%${name}%`];
     try {
       connect.query(query, values, function (err, results) {
         if (err) {
@@ -99,7 +99,7 @@ module.exports = class classController {
         }
         return res
           .status(200)
-          .json({ message: "class found:", classs: results });
+          .json({ classes: results });
       });
     } catch (error) {
       console.error(error);
@@ -109,7 +109,7 @@ module.exports = class classController {
 
   static async GetClassByName(req, res, next) {
     const { name } = req.params;
-    const query = "SELECT * FROM class WHERE name LIKE ?";
+    const query = "SELECT class.name, instructor.name as instructor_name, class.id_class FROM class JOIN instructor ON class.fk_id_instructor = instructor.id_instructor WHERE class.name LIKE ?";
     const values = [`%${name}%`];
     try {
       connect.query(query, values, function (err, results) {
@@ -124,7 +124,7 @@ module.exports = class classController {
         }
         return res
           .status(200)
-          .json({ message: "class found:", classs: results });
+          .json({ classes: results });
       });
     } catch (error) {
       console.error(error);

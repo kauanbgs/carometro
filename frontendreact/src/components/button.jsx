@@ -7,13 +7,21 @@ const colorMap = {
         fill: "bg-[var(--azulSecundario)] text-white hover:bg-[var(--azulSecundario)]/80 active:bg-[var(--azulSecundario)]/95",
         outline: "border-1 border-[var(--azulSecundario)] text-[var(--azulSecundario)] hover:bg-[var(--azulSecundario)] hover:text-white",
     },
+    laranjaSecundario: {
+        fill: "bg-[var(--laranjaSecundario)] text-black hover:bg-[var(--laranjaSecundario)]/80 active:bg-[var(--laranjaSecundario)]/95",
+        outline: "border-1 border-[var(--laranjaSecundario)] text-[var(--laranjaSecundario)] hover:bg-[var(--laranjaSecundario)] hover:text-white",
+    },
     erro: {
         fill: "bg-[var(--erro)] text-white hover:bg-[var(--erro)]/80 active:bg-[var(--erro)]/95",
         outline: "border-1 border-[var(--erro)] text-[var(--erro)] hover:bg-[var(--erro)] hover:text-white",
     },
+    preto: {
+        fill: "bg-black text-white hover:bg-black/80 active:bg-black/95",
+        outline: "border-1 border-black text-black hover:bg-black hover:text-white",
+    }
 }
 
-export default function Button({ text, onClick, fill, color = "azulPrincipal", type = "submit", className }) {
+export default function Button({ rounded = "full", text, onClick, fill, color = "azulPrincipal", type = "submit", className }) {
     const variant = fill ? "fill" : "outline"
     const colorClass = colorMap[color]?.[variant] ?? colorMap.azulPrincipal[variant]
 
@@ -21,7 +29,7 @@ export default function Button({ text, onClick, fill, color = "azulPrincipal", t
         <button
             onClick={onClick}
             type={type}
-            className={`${colorClass} p-2 rounded-full cursor-pointer transition-all duration-200 ${className}`}
+            className={`${colorClass} p-2 rounded-${rounded} cursor-pointer transition-all duration-200 ${className}`}
         >
             {text}
         </button>
