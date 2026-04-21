@@ -45,11 +45,6 @@ module.exports = class studentController {
           console.error(err);
           return next(err);
         }
-        if (results.length === 0) {
-          return res
-            .status(404)
-            .json({ error: "Students not found" });
-        }
         return res
           .status(200)
           .json({ students: results });

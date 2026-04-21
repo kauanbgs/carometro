@@ -12,11 +12,14 @@ import Modal from "../../components/modal";
 import api from "../../axios/axios";
 import { ChevronLeft } from "lucide-react"; 
 import { Snackbar } from "../../components/snackbar";
+import { useNavigate } from "react-router-dom";
 
 export default function VerTurma() {
+    const navigate = useNavigate();
     const { id_class } = useParams();
     const [students, setStudents] = useState([]);
     const [nomeDaTurma, setNomeDaTurma] = useState("");
+    const [turma, setTurma] = useState({});
     const [aluno, setAluno] = useState({
         name: "",
         email: "",
@@ -34,14 +37,16 @@ export default function VerTurma() {
     useEffect(() => {
         api.getAlunosByTurma(id_class).then((response) => {
             const data = response.data;
-            console.log(data);
             setStudents(data.students || []);
         }).catch(() => setStudents([]));
         api.getTurmaById(id_class).then((response) => {
             const data = response.data.class;
-            console.log(data);
             setNomeDaTurma(data.name_class || "oii");
         }).catch(() => setNomeDaTurma(""));
+        api.getTurmaById(id_class).then((response) => {
+            const data = response.data.class;
+            setTurma(data || {});
+        }).catch(() => setTurma({}));
     }, [id_class]);
 
     const handleSearch = () => {
@@ -88,7 +93,20 @@ export default function VerTurma() {
             setSnackbar({ isOpen: true, message: error.response?.data?.error || "Erro ao criar aluno", type: "error" });
         });
     }
+
+    const handleDeleteTurma = async () => {
+        await api.deleteTurma(id_class).then((response) => {
+            setSnackbar({ isOpen: true, message: response?.data?.message || "Turma deletada com sucesso", type: "success" });
+            setTimeout(() => {
+                navigate("/editarTurma");
+            }, 1000);
+        }).catch((error) => {
+            setSnackbar({ isOpen: true, message: error.response?.data?.error || "Erro ao deletar turma", type: "error" });
+        });
+    }
+
     const [modalAberto, setModalAberto] = useState(false);
+    const [modalDeletarAberto, setModalDeletarAberto] = useState(false);
 
     return (
         <div className="h-screen w-screen bg-[var(--back)] flex">
@@ -149,8 +167,31 @@ export default function VerTurma() {
                                     </div>
                                 </div>
                             </Modal>
+                            <Modal isOpen={modalDeletarAberto} onClose={() => setModalDeletarAberto(false)} title="Deletar Turma">
+                                <div className="flex flex-col gap-4">
+                                                    <Text variant="text">
+                                                        Tem certeza que deseja excluir a turma <span className="font-bold">{nomeDaTurma}</span>? 
+                                                        Esta ação não pode ser desfeita.
+                                                    </Text>
+                                                    <div className="flex justify-end gap-3 mt-2">
+                                                        <Button 
+                                                            color="preto" 
+                                                            rounded="lg" 
+                                                            text="Cancelar" 
+                                                            onClick={() => setModalDeletarAberto(false)} 
+                                                        />
+                                                        <Button 
+                                                            color="erro" 
+                                                            fill 
+                                                            rounded="lg" 
+                                                            text="Excluir" 
+                                                            onClick={handleDeleteTurma} 
+                                                        />
+                                                    </div>
+                                                </div>
+                            </Modal>
                 <div className="flex items-center gap-2">
-                    <ChevronLeft className="w-6 h-6 cursor-pointer" onClick={() => window.history.back()} />
+                    <ChevronLeft className="w-6 h-6 cursor-pointer" onClick={() => navigate("/editarTurma")} />
                     <Text variant="title">{nomeDaTurma}</Text>
                 </div>
                 
@@ -161,9 +202,10 @@ export default function VerTurma() {
                         <Search className="text-white w-6 h-6" />
                     </button>
                     <Button color="preto" text="Adicionar Aluno" className="rounded-lg" onClick={() => setModalAberto(true)} />
+                    <Button color="erro" text="Excluir Turma" className="rounded-lg" onClick={() => setModalDeletarAberto(true)} />
                 </div>
 
-                <StudentList students={students} />
+                <StudentList students={students} onDeleteSuccess={handleSearch} />
             </main>
             <Snackbar 
                 isOpen={snackbar.isOpen} 

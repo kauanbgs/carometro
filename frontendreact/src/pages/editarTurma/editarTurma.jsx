@@ -11,8 +11,13 @@ import { useState, useEffect } from "react";
 import api from "../../axios/axios";
 import { ChevronLeft } from "lucide-react";
 import { Snackbar } from "../../components/snackbar.jsx";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function EditarTurma() {
+
+    const navigate = useNavigate();
+    const { criar } = useLocation().state || { };
+    
     const [classes, setClasses] = useState([]);
     const [nomeDaTurma, setNomeDaTurma] = useState("");
     const [nomeDoProfessor, setNomeDoProfessor] = useState("");
@@ -37,6 +42,12 @@ export default function EditarTurma() {
             }).catch(() => setInstrutores([]));
         }
     }, [modalAberto]);
+
+    useEffect(() => {
+        if (criar) {
+            setModalAberto(true);
+        }
+    }, []);
 
     function buscar() {
         if (nomeDaTurma.trim()) {
@@ -89,7 +100,7 @@ export default function EditarTurma() {
             />
             <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-[var(--background)] rounded-l-3xl">
                 <div className="flex items-center gap-2">
-                    <ChevronLeft className="w-6 h-6 cursor-pointer" onClick={() => window.history.back()} />
+                    <ChevronLeft className="w-6 h-6 cursor-pointer" onClick={() => navigate("/home")} />
                     <Text variant="title">Gerenciar Turmas</Text>
                 </div>
                 
@@ -102,10 +113,9 @@ export default function EditarTurma() {
                     <Button color="preto" rounded="lg" text="Criar Turma" onClick={() => setModalAberto(true)} />
                 </div>
 
-                <List classes={classes} />
+                <List classes={classes} onDeleteSuccess={buscar} />
             </main>
 
-            {/* Modal Criar Turma */}
             <Modal isOpen={modalAberto} onClose={() => setModalAberto(false)} title="Criar Turma">
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-col gap-1.5">

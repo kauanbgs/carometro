@@ -10,13 +10,15 @@ import EditarTurma from "./pages/editarTurma/editarTurma"
 import VerTurma from "./pages/verTurma/verTurma"
 import CadastroTemp from "./pages/cadastrotemp/cadastroTemp"
 import Aluno from "./pages/aluno/aluno"
+import Suporte from "./pages/suporte/suporte"
 
 
 function App() {
-
+  const token = localStorage.getItem("token");
   return (
     <div>
       <BrowserRouter>
+        {token ? (
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
@@ -28,7 +30,15 @@ function App() {
           <Route path="/cadastrotemp" element={<CadastroTemp />} />
           <Route path="/aluno/:id_student" element={<Aluno />} />
           <Route path="*" element={<Page404 />} />
+          <Route path="/suporte" element={<Suporte />} />
         </Routes>
+      ) : (
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="*" element={<Login />} />
+          <Route path="/suporte" element={<Suporte />} />
+        </Routes>
+      )}
       </BrowserRouter>
     </div>
   )

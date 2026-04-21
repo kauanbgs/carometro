@@ -40,6 +40,7 @@ module.exports = class classController {
       SELECT class.name, instructor.name as instructor_name, class.id_class 
       FROM class 
       JOIN instructor ON class.fk_id_instructor = instructor.id_instructor
+      ORDER BY class.id_class DESC
     `;
     try {
       connect.query(query, function (err, results) {

@@ -1,6 +1,18 @@
 import Text from "./text";
 import { ChevronDown } from "lucide-react";
 
+const getColorByType = (type) => {
+    switch (type) {
+        case "falta":
+            return "bg-red-500 text-white";
+        case "atraso":
+            return "bg-yellow-500 text-yellow-900";
+        default:
+            return "bg-gray-200 text-gray-800";
+    }
+};
+
+
 export default function Occurrence({ message, id_occurrence, type, onClick }) {
     return (
         <div

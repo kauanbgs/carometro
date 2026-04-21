@@ -1,7 +1,13 @@
 const jwt = require("jsonwebtoken");
 
 function verifyJWT(req, res, next) {
-  const token = req.headers["authorization"];
+  const authHeader = req.headers["authorization"];
+
+  if (!authHeader) {
+    return res.status(401).json({ auth: false, message: "Token não fornecido!" });
+  }
+
+  const token = authHeader.split(' ')[1];
 
   if (!token) {
     return res

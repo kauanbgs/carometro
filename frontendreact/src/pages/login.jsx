@@ -35,7 +35,10 @@ export default function Login() {
         message: response.data.message || "Login realizado com sucesso!",
         type: "success"
       });
-      setTimeout(() => navigate("/home"), 1000); // Vai deixar o usuário ver a mensagem por 1seg
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.instructor));
+      navigate("/home");
+      window.location.reload();
     } catch (error) {
       const msgErro =
         error.response.data.error || "Erro ao conectar com o servidor.";
@@ -45,11 +48,11 @@ export default function Login() {
 
   return (
     <div className="bg-[url('/FundoLogin.png')] bg-cover bg-center min-h-screen items-center flex align-center justify-center flex-col">
-      <Snackbar 
-        isOpen={snackbar.message !== ""} 
-        message={snackbar.message} 
-        type={snackbar.type} 
-        onClose={() => setSnackbar({ message: "", type: "" })} 
+      <Snackbar
+        isOpen={snackbar.message !== ""}
+        message={snackbar.message}
+        type={snackbar.type}
+        onClose={() => setSnackbar({ message: "", type: "" })}
       />
       <main className="w-[31%] bg-white rounded-lg items-center align-center justify-center min-h-125 w-[80%] max-w-105">
         <div className="flex flex-col items-center justify-center p-10">
@@ -83,7 +86,7 @@ export default function Login() {
           <Button type="submit" text="Entrar" fill className="w-full" />
           <Text variant="text" className="mt-4">
             Esqueceu sua senha?{" "}
-            <Link to="/" className="text-[var(--azulPrincipal)] cursor-pointer hover:underline">
+            <Link to="/suporte" className="text-[var(--azulPrincipal)] cursor-pointer hover:underline">
               Recuperar senha
             </Link>
           </Text>
@@ -91,7 +94,7 @@ export default function Login() {
         <div className="flex flex-col p-7 justify-center items-center gap-12">
           <Text variant="text" className="text-sm mt-8 ">
             Não tem uma conta?{" "}
-            <Link to="/" className="text-[var(--azulPrincipal)] cursor-pointer hover:underline">
+            <Link to="/suporte" className="text-[var(--azulPrincipal)] cursor-pointer hover:underline">
               Cadastre-se
             </Link>
             <Link to="/cadastrotemp" className="text-[var(--azulPrincipal)] cursor-pointer hover:underline">

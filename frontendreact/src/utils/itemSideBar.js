@@ -1,4 +1,4 @@
-import { House, UsersRound, GraduationCap, Shield } from 'lucide-react';
+import { House, UsersRound, GraduationCap } from 'lucide-react';
 
 const items = [
     {
@@ -17,13 +17,8 @@ const items = [
         dad: "Docentes",
         label: "Gerenciar Docentes",
         to: "/gerenciarDocentes"
-    },
-    {
-        icon: Shield,
-        dad: "Dev",
-        label: "Gerenciar Desenvolvedores",
-        to: "/gerenciarDesenvolvedores"
     }
+
 ];
 
 export default items;

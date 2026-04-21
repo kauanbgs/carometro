@@ -222,15 +222,14 @@ module.exports = class instructorController {
           const token = jwt.sign(
             { id_instructor: instructor.id_instructor },
             process.env.SECRET,
-            /* O secret vai decodificar e codificar, isso evita invasões com token de outras pessoas */ {
+            {
               expiresIn: "24h",
             },
           );
-          // Remover o atributo senha do objeto user
           delete instructor.password;
           return res
             .status(200)
-            .json({ message: "Successful login", instructor, token });
+            .json({ message: "Successful login", token, instructor });
         }
       });
     } catch (error) {

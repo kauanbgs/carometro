@@ -26,23 +26,22 @@ router.delete("/student/:id_student", verifyJWT, studentController.deleteStudent
 router.get("/student/class/:fk_id_class", verifyJWT, studentController.getStudentsByClass);
 
 //      CONTROLLER class       //
-router.post("/class", classController.createClass);
-router.get("/class", classController.readClass);
-router.get("/class/:id_class", classController.readClassByID);
-router.get("/class/instructor/:name", classController.getClassByInstructorName);
-router.get("/class/name/:name", classController.GetClassByName);
-router.get("/class/instructors", classController.readClassInstructor);
-router.get("/class/student", classController.readStudentsClass);
-router.put("/class/:id_class", classController.updateClass);
-router.delete("/class/:id_class", classController.deleteClass);
+router.post("/class", verifyJWT, classController.createClass);
+router.get("/class", verifyJWT, classController.readClass);
+router.get("/class/:id_class", verifyJWT, classController.readClassByID);
+router.get("/class/instructor/:name", verifyJWT, classController.getClassByInstructorName);
+router.get("/class/name/:name", verifyJWT, classController.GetClassByName);
+router.get("/class/instructors", verifyJWT, classController.readClassInstructor);
+router.get("/class/student", verifyJWT, classController.readStudentsClass);
+router.put("/class/:id_class", verifyJWT, classController.updateClass);
+router.delete("/class/:id_class", verifyJWT, classController.deleteClass);
 
 //      CONTROLLER occurrence       //
-router.post("/occurrence", occurrenceController.createOccurrence);
-router.get("/occurrence", occurrenceController.readOccurrences);
-router.get("/occurrence/:fk_id_student",occurrenceController.getOccurrenceByStudentId
-);
-router.get("/occurrence/id/:id_occurrence", occurrenceController.getOccurrenceById);
-router.put("/occurrence/:id_occurrence", occurrenceController.updateOccurrence);
-router.delete("/occurrence/:id_occurrence",occurrenceController.deleteOccurrence);
+router.post("/occurrence", verifyJWT, occurrenceController.createOccurrence);
+router.get("/occurrence", verifyJWT, occurrenceController.readOccurrences);
+router.get("/occurrence/:fk_id_student",verifyJWT, occurrenceController.getOccurrenceByStudentId);
+router.get("/occurrence/id/:id_occurrence", verifyJWT, occurrenceController.getOccurrenceById);
+router.put("/occurrence/:id_occurrence", verifyJWT, occurrenceController.updateOccurrence);
+router.delete("/occurrence/:id_occurrence", verifyJWT, occurrenceController.deleteOccurrence);
 
 module.exports = router;

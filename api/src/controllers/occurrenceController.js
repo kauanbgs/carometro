@@ -36,9 +36,6 @@ module.exports = class OccurrenceController {
         if (err) {
           return next(err);
         }
-        if (results.length === 0) {
-          return res.status(404).json({ error: "No occurrences registered!" });
-        }
         return res.status(200).json({ occurrences: results });
       });
     } catch (error) {
@@ -56,9 +53,6 @@ module.exports = class OccurrenceController {
         if (err) {
           return next(err);
         }
-        if (results.length === 0) {
-          return res.status(404).json({ error: "No occurrences registered!" });
-        }
         return res.status(200).json({ occurrences: results });
       });
     } catch (error) {
@@ -67,14 +61,18 @@ module.exports = class OccurrenceController {
   }
 
   static async readOccurrences(req, res, next) {
-    const query = "SELECT * FROM occurrence";
+    const query = `
+      SELECT o.*, i.name as instructor_name, s.name as student_name 
+      FROM occurrence o 
+      JOIN occurrence_log ol ON o.id_occurrence = ol.fk_id_occurrence 
+      JOIN instructor i ON ol.fk_id_instructor = i.id_instructor
+      JOIN student s ON o.fk_id_student = s.id_student
+      ORDER BY o.create_date DESC
+    `;
     try {
       connect.query(query, function (err, results) {
         if (err) {
           return next(err);
-        }
-        if (results.length === 0) {
-          return res.status(404).json({ error: "No occurrences registered!" });
         }
         return res.status(200).json(results);
       });

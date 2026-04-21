@@ -1,10 +1,11 @@
 import { House, UsersRound, GraduationCap, Shield, User, LogOut } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Text from './text';
 import { useState } from 'react';
 
 export default function SideBar({ items }) {
     const [showLogout, setShowLogout] = useState(false);
+    const navigate = useNavigate();
 
     return (
         <div className="w-16 md:w-[22%] lg:w-[20%] bg-[var(--background)] flex flex-col h-screen fixed left-0 top-0 md:rounded-r-3xl z-50">
@@ -36,7 +37,10 @@ export default function SideBar({ items }) {
                     <div 
                         className="absolute bottom-full mb-2 left-2 md:left-4 right-2 md:right-4 bg-white shadow-md rounded-xl flex items-center justify-center md:justify-start gap-2 p-3 cursor-pointer hover:bg-gray-50 transition-colors"
                         onClick={() => {
-                            window.location.href = "/"; //aqui vai a lógica de logout!!!!
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("user");
+                            navigate("/");
+                            window.location.reload();
                         }}
                     >
                         <LogOut className="w-5 h-5 text-red-500 shrink-0" />
@@ -52,8 +56,8 @@ export default function SideBar({ items }) {
                         <User className="w-5 h-5 text-gray-500" />
                     </div>
                     <div className="hidden md:flex flex-col truncate">
-                        <Text variant="text" className="font-semibold text-sm truncate">Kauan Plaza</Text>
-                        <Text variant="text" className="text-xs text-gray-500 truncate">kauan@exemplo.com</Text>
+                        <Text variant="text" className="font-semibold text-sm truncate">{JSON.parse(localStorage.getItem("user")).name}</Text>
+                        <Text variant="text" className="text-xs text-gray-500 truncate">{JSON.parse(localStorage.getItem("user")).email}</Text>
                     </div>
                 </div>
             </div>

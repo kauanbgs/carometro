@@ -31,7 +31,7 @@ export default function Aluno() {
         type: "",
         description: "",
         fk_id_student: id_student,
-        fk_id_instructor: 1 //precisa pegar do localStorage
+        fk_id_instructor: JSON.parse(localStorage.getItem("user")).id_instructor
     });
     const [occurrences, setOccurrences] = useState([]);
     const [selectedOccurrence, setSelectedOccurrence] = useState(null);
@@ -45,6 +45,7 @@ export default function Aluno() {
             try {
                 const response = await api.getAlunoById(id_student);
                 const data = response.data.students[0];
+                console.log(response.data)
                 setStudent(data);
                 setFormData({
                     name: data.name,
