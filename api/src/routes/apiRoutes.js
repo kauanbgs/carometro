@@ -3,7 +3,9 @@ const studentController = require("../controllers/studentController");
 const instructorController = require("../controllers/instructorController");
 const classController = require("../controllers/classController");
 const occurrenceController = require("../controllers/occurrenceController");
-const verifyJWT = require("../middlewares/verifyJWT")
+const verifyJWT = require("../middlewares/verifyJWT");
+const { loginLimiter } = require("../middlewares/rateLimiter");
+
 
 
 
@@ -18,7 +20,7 @@ router.get("/google_classroom/students/:id_class/:id_instructor", instructorCont
 
 //      CONTROLLER instructor (INST & DEV)       //
 router.post("/instructor", instructorController.createInstructor);
-router.post("/instructor/login", instructorController.login);
+router.post("/instructor/login", loginLimiter, instructorController.login);
 router.get("/instructor", verifyJWT, instructorController.readInstructors);
 router.get("/instructor/:id_instructor", verifyJWT, instructorController.getInstructorById);
 router.get("/instructor/name/:name", verifyJWT,instructorController.getInstructorByName);
