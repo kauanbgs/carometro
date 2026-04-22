@@ -1,27 +1,25 @@
 const connect = require("../connect");
+const validateOccurrence = require("../services/validateOccurrence");
 
 module.exports = class OccurrenceController {
   static async createOccurrence(req, res, next) {
     let { type, description, fk_id_student, fk_id_instructor } = req.body;
-    if (!type || !description || !fk_id_student || !fk_id_instructor) {
-      return res.status(400).json({ error: "All fields must be filled" });
+
+    const validationOccurrenceError = await validateOccurrence(req.body);
+    if (validationOccurrenceError) {
+      return res.status(400).json(validationOccurrenceError);
     }
     const query = `CALL createOccurrence(?, ?, ?, ?)`;
     const values = [type, description, fk_id_student, fk_id_instructor];
 
     try {
-      connect.query(query, values, function (err, results) {
+      connect.query(query, values, (err) => {
         if (err) {
-          if (err.code === "ER_DUP_ENTRY") {
-            return res.status(409).json({
-              error: "Occurrence already registered. Try another.",
-            });
-          }
-          return next(err);
+          console.error(err);
+          return res.status(500).json({ error: "Internal Server Error" });
         }
-        return res.status(201).json({
-          message: "Occurrence created successfully (with procedure) ",
-        });
+
+        return res.status(201).json({ message: "Occurrence created successfully" });
       });
     } catch (error) {
       return next(error);
@@ -41,7 +39,27 @@ module.exports = class OccurrenceController {
         if (results.length === 0) {
           return res.status(404).json({ error: "No occurrences registered!" });
         }
-        return res.status(200).json(results);
+        return res.status(200).json({ occurrences: results });
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+
+  static async getOccurrenceById(req, res, next) {
+    const { id_occurrence } = req.params;
+    const query = "SELECT * FROM occurrence WHERE id_occurrence = ?";
+    const values = [id_occurrence];
+
+    try {
+      connect.query(query, values, function (err, results) {
+        if (err) {
+          return next(err);
+        }
+        if (results.length === 0) {
+          return res.status(404).json({ error: "No occurrences registered!" });
+        }
+        return res.status(200).json({ occurrences: results });
       });
     } catch (error) {
       return next(error);
@@ -68,8 +86,10 @@ module.exports = class OccurrenceController {
   static async updateOccurrence(req, res, next) {
     const { id_occurrence } = req.params;
     let { type, description, fk_id_student } = req.body;
-    if (!type || !description || !fk_id_student) {
-      return res.status(400).json({ error: "All fields must be filled" });
+
+    const validationOccurrenceError = await validateOccurrence(req.body, true);
+    if (validationOccurrenceError) {
+      return res.status(400).json(validationOccurrenceError);
     }
 
     const query =
@@ -86,7 +106,7 @@ module.exports = class OccurrenceController {
         }
         return res
           .status(200)
-          .json({ message: "Occurrence updated: ", id_occurrence });
+          .json({ message: "Occurrence updated successfully!", id_occurrence });
       });
     } catch (error) {
       return next(error);

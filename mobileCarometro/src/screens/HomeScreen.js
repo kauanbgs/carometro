@@ -1,11 +1,11 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import Header from "../components/Header";
 import styles from "../components/Styles";
 
 export default function Home({ navigation }) {
   return (
-    <View style={styles.pageContainer}>
+    <ScrollView style={styles.pageContainer}>
       <Header navigation={navigation} />
 
       <View style={styles.pageContent}>
@@ -19,7 +19,7 @@ export default function Home({ navigation }) {
 
         <TouchableOpacity
           style={styles.primaryButton}
-          onPress={() => navigation.navigate("Suporte")}
+          onPress={() => navigation.navigate("GerenciarTurma")}
         >
           <Text style={styles.buttonWhiteText}>Clique aqui e comece</Text>
         </TouchableOpacity>
@@ -36,13 +36,13 @@ export default function Home({ navigation }) {
 
         <TouchableOpacity
           style={styles.primaryButton}
-          onPress={() => navigation.navigate("Suporte")}
+          onPress={() => navigation.navigate("GerenciarTurma")}
         >
           <Text style={styles.buttonWhiteText}>Clique aqui e comece</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.footer} />
-    </View>
+    </ScrollView>
   );
 }

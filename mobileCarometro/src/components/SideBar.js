@@ -7,6 +7,7 @@ import {
   Image,
   Pressable,
   Modal,
+  ScrollView
 } from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 
@@ -33,7 +34,7 @@ export default function SideBar({ visible, onClose, navigation }) {
           </View>
 
           {/* Itens do Menu */}
-          <View style={styles.menu}>
+          <ScrollView style={styles.menu}>
             <TouchableOpacity
               style={styles.menuItem}
               onPress={() => {
@@ -53,7 +54,7 @@ export default function SideBar({ visible, onClose, navigation }) {
               style={styles.menuItem}
               onPress={() => {
                 onClose();
-                navigation.navigate("Suporte");
+                navigation.navigate("GerenciarTurma");
               }}
             >
               <MaterialIcons name="groups" size={26} color="#333" />
@@ -75,19 +76,7 @@ export default function SideBar({ visible, onClose, navigation }) {
               <Text style={styles.menuText}>Gerenciar Docente</Text>
             </TouchableOpacity>
 
-            <Text style={styles.sectionLabel}>DEV</Text>
-
-            <TouchableOpacity
-              style={styles.menuItem}
-              onPress={() => {
-                onClose();
-                navigation.navigate("GerenciarDocentes");
-              }}
-            >
-              <MaterialIcons name="groups" size={26} color="#333" />
-              <Text style={styles.menuText}>Criar ou Editar Docentes</Text>
-            </TouchableOpacity>
-          </View>
+          </ScrollView>
         </View>
 
         {/* Área fora da sidebar (clicar aqui fecha o menu) */}
