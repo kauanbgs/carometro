@@ -15,7 +15,6 @@ export default function Login() {
     password: "",
   });
 
-  const [feedback, setFeedback] = useState({ message: "", type: "" });
 
   const navigate = useNavigate();
   const [snackbar, setSnackbar] = useState({ message: "", type: "" });

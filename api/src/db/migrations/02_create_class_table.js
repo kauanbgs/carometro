@@ -3,7 +3,7 @@ exports.up = function(knex) {
       table.increments('id_class').primary();
       table.string('name', 100).notNullable();
       table.integer('fk_id_instructor').unsigned().notNullable();
-      table.foreign('fk_id_instructor').references('id_instructor').inTable('instructor');
+      table.foreign('fk_id_instructor').references('id_instructor').inTable('instructor').onDelete('CASCADE');
     });
   };
   

@@ -56,6 +56,13 @@ const sheets = {
     deleteOccurrence: (id_occurrence) => api.delete(`/occurrence/${id_occurrence}`),
     updateOccurrence: (id_occurrence, occurrence) => api.put(`/occurrence/${id_occurrence}`, occurrence),
 
+
+    // google classroom
+    getClassesGoogle: (id_instructor) => api.get(`/google_classroom/${id_instructor}`),
+    getAlunosByGClass: (id_class, id_instructor) => api.get(`/google_classroom/students/${id_class}/${id_instructor}`),
+    postDisconnectGoogle: (id_instructor) => api.post(`/auth/google/disconnect/${id_instructor}`)
+    
+
 }
 
 export default sheets

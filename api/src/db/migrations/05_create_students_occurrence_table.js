@@ -4,7 +4,7 @@ exports.up = function(knex) {
       table.integer('fk_id_occurrence').unsigned().notNullable();
       table.integer('fk_id_student').unsigned().notNullable();
       table.foreign('fk_id_occurrence').references('id_occurrence').inTable('occurrence').onDelete('CASCADE').onUpdate('CASCADE');
-      table.foreign('fk_id_student').references('id_student').inTable('student');
+      table.foreign('fk_id_student').references('id_student').inTable('student').onDelete('CASCADE');
     });
   };
   

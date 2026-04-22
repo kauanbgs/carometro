@@ -5,6 +5,17 @@ const classController = require("../controllers/classController");
 const occurrenceController = require("../controllers/occurrenceController");
 const verifyJWT = require("../middlewares/verifyJWT")
 
+
+
+
+//      LINK WITH GOOGLE       //
+router.get("/auth/google", instructorController.authGoogle);
+router.post("/auth/google/disconnect/:id_instructor", instructorController.disconnectGoogle);
+router.get("/auth/google/callback", instructorController.callbackGoogle);
+router.get("/google_classroom/:id_instructor", instructorController.googleClasses);
+router.get("/google_classroom/students/:id_class/:id_instructor", instructorController.googleStudents);
+
+
 //      CONTROLLER instructor (INST & DEV)       //
 router.post("/instructor", instructorController.createInstructor);
 router.post("/instructor/login", instructorController.login);

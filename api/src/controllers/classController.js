@@ -10,7 +10,7 @@ module.exports = class classController {
     if (validationErrorClass) {
       return res.status(400).json(validationErrorClass);
     }
-    
+
     const query = "INSERT INTO class (name, fk_id_instructor) VALUES (?, ?)";
     const values = [name, fk_id_instructor];
 
@@ -25,9 +25,7 @@ module.exports = class classController {
           console.error(err);
           return next(err);
         }
-        return res
-          .status(201)
-          .json({ message: "class registered successfully!" });
+        return res.status(201).json({ id_class: results.insertId });
       });
     } catch (error) {
       console.error(error);
@@ -68,7 +66,8 @@ module.exports = class classController {
       WHERE class.id_class = ?
     `;
     const values = [id_class];
-    try {``
+    try {
+      ``;
       connect.query(query, values, function (err, results) {
         if (err) {
           console.error(err);
@@ -87,7 +86,8 @@ module.exports = class classController {
     if (!name) {
       return res.status(400).json({ error: "Name of instructor is required!" });
     }
-    const query = "SELECT class.name, instructor.name as instructor_name, class.id_class FROM class JOIN instructor ON class.fk_id_instructor = instructor.id_instructor WHERE instructor.name LIKE ?";
+    const query =
+      "SELECT class.name, instructor.name as instructor_name, class.id_class FROM class JOIN instructor ON class.fk_id_instructor = instructor.id_instructor WHERE instructor.name LIKE ?";
     const values = [`%${name}%`];
     try {
       connect.query(query, values, function (err, results) {
@@ -100,9 +100,7 @@ module.exports = class classController {
             .status(404)
             .json({ message: "No class found for this instructor." });
         }
-        return res
-          .status(200)
-          .json({ classes: results });
+        return res.status(200).json({ classes: results });
       });
     } catch (error) {
       console.error(error);
@@ -112,7 +110,8 @@ module.exports = class classController {
 
   static async GetClassByName(req, res, next) {
     const { name } = req.params;
-    const query = "SELECT class.name, instructor.name as instructor_name, class.id_class FROM class JOIN instructor ON class.fk_id_instructor = instructor.id_instructor WHERE class.name LIKE ?";
+    const query =
+      "SELECT class.name, instructor.name as instructor_name, class.id_class FROM class JOIN instructor ON class.fk_id_instructor = instructor.id_instructor WHERE class.name LIKE ?";
     const values = [`%${name}%`];
     try {
       connect.query(query, values, function (err, results) {
@@ -125,9 +124,7 @@ module.exports = class classController {
             .status(404)
             .json({ message: "No class found with this name." });
         }
-        return res
-          .status(200)
-          .json({ classes: results });
+        return res.status(200).json({ classes: results });
       });
     } catch (error) {
       console.error(error);

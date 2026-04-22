@@ -15,8 +15,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 export default function EditarTurma() {
 
+    const user = JSON.parse(localStorage.getItem("user"));
+
     const navigate = useNavigate();
     const { criar } = useLocation().state || { };
+    let importar = false;
     
     const [classes, setClasses] = useState([]);
     const [nomeDaTurma, setNomeDaTurma] = useState("");
@@ -28,12 +31,23 @@ export default function EditarTurma() {
     const [novaTurma, setNovaTurma] = useState("");
     const [instrutores, setInstrutores] = useState([]);
     const [instrutorSelecionado, setInstrutorSelecionado] = useState("");
+    const [modalClassesAberto, setModalClassesAberto] = useState(false);
+    const [googleClasses, setGoogleClasses] = useState([]);
+    const [gClassSelecionada, setGClassSelecionada] = useState("");
+    const [gNomeDaTurma, setGNomeDaTurma] = useState("");
 
     useEffect(() => {
         api.getTurmas().then((response) => {
             setClasses(response.data.classes || []);
         }).catch(() => setClasses([]));
     }, []);
+
+    useEffect(()=>{
+        api.getClassesGoogle(user.id_instructor).then((response) => {
+            console.log(response.data)
+            setGoogleClasses(response.data || []);
+        }).catch(() => setGoogleClasses([]));
+    },[modalClassesAberto])
 
     useEffect(() => {
         if (modalAberto) {
@@ -86,6 +100,49 @@ export default function EditarTurma() {
             setSnackbar({ message: "Turma criada com sucesso!", type: "success" });
         }).catch((err) => {
             setSnackbar({ message: err.response?.data?.error || "Erro ao criar turma", type: "error" });
+        });
+    }
+
+    function handleImportarGClass(){
+        if (!gClassSelecionada) {
+            setSnackbar({ message: "Selecione uma turma", type: "error" });
+            return;
+        }
+
+        api.getAlunosByGClass(gClassSelecionada, user.id_instructor).then((response) => {
+            setModalClassesAberto(false);
+            setGClassSelecionada("");
+            api.postCriarTurma({
+                name: gNomeDaTurma,
+                fk_id_instructor: user.id_instructor,
+            }).then(async (resTurma) => {
+                const novaTurmaId = resTurma.data.id_class;
+                
+                const promisesAlunos = response.data.map((alunoGoogle, index) => {
+                    return api.createStudent({
+                        name: alunoGoogle.profile.name.fullName,
+                        email: null,
+                        phone: null,
+                        status: 1,
+                        student_number: index + 1,
+                        fk_id_class: novaTurmaId
+                    });
+                });
+
+                await Promise.all(promisesAlunos);
+
+                setModalAberto(false);
+                setNovaTurma("");
+                setInstrutorSelecionado("");
+                api.getTurmas().then((resTurmas) => {
+                    setClasses(resTurmas.data.classes || []);
+                }).catch(() => setClasses([]));
+                setSnackbar({ message: "Turma e alunos importados com sucesso!", type: "success" });
+            }).catch((err) => {
+                setSnackbar({ message: err.response?.data?.error || "Erro ao criar turma", type: "error" });
+            });
+        }).catch((err) => {
+            setSnackbar({ message: err.response?.data?.error || "Erro ao importar alunos", type: "error" });
         });
     }
 
@@ -147,10 +204,18 @@ export default function EditarTurma() {
                         <Button 
                             color="preto" 
                             rounded="lg" 
+                            text="Importar do Classroom" 
+                            type="button"
+                            onClick={() => {setModalClassesAberto(true)}} 
+                        />
+                        <Button 
+                            color="preto" 
+                            rounded="lg" 
                             text="Cancelar" 
                             type="button"
                             onClick={() => setModalAberto(false)} 
                         />
+                        
                         <Button 
                             color="azulPrincipal" 
                             fill 
@@ -159,6 +224,31 @@ export default function EditarTurma() {
                             type="button"
                             onClick={criarTurma} 
                         />
+                    </div>
+                </div>
+            </Modal>
+            <Modal isOpen={modalClassesAberto} onClose={() => setModalClassesAberto(false)} title="Turmas do Google Classroom">
+                <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-1.5">
+                        <select
+                            value={gClassSelecionada}
+                            onChange={(e) => {
+                                setGClassSelecionada(e.target.value);
+                                setGNomeDaTurma(e.target.options[e.target.selectedIndex].text);
+                            }}
+                            className="p-2 h-12 rounded-lg text-sm border border-zinc-300 bg-white focus:outline-none focus:border-[var(--azulPrincipal)]"
+                        >
+                            <option value="">Selecione uma turma</option>
+                            {googleClasses.map((gClass) => (
+                                <option key={gClass.id} value={gClass.id}>
+                                    {gClass.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="flex justify-end gap-3 mt-2">
+                        <Button color="preto" rounded="lg" text="Cancelar" type="button" onClick={() => setModalClassesAberto(false)} />
+                        <Button color="azulPrincipal" fill rounded="lg" text="Importar" type="button" onClick={() => {handleImportarGClass()}} />
                     </div>
                 </div>
             </Modal>

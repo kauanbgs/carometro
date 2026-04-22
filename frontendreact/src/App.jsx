@@ -11,6 +11,7 @@ import VerTurma from "./pages/verTurma/verTurma"
 import CadastroTemp from "./pages/cadastrotemp/cadastroTemp"
 import Aluno from "./pages/aluno/aluno"
 import Suporte from "./pages/suporte/suporte"
+import Conexoes from "./pages/gerenciarConexoes/conexoes"
 
 
 function App() {
@@ -29,14 +30,16 @@ function App() {
           <Route path="/verTurma/:id_class" element={<VerTurma />} />
           <Route path="/cadastrotemp" element={<CadastroTemp />} />
           <Route path="/aluno/:id_student" element={<Aluno />} />
-          <Route path="*" element={<Page404 />} />
           <Route path="/suporte" element={<Suporte />} />
+          <Route path="/conexoes" element={<Conexoes />} />
+          <Route path="*" element={<Page404 />} />
+
         </Routes>
       ) : (
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="*" element={<Login />} />
           <Route path="/suporte" element={<Suporte />} />
+          <Route path="*" element={<Login />} />
         </Routes>
       )}
       </BrowserRouter>

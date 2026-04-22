@@ -30,7 +30,6 @@ function verifyJWT(req, res, next) {
 
     req.userId = decoded.cpf;
     next();
-  
   });
 }
 
