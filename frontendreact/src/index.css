@@ -1,11 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
+@theme {
+  --color-back: var(--back);
+  --color-background: var(--background);
+  --color-textoPrincipal: var(--textoPrincipal);
+  --color-textoSecundario: var(--textoSecundario);
+  --color-textoSelecionado: var(--textoSelecionado);
+  --color-branco: var(--branco);
+  --color-azulPrincipal: var(--azulPrincipal);
+  --color-azulSecundario: var(--azulSecundario);
+  --color-laranjaPrincipal: var(--laranjaPrincipal);
+  --color-laranjaSecundario: var(--laranjaSecundario);
+  --color-erro: var(--erro);
+  --color-sucesso: var(--sucesso);
+  --color-preto: var(--preto);
+  --color-textoNotificacoes: var(--textoNotificacoes);
+}
+
 :root {
   --back: #e4e4e4;
   --background: #efefef;
-  --textoCinza: #f2f2f2;
-  --textoCinzaSuporte: #bababa;
+  --textoPrincipal: #000000;
+  --textoSecundario: #bababa;
   --textoSelecionado: #ffffff;
   --branco: #ffffff;
   --azulPrincipal: #2957a4;
@@ -16,15 +33,34 @@
   --sucesso: #caf6a7;
   --preto: #000000;
   --textoNotificacoes: #606060;
-  
-  font-family: 'Montserrat', sans-serif;  
+
+  font-family: 'Montserrat', sans-serif;
 }
+
+.dark {
+  --back: #282828;
+  --background: #303030;
+  --textoPrincipal: #ffffff;
+  --textoSecundario: #bababa;
+  --textoSelecionado: #ffffff;
+  --branco: #ffffff;
+  --azulPrincipal: #2a67d1;
+  --azulSecundario: #3879dc;
+  --laranjaPrincipal: #d95d36;
+  --laranjaSecundario: #df804d;
+  --erro: #f64949;
+  --sucesso: #caf6a7;
+  --preto: #000000;
+  --textoNotificacoes: #606060;
+}
+
 
 @keyframes modalIn {
   from {
     opacity: 0;
     transform: scale(0.95) translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);

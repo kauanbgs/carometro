@@ -42,9 +42,9 @@ export default function AdicionarDocente() {
     }
 
     return (
-        <div className="bg-[var(--back)] h-screen w-screen">
+        <div className="bg-back h-screen w-screen">
             <SideBar items={items} />
-            <main className="flex-1 w-78%] ml-[22%] p-10 bg-[var(--background)] h-full rounded-l-3xl">
+            <main className="flex-1 w-78%] ml-[22%] p-10 bg-background h-full rounded-l-3xl">
                 <div className="flex gap-2">
                     <Link className="flex gap-2" to="/gerenciarDocentes"> <ArrowLeft /> Voltar</Link>
                 </div>

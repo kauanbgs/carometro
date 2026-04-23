@@ -167,7 +167,7 @@ export default function EditarTurma() {
     }
 
     return (
-        <div className="h-screen w-screen bg-[var(--back)] flex">
+        <div className="h-screen w-screen bg-back flex">
             <SideBar items={items} />
             <Snackbar 
                 isOpen={snackbar.message !== ""} 
@@ -175,19 +175,19 @@ export default function EditarTurma() {
                 type={snackbar.type} 
                 onClose={() => setSnackbar({ message: "", type: "" })} 
             />
-            <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-[var(--background)] rounded-l-3xl">
+            <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-background rounded-l-3xl">
                 <div className="flex items-center gap-2">
-                    <ChevronLeft className="w-6 h-6 cursor-pointer" onClick={() => navigate("/home")} />
+                    <ChevronLeft className="w-6 h-6 cursor-pointer text-textoPrincipal" onClick={() => navigate("/home")} />
                     <Text variant="title">Gerenciar Turmas</Text>
                 </div>
                 
-                <div className="flex flex-wrap justify-start gap-5 items-center mt-5">
+                <div className="flex flex-wrap justify-start gap-5 items-center mt-5 text-textoPrincipal">
                     <Input placeholder="Nome da turma" value={nomeDaTurma} onChange={(e) => setNomeDaTurma(e.target.value)}/>
                     <Input placeholder="Professor" value={nomeDoProfessor} onChange={(e) => setNomeDoProfessor(e.target.value)}/>
-                    <button className="flex items-center gap-2 bg-gray-800 px-5 py-2.5 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors" onClick={buscar}>
-                        <Search className="text-white w-6 h-6" />
+                    <button className="flex items-center gap-2 bg-textoPrincipal/90 px-5 py-2.5 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors" onClick={buscar}>
+                        <Search className="text-background w-6 h-6" />
                     </button>
-                    <Button color="preto" rounded="lg" text="Criar Turma" onClick={() => setModalAberto(true)} />
+                    <Button color="branco" rounded="lg" text="Criar Turma" onClick={() => setModalAberto(true)} />
                 </div>
 
                 <List classes={classes} onDeleteSuccess={buscar} />
@@ -209,7 +209,7 @@ export default function EditarTurma() {
                         <select
                             value={instrutorSelecionado}
                             onChange={(e) => setInstrutorSelecionado(e.target.value)}
-                            className="p-2 h-12 rounded-lg text-sm border border-zinc-300 bg-white focus:outline-none focus:border-[var(--azulPrincipal)]"
+                            className="p-2 h-12 rounded-lg text-sm border border-zinc-300 bg-white focus:outline-none focus:border-azulPrincipal"
                         >
                             <option value="">Selecione um professor</option>
                             {instrutores.map((inst) => (
@@ -256,7 +256,7 @@ export default function EditarTurma() {
                                 setGClassSelecionada(e.target.value);
                                 setGNomeDaTurma(e.target.options[e.target.selectedIndex].text);
                             }}
-                            className="p-2 h-12 rounded-lg text-sm border border-zinc-300 bg-white focus:outline-none focus:border-[var(--azulPrincipal)]"
+                            className="p-2 h-12 rounded-lg text-sm border border-zinc-300 bg-white focus:outline-none focus:border-azulPrincipal"
                         >
                             <option value="">Selecione uma turma</option>
                             {googleClasses.map((gClass) => (

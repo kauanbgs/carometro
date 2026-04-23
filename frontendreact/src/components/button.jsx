@@ -1,23 +1,27 @@
 const colorMap = {
     azulPrincipal: {
-        fill: "bg-[var(--azulPrincipal)] text-white hover:bg-[var(--azulPrincipal)]/80 active:bg-[var(--azulPrincipal)]/95",
-        outline: "border-1 border-[var(--azulPrincipal)] text-[var(--azulPrincipal)] hover:bg-[var(--azulPrincipal)] hover:text-white",
+        fill: "bg-azulPrincipal text-white hover:bg-azulPrincipal/80 active:bg-azulPrincipal/95",
+        outline: "border-1 border-azulPrincipal text-azulPrincipal hover:bg-azulPrincipal hover:text-white",
     },
     azulSecundario: {
-        fill: "bg-[var(--azulSecundario)] text-white hover:bg-[var(--azulSecundario)]/80 active:bg-[var(--azulSecundario)]/95",
-        outline: "border-1 border-[var(--azulSecundario)] text-[var(--azulSecundario)] hover:bg-[var(--azulSecundario)] hover:text-white",
+        fill: "bg-azulSecundario text-white hover:bg-azulSecundario/80 active:bg-azulSecundario/95",
+        outline: "border-1 border-azulSecundario text-azulSecundario hover:bg-azulSecundario hover:text-white",
     },
     laranjaSecundario: {
-        fill: "bg-[var(--laranjaSecundario)] text-black hover:bg-[var(--laranjaSecundario)]/80 active:bg-[var(--laranjaSecundario)]/95",
-        outline: "border-1 border-[var(--laranjaSecundario)] text-[var(--laranjaSecundario)] hover:bg-[var(--laranjaSecundario)] hover:text-white",
+        fill: "bg-laranjaSecundario text-black hover:bg-laranjaSecundario/80 active:bg-laranjaSecundario/95",
+        outline: "border-1 border-laranjaSecundario text-laranjaSecundario hover:bg-laranjaSecundario hover:text-white",
     },
     erro: {
-        fill: "bg-[var(--erro)] text-white hover:bg-[var(--erro)]/80 active:bg-[var(--erro)]/95",
-        outline: "border-1 border-[var(--erro)] text-[var(--erro)] hover:bg-[var(--erro)] hover:text-white",
+        fill: "bg-erro text-white hover:bg-erro/80 active:bg-erro/95",
+        outline: "border-1 border-erro text-erro hover:bg-erro hover:text-white",
     },
     preto: {
         fill: "bg-black text-white hover:bg-black/80 active:bg-black/95",
         outline: "border-1 border-black text-black hover:bg-black hover:text-white",
+    },
+    branco:{
+        fill: "bg-branco text-textoPrincipal hover:bg-branco/10 active:bg-branco/95",
+        outline: "border-1 text-textoPrincipal hover:bg-branco/10 hover:text-textoPrincipal",
     }
 }
 
@@ -29,7 +33,7 @@ export default function Button({ rounded = "full", text, onClick, fill, color = 
         <button
             onClick={onClick}
             type={type}
-            className={`${colorClass} p-2 rounded-${rounded} cursor-pointer transition-all duration-200 ${className}`}
+            className={`${colorClass} p-2 rounded-${rounded} shadow-md shadow-black/20  cursor-pointer transition-all duration-200 ${className}`}
         >
             {text}
         </button>

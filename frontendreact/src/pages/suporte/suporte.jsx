@@ -16,7 +16,7 @@ export default function Suporte() {
 
       <div className="flex-1 flex flex-col lg:flex-row items-center justify-center max-w-[1300px] w-full mx-auto px-6 py-28 lg:py-0 gap-10 lg:gap-0">
         <div className="w-full lg:w-1/2 flex flex-col items-center justify-center h-full">
-          <h1 className="text-[var(--azulPrincipal)] text-3xl md:text-4xl font-bold text-center leading-tight mb-5">
+          <h1 className="text-azulPrincipal text-3xl md:text-4xl font-bold text-center leading-tight mb-5">
             Como podemos
             <br />
             ajudar?
@@ -49,7 +49,7 @@ export default function Suporte() {
 
           <button
             onClick={() => navigate(-1)}
-            className="w-full max-w-[360px] bg-[var(--azulPrincipal)] text-white py-3.5 rounded-full font-medium text-[17px] hover:bg-blue-800 transition-colors shadow-md"
+            className="w-full max-w-[360px] bg-azulPrincipal text-white py-3.5 rounded-full font-medium text-[17px] hover:bg-blue-800 transition-colors shadow-md"
           >
             Voltar
           </button>
@@ -58,7 +58,7 @@ export default function Suporte() {
         <div className="hidden lg:block w-[1.5px] h-[60vh] bg-[#C1C1C1] mx-4"></div>
 
         <div className="w-full lg:w-1/2 flex flex-col justify-center h-full pl-0 lg:pl-16 max-w-[650px] mx-auto">
-          <h1 className="text-[var(--azulPrincipal)] text-3xl md:text-4xl font-bold text-center leading-tight mb-10">
+          <h1 className="text-azulPrincipal text-3xl md:text-4xl font-bold text-center leading-tight mb-10">
             Dúvidas
             <br />
             Frequentes

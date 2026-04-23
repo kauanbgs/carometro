@@ -6,15 +6,17 @@ const variants = {
 }
 
 const colorMap = {
-    azulPrincipal: "text-[var(--azulPrincipal)]",
-    azulSecundario: "text-[var(--azulSecundario)]",
-    erro: "text-[var(--erro)]",
-    sucesso: "text-[var(--sucesso)]",
+    azulPrincipal: "text-azulPrincipal",
+    azulSecundario: "text-azulSecundario",
+    erro: "text-erro",
+    sucesso: "text-sucesso",
     branco: "text-white",
     preto: "text-black",
+    textoPrincipal: "text-textoPrincipal",
+    textoSecundario: "text-textoSecundario",
 }
 
-export default function Text({ variant, children, color = 'preto', className = "" }) {
+export default function Text({ variant, children, color = 'textoPrincipal', className = "" }) {
     return (
         <p className={`${className} ${variants[variant]} ${colorMap[color]}`}>
             {children}

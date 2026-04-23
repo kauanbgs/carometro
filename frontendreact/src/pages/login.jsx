@@ -10,13 +10,16 @@ import { Snackbar } from "../components/snackbar.jsx";
 
 
 export default function Login() {
+  const navigate = useNavigate();
+
+  if (localStorage.getItem("token")) {
+    navigate("/home");
+  }
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
 
-
-  const navigate = useNavigate();
   const [snackbar, setSnackbar] = useState({ message: "", type: "" });
 
   const onChange = (e) => {
@@ -85,7 +88,7 @@ export default function Login() {
           <Button type="submit" text="Entrar" fill className="w-full" />
           <Text variant="text" className="mt-4">
             Esqueceu sua senha?{" "}
-            <Link to="/suporte" className="text-[var(--azulPrincipal)] cursor-pointer hover:underline">
+            <Link to="/suporte" className="text-azulPrincipal cursor-pointer hover:underline">
               Recuperar senha
             </Link>
           </Text>
@@ -93,10 +96,10 @@ export default function Login() {
         <div className="flex flex-col p-7 justify-center items-center gap-12">
           <Text variant="text" className="text-sm mt-8 ">
             Não tem uma conta?{" "}
-            <Link to="/suporte" className="text-[var(--azulPrincipal)] cursor-pointer hover:underline">
+            <Link to="/suporte" className="text-azulPrincipal cursor-pointer hover:underline">
               Cadastre-se
             </Link>
-            <Link to="/cadastrotemp" className="text-[var(--azulPrincipal)] cursor-pointer hover:underline">
+            <Link to="/cadastrotemp" className="text-azulPrincipal cursor-pointer hover:underline">
               TEMPORARIO PRA TESTES
             </Link>
           </Text>

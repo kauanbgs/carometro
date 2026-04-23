@@ -9,11 +9,11 @@ export default function Modal({ isOpen, onClose, title, children }) {
             onClick={onClose}
         >
             <div
-                className="bg-white rounded shadow-xl w-full max-w-lg mx-4"
+                className="bg-back rounded shadow-xl w-full max-w-lg mx-4"
                 onClick={(e) => e.stopPropagation()}
             >
                 <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-200">
-                    <h2 className="text-lg font-semibold text-zinc-800">{title}</h2>
+                    <h2 className="text-lg font-semibold text-textoPrincipal">{title}</h2>
                     <button
                         onClick={onClose}
                         className="p-1 rounded-lg hover:bg-zinc-100 transition-colors cursor-pointer"

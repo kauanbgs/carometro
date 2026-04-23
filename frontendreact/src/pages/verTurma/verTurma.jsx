@@ -150,9 +150,9 @@ export default function VerTurma() {
   const [modalDeletarAberto, setModalDeletarAberto] = useState(false);
 
   return (
-    <div className="h-screen w-screen bg-[var(--back)] flex">
+    <div className="h-screen w-screen bg-back flex">
       <SideBar items={items} />
-      <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-[var(--background)] rounded-l-3xl">
+      <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-background rounded-l-3xl">
         <Modal
           isOpen={modalAberto}
           onClose={() => setModalAberto(false)}
@@ -252,7 +252,7 @@ export default function VerTurma() {
         </Modal>
         <div className="flex items-center gap-2">
           <ChevronLeft
-            className="w-6 h-6 cursor-pointer"
+            className="w-6 h-6 cursor-pointer text-textoPrincipal"
             onClick={() => navigate("/editarTurma")}
           />
           <Text variant="title">{nomeDaTurma}</Text>
@@ -274,7 +274,7 @@ export default function VerTurma() {
             <Search className="text-white w-6 h-6" />
           </button>
           <Button
-            color="preto"
+            color="branco"
             text="Adicionar Aluno"
             className="rounded-lg"
             onClick={() => setModalAberto(true)}

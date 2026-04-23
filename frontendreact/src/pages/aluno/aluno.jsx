@@ -164,9 +164,9 @@ export default function Aluno() {
     }
 
     return (
-        <div className="h-screen w-screen bg-[var(--back)] flex">
+        <div className="h-screen w-screen bg-back flex">
             <SideBar items={items} />
-            <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-[var(--background)] rounded-l-3xl">
+            <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-background rounded-l-3xl">
                 
                 <Modal 
                     isOpen={modalExcluirAberto} 
@@ -192,21 +192,22 @@ export default function Aluno() {
                     {selectedOccurrence && (
                         <div className="flex flex-col gap-4">
                             <div>
-                                <label className="text-xs text-zinc-400 uppercase">Motivo</label>
+                                <label className="text-xs text-textoPrincipal/50 uppercase">Motivo</label>
                                 <Select 
                                     width="w-full"
                                     value={selectedOccurrence.type}
+                                    className="text-textoPrincipal"
                                     onChange={(e) => setSelectedOccurrence({ ...selectedOccurrence, type: e.target.value })}
                                 >
-                                    <option value="Falta">Falta</option>
-                                    <option value="Atraso">Atraso</option>
-                                    <option value="Outro">Outro</option>
+                                    <option className="text-preto" value="Falta">Falta</option>
+                                    <option className="text-preto" value="Atraso">Atraso</option>
+                                    <option className="text-preto" value="Outro">Outro</option>
                                 </Select>
                             </div>
                             <div>
-                                <label className="text-xs text-zinc-400 uppercase">Descrição</label>
+                                <label className="text-xs text-textoPrincipal/50 uppercase">Descrição</label>
                                 <textarea 
-                                    className="w-full p-4 bg-zinc-50 rounded-lg border border-zinc-200 mt-1 focus:outline-none text-sm text-zinc-700 h-32 transition-all"
+                                    className="w-full p-4 text-textoPrincipal bg-back rounded-lg border border-zinc-300 mt-1 focus:outline-none text-sm h-32 transition-all"
                                     value={selectedOccurrence.description}
                                     onChange={(e) => setSelectedOccurrence({ ...selectedOccurrence, description: e.target.value })}
                                 />
@@ -214,7 +215,7 @@ export default function Aluno() {
                             <div className="flex justify-between items-center mt-2">
                                 <Button color="erro" rounded="lg" text="Excluir Ocorrência" onClick={() => handleDeleteOccurrence(selectedOccurrence.id_occurrence)} />
                                 <div className="flex gap-2">
-                                    <Button color="preto" rounded="lg" text="Cancelar" onClick={() => setModalOcorrenciaAberta(false)} />
+                                    <Button color="branco" rounded="lg" text="Cancelar" onClick={() => setModalOcorrenciaAberta(false)} />
                                     <Button color="azulPrincipal" fill rounded="lg" text="Salvar" onClick={handleUpdateOccurrence} />
                                 </div>
                             </div>
@@ -223,7 +224,7 @@ export default function Aluno() {
                 </Modal>
                 
                 <div className="flex items-center gap-2">
-                    <ChevronLeft className="w-6 h-6 cursor-pointer" onClick={() => window.history.back()} />
+                    <ChevronLeft className="w-6 h-6 cursor-pointer text-textoPrincipal" onClick={() => window.history.back()} />
                     <Text variant="megaTitle" className="font-bold">{student.name}</Text>
                     <Button color="erro" rounded="lg" text="Excluir Aluno" className="ml-auto mr-4" onClick={() => setModalExcluirAberto(true)} />
                 </div>
@@ -231,13 +232,13 @@ export default function Aluno() {
                 <div className="grid grid-cols-[3fr_2fr_1fr] gap-4 mt-5 w-[80%]">
                     <Input label="Nome do aluno" placeholder="Nome" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="placeholder:text-zinc-400 w-full" />
                     <div>
-                        <Text variant="text" className="text-zinc-500 text-sm">Turma</Text>
-                        <select className="w-full p-2 h-12 rounded-lg text-sm border border-zinc-300 focus:outline-none" 
+                        <Text variant="text" className="text-textoPrincipal text-sm">Turma</Text>
+                        <select className="w-full p-2 h-12 rounded-lg text-sm text-textoPrincipal border border-zinc-300 focus:outline-none" 
                                 value={formData.fk_id_class} 
                                 onChange={(e) => setFormData({ ...formData, fk_id_class: e.target.value })}>
-                            <option value="">Selecione uma turma</option>
+                            <option value="" className="text-preto">Selecione uma turma</option>
                             {classes.map((classe) => (
-                                <option key={classe.id_class} value={classe.id_class}>{classe.name}</option>
+                                <option key={classe.id_class} value={classe.id_class} className="text-preto">{classe.name}</option>
                             ))}
                         </select>
                     </div>
@@ -246,36 +247,37 @@ export default function Aluno() {
 
                  <div className="grid grid-cols-[1fr_3fr_1fr_1fr] gap-4 mt-4 w-[80%] items-center">
                     <div>
-                        <Text variant="text" className="text-zinc-500 text-sm mb-1">Status</Text>
-                        <select className="w-full p-2 h-12 rounded-lg text-sm border border-zinc-300 focus:outline-none focus:border-[var(--azulPrincipal)]" 
+                        <Text variant="text" className="text-textoPrincipal text-sm mb-1">Status</Text>
+                        <select className="w-full p-2 h-12 rounded-lg text-sm text-textoPrincipal border border-zinc-300 focus:outline-none focus:border-azulPrincipal" 
                                 value={formData.status} 
                                 onChange={(e) => setFormData({ ...formData, status: e.target.value })}>
-                            <option value={1}>Ativo</option>
-                            <option value={0}>Inativo</option>
+                            <option value={1} className="text-preto">Ativo</option>
+                            <option value={0} className="text-preto">Inativo</option>
                         </select>
                     </div>
                     <Input label="Email" placeholder="Email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="placeholder:text-zinc-400 w-full" />
                     <Input label="Telefone" placeholder="Telefone" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="placeholder:text-zinc-400 w-full" />
-                    <button className="w-full h-12 mt-5 flex items-center justify-center bg-[var(--azulPrincipal)] rounded-lg cursor-pointer hover:bg-[var(--azulSecundario)] transition-colors" onClick={handleSave}>
+                    <button className="w-full h-12 mt-5 flex items-center justify-center bg-azulPrincipal rounded-lg cursor-pointer hover:bg-azulSecundario transition-colors" onClick={handleSave}>
                         <Pencil className="w-6 h-6 text-white" />
                     </button>
                 </div>
                 
                 <div className="mt-12 flex flex-col w-full">
                     <div className="w-[80%]">
-                        <Text variant="title" className="text-zinc-700 font-semibold mb-6">Registrar Ocorrência</Text>
+                        <Text variant="title" className="text-textoPrincipal font-semibold mb-6">Registrar Ocorrência</Text>
                         
                         <div className="grid grid-cols-[1.5fr_3fr_auto] gap-4 items-end">
                             <div className="flex flex-col">
-                                <Text variant="text" className="text-zinc-500 text-sm mb-1">Motivo</Text>
+                                <Text variant="text" className="text-textoPrincipal text-sm mb-1">Motivo</Text>
                                 <Select  
                                     width="w-full"
+                                    className="text-textoPrincipal"
                                     value={occurrence.type} 
                                     onChange={(e) => setOccurrence({ ...occurrence, type: e.target.value })}>
-                                    <option value="">Selecione um motivo</option>
-                                    <option value="Falta">Falta</option>
-                                    <option value="Atraso">Atraso</option>
-                                    <option value="Outro">Outro</option>
+                                    <option className="text-preto" value="">Selecione um motivo</option>
+                                    <option className="text-preto" value="Falta">Falta</option>
+                                    <option className="text-preto" value="Atraso">Atraso</option>
+                                    <option className="text-preto" value="Outro">Outro</option>
                                 </Select>
                             </div>
 
@@ -287,7 +289,7 @@ export default function Aluno() {
                                 className="placeholder:text-zinc-400 w-full" 
                             />
 
-                            <button onClick={handleSaveOccurrence} className="h-12 px-6 flex items-center justify-center bg-zinc-800 rounded-lg cursor-pointer hover:bg-zinc-700 transition-colors">
+                            <button onClick={handleSaveOccurrence} className="h-12 px-6 flex items-center justify-center bg-azulPrincipal rounded-lg cursor-pointer hover:bg-azulSecundario transition-colors">
                                 <Text variant="text" className="text-white font-medium" >Registrar</Text>
                             </button>
                         </div>
@@ -295,7 +297,7 @@ export default function Aluno() {
                 </div>
 
                 <div className="p-10 rounded-3xl mt-4 w-[80%]">
-                    <Text variant="title" className="text-zinc-700 font-semibold mb-8 text-center">Histórico de Ocorrências</Text>
+                    <Text variant="title" className="text-textoPrincipal font-semibold mb-8 text-center">Histórico de Ocorrências</Text>
                     <div className="flex flex-col gap-3">
                         {occurrences.length > 0 ? occurrences.map((occ) => (
                             <Occurrence 

@@ -76,9 +76,9 @@ export default function Conexoes() {
     }
 
     return (
-        <div className="h-screen w-full bg-[var(--back)] flex overflow-hidden font-sans">
+        <div className="h-screen w-full bg-back flex overflow-hidden font-sans">
             <SideBar items={items} />
-            <main className="flex-1 ml-16 md:ml-[22%] p-6 md:p-12 overflow-y-auto bg-[var(--background)] rounded-l-3xl flex flex-col items-center">
+            <main className="flex-1 ml-16 md:ml-[22%] p-6 md:p-12 overflow-y-auto bg-background rounded-l-3xl flex flex-col items-center">
 
                 <Snackbar
                     isOpen={snackbar.message !== ""}
@@ -127,7 +127,7 @@ export default function Conexoes() {
                                     {!isConnected ? (
                                         <button 
                                             onClick={handleGoogleAuth}
-                                            className="flex items-center justify-center gap-2 px-6 py-3 bg-[var(--azulPrincipal)] hover:bg-blue-700 text-white rounded-xl font-medium transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                            className="flex items-center justify-center gap-2 px-6 py-3 bg-azulPrincipal hover:bg-blue-700 text-white rounded-xl font-medium transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                         >
                                             <Link2 className="w-5 h-5" />
                                             <span>Conectar Conta</span>

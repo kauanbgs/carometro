@@ -43,8 +43,8 @@ export default function CadastroTemp() {
     }
 
     return (
-        <div className="bg-[var(--back)] h-screen w-screen">
-            <main className="flex-1 p-10 bg-[var(--background)] h-full rounded-l-3xl">
+        <div className="bg-back h-screen w-screen">
+            <main className="flex-1 p-10 bg-background h-full rounded-l-3xl">
 
                 <Alert
                     type={feedback.type}

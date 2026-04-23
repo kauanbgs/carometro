@@ -67,24 +67,24 @@ export default function List({ classes = [], onDeleteSuccess }) {
             </Modal>
 
             <div className="grid grid-cols-[1fr_1fr_1fr] px-6 py-4 border-b border-zinc-300">
-                <div className="flex items-center gap-1 text-sm font-semibold text-zinc-700 cursor-pointer select-none">
+                <div className="flex items-center gap-1 text-sm font-semibold text-textoPrincipal cursor-pointer select-none">
                     Nome <ChevronDown className="w-4 h-4" />
                 </div>
-                <div className="flex items-center gap-1 text-sm font-semibold text-zinc-700 cursor-pointer select-none">
+                <div className="flex items-center gap-1 text-sm font-semibold text-textoPrincipal cursor-pointer select-none">
                     Professor <ChevronDown className="w-4 h-4" />
                 </div>
-                <div className="flex items-center gap-1 text-sm font-semibold text-zinc-700 cursor-pointer select-none">
+                <div className="flex items-center gap-1 text-sm font-semibold text-textoPrincipal cursor-pointer select-none">
                     Ações <ChevronDown className="w-4 h-4" />
                 </div>
             </div>
             {classes.map((turma) => (
                 <div
                     key={turma.id_class}
-                    className="grid grid-cols-[1fr_1fr_1fr] px-6 py-3.5 border-b border-zinc-100 hover:bg-zinc-50 transition-colors relative"
+                    className="grid grid-cols-[1fr_1fr_1fr] px-6 py-3.5 border-b border-zinc-100 hover:bg-textoPrincipal/10 transition-colors relative"
                 >
-                    <div className="text-sm text-zinc-800 cursor-pointer" onClick={() => navigate(`/verTurma/${turma.id_class}`)}>{turma.name}</div>
-                    <div className="text-sm text-zinc-800 cursor-pointer" onClick={() => navigate(`/verTurma/${turma.id_class}`)}>{turma.instructor_name}</div>
-                    <div className="text-sm text-zinc-800 relative">
+                    <div className="text-sm text-textoPrincipal cursor-pointer" onClick={() => navigate(`/verTurma/${turma.id_class}`)}>{turma.name}</div>
+                    <div className="text-sm text-textoPrincipal cursor-pointer" onClick={() => navigate(`/verTurma/${turma.id_class}`)}>{turma.instructor_name}</div>
+                    <div className="text-sm text-textoPrincipal relative">
                         <EllipsisVertical 
                             className="w-5 h-5 cursor-pointer hover:text-zinc-500 transition-colors" 
                             onClick={() => setIdMenuAberto(idMenuAberto === turma.id_class ? null : turma.id_class)} 
