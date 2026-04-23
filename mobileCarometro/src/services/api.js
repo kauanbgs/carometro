@@ -15,12 +15,8 @@ const sheets = {
 
   getClasses: () => api.get('/class'),
   getTurmas: () => api.get('/class'),
-  getDocentes: () => api.get('/instructor'),
-  getInstructors: () => api.get('/instructor'),
-  getTurmaByName: (name) => api.get(`/class/name/${name}`),
-  getClassByName: (name) => api.get(`/class/name/${name}`),
-  getTurmaByInstructorName: (name) => api.get(`/class/instructor/${name}`),
-  postCriarTurma: (data) => api.post('/class', data),}
+  getStudentsByClass: (fk_id_class) => api.get(`/student/class/${fk_id_class}`)
+}
 
 
 export default sheets;

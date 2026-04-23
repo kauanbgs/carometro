@@ -23,7 +23,7 @@ router.get("/student/name/:name", verifyJWT, studentController.getStudentByName)
 router.get("/student/status/:status", verifyJWT, studentController.getStudentsByStatus);
 router.put("/student/:id_student", verifyJWT, studentController.updateStudent);
 router.delete("/student/:id_student", verifyJWT, studentController.deleteStudent);
-router.get("/student/class/:fk_id_class", verifyJWT, studentController.getStudentsByClass);
+router.get("/student/class/:fk_id_class",  studentController.getStudentsByClass);
 
 //      CONTROLLER class       //
 router.post("/class", classController.createClass);

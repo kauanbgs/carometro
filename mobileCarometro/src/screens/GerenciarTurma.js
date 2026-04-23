@@ -21,7 +21,6 @@ export default function GerenciarTurma({ navigation }) {
       const respProfs = await api.getInstructors();
       setProfessores(respProfs.data.instructors);
     } catch (error) {
-
     }
   }
 
