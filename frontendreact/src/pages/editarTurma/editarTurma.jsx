@@ -36,18 +36,38 @@ export default function EditarTurma() {
     const [gClassSelecionada, setGClassSelecionada] = useState("");
     const [gNomeDaTurma, setGNomeDaTurma] = useState("");
 
+    const [isConnected, setIsConnected] = useState(false);
+
     useEffect(() => {
         api.getTurmas().then((response) => {
             setClasses(response.data.classes || []);
         }).catch(() => setClasses([]));
     }, []);
 
-    useEffect(()=>{
-        api.getClassesGoogle(user.id_instructor).then((response) => {
-            console.log(response.data)
-            setGoogleClasses(response.data || []);
-        }).catch(() => setGoogleClasses([]));
-    },[modalClassesAberto])
+    useEffect(() => {
+        if (user && user.id_instructor) {
+            api.getClassesGoogle(user.id_instructor)
+                .then(() => {
+                    setIsConnected(true);
+                })
+                .catch(() => {
+                    setIsConnected(false);
+                });
+        }
+
+        if(modalClassesAberto && isConnected){
+            api.getClassesGoogle(user.id_instructor).then((response) => {
+                console.log(response.data)
+                setGoogleClasses(response.data || []);
+            }).catch(() => setGoogleClasses([]));
+        }
+        else if (modalClassesAberto) {
+            navigate('/conexoes', { state: { snackbar: 'Você não está conectado ao Google Classroom!' } })
+        }
+    }, [modalClassesAberto]);
+
+
+    
 
     useEffect(() => {
         if (modalAberto) {

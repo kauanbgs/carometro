@@ -49,10 +49,10 @@ export default function SideBar({ items }) {
                 )}
                 
                 <div 
-                    className="flex justify-center md:justify-start items-center gap-3 cursor-pointer hover:bg-gray-200 p-2 -m-2 rounded-lg transition-colors"
+                    className="flex justify-center md:justify-start items-center gap-3 cursor-pointer p-2 -m-2 rounded-lg"
                     onClick={() => setShowLogout(!showLogout)}
                 >
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center">
                         <User className="w-5 h-5 text-gray-500" />
                     </div>
                     <div className="hidden md:flex flex-col truncate">

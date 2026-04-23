@@ -6,8 +6,12 @@ import items from "../../utils/itemSideBar";
 import Text from "../../components/text";
 import api from "../../axios/axios";
 import { Globe, GraduationCap, Link2, Unlink, CheckCircle2 } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 export default function Conexoes() {
+    const location = useLocation();
+
+    
     const [searchParams] = useSearchParams();
     const [snackbar, setSnackbar] = useState({ message: "", type: "" });
     const [isLoading, setIsLoading] = useState(false);
@@ -18,6 +22,14 @@ export default function Conexoes() {
 
     // Verifica se já está conectado ao carregar a página
     useEffect(() => {
+        const { snackbar: stateSnackbar } = location.state || {};
+        
+        if (stateSnackbar) {
+            setSnackbar({ message: stateSnackbar, type: "error" });
+            location.state = null;
+            console.log(location)
+        }
+        
         if (user && user.id_instructor) {
             api.getClassesGoogle(user.id_instructor)
                 .then(() => {
@@ -77,23 +89,21 @@ export default function Conexoes() {
                 
                 <div className="w-full max-w-5xl mt-4">
                     <div className="flex items-center gap-3 mb-2">
-                        <Globe className="w-8 h-8 text-[var(--azulPrincipal)]" />
                         <Text variant="megaTitle" className="text-3xl md:text-4xl lg:text-5xl">Conexões</Text>
                     </div>
                     <Text variant="text" className="text-gray-500 mb-10 text-lg">
                         Conecte suas contas para puxar turmas e alunos automaticamente e poupar trabalho.
                     </Text>
                     
-                    {/* Google Classroom Card */}
                     <div className="bg-white rounded-2xl  p-8 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group">
                         
 
                         <div className="flex items-center gap-6 z-10 w-full md:w-auto">
                             <div className="w-20 h-20 rounded-2xl flex items-center justify-center flex-shrink-0 relative">
                                 <img 
-                                    src="https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png" 
+                                    src="/classroomlogo.png" 
                                     alt="Google Classroom" 
-                                    className="w-12 h-12 object-contain" 
+                                    className="w-20 h-20 object-contain" 
                                 />
                             </div>
                             <div className="flex flex-col">

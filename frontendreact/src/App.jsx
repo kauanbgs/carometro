@@ -28,7 +28,6 @@ function App() {
           <Route path="/removerDocente" element={<RemoverDocente />} />
           <Route path="/editarTurma" element={<EditarTurma />} />
           <Route path="/verTurma/:id_class" element={<VerTurma />} />
-          <Route path="/cadastrotemp" element={<CadastroTemp />} />
           <Route path="/aluno/:id_student" element={<Aluno />} />
           <Route path="/suporte" element={<Suporte />} />
           <Route path="/conexoes" element={<Conexoes />} />
@@ -38,6 +37,7 @@ function App() {
       ) : (
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/cadastrotemp" element={<CadastroTemp />} />
           <Route path="/suporte" element={<Suporte />} />
           <Route path="*" element={<Login />} />
         </Routes>

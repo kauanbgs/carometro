@@ -181,7 +181,7 @@ module.exports = class classController {
         }
         return res
           .status(200)
-          .json({ message: "class deleted successfully: ", id_class });
+          .json({ message: "class deleted successfully!"});
       });
     } catch (error) {
       console.error(error);
