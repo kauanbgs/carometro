@@ -5,12 +5,12 @@ export default function Suporte() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen w-full bg-[#E8E8E8] relative flex flex-col font-['Montserrat'] overflow-x-hidden">
+    <div className="min-h-screen w-full bg-background relative flex flex-col font-['Montserrat'] overflow-x-hidden">
       <div className="absolute top-10 left-10 md:top-14 md:left-14">
         <img
           src="/LogoCarometro-v2.png"
           alt="Carometro"
-          className="h-12 md:h-16 mix-blend-multiply opacity-90"
+          className="h-12 md:h-16"
         />
       </div>
 
@@ -22,7 +22,7 @@ export default function Suporte() {
             ajudar?
           </h1>
 
-          <p className="text-[#555555] text-center text-[17px] md:text-lg mb-12 max-w-[400px]">
+          <p className="text-textoPrincipal text-center text-[17px] md:text-lg mb-12 max-w-[400px]">
             Nosso suporte está disponível 24h para
             <br className="hidden md:block" /> registro e edição de contas
           </p>
@@ -32,7 +32,7 @@ export default function Suporte() {
               <div className="w-12 h-12 bg-[#5179B6] rounded-xl flex items-center justify-center text-white shrink-0 shadow-sm">
                 <Mail className="w-[22px] h-[22px]" />
               </div>
-              <span className="text-[#555555] text-[17px] font-medium tracking-wide">
+              <span className="text-textoPrincipal text-[17px] font-medium tracking-wide">
                 meuemailadm@gmail.com
               </span>
             </div>
@@ -41,7 +41,7 @@ export default function Suporte() {
               <div className="w-12 h-12 bg-[#5179B6] rounded-xl flex items-center justify-center text-white shrink-0 shadow-sm">
                 <Phone className="w-[22px] h-[22px]" />
               </div>
-              <span className="text-[#555555] text-[17px] font-medium tracking-wide">
+              <span className="text-textoPrincipal text-[17px] font-medium tracking-wide">
                 +99 (99)99999-9999
               </span>
             </div>
@@ -64,16 +64,16 @@ export default function Suporte() {
             Frequentes
           </h1>
 
-          <ul className="flex flex-col gap-6 text-[#555555] text-[15px] leading-relaxed font-medium">
+          <ul className="flex flex-col gap-6 text-textoPrincipal text-[15px] leading-relaxed font-medium">
             <li className="flex items-start gap-2.5">
-              <div className="w-[5px] h-[5px] bg-[#333333] rounded-full mt-2.5 shrink-0"></div>
+              <div className="w-[5px] h-[5px] bg-textoPrincipal rounded-full mt-2.5 shrink-0"></div>
               <p>
                 Não é possível se registrar sozinho(a) no Carômetro de Franca,
                 SP. Procure um administrador nos contatos ao lado!
               </p>
             </li>
             <li className="flex items-start gap-2.5">
-              <div className="w-[5px] h-[5px] bg-[#333333] rounded-full mt-2.5 shrink-0"></div>
+              <div className="w-[5px] h-[5px] bg-textoPrincipal rounded-full mt-2.5 shrink-0"></div>
               <p>
                 O sistema é totalmente online e não depende de instalar nenhum
                 aplicativo. Basta ter acesso à internet e um navegador
@@ -81,7 +81,7 @@ export default function Suporte() {
               </p>
             </li>
             <li className="flex items-start gap-2.5">
-              <div className="w-[5px] h-[5px] bg-[#333333] rounded-full mt-2.5 shrink-0"></div>
+              <div className="w-[5px] h-[5px] bg-textoPrincipal rounded-full mt-2.5 shrink-0"></div>
               <p>
                 O uso do sistema é exclusivo da escola. Isso significa que
                 somente professores e gestores autorizados pelo administrador
@@ -89,7 +89,7 @@ export default function Suporte() {
               </p>
             </li>
             <li className="flex items-start gap-2.5">
-              <div className="w-[5px] h-[5px] bg-[#333333] rounded-full mt-2.5 shrink-0"></div>
+              <div className="w-[5px] h-[5px] bg-textoPrincipal rounded-full mt-2.5 shrink-0"></div>
               <p>
                 Alterações de informações sensíveis, como o e-mail de login ou o
                 tipo de permissão de acesso, só podem ser realizadas pelo
@@ -97,7 +97,7 @@ export default function Suporte() {
               </p>
             </li>
             <li className="flex items-start gap-2.5">
-              <div className="w-[5px] h-[5px] bg-[#333333] rounded-full mt-2.5 shrink-0"></div>
+              <div className="w-[5px] h-[5px] bg-textoPrincipal rounded-full mt-2.5 shrink-0"></div>
               <p>
                 Se você tiver qualquer dificuldade para acessar, o primeiro
                 passo é falar com o administrador da sua escola. Caso seja

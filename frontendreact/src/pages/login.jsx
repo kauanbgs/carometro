@@ -56,12 +56,12 @@ export default function Login() {
         type={snackbar.type}
         onClose={() => setSnackbar({ message: "", type: "" })}
       />
-      <main className="w-[31%] bg-white rounded-lg items-center align-center justify-center min-h-125 w-[80%] max-w-105">
+      <main className="w-[31%] bg-back rounded-lg items-center align-center justify-center min-h-125 w-[80%] max-w-105">
         <div className="flex flex-col items-center justify-center p-10">
           <img src="/LogoCarometro-v2.png" alt="" className="w-48" />
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col p-6">
-          <div className="flex flex-col mb-3">
+          <div className="flex flex-col mb-3 ">
             <Text variant="text">Email</Text>
             <Input
               type="text"

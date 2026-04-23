@@ -76,7 +76,7 @@ export default function Conexoes() {
     }
 
     return (
-        <div className="h-screen w-full bg-back flex overflow-hidden font-sans">
+        <div className="h-screen w-full bg-back flex overflow-hidden">
             <SideBar items={items} />
             <main className="flex-1 ml-16 md:ml-[22%] p-6 md:p-12 overflow-y-auto bg-background rounded-l-3xl flex flex-col items-center">
 
@@ -91,11 +91,11 @@ export default function Conexoes() {
                     <div className="flex items-center gap-3 mb-2">
                         <Text variant="megaTitle" className="text-3xl md:text-4xl lg:text-5xl">Conexões</Text>
                     </div>
-                    <Text variant="text" className="text-gray-500 mb-10 text-lg">
+                    <Text variant="text" className="text-textoPrincipal mb-10 text-lg">
                         Conecte suas contas para puxar turmas e alunos automaticamente e poupar trabalho.
                     </Text>
                     
-                    <div className="bg-white rounded-2xl  p-8 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group">
+                    <div className="bg-back/40 border border-back rounded-2xl  p-8 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group">
                         
 
                         <div className="flex items-center gap-6 z-10 w-full md:w-auto">
