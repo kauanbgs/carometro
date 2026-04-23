@@ -21,7 +21,7 @@ export default function GerenciarTurma({ navigation }) {
       const respProfs = await api.getInstructors();
       setProfessores(respProfs.data.instructors);
     } catch (error) {
-      Alert.alert("Erro", "Falha ao buscar os dados.");
+
     }
   }
 
@@ -86,17 +86,14 @@ export default function GerenciarTurma({ navigation }) {
             onChangeText={setSearchNome}
           />
 
-          <View style={{ borderWidth: 0.3, borderRadius: 8, height: 45, justifyContent: "center", overflow: "hidden", width: "49%", marginRight: 5 }}>
-            <Picker
+          <View style={{ borderWidth: 0.3, borderRadius: 8, height: 45, justifyContent: "center", overflow: "hidden", width: "50%", marginRight: 5 }}>
+            <TextInput
               selectedValue={searchProfessor}
               onValueChange={(itemValue) => setSearchProfessor(itemValue)}
-              style={{ height: 45 }}
-            >
-              <Picker.Item label="Professor" value="" />
-              {professores.map((prof) => (
-                <Picker.Item key={prof.id_instructor} label={prof.name} value={prof.name} />
-              ))}
-            </Picker>
+              style={{ height: 55 ,marginLeft: 5}}
+              placeholder="Professor"
+            />
+
           </View>
 
           <TouchableOpacity style={styles.turmaBtnSearch} onPress={() => { pesquisar() }}>

@@ -52,7 +52,7 @@ export default function DeleteDocente({ navigation }) {
           placeholder="Email do docente"
           placeholderTextColor="#bababa"
           value={instructor.email}
-          onChange={(value) => onChange("email", value)}
+          onChangeText={(value) => onChange("email", value)}
         />
         <TextInput
           style={styles.input}
@@ -60,7 +60,7 @@ export default function DeleteDocente({ navigation }) {
           placeholderTextColor="#bababa"
           
           value={instructor.password}
-          onChange={(value) => onChange("password", value)}
+          onChangeText={(value) => onChange("password", value)}
         />
 
         <TouchableOpacity style={styles.primaryButton} onPress={Delete}>

@@ -8,7 +8,7 @@ import GerenciarDocentesScreen from "./src/screens/GerenciarDocentesScreen";
 import EditarTurmas from "./src/screens/EditarTurmasScreen";
 import DeleteScreen from "./src/screens/DeleteScreen";
 import GerenciarTurma from "./src/screens/GerenciarTurma";
-import GerenciarDocente from "./src/screens/GerenciarDocente";
+
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -16,7 +16,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="GerenciarDocente"
+        initialRouteName="Delete"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Login" component={LoginScreen} />
@@ -27,7 +27,7 @@ export default function App() {
         <Stack.Screen name="GerenciarDocentes" component={GerenciarDocentesScreen} />
         <Stack.Screen name="EditarTurmas" component={EditarTurmas} />
         <Stack.Screen name="GerenciarTurma" component={GerenciarTurma} />
-        <Stack.Screen name="GerenciarDocente" component={GerenciarDocente} />
+
 
       </Stack.Navigator>
     </NavigationContainer>

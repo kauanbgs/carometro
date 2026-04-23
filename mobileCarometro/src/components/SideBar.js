@@ -69,11 +69,13 @@ export default function SideBar({ visible, onClose, navigation }) {
               style={styles.menuItem}
               onPress={() => {
                 onClose();
-                navigation.navigate("Suporte");
+                navigation.navigate("GerenciarDocentes");
               }}
             >
               <MaterialIcons name="groups" size={26} color="#333" />
               <Text style={styles.menuText}>Gerenciar Docente</Text>
+              
+              
             </TouchableOpacity>
 
           </ScrollView>

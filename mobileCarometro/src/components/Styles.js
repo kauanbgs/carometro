@@ -370,17 +370,17 @@ export default StyleSheet.create({
     marginBottom: 20,
   },
   turmaInputNome: {
-    flex: 1.2,
+    flex: 1.3,
     height: 45,
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 8,
-    paddingHorizontal: 10,
-    marginRight: 10,
+    paddingHorizontal: 5,
+
   },
   turmaPickerContainer: {
     flex: 1,
-    height: 45,
+    height: 50,
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 8,
