@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://192.168.100.85:5000/sigo",
+  baseURL: "http://10.89.240.45:5001/sigo",
   headers: {
     'Accept': 'application/json',
   }
@@ -14,12 +14,8 @@ const sheets = {
 
   getClasses: () => api.get('/class'),
   getTurmas: () => api.get('/class'),
-  getDocentes: () => api.get('/instructor'),
-  getInstructors: () => api.get('/instructor'),
-  getTurmaByName: (name) => api.get(`/class/name/${name}`),
-  getClassByName: (name) => api.get(`/class/name/${name}`),
-  getTurmaByInstructorName: (name) => api.get(`/class/instructor/${name}`),
-  postCriarTurma: (data) => api.post('/class', data),}
+  getStudentsByClass: (fk_id_class) => api.get(`/student/class/${fk_id_class}`)
+}
 
 
 export default sheets;

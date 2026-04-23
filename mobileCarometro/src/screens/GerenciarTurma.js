@@ -21,7 +21,6 @@ export default function GerenciarTurma({ navigation }) {
       const respProfs = await api.getInstructors();
       setProfessores(respProfs.data.instructors);
     } catch (error) {
-      Alert.alert("Erro", "Falha ao buscar os dados.");
     }
   }
 
