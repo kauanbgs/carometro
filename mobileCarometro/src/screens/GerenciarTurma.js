@@ -1,64 +1,53 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, TextInput, FlatList, Alert } from "react-native";
-import { Picker } from "@react-native-picker/picker";
+import { useEffect, useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+  Alert,
+} from "react-native";
 import { MaterialIcons, Feather } from "@expo/vector-icons";
-import api from "../services/api";
 import Header from "../components/Header";
 import styles from "../components/Styles";
+import api from "../services/api";
 
 export default function GerenciarTurma({ navigation }) {
 
   const [turmas, setTurmas] = useState([]);
-  const [professores, setProfessores] = useState([]);
   const [searchNome, setSearchNome] = useState("");
   const [searchProfessor, setSearchProfessor] = useState("");
-
-
-  async function carregarDados() {
-    try {
-      const respTurmas = await api.getClasses();
-      setTurmas(respTurmas.data.classes);
-      const respProfs = await api.getInstructors();
-      setProfessores(respProfs.data.instructors);
-    } catch (error) {
-    }
-  }
-
 
   useEffect(() => {
     carregarDados();
   }, []);
 
-  async function pesquisar() {
+  const carregarDados = async () => {
+    try {
+      const response = await api.getClasses();
+      setTurmas(response.data.classes);
+    } catch (error) {
+      console.log("Erro ao carregar dados", error);
+    }
+  };
+
+  const pesquisar = async () => {
     try {
       if (searchNome !== "") {
-        // Se o cara digitou um nome, busca por nome
         const response = await api.getClassByName(searchNome);
         setTurmas(response.data.classes);
+      } else if (searchProfessor !== "") {
+        const response = await api.getClassByInstructorName(searchProfessor);
+        setTurmas(response.data.classes);
       } else {
-
         carregarDados();
       }
     } catch (error) {
       Alert.alert("Aviso", "Nenhuma turma encontrada!");
+      console.log(error);
       setTurmas([]);
     }
-  }
-
-
-  function renderItem({ item }) {
-    return (
-      <View style={styles.turmaListItem}>
-        <Text style={styles.turmaItemTextNome}>{item.name}</Text>
-        <Text style={styles.turmaItemTextProf}>{item.instructor_name}</Text>
-
-        <TouchableOpacity style={styles.turmaItemAcaoContainer}>
-          <MaterialIcons name="more-vert" size={20} color="#555" />
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
+  };
 
   return (
     <View style={styles.pageContainer}>
@@ -71,7 +60,7 @@ export default function GerenciarTurma({ navigation }) {
 
         <TouchableOpacity
           style={styles.turmaBtnAdicionar}
-          onPress={() => navigation.navigate("EditarTurmas")}
+          onPress={() => navigation.navigate("Suporte")}
         >
           <Text style={styles.turmaBtnAdicionarText}>Adicionar Turma</Text>
           <Feather name="plus-circle" size={18} color="#888" />
@@ -85,17 +74,16 @@ export default function GerenciarTurma({ navigation }) {
             onChangeText={setSearchNome}
           />
 
-          <View style={{ borderWidth: 0.3, borderRadius: 8, height: 45, justifyContent: "center", overflow: "hidden", width: "50%", marginRight: 5 }}>
+          <View style={{ borderWidth: 0.3, borderRadius: 8, height: 45, justifyContent: "center", overflow: "hidden", width: "33%", marginRight: 5 }}>
             <TextInput
-              selectedValue={searchProfessor}
-              onValueChange={(itemValue) => setSearchProfessor(itemValue)}
-              style={{ height: 55 ,marginLeft: 5}}
+              value={searchProfessor}
+              onChangeText={(text) => setSearchProfessor(text)}
+              style={{ height: 55, marginLeft: 5 }}
               placeholder="Professor"
             />
-
           </View>
 
-          <TouchableOpacity style={styles.turmaBtnSearch} onPress={() => { pesquisar() }}>
+          <TouchableOpacity style={styles.turmaBtnSearch} onPress={pesquisar}>
             <Feather name="search" size={20} color="white" />
           </TouchableOpacity>
         </View>
@@ -109,11 +97,19 @@ export default function GerenciarTurma({ navigation }) {
         <FlatList
           data={turmas}
           keyExtractor={(item) => String(item.id_class)}
-          renderItem={renderItem}
-          onPress={() => navigation.navigate("EditarTurmas", { turma: item })}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => navigation.navigate("EditarTurmas", { turma: item })}>
+              <View style={styles.turmaListItem}>
+                <Text style={styles.turmaItemTextNome}>{item.name}</Text>
+                <Text style={styles.turmaItemTextProf}>{item.instructor_name}</Text>
+                <View style={styles.turmaItemAcaoContainer}>
+                  <MaterialIcons name="more-vert" size={20} color="#555" />
+                </View>
+              </View>
+            </TouchableOpacity>
+          )}
         />
       </View>
     </View>
   );
 }
-

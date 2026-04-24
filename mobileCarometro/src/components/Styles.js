@@ -376,7 +376,8 @@ export default StyleSheet.create({
     borderColor: "#ccc",
     borderRadius: 8,
     paddingHorizontal: 5,
-
+    width: "33%",
+    marginRight: 5,
   },
   turmaPickerContainer: {
     flex: 1,
