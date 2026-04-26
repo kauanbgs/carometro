@@ -443,4 +443,66 @@ export default StyleSheet.create({
     flex: 0.5,
     alignItems: "center",
   },
+  // ─── Modals ───────────────────────────────────────────────
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalOverlayClick: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+  },
+  modalContainer: {
+    backgroundColor: "#fff",
+    width: "80%",
+    padding: 25,
+    borderRadius: 10,
+    zIndex: 1,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+    color: "#333",
+  },
+  modalLabel: {
+    color: "#666",
+    marginBottom: 5,
+  },
+  modalInput: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 15,
+  },
+  modalPickerContainer: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    marginBottom: 20,
+  },
+  modalBtnCriar: {
+    backgroundColor: "#4A89DF",
+    padding: 15,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  modalBtnExcluir: {
+    backgroundColor: "#D33F3F",
+    padding: 15,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  modalBtnText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  
+  
 });

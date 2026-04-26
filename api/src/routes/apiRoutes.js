@@ -10,7 +10,7 @@ router.post("/instructor", instructorController.createInstructor);
 router.post("/instructor/login", instructorController.login);
 router.get("/instructor", verifyJWT, instructorController.readInstructors);
 router.get("/instructor/:id_instructor", verifyJWT, instructorController.getInstructorById);
-router.get("/instructor/name/:name", verifyJWT,instructorController.getInstructorByName);
+router.get("/instructor/name/:name", instructorController.getInstructorByName);
 router.put("/instructor/:id_instructor", verifyJWT,instructorController.updateInstructor);
 router.delete("/instructor", verifyJWT,instructorController.deleteInstructor);
 

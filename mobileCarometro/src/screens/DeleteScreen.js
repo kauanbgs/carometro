@@ -15,12 +15,15 @@ import { Picker } from "@react-native-picker/picker";
 import api from "../services/api";
 import Header from "../components/Header";
 import styles from "../components/Styles";
+import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
 
 export default function DeleteDocente({ navigation }) {
   const [instructor, setInstructor] = useState({
     email: "",
     password: "",
   });
+  const [modalVisivel, setModalVisivel] = useState(false);
+  
 
   function onChange(email, value) {
     setInstructor({ ...instructor, [email]: value });
@@ -63,9 +66,14 @@ export default function DeleteDocente({ navigation }) {
           onChangeText={(value) => onChange("password", value)}
         />
 
-        <TouchableOpacity style={styles.primaryButton} onPress={Delete}>
+        <TouchableOpacity style={styles.primaryButton} onPress={()=> setModalVisivel(true)}>
           <Text style={styles.buttonWhiteText}>Remover</Text>
         </TouchableOpacity>
+        <ConfirmDeleteModal 
+          visible={modalVisivel} 
+          onClose={() => setModalVisivel(false)} 
+          onConfirm={Delete} 
+        />
       </View>
     </View>
   );

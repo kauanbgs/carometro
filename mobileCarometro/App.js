@@ -10,13 +10,14 @@ import DeleteScreen from "./src/screens/DeleteScreen";
 import GerenciarTurma from "./src/screens/GerenciarTurma";
 
 
+
 export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="GerenciarTurma"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Login" component={LoginScreen} />
