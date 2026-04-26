@@ -1,7 +1,7 @@
 module.exports = async function validateInstructor(
-  { name, email, phone, create_date, status, student_number, fk_id_class }
-    ) {
-  if (!name || !email || !phone || !create_date || !status || !student_number || !fk_id_class) {
+  { name, email, phone, status, student_number, fk_id_class }
+) {
+  if (!name || !email || !phone || !status || !student_number || !fk_id_class) {
     return { error: "All fields must be filled" };
   }
 
