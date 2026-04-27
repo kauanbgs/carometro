@@ -504,5 +504,108 @@ export default StyleSheet.create({
     fontSize: 16,
   },
   
+  // --- ESTILOS DA TELA DE DETALHES DO ALUNO ---
+  avatarContainer: {
+    alignItems: 'center',
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  avatarPlaceholder: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#ccc',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  studentNameTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: '400',
+    marginBottom: 10,
+  },
+  infoText: {
+    fontSize: 12,
+    color: '#888',
+  },
+  infoValue: {
+    fontSize: 14,
+    color: '#333',
+    marginBottom: 10,
+  },
+  rowBetween: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  pickerContainer: {
+    borderWidth: 0.5,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    height: 40,
+    justifyContent: 'center',
+    width: 120,
+  },
+  actionButtonsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
+    marginBottom: 30,
+  },
+  btnExcluirPerfil: {
+    borderWidth: 1,
+    borderColor: '#ff4d4d',
+    borderRadius: 8,
+    width: '48%',
+    height: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  btnExcluirText: {
+    color: '#ff4d4d',
+    fontWeight: '500',
+  },
+  btnEditarPerfil: {
+    backgroundColor: '#434141',
+    borderRadius: 8,
+    width: '48%',
+    height: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  occurrenceInput: {
+    borderWidth: 0.5,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    height: 45,
+    marginBottom: 15,
+  },
+  btnEnviarOcorrencia: {
+    backgroundColor: '#4a8add',
+    borderRadius: 8,
+    height: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  occurrenceItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 15,
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#ccc',
+  },
+  occurrenceText: {
+    fontSize: 12,
+    color: '#666',
+    width: '90%',
+  },
   
 });

@@ -28,8 +28,13 @@ const sheets = {
   getClassByName: (name) => api.get(`/class/name/${name}`),
   getClassByInstructorName: (name) => api.get(`/class/instructor/${name}`),
   getStudentsByClass: (fk_id_class) => api.get(`/student/class/${fk_id_class}`),
-  createStudent: (student) => api.post('/student', student), // ✅ adicionado
+  createStudent: (student) => api.post('/student', student), 
+  getStudentByID: (id_student) => api.get(`/student/${id_student}`),
+  updateStudent: (id_student, studentData) => api.put(`/student/${id_student}`, studentData),
+  deleteStudent: (id_student) => api.delete(`/student/${id_student}`),
   createClass: (dadosTurma) => api.post('/class', dadosTurma),
+  getOccurrencesByStudent: (fk_id_student) => api.get(`/occurrence/student/${fk_id_student}`),
+  createOccurrence: (occurrenceData) => api.post('/occurrence', occurrenceData),
 }
 
 export default sheets;
