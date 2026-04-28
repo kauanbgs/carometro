@@ -30,6 +30,7 @@ export default function Aluno() {
     const [occurrence, setOccurrence] = useState({
         type: "",
         description: "",
+        create_date: null,
         fk_id_student: id_student,
         fk_id_instructor: JSON.parse(localStorage.getItem("user")).id_instructor
     });
@@ -125,6 +126,15 @@ export default function Aluno() {
         }
     }
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+    };
+
     useEffect(() => {
         fetchOccurrences();
     }, [id_student]);
@@ -209,6 +219,15 @@ export default function Aluno() {
                                     className="w-full p-4 text-textoPrincipal bg-back rounded-lg border border-zinc-300 mt-1 focus:outline-none text-sm h-32 transition-all"
                                     value={selectedOccurrence.description}
                                     onChange={(e) => setSelectedOccurrence({ ...selectedOccurrence, description: e.target.value })}
+                                />
+                            </div>
+                            <div className="flex flex-col">
+                                <label className="text-xs text-textoPrincipal/50 uppercase">Data</label>
+                                <Input 
+                                    type="date" 
+                                    value={selectedOccurrence.create_date ? selectedOccurrence.create_date.split('T')[0] : ""}
+                                    className="placeholder:text-textoPrincipal w-full"
+                                    onChange={(e) => setSelectedOccurrence({ ...selectedOccurrence, create_date: e.target.value })}
                                 />
                             </div>
                             <div className="flex justify-between items-center mt-2">
@@ -304,6 +323,7 @@ export default function Aluno() {
                                 id_occurrence={occ.id_occurrence}
                                 type={occ.type}
                                 message={occ.description} 
+                                date={formatDate(occ.create_date)}
                                 onClick={() => openOccurrenceDetails(occ)}
                             />
                         )) : (
