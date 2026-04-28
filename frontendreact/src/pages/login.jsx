@@ -34,7 +34,7 @@ export default function Login() {
     try {
       const response = await api.postLogin(user);
       setSnackbar({
-        message: response.data.message || "Login realizado com sucesso!",
+        message: response.data.message || "Successful login",
         type: "success"
       });
       localStorage.setItem("token", response.data.token);
@@ -43,7 +43,7 @@ export default function Login() {
       window.location.reload();
     } catch (error) {
       const msgErro =
-        error.response.data.error || "Erro ao conectar com o servidor.";
+        error.response.data.error || "Internal Server Error";
       setSnackbar({ message: msgErro, type: "error" });
     }
   };

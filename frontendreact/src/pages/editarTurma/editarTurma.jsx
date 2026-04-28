@@ -209,11 +209,11 @@ export default function EditarTurma() {
                         <select
                             value={instrutorSelecionado}
                             onChange={(e) => setInstrutorSelecionado(e.target.value)}
-                            className="p-2 h-12 rounded-lg text-sm border border-zinc-300 bg-white focus:outline-none focus:border-azulPrincipal"
+                            className="p-2 h-12 rounded-lg text-sm border border-zinc-300 bg-back focus:outline-none focus:border-azulPrincipal"
                         >
-                            <option value="">Selecione um professor</option>
+                            <option className="bg-background text-textoPrincipal " value="">Selecione um professor</option>
                             {instrutores.map((inst) => (
-                                <option key={inst.id_instructor} value={inst.id_instructor}>
+                                <option className="bg-background text-textoPrincipal" key={inst.id_instructor} value={inst.id_instructor}>
                                     {inst.name}
                                 </option>
                             ))}

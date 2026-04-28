@@ -27,7 +27,6 @@ export default function Conexoes() {
         if (stateSnackbar) {
             setSnackbar({ message: stateSnackbar, type: "error" });
             location.state = null;
-            console.log(location)
         }
         
         if (user && user.id_instructor) {

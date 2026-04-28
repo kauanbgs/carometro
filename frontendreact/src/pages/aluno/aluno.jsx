@@ -92,7 +92,6 @@ export default function Aluno() {
         try {
             const response = await api.deleteStudent(id_student);
             if(response.status === 200) {
-                // Não mostramos snackbar aqui porque vamos navegar para trás
                 window.history.back();
             }
         } catch (error) {

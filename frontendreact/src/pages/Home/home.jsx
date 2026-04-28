@@ -39,7 +39,7 @@ export default function Home() {
             <SideBar items={items} />
             <main className="flex-1 ml-16 md:ml-[22%] p-4 md:p-10 overflow-y-auto bg-background rounded-l-3xl flex flex-col items-center">
 
-                <Text variant="megaTitle" className="text-left w-full ml-0 md:ml-10 lg:ml-35 text-3xl md:text-4xl lg:text-5xl mt-5">Bem vindo ao <a className="text-azulPrincipal">Carômetro,</a><br className="hidden md:block" />{JSON.parse(user).name}!</Text>
+                <Text variant="megaTitle" className="text-left w-full ml-0 md:ml-10 lg:ml-35 text-3xl md:text-4xl lg:text-5xl mt-5">Bem vindo ao <a className="text-azulPrincipal">Carômetro, </a><br className="hidden md:block" />{JSON.parse(user).name}!</Text>
 
                 <section className="w-full xl:w-[90%] bg-background/40 border border-background mt-8 justify-center flex flex-col lg:flex-row gap-6 p-6 md:p-10 shadow-lg rounded-xl items-center">
                     <div className="flex flex-col text-center lg:text-left items-center lg:items-start w-full lg:w-1/2">

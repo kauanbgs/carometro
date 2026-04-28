@@ -1,6 +1,7 @@
 import { CheckCircle2, XCircle, AlertCircle, X } from "lucide-react";
 import { useEffect } from "react";
 import Text from "./text";
+import translate from "../utils/ptTranslation";
 
 const styles = {
     success: {
@@ -42,7 +43,7 @@ export function Snackbar({ isOpen, message, type = "success", onClose, duration 
             <div className={`flex items-center gap-3 px-4 py-3 rounded-xl ${currentStyle.bg} ${currentStyle.border}`}>
                 {currentStyle.icon}
                 <Text variant="text" className={`text-sm font-medium ${currentStyle.text}`}>
-                    {message}
+                    {translate(message)}
                 </Text>
                 <button 
                     onClick={onClose}
