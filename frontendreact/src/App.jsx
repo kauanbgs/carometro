@@ -12,7 +12,8 @@ import CadastroTemp from "./pages/cadastrotemp/cadastroTemp"
 import Aluno from "./pages/aluno/aluno"
 import Suporte from "./pages/suporte/suporte"
 import Conexoes from "./pages/gerenciarConexoes/conexoes"
-
+import VerUsers from "./pages/verUsers/verUsers"
+import Instrutor from "./pages/verInstrutor/verInstrutor"
 
 function App() {
   const token = localStorage.getItem("token");
@@ -31,7 +32,10 @@ function App() {
           <Route path="/aluno/:id_student" element={<Aluno />} />
           <Route path="/suporte" element={<Suporte />} />
           <Route path="/conexoes" element={<Conexoes />} />
+          <Route path="/verUsers" element={<VerUsers />} />
+          <Route path="/instrutor/:id_instructor" element={<Instrutor />} />
           <Route path="*" element={<Page404 />} />
+
 
         </Routes>
       ) : (

@@ -165,7 +165,7 @@ export default function Aluno() {
     return (
         <div className="h-screen w-screen bg-back flex">
             <SideBar items={items} />
-            <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-background rounded-l-3xl">
+            <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-background rounded-l-3xl custom-scrollbar">
                 
                 <Modal 
                     isOpen={modalExcluirAberto} 
@@ -177,7 +177,7 @@ export default function Aluno() {
                             Tem certeza que deseja excluir o aluno {student.name}? Esta ação não pode ser desfeita.
                         </Text>
                         <div className="flex gap-3 justify-end">
-                            <Button color="preto" rounded="lg" text="Cancelar" onClick={() => setModalExcluirAberto(false)} />
+                            <Button color="textoPrincipal" rounded="lg" text="Cancelar" onClick={() => setModalExcluirAberto(false)} />
                             <Button color="erro" rounded="lg" fill text="Excluir Aluno" onClick={handleDelete} />
                         </div>
                     </div>
@@ -214,7 +214,7 @@ export default function Aluno() {
                             <div className="flex justify-between items-center mt-2">
                                 <Button color="erro" rounded="lg" text="Excluir Ocorrência" onClick={() => handleDeleteOccurrence(selectedOccurrence.id_occurrence)} />
                                 <div className="flex gap-2">
-                                    <Button color="branco" rounded="lg" text="Cancelar" onClick={() => setModalOcorrenciaAberta(false)} />
+                                    <Button color="textoPrincipal" rounded="lg" text="Cancelar" onClick={() => setModalOcorrenciaAberta(false)} />
                                     <Button color="azulPrincipal" fill rounded="lg" text="Salvar" onClick={handleUpdateOccurrence} />
                                 </div>
                             </div>

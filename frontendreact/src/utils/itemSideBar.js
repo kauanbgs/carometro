@@ -1,4 +1,4 @@
-import { House, UsersRound, GraduationCap, Globe } from 'lucide-react';
+import { House, UsersRound, GraduationCap, Globe, Code } from 'lucide-react';
 
 const items = [
     {
@@ -23,6 +23,12 @@ const items = [
         dad: "Conexões",
         label: "Conectar-se ao Google",
         to: "/conexoes"
+    },
+    {
+        icon: Code,
+        dad: "Devs",
+        label: "Ver Usuários",
+        to: "/verUsers"
     }
 
 ];

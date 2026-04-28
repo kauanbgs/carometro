@@ -175,7 +175,7 @@ export default function EditarTurma() {
                 type={snackbar.type} 
                 onClose={() => setSnackbar({ message: "", type: "" })} 
             />
-            <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-background rounded-l-3xl">
+            <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-background rounded-l-3xl custom-scrollbar">
                 <div className="flex items-center gap-2">
                     <ChevronLeft className="w-6 h-6 cursor-pointer text-textoPrincipal" onClick={() => navigate("/home")} />
                     <Text variant="title">Gerenciar Turmas</Text>
@@ -184,7 +184,7 @@ export default function EditarTurma() {
                 <div className="flex flex-wrap justify-start gap-5 items-center mt-5 text-textoPrincipal">
                     <Input placeholder="Nome da turma" value={nomeDaTurma} onChange={(e) => setNomeDaTurma(e.target.value)}/>
                     <Input placeholder="Professor" value={nomeDoProfessor} onChange={(e) => setNomeDoProfessor(e.target.value)}/>
-                    <button className="flex items-center gap-2 bg-textoPrincipal/90 px-5 py-2.5 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors" onClick={buscar}>
+                    <button className="flex items-center gap-2 bg-textoPrincipal/90 px-5 py-2.5 rounded-lg cursor-pointer hover:bg-textoPrincipal/70 transition-colors" onClick={buscar}>
                         <Search className="text-background w-6 h-6" />
                     </button>
                     <Button color="branco" rounded="lg" text="Criar Turma" onClick={() => setModalAberto(true)} />
@@ -196,7 +196,7 @@ export default function EditarTurma() {
             <Modal isOpen={modalAberto} onClose={() => setModalAberto(false)} title="Criar Turma">
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-col gap-1.5">
-                        <label className="text-sm font-medium text-zinc-700">Nome da Turma</label>
+                        <label className="text-sm font-medium text-textoPrincipal">Nome da Turma</label>
                         <Input
                             placeholder="Ex: 3º DS - 2025"
                             value={novaTurma}
@@ -205,15 +205,15 @@ export default function EditarTurma() {
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                        <label className="text-sm font-medium text-zinc-700">Professor</label>
+                        <label className="text-sm font-medium text-textoPrincipal">Professor</label>
                         <select
                             value={instrutorSelecionado}
                             onChange={(e) => setInstrutorSelecionado(e.target.value)}
-                            className="p-2 h-12 rounded-lg text-sm border border-zinc-300 bg-back focus:outline-none focus:border-azulPrincipal"
+                            className="p-2 h-12 rounded-lg text-sm text-textoPrincipal/60 border border-zinc-300 bg-back focus:outline-none focus:border-azulPrincipal"
                         >
-                            <option className="bg-background text-textoPrincipal " value="">Selecione um professor</option>
+                            <option className="text-textoPrincipal " value="">Selecione um professor</option>
                             {instrutores.map((inst) => (
-                                <option className="bg-background text-textoPrincipal" key={inst.id_instructor} value={inst.id_instructor}>
+                                <option className="text-textoPrincipal" key={inst.id_instructor} value={inst.id_instructor}>
                                     {inst.name}
                                 </option>
                             ))}
@@ -222,14 +222,14 @@ export default function EditarTurma() {
 
                     <div className="flex justify-end gap-3 mt-2">
                         <Button 
-                            color="preto" 
+                            color="textoPrincipal" 
                             rounded="lg" 
                             text="Importar do Classroom" 
                             type="button"
                             onClick={() => {setModalClassesAberto(true)}} 
                         />
                         <Button 
-                            color="preto" 
+                            color="textoPrincipal" 
                             rounded="lg" 
                             text="Cancelar" 
                             type="button"
@@ -256,7 +256,7 @@ export default function EditarTurma() {
                                 setGClassSelecionada(e.target.value);
                                 setGNomeDaTurma(e.target.options[e.target.selectedIndex].text);
                             }}
-                            className="p-2 h-12 rounded-lg text-sm border border-zinc-300 bg-white focus:outline-none focus:border-azulPrincipal"
+                            className="p-2 h-12 rounded-lg text-sm text-textoPrincipal/70 border border-zinc-300 bg-back focus:outline-none focus:border-azulPrincipal"
                         >
                             <option value="">Selecione uma turma</option>
                             {googleClasses.map((gClass) => (

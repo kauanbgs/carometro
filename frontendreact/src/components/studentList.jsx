@@ -49,7 +49,7 @@ export default function StudentList({ students = [], onDeleteSuccess }) {
                     </Text>
                     <div className="flex justify-end gap-3 mt-2">
                         <Button 
-                            color="preto" 
+                            color="textoPrincipal" 
                             rounded="lg" 
                             text="Cancelar" 
                             onClick={() => setAlunoParaExcluir(null)} 
@@ -110,15 +110,15 @@ export default function StudentList({ students = [], onDeleteSuccess }) {
                         
                         {idMenuAberto === aluno.id_student && (
                             <div 
-                                className="absolute right-0 top-full mt-1 bg-white shadow-xl border border-zinc-100 rounded-lg py-2 z-40 min-w-[160px]"
+                                className="absolute right-0 top-full mt-1 bg-back shadow-xl border border-background/20 rounded-lg py-2 z-40 min-w-[160px]"
                                 onMouseLeave={() => setIdMenuAberto(null)}
                             >
                                 <div 
-                                    className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-red-50 transition-colors text-red-600"
+                                    className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-red-500/10 transition-colors text-red-600"
                                     onClick={() => setAlunoParaExcluir(aluno)}
                                 >
                                     <Trash className="w-4 h-4" />
-                                    <Text variant="text" className="text-sm font-medium">Excluir aluno</Text>
+                                    <Text variant="text" color="erro" className="text-sm font-medium">Excluir aluno</Text>
                                 </div>
                             </div>
                         )}

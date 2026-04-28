@@ -124,26 +124,31 @@ module.exports = class instructorController {
 
   static async updateInstructor(req, res, next) {
     const { id_instructor } = req.params;
-    const { password, name, role } = req.body;
-
-    const validationErrorEmailInst = await validateInstEmail(email);
-    if (validationErrorEmailInst) {
-      return res.status(400).json(validationErrorEmailInst);
-    }
+    const { password, name, email, role } = req.body;
 
     let query;
     let values;
 
-    if (role) {
-      query = `UPDATE instructor SET password = ?, name = ?, role = ? WHERE id_instructor = ?`;
-      values = [password, name, role, id_instructor];
-    } else {
-      query = `UPDATE instructor SET password = ?, name = ? WHERE id_instructor = ?`;
-      values = [password, name, id_instructor];
-    }
-    const hash = await bcrypt.hash(password, saltRounds);
-    values[0] = hash; //replace the password with the hash
     try {
+      if (password) {
+        const hash = await bcrypt.hash(password, saltRounds);
+        if (role) {
+          query = `UPDATE instructor SET password = ?, name = ?, email = ?, role = ? WHERE id_instructor = ?`;
+          values = [hash, name, email, role, id_instructor];
+        } else {
+          query = `UPDATE instructor SET password = ?, name = ?, email = ? WHERE id_instructor = ?`;
+          values = [hash, name, email, id_instructor];
+        }
+      } else {
+        if (role) {
+          query = `UPDATE instructor SET name = ?, email = ?, role = ? WHERE id_instructor = ?`;
+          values = [name, email, role, id_instructor];
+        } else {
+          query = `UPDATE instructor SET name = ?, email = ? WHERE id_instructor = ?`;
+          values = [name, email, id_instructor];
+        }
+      }
+
       connect.query(query, values, function (err, results) {
         if (err) {
           console.log(err);
