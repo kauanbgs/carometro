@@ -231,7 +231,7 @@ module.exports = class studentController {
   }
   static async getStudentsByClass(req, res, next) {
     const { fk_id_class } = req.params;
-    const query = "SELECT student.name, class.name as class_name, student.status, student.id_student, student.student_number FROM student INNER JOIN class ON student.fk_id_class = class.id_class WHERE fk_id_class = ?";
+    const query = "SELECT student.name as student_name, class.name as class_name, student.status, student.id_student, student.student_number FROM student INNER JOIN class ON student.fk_id_class = class.id_class WHERE fk_id_class = ?";
     const values = [fk_id_class];
     try {
       connect.query(query, values, function (err, results) {

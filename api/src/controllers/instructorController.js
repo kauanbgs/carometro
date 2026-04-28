@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const validateInstructor = require("../services/validateInstructor");
 const validateInstEmail = require("../services/validateInstEmail");
 
-
 const jwt = require("jsonwebtoken");
 
 const saltRounds = 10;
@@ -13,7 +12,7 @@ const { google } = require("googleapis");
 const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
-  "http://localhost:5000/sigo/auth/google/callback"
+  "http://localhost:5000/sigo/auth/google/callback",
 );
 
 module.exports = class instructorController {
@@ -50,9 +49,10 @@ module.exports = class instructorController {
           return res.status(500).json({ error: "Internal Server Error" });
         }
 
-        return res.status(201).json({ message: "Instructor created successfully" });
+        return res
+          .status(201)
+          .json({ message: "Instructor created successfully" });
       });
-
     } catch (error) {
       next(error);
     }
@@ -124,13 +124,12 @@ module.exports = class instructorController {
 
   static async updateInstructor(req, res, next) {
     const { id_instructor } = req.params;
-    const { password, name, role } = req.body;
+    const { password, name, role, email } = req.body;
 
-    const validationErrorEmailInst = await validateInstEmail(email);
-    if (validationErrorEmailInst) {
-      return res.status(400).json(validationErrorEmailInst);
+    const validationErrorInstructor = await validateInstructor(req.body, true);
+    if (validationErrorInstructor) {
+      return res.status(400).json(validationErrorInstructor);
     }
-
     let query;
     let values;
 
@@ -154,7 +153,7 @@ module.exports = class instructorController {
         }
         return res
           .status(200)
-          .json({ message: "Instructor updated successfully!", id_instructor });
+          .json({ message: "Instructor updated successfully!", name });
       });
     } catch (error) {
       next(error);
@@ -249,10 +248,13 @@ module.exports = class instructorController {
   static async authGoogle(req, res, next) {
     const { id_instructor } = req.query;
     const authUrl = oauth2Client.generateAuthUrl({
-      access_type: 'offline',
-      prompt: 'consent',
-      scope: ['https://www.googleapis.com/auth/classroom.courses.readonly', 'https://www.googleapis.com/auth/classroom.rosters.readonly'],
-      state: id_instructor
+      access_type: "offline",
+      prompt: "consent",
+      scope: [
+        "https://www.googleapis.com/auth/classroom.courses.readonly",
+        "https://www.googleapis.com/auth/classroom.rosters.readonly",
+      ],
+      state: id_instructor,
     });
     res.redirect(authUrl);
   }
@@ -269,7 +271,9 @@ module.exports = class instructorController {
       if (results.affectedRows === 0) {
         return next(new Error("Instructor not found"));
       }
-      return res.status(200).json({ message: "Google Classroom disconnected successfully!" });
+      return res
+        .status(200)
+        .json({ message: "Google Classroom disconnected successfully!" });
     });
   }
 
@@ -303,16 +307,20 @@ module.exports = class instructorController {
   static async googleClasses(req, res) {
     const id_instructor = req.id_instructor || req.params.id_instructor;
     const query = `SELECT google_access_token FROM instructor WHERE id_instructor = ?`;
-    
+
     connect.query(query, [id_instructor], async (err, results) => {
       if (err) return res.status(500).json({ error: err.message });
       if (results.length === 0 || !results[0].google_access_token) {
-        return res.status(401).json({ error: "Google Classroom não conectado!" });
+        return res
+          .status(401)
+          .json({ error: "Google Classroom não conectado!" });
       }
 
-      oauth2Client.setCredentials({ access_token: results[0].google_access_token });
+      oauth2Client.setCredentials({
+        access_token: results[0].google_access_token,
+      });
       const classroom = google.classroom({ version: "v1", auth: oauth2Client });
-      
+
       try {
         const response = await classroom.courses.list();
         res.json(response.data.courses || []);
@@ -329,19 +337,24 @@ module.exports = class instructorController {
     connect.query(query, [id_instructor], async (err, results) => {
       if (err) return res.status(500).json({ error: err.message });
       if (results.length === 0 || !results[0].google_access_token) {
-        return res.status(401).json({ error: "Google Classroom não conectado!" });
+        return res
+          .status(401)
+          .json({ error: "Google Classroom não conectado!" });
       }
 
-      oauth2Client.setCredentials({ access_token: results[0].google_access_token });
+      oauth2Client.setCredentials({
+        access_token: results[0].google_access_token,
+      });
       const classroom = google.classroom({ version: "v1", auth: oauth2Client });
 
       try {
-        const response = await classroom.courses.students.list({ courseId: id_class });
+        const response = await classroom.courses.students.list({
+          courseId: id_class,
+        });
         res.json(response.data.students || []);
       } catch (error) {
         res.status(500).json({ error: error.message });
       }
     });
   }
-  
 };
