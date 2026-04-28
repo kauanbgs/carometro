@@ -4,19 +4,27 @@ import Text from "../../components/text";
 import Button from "../../components/button";
 import Separator from "../../components/separator";
 import Logs from "../../components/logs";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "../../axios/axios";
-
-
+import { Snackbar } from "../../components/snackbar";
 
 export default function Home() {
+    const location = useLocation();
+    const [snackbar, setSnackbar] = useState({ isOpen: false, message: "", type: "success" });
+
+    useEffect(() => {
+        if (location.state?.error) {
+            setSnackbar({ isOpen: true, message: location.state.error, type: "error" });
+        }
+    }, [location.state]);
     const user = localStorage.getItem("user");
     const navigate = useNavigate();
     const [occurrences, setOccurrences] = useState([]);
     const handleClick = (criar = false) => {
         criar ? navigate("/editarTurma", { state: { criar } }) : navigate("/editarTurma");
     }
+    
     const getOccurrences = () => {
         api.readOccurrences().then((response) => {
             const data = response.data;
@@ -76,6 +84,12 @@ export default function Home() {
                     </div>
                 </section>
             </main>
+            <Snackbar
+                isOpen={snackbar.isOpen}
+                message={snackbar.message}
+                type={snackbar.type}
+                onClose={() => setSnackbar({ ...snackbar, isOpen: false })}
+            />
         </div>
     );
 }

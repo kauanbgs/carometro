@@ -205,7 +205,7 @@ export default function VerTurma() {
 
             <div className="flex justify-end gap-3 mt-2">
               <Button
-                color="preto"
+                color="textoPrincipal"
                 rounded="lg"
                 text="Cancelar"
                 type="button"
@@ -268,10 +268,10 @@ export default function VerTurma() {
             onChange={(e) => setNumeroDoAluno(e.target.value)}
           />
           <button
-            className="flex items-center gap-2 bg-gray-800 px-5 py-2.5 rounded-lg cursor-pointer hover:bg-gray-700 transition-colors"
+            className="flex items-center gap-2 bg-textoPrincipal/90 px-5 py-2.5 rounded-lg cursor-pointer hover:bg-textoPrincipal/70 transition-colors"
             onClick={handleSearch}
           >
-            <Search className="text-white w-6 h-6" />
+            <Search className="text-background w-6 h-6" />
           </button>
           <Button
             color="branco"

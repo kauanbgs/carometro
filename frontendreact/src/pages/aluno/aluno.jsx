@@ -30,6 +30,7 @@ export default function Aluno() {
     const [occurrence, setOccurrence] = useState({
         type: "",
         description: "",
+        create_date: null,
         fk_id_student: id_student,
         fk_id_instructor: JSON.parse(localStorage.getItem("user")).id_instructor
     });
@@ -125,6 +126,15 @@ export default function Aluno() {
         }
     }
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+    };
+
     useEffect(() => {
         fetchOccurrences();
     }, [id_student]);
@@ -165,7 +175,7 @@ export default function Aluno() {
     return (
         <div className="h-screen w-screen bg-back flex">
             <SideBar items={items} />
-            <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-background rounded-l-3xl">
+            <main className="flex-1 ml-[22%] p-10 overflow-y-auto bg-background rounded-l-3xl custom-scrollbar">
                 
                 <Modal 
                     isOpen={modalExcluirAberto} 
@@ -177,7 +187,7 @@ export default function Aluno() {
                             Tem certeza que deseja excluir o aluno {student.name}? Esta ação não pode ser desfeita.
                         </Text>
                         <div className="flex gap-3 justify-end">
-                            <Button color="preto" rounded="lg" text="Cancelar" onClick={() => setModalExcluirAberto(false)} />
+                            <Button color="textoPrincipal" rounded="lg" text="Cancelar" onClick={() => setModalExcluirAberto(false)} />
                             <Button color="erro" rounded="lg" fill text="Excluir Aluno" onClick={handleDelete} />
                         </div>
                     </div>
@@ -211,10 +221,19 @@ export default function Aluno() {
                                     onChange={(e) => setSelectedOccurrence({ ...selectedOccurrence, description: e.target.value })}
                                 />
                             </div>
+                            <div className="flex flex-col">
+                                <label className="text-xs text-textoPrincipal/50 uppercase">Data</label>
+                                <Input 
+                                    type="date" 
+                                    value={selectedOccurrence.create_date ? selectedOccurrence.create_date.split('T')[0] : ""}
+                                    className="placeholder:text-textoPrincipal w-full"
+                                    onChange={(e) => setSelectedOccurrence({ ...selectedOccurrence, create_date: e.target.value })}
+                                />
+                            </div>
                             <div className="flex justify-between items-center mt-2">
                                 <Button color="erro" rounded="lg" text="Excluir Ocorrência" onClick={() => handleDeleteOccurrence(selectedOccurrence.id_occurrence)} />
                                 <div className="flex gap-2">
-                                    <Button color="branco" rounded="lg" text="Cancelar" onClick={() => setModalOcorrenciaAberta(false)} />
+                                    <Button color="textoPrincipal" rounded="lg" text="Cancelar" onClick={() => setModalOcorrenciaAberta(false)} />
                                     <Button color="azulPrincipal" fill rounded="lg" text="Salvar" onClick={handleUpdateOccurrence} />
                                 </div>
                             </div>
@@ -304,6 +323,7 @@ export default function Aluno() {
                                 id_occurrence={occ.id_occurrence}
                                 type={occ.type}
                                 message={occ.description} 
+                                date={formatDate(occ.create_date)}
                                 onClick={() => openOccurrenceDetails(occ)}
                             />
                         )) : (

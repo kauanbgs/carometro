@@ -22,6 +22,10 @@ const colorMap = {
     branco:{
         fill: "bg-branco text-textoPrincipal hover:bg-branco/10 active:bg-branco/95",
         outline: "border-1 text-textoPrincipal hover:bg-branco/10 hover:text-textoPrincipal",
+    },
+    textoPrincipal:{
+        fill: "bg-background text-textoPrincipal hover:bg-back/10 active:bg-textoPrincipal/95",
+        outline: "border-1 border-textoPrincipal text-textoPrincipal hover:bg-textoPrincipal/10 hover:text-textoPrincipal",
     }
 }
 

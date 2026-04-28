@@ -25,7 +25,6 @@ export default function Login() {
   const onChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
-    console.log(user);
   };
 
   const handleSubmit = async (e) => {
@@ -79,6 +78,7 @@ export default function Login() {
               type="password"
               placeholder="Senhaboa123!"
               fill
+              
               onChange={onChange}
               id="password"
               name="password"

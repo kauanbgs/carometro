@@ -20,7 +20,7 @@ export default function SideBar({ items }) {
                 <img src="/LogoCarometro-v2.png" alt="" className="hidden md:block w-32 lg:w-42 mt-5 object-contain" />
                 <img src="/LogoCarometro-v2.png" alt="" className="md:hidden w-8 h-8 mt-2 object-cover object-left" style={{ objectFit: 'cover', objectPosition: 'left' }} />
             </header>
-            <main className="flex flex-col gap-2 mt-4 p-2 md:p-4 overflow-y-auto flex-1 scrollbar-hide">
+            <main className="flex flex-col gap-2 mt-4 p-2 md:p-4 overflow-y-auto flex-1 custom-scrollbar">
                 {items.map((item, index) => {
                     const Icon = item.icon;
 
@@ -41,9 +41,9 @@ export default function SideBar({ items }) {
 
             <div className="mt-auto p-4 relative bg-background z-50">
                 {showLogout && (
-                    <div className="absolute bottom-full mb-2 left-2 md:left-4 right-2 md:right-4 bg-background shadow-md rounded-xl p-2 flex flex-col gap-1 border border-zinc-100 dark:border-zinc-800">
-                        <div 
-                            className="flex items-center justify-center md:justify-start gap-2 p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-zinc-800 rounded-lg transition-colors"
+                    <div className="absolute bottom-full mb-2 left-2 md:left-4 right-2 md:right-4 bg-background shadow-md rounded-xl p-2 flex flex-col gap-1">
+                        <div
+                            className="flex items-center justify-center md:justify-start gap-2 p-3 cursor-pointer hover:bg-back/50 rounded-lg transition-colors"
                             onClick={toggleTheme}
                         >
                             <Moon className="w-5 h-5 text-azulPrincipal shrink-0 block dark:hidden" />
@@ -53,7 +53,7 @@ export default function SideBar({ items }) {
 
                         <hr className="border-zinc-100 dark:border-zinc-800" />
 
-                        <div 
+                        <div
                             className="flex items-center justify-center md:justify-start gap-2 p-3 cursor-pointer hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
                             onClick={() => {
                                 localStorage.removeItem("token");
@@ -67,8 +67,8 @@ export default function SideBar({ items }) {
                         </div>
                     </div>
                 )}
-                
-                <div 
+
+                <div
                     className="flex justify-center md:justify-start items-center gap-3 cursor-pointer p-2 -m-2 rounded-lg"
                     onClick={() => setShowLogout(!showLogout)}
                 >

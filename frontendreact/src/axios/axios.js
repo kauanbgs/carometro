@@ -57,6 +57,12 @@ const sheets = {
     updateOccurrence: (id_occurrence, occurrence) => api.put(`/occurrence/${id_occurrence}`, occurrence),
 
 
+    getInstructors: () => api.get("/instructor"),
+    getInstructorById: (id_instructor) => api.get(`/instructor/${id_instructor}`),
+    getInstructorByName: (name) => api.get(`/instructor/name/${name}`),
+    updateInstructor: (id_instructor, data) => api.put(`/instructor/${id_instructor}`, data),
+    deleteInstructor: (id_instructor) => api.delete(`/instructor/${id_instructor}`),
+
     // google classroom
     getClassesGoogle: (id_instructor) => api.get(`/google_classroom/${id_instructor}`),
     getAlunosByGClass: (id_class, id_instructor) => api.get(`/google_classroom/students/${id_class}/${id_instructor}`),

@@ -83,7 +83,7 @@ module.exports = class OccurrenceController {
 
   static async updateOccurrence(req, res, next) {
     const { id_occurrence } = req.params;
-    let { type, description, fk_id_student } = req.body;
+    let { type, description, create_date, fk_id_student } = req.body;
 
     const validationOccurrenceError = await validateOccurrence(req.body, true);
     if (validationOccurrenceError) {
@@ -91,8 +91,8 @@ module.exports = class OccurrenceController {
     }
 
     const query =
-      "UPDATE occurrence SET type=?, description=?, fk_id_student=? WHERE id_occurrence=?";
-    const values = [type, description, fk_id_student, id_occurrence];
+      "UPDATE occurrence SET type=?, description=?, create_date=?, fk_id_student=? WHERE id_occurrence=?";
+    const values = [type, description, create_date, fk_id_student, id_occurrence];
 
     try {
       connect.query(query, values, function (err, results) {

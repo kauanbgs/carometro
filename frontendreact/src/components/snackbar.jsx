@@ -42,7 +42,7 @@ export function Snackbar({ isOpen, message, type = "success", onClose, duration 
         <div className="fixed top-10 left-1/2 -translate-x-1/2 z-[100] duration-300 min-w-96">
             <div className={`flex items-center gap-3 px-4 py-3 rounded-xl ${currentStyle.bg} ${currentStyle.border}`}>
                 {currentStyle.icon}
-                <Text variant="text" className={`text-sm font-medium ${currentStyle.text}`}>
+                <Text variant="text" color="preto" className={`text-sm font-medium ${currentStyle.text}`}>
                     {translate(message)}
                 </Text>
                 <button 

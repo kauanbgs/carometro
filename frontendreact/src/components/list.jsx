@@ -50,7 +50,7 @@ export default function List({ classes = [], onDeleteSuccess }) {
                     </Text>
                     <div className="flex justify-end gap-3 mt-2">
                         <Button 
-                            color="preto" 
+                            color="textoPrincipal" 
                             rounded="lg" 
                             text="Cancelar" 
                             onClick={() => setTurmaParaExcluir(null)} 
@@ -68,13 +68,13 @@ export default function List({ classes = [], onDeleteSuccess }) {
 
             <div className="grid grid-cols-[1fr_1fr_1fr] px-6 py-4 border-b border-zinc-300">
                 <div className="flex items-center gap-1 text-sm font-semibold text-textoPrincipal cursor-pointer select-none">
-                    Nome <ChevronDown className="w-4 h-4" />
+                    Nome
                 </div>
                 <div className="flex items-center gap-1 text-sm font-semibold text-textoPrincipal cursor-pointer select-none">
-                    Professor <ChevronDown className="w-4 h-4" />
+                    Professor
                 </div>
                 <div className="flex items-center gap-1 text-sm font-semibold text-textoPrincipal cursor-pointer select-none">
-                    Ações <ChevronDown className="w-4 h-4" />
+                    Ações
                 </div>
             </div>
             {classes.map((turma) => (
@@ -92,11 +92,11 @@ export default function List({ classes = [], onDeleteSuccess }) {
                         
                         {idMenuAberto === turma.id_class && (
                             <div 
-                                className="absolute right-0 top-full mt-1 bg-white shadow-xl border border-zinc-100 rounded-lg py-2 z-40 min-w-[160px]"
+                                className="absolute right-0 top-full mt-1 bg-back shadow-xl border border-background/20 rounded-lg py-2 z-40 min-w-[160px]"
                                 onMouseLeave={() => setIdMenuAberto(null)}
                             >
                                 <div 
-                                    className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-red-50 transition-colors text-red-600"
+                                    className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-red-500/10 transition-colors text-red-600"
                                     onClick={() => setTurmaParaExcluir(turma)}
                                 >
                                     <Trash className="w-4 h-4" />
