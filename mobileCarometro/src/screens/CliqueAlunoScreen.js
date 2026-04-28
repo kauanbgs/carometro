@@ -24,6 +24,11 @@ export default function DetalhesDoAluno({ navigation, route }) {
   const [student, setStudent] = useState(null);
   const [occurrences, setOccurrences] = useState([]);
 
+  // FIX BUG 1: guardar fk_id_class separado, pois o objeto student
+  // retornado pela API tem class_name mas não fk_id_class.
+  // Esse valor é necessário para o updateStudent (campo obrigatório no backend).
+  const [fkIdClass, setFkIdClass] = useState(null);
+
   const [motivo, setMotivo] = useState("");
   const [detalhes, setDetalhes] = useState("");
 
@@ -41,41 +46,93 @@ export default function DetalhesDoAluno({ navigation, route }) {
 
   const carregarDadosDaAPI = async () => {
     try {
-      // Busca o aluno no banco
       const respostaAluno = await api.getStudentByID(id_student);
-      if (respostaAluno.data && respostaAluno.data.students) {
-        setStudent(respostaAluno.data.students[0]);
+
+      if (
+        respostaAluno.data &&
+        respostaAluno.data.students &&
+        respostaAluno.data.students.length > 0
+      ) {
+        const alunoCarregado = respostaAluno.data.students[0];
+        setStudent(alunoCarregado);
+
+        // FIX BUG 1: salvar fk_id_class se vier na resposta.
+        // Se o backend retornar fk_id_class junto com class_name, perfeito.
+        // Se não retornar, você precisa adicionar fk_id_class na query do
+        // getStudentByID no backend (SELECT student.fk_id_class, ...).
+        if (alunoCarregado.fk_id_class) {
+          setFkIdClass(alunoCarregado.fk_id_class);
+        }
+      } else {
+        Alert.alert("Aviso", "Aluno não encontrado no banco de dados.");
+        navigation.goBack();
       }
 
-      const respostaOcorrencias = await api.getOccurrencesByStudent(id_student);
-
-      const lista =
-        respostaOcorrencias.data.occurrences || respostaOcorrencias.data || [];
-      setOccurrences(lista);
+      try {
+        const respostaOcorrencias = await api.getOccurrencesByStudent(id_student);
+        const lista =
+          respostaOcorrencias.data.occurrences || respostaOcorrencias.data || [];
+        setOccurrences(lista);
+      } catch (occError) {
+        console.log("Aluno sem ocorrências ou erro na busca de ocorrências");
+        setOccurrences([]);
+      }
     } catch (error) {
-      console.log("Erro ao buscar dados na API:", error);
-
-      setOccurrences([]);
+      console.log("Erro fatal ao buscar aluno:", error);
+      Alert.alert("Erro", "Não foi possível carregar os dados do aluno.");
+      navigation.goBack();
     }
   };
 
   const handleUpdateStudent = async (dadosEdicao) => {
     try {
-      await api.updateStudent(id_student, dadosEdicao);
+      // FIX BUG 2: garantir que fk_id_class esteja presente nos dados de edição.
+      // O updateStudent no backend exige fk_id_class — sem ele a validação falha.
+      // O UpdateAlunoModal deve passar fk_id_class nos dadosEdicao, ou completamos aqui.
+      const dadosCompletos = {
+        ...dadosEdicao,
+        fk_id_class: dadosEdicao.fk_id_class ?? fkIdClass,
+        status: dadosEdicao.status ?? student.status,
+      };
+
+      await api.updateStudent(id_student, dadosCompletos);
       Alert.alert("Sucesso", "Dados atualizados com sucesso!");
       setEditModalVisible(false);
       carregarDadosDaAPI();
     } catch (error) {
+      console.log("Erro ao atualizar aluno:", error?.response?.data || error);
       Alert.alert("Erro", "Falha ao atualizar o aluno.");
     }
   };
 
+  // FIX BUG 1: handleUpdateStatus agora monta o payload completo que o backend exige.
+  // Antes, mandava só { ...student, status: newStatus }, mas student.fk_id_class
+  // é undefined — o objeto vindo da API tem class_name, não fk_id_class.
+  // Sem fk_id_class, o validateStudent rejeita a requisição com 400.
   const handleUpdateStatus = async (newStatus) => {
+    if (!fkIdClass) {
+      Alert.alert(
+        "Erro",
+        "Não foi possível identificar a turma do aluno. Recarregue a tela."
+      );
+      return;
+    }
+
     try {
-      setStudent({ ...student, status: newStatus });
-      await api.updateStudent(id_student, { ...student, status: newStatus });
+      const payload = {
+        name: student.name,
+        email: student.email,
+        phone: student.phone,
+        status: newStatus,
+        student_number: student.student_number,
+        fk_id_class: fkIdClass, // campo obrigatório que faltava
+      };
+
+      await api.updateStudent(id_student, payload);
+      setStudent((prev) => ({ ...prev, status: newStatus }));
       Alert.alert("Sucesso", "Status alterado!");
     } catch (error) {
+      console.log("Erro ao alterar status:", error?.response?.data || error);
       Alert.alert("Erro", "Falha ao alterar status.");
     }
   };
@@ -95,12 +152,18 @@ export default function DetalhesDoAluno({ navigation, route }) {
     if (!motivo) return Alert.alert("Erro", "Digite o motivo da ocorrência.");
 
     try {
-      const id_instructor = await AsyncStorage.getItem("id_instructor");
+      const idRaw = await AsyncStorage.getItem("id_instructor");
+
+      // FIX BUG 3: AsyncStorage sempre retorna string ou null.
+      // parseInt(null) retorna NaN — e NaN enviado ao backend causa erro.
+      // Usar o fallback 1 só se realmente não houver id salvo.
+      const fk_id_instructor = idRaw ? parseInt(idRaw, 10) : 1;
+
       await api.createOccurrence({
         type: motivo,
         description: detalhes,
         fk_id_student: id_student,
-        fk_id_instructor: id_instructor || 1,
+        fk_id_instructor,
       });
 
       Alert.alert("Sucesso", "Ocorrência registrada!");
@@ -108,6 +171,7 @@ export default function DetalhesDoAluno({ navigation, route }) {
       setDetalhes("");
       carregarDadosDaAPI();
     } catch (error) {
+      console.log("Erro ao criar ocorrência:", error?.response?.data || error);
       Alert.alert("Erro", "Não foi possível registrar a ocorrência.");
     }
   };
@@ -115,17 +179,10 @@ export default function DetalhesDoAluno({ navigation, route }) {
   if (!student) {
     return (
       <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#fff",
-        }}
+        style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fff" }}
       >
         <ActivityIndicator size="large" color="#0000ff" />
-        <Text style={{ marginTop: 15, fontSize: 16 }}>
-          Buscando dados no banco...
-        </Text>
+        <Text style={{ marginTop: 15, fontSize: 16 }}>Buscando dados no banco...</Text>
       </View>
     );
   }
@@ -133,12 +190,10 @@ export default function DetalhesDoAluno({ navigation, route }) {
   return (
     <View style={[styles.pageContainer, { flex: 1 }]}>
       <Header navigation={navigation} />
-
       <ScrollView
         contentContainerStyle={[styles.pageContent, { paddingBottom: 50 }]}
         showsVerticalScrollIndicator={false}
       >
-        {/* Foto de Perfil */}
         <View style={styles.avatarContainer}>
           <View style={styles.avatarPlaceholder}>
             <FontAwesome name="user" size={40} color="#fff" />
@@ -146,7 +201,6 @@ export default function DetalhesDoAluno({ navigation, route }) {
         </View>
         <Text style={styles.studentNameTitle}>{student.name}</Text>
 
-        {/* Informações Básicas */}
         <View style={styles.rowBetween}>
           <View>
             <Text style={styles.sectionTitle}>Dados do aluno</Text>
@@ -156,10 +210,7 @@ export default function DetalhesDoAluno({ navigation, route }) {
           <View>
             <Text style={styles.infoText}>Status</Text>
             <View style={styles.pickerContainer}>
-              <Picker
-                selectedValue={student.status}
-                onValueChange={handleUpdateStatus}
-              >
+              <Picker selectedValue={student.status} onValueChange={handleUpdateStatus}>
                 <Picker.Item label="Ativo" value={1} />
                 <Picker.Item label="Inativo" value={0} />
               </Picker>
@@ -172,7 +223,6 @@ export default function DetalhesDoAluno({ navigation, route }) {
         <Text style={styles.infoText}>Telefone</Text>
         <Text style={styles.infoValue}>{student.phone}</Text>
 
-        {/* Botões de Ação */}
         <View style={styles.actionButtonsRow}>
           <TouchableOpacity
             style={styles.btnExcluirPerfil}
@@ -188,7 +238,6 @@ export default function DetalhesDoAluno({ navigation, route }) {
           </TouchableOpacity>
         </View>
 
-        {/* Formulário Nova Ocorrência */}
         <Text style={styles.sectionTitle}>Nova Ocorrência</Text>
         <Text style={styles.infoText}>Motivo</Text>
         <TextInput
@@ -197,7 +246,6 @@ export default function DetalhesDoAluno({ navigation, route }) {
           value={motivo}
           onChangeText={setMotivo}
         />
-
         <Text style={styles.infoText}>Detalhes</Text>
         <TextInput
           style={styles.occurrenceInput}
@@ -206,40 +254,24 @@ export default function DetalhesDoAluno({ navigation, route }) {
           onChangeText={setDetalhes}
         />
 
-        <TouchableOpacity
-          style={styles.btnEnviarOcorrencia}
-          onPress={handleCreateOccurrence}
-        >
-          <Text style={styles.buttonWhiteText || { color: "white" }}>
-            Registrar
-          </Text>
+        <TouchableOpacity style={styles.btnEnviarOcorrencia} onPress={handleCreateOccurrence}>
+          <Text style={{ color: "white" }}>Registrar</Text>
         </TouchableOpacity>
 
-        {/* LISTA DE OCORRÊNCIAS */}
         <Text
           style={[
             styles.sectionTitle,
-            {
-              marginTop: 30,
-              borderBottomWidth: 1,
-              borderColor: "#ccc",
-              paddingBottom: 5,
-            },
+            { marginTop: 30, borderBottomWidth: 1, borderColor: "#ccc", paddingBottom: 5 },
           ]}
         >
           Últimas Ocorrências
         </Text>
 
-        {/* Verifica se a variável occurrences existe e tem itens dentro */}
         {occurrences && occurrences.length > 0 ? (
           occurrences.map((item, index) => (
             <View
               key={index}
-              style={{
-                paddingVertical: 15,
-                borderBottomWidth: 1,
-                borderColor: "#eee",
-              }}
+              style={{ paddingVertical: 15, borderBottomWidth: 1, borderColor: "#eee" }}
             >
               <Text style={{ fontSize: 14, color: "#333", fontWeight: "bold" }}>
                 Motivo: {item.type}
@@ -251,12 +283,7 @@ export default function DetalhesDoAluno({ navigation, route }) {
           ))
         ) : (
           <Text
-            style={{
-              textAlign: "center",
-              color: "#999",
-              marginTop: 20,
-              fontStyle: "italic",
-            }}
+            style={{ textAlign: "center", color: "#999", marginTop: 20, fontStyle: "italic" }}
           >
             Este aluno não possui nenhuma ocorrência registrada.
           </Text>
@@ -265,10 +292,9 @@ export default function DetalhesDoAluno({ navigation, route }) {
         <UpdateAluno
           visible={editModalVisible}
           onClose={() => setEditModalVisible(false)}
-          studentData={student}
+          studentData={{ ...student, fk_id_class: fkIdClass }}
           onSave={handleUpdateStudent}
         />
-
         <ConfirmDeleteModal
           visible={modalVisivel}
           onClose={() => setModalVisivel(false)}

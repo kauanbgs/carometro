@@ -10,7 +10,7 @@ export default function GerenciarDocentes({ navigation }) {
 
       <View style={styles.homeContent}>
         <View>
-          <Text style={styles.titulo}>Adicionar Docente</Text>
+          <Text style={styles.titulo}>Gerenciar Docente</Text>
           <Text style={styles.texto}>Deseja adicionar um administrador?</Text>
           <TouchableOpacity style={styles.cadastroButtonCriar} onPress={() => navigation.navigate("Cadastro")}>
             <Text style={styles.buttonWhiteText}>Criar</Text>

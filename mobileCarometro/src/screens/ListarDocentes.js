@@ -11,37 +11,23 @@ import { MaterialIcons, Feather } from "@expo/vector-icons";
 import Header from "../components/Header";
 import styles from "../components/Styles";
 import api from "../services/api";
-import CriarTurmaModal from "../components/CriarTurmaModal";
 
-export default function GerenciarTurma({ navigation }) {
-  const [turmas, setTurmas] = useState([]);
+export default function GerenciarDocentes({ navigation }) {
+  const [docentes, setDocentes] = useState([]);
   const [searchNome, setSearchNome] = useState("");
   const [searchProfessor, setSearchProfessor] = useState("");
 
- 
-  const [modalVisivel, setModalVisivel] = useState(false);
-  const [professores, setProfessores] = useState([]);
+  const [professores, setProfessores] = useState("");
 
   useEffect(() => {
-    carregarDados();
     carregarProfessores(); 
   }, []);
 
-  const carregarDados = async () => {
-    try {
-      const response = await api.getClasses();
-      setTurmas(response.data.classes);
-    } catch (error) {
-      console.log("Erro ao carregar dados", error);
-    }
-  };
-
-  
   const carregarProfessores = async () => {
     try {
-      
+      // Ajuste o nome "getInstructors" para o nome que estiver no seu arquivo api.js
       const response = await api.getInstructors(); 
-      setProfessores(response.data.instructors);
+      setProfessores(response.data.instructor);
     } catch (error) {
       console.log("Erro ao carregar professores", error);
     }
@@ -50,32 +36,20 @@ export default function GerenciarTurma({ navigation }) {
   const pesquisar = async () => {
     try {
       if (searchNome !== "") {
-        const response = await api.getClassByName(searchNome);
-        setTurmas(response.data.classes);
+        const response = await api.getClassByInstructorName(searchNome);
+        setDocentes(response.data.instructor);
       } else if (searchProfessor !== "") {
         const response = await api.getClassByInstructorName(searchProfessor);
-        setTurmas(response.data.classes);
-      } else {
-        carregarDados();
+        setDocentes(response.data.instructor);
       }
     } catch (error) {
-      Alert.alert("Aviso", "Nenhuma turma encontrada!");
+      Alert.alert("Aviso", "Nenhum instrutor encontrado!");
       console.log(error);
-      setTurmas([]);
+      setDocentes([]);
     }
   };
 
-  const handleCriarTurma = async (dadosTurma) => {
-    try {
-      await api.createClass(dadosTurma);
-      setModalVisivel(false);
-      carregarDados();
-      Alert.alert("Sucesso", "Turma criada com sucesso!");
-    } catch (error) {
-      console.log(error);
-      Alert.alert("Erro", "Não foi possível criar a turma");
-    }
-  };
+  
 
   return (
     <View style={styles.pageContainer}>
@@ -83,22 +57,21 @@ export default function GerenciarTurma({ navigation }) {
 
       <View style={styles.pageContent}>
         <View style={styles.turmaHeaderContainer}>
-          <Text style={styles.turmaTitle}>Gerenciar Turmas</Text>
+          <Text style={styles.turmaTitle}>Gerenciar Docentes</Text>
         </View>
 
-     
         <TouchableOpacity
           style={styles.turmaBtnAdicionar}
-          onPress={() => setModalVisivel(true)}
+          onPress={()=> navigation.navigate("Cadastro")}
         >
-          <Text style={styles.turmaBtnAdicionarText}>Adicionar Turma</Text>
+          <Text style={styles.turmaBtnAdicionarText}>Adicionar Docente</Text>
           <Feather name="plus-circle" size={18} color="#888" />
         </TouchableOpacity>
 
         <View style={styles.turmaFilterRow}>
           <TextInput
             style={styles.turmaInputNome}
-            placeholder="Nome da Turma"
+            placeholder="Nome do instrutor"
             value={searchNome}
             onChangeText={setSearchNome}
           />
@@ -128,38 +101,30 @@ export default function GerenciarTurma({ navigation }) {
         </View>
 
         <View style={styles.turmaListHeader}>
-          <Text style={styles.turmaListHeaderTextNome}>Nome</Text>
-          <Text style={styles.turmaListHeaderTextProf}>Professor</Text>
-          <Text style={styles.turmaListHeaderTextAcao}>Ação</Text>
+          <Text style={styles.turmaListHeaderTextProf}>Nome</Text>
+          <Text style={styles.turmaListHeaderTextAcao}>ID</Text>
         </View>
 
         <FlatList
-          data={turmas}
-          keyExtractor={(item) => String(item.id_class)}
+          data={docentes}
+          keyExtractor={(item) => String(item.id_instructor)}
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("EditarTurmas", { turma: item })
+                navigation.navigate("CliqueDocente", { docentes: item })
               }
             >
               <View style={styles.turmaListItem}>
                 <Text style={styles.turmaItemTextNome}>{item.name}</Text>
                 <Text style={styles.turmaItemTextProf}>
-                  {item.instructor_name}
+                  {item.id_instructor}
                 </Text>
                 <View style={styles.turmaItemAcaoContainer}>
-                  <MaterialIcons name="more-vert" size={20} color="#555" />
+                  <MaterialIcons name="menu" size={20} color="#555" />
                 </View>
               </View>
             </TouchableOpacity>
           )}
-        />
-        
-        <CriarTurmaModal 
-          visible={modalVisivel} 
-          onClose={() => setModalVisivel(false)} 
-          onCreate={handleCriarTurma}
-          professores={professores}
         />
         
       </View>

@@ -7,7 +7,7 @@ import {
   Image,
   Pressable,
   Modal,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 
@@ -18,7 +18,7 @@ export default function SideBar({ visible, onClose, navigation }) {
       visible={visible} // Define se a Sidebar está visível ou não (True ou False)
       transparent={true} // Permite que o fundo da tela original (sua Home) continue visível por trás do Modal.
       animationType="fade" // Deixa a transição mais suave
-      onRequestClose={onClose} // É uma configuração obrigatória para Android (se o usuario apertar no botao fisico de voltar) 
+      onRequestClose={onClose} // É uma configuração obrigatória para Android (se o usuario apertar no botao fisico de voltar)
     >
       <View style={styles.overlay}>
         <View style={styles.sidebar}>
@@ -74,10 +74,26 @@ export default function SideBar({ visible, onClose, navigation }) {
             >
               <MaterialIcons name="groups" size={26} color="#333" />
               <Text style={styles.menuText}>Gerenciar Docente</Text>
+            </TouchableOpacity>
+
+            
+
+            <View style={styles.linhaFinaPreta}></View>
+
+            <Text style={styles.sectionLabel}>DEV</Text>
+
+            <TouchableOpacity
+              style={styles.menuItem}
+              onPress={() => {
+                onClose();
+                navigation.navigate("GerenciarDocentesScreen");
+              }}
+            >
+              <MaterialIcons name="groups" size={26} color="#333" />
+              <Text style={styles.menuText}>Gerenciar Docente</Text>
               
               
             </TouchableOpacity>
-
           </ScrollView>
         </View>
 

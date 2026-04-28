@@ -221,7 +221,7 @@ export default function EditarTurmas({ navigation, route }) {
                 style={{ width: "20%", alignItems: "center" }}
                 onPress={() =>
                   navigation.navigate("DetalhesDoAluno", {
-                    id_student: item.id_student,
+                    id_student: item.id_student, // ENVIANDO COMO id_student
                   })
                 }
               >

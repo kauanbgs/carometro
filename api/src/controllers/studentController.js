@@ -5,15 +5,15 @@ const validateStudEmail = require("../services/validateStudEmail");
 module.exports = class studentController {
   static async createStudent(req, res, next) {
     const { name, email, phone, status, student_number, fk_id_class } = req.body;
-    
+
     const validateStudentError = await validateStudent(req.body);
     if (validateStudentError) {
       return res.status(400).json(validateStudentError);
     }
 
-    const validateErrorStudEmail = await validateStudEmail(email)
-    if(validateErrorStudEmail){
-      return res.status(400).json(validateErrorStudEmail)
+    const validateErrorStudEmail = await validateStudEmail(email);
+    if (validateErrorStudEmail) {
+      return res.status(400).json(validateErrorStudEmail);
     }
 
     const query = `INSERT INTO student (name, email, phone, status, student_number, fk_id_class) VALUES (?, ?, ?, ?, ?, ?)`;
@@ -27,9 +27,7 @@ module.exports = class studentController {
         if (results.affectedRows === 0) {
           return res.status(404).json({ error: "Student not found!" });
         }
-        return res
-          .status(200)
-          .json({ message: "Student created successfully!" });
+        return res.status(200).json({ message: "Student created successfully!" });
       });
     } catch (error) {
       console.error(error);
@@ -46,13 +44,9 @@ module.exports = class studentController {
           return next(err);
         }
         if (results.length === 0) {
-          return res
-            .status(404)
-            .json({ error: "Students not found" });
+          return res.status(404).json({ error: "Students not found" });
         }
-        return res
-          .status(200)
-          .json({ students: results });
+        return res.status(200).json({ students: results });
       });
     } catch (error) {
       console.error(error);
@@ -65,8 +59,26 @@ module.exports = class studentController {
     if (!id_student) {
       return res.status(400).json({ error: "Student ID is required" });
     }
-    const query = "SELECT student.name, student.email, student.phone, class.name as class_name, student.status, student.id_student, student.student_number FROM student INNER JOIN class ON student.fk_id_class = class.id_class WHERE id_student = ?";
+
+    // FIX: adicionado student.fk_id_class no SELECT.
+    // Sem esse campo, o frontend não consegue montar o payload de update/status,
+    // pois o backend exige fk_id_class mas o objeto retornado só tinha class_name.
+    const query = `
+      SELECT
+        student.name,
+        student.email,
+        student.phone,
+        student.status,
+        student.id_student,
+        student.student_number,
+        student.fk_id_class,
+        class.name AS class_name
+      FROM student
+      INNER JOIN class ON student.fk_id_class = class.id_class
+      WHERE student.id_student = ?
+    `;
     const values = [id_student];
+
     try {
       connect.query(query, values, function (err, results) {
         if (err) {
@@ -76,9 +88,7 @@ module.exports = class studentController {
         if (results.length === 0) {
           return res.status(404).json({ error: "Student not found" });
         }
-        return res
-          .status(200)
-          .json({ students: results });
+        return res.status(200).json({ students: results });
       });
     } catch (error) {
       console.error(error);
@@ -88,7 +98,6 @@ module.exports = class studentController {
 
   static async getStudentByNumber(req, res, next) {
     const { student_number } = req.params;
-    console.log("ID recebido:", student_number); // <--- Adicione isto
     const query = "SELECT * FROM student WHERE student_number = ?";
     const values = [student_number];
     try {
@@ -100,9 +109,7 @@ module.exports = class studentController {
         if (results.length === 0) {
           return res.status(404).json({ error: "Student not found" });
         }
-        return res
-          .status(200)
-          .json({ students: results });
+        return res.status(200).json({ students: results });
       });
     } catch (error) {
       console.error(error);
@@ -123,9 +130,7 @@ module.exports = class studentController {
         if (results.length === 0) {
           return res.status(404).json({ error: "student não encontrado!" });
         }
-        return res
-          .status(200)
-          .json({ students: results });
+        return res.status(200).json({ students: results });
       });
     } catch (error) {
       console.error(error);
@@ -158,35 +163,23 @@ module.exports = class studentController {
 
   static async updateStudent(req, res, next) {
     const { id_student } = req.params;
-    const {
-      name,
-      email,
-      phone,
-      status,
-      student_number,
-      fk_id_class,
-    } = req.body;
+    const { name, email, phone, status, student_number, fk_id_class } = req.body;
 
     const validateStudentError = await validateStudent(req.body);
     if (validateStudentError) {
       return res.status(400).json(validateStudentError);
     }
 
-    const validateErrorStudEmail = await validateStudEmail(email)
-    if(validateErrorStudEmail){
-      return res.status(400).json(validateErrorStudEmail)
+    // FIX: passa id_student para o validateStudEmail para que ele ignore
+    // o email do próprio aluno ao checar duplicatas no banco.
+    // Sem isso, qualquer update rejeita porque o email "já existe" (é do próprio aluno).
+    const validateErrorStudEmail = await validateStudEmail(email, id_student);
+    if (validateErrorStudEmail) {
+      return res.status(400).json(validateErrorStudEmail);
     }
 
     const query = `UPDATE student SET name=?, email=?, phone=?, status=?, student_number=?, fk_id_class=? WHERE id_student=?`;
-    const values = [
-      name,
-      email,
-      phone,
-      status,
-      student_number,
-      fk_id_class,
-      id_student,
-    ];
+    const values = [name, email, phone, status, student_number, fk_id_class, id_student];
 
     try {
       connect.query(query, values, function (err, results) {
@@ -195,13 +188,9 @@ module.exports = class studentController {
           return next(err);
         }
         if (results.affectedRows === 0) {
-          return next(
-            res.status(404).json({ error: "Student not found" })
-          );
+          return res.status(404).json({ error: "Student not found" });
         }
-        return res
-          .status(200)
-          .json({ message: "Student updated successfully", id_student });
+        return res.status(200).json({ message: "Student updated successfully", id_student });
       });
     } catch (error) {
       console.error(error);
@@ -225,18 +214,28 @@ module.exports = class studentController {
         if (results.affectedRows === 0) {
           return next(new Error("Student not found"));
         }
-        return res
-          .status(200)
-          .json({ message: "Student deleted successfully", id_student });
+        return res.status(200).json({ message: "Student deleted successfully", id_student });
       });
     } catch (error) {
       console.error(error);
       return next(error);
     }
   }
+
   static async getStudentsByClass(req, res, next) {
     const { fk_id_class } = req.params;
-    const query = "SELECT student.name, class.name as class_name, student.status, student.id_student, student.student_number FROM student INNER JOIN class ON student.fk_id_class = class.id_class WHERE fk_id_class = ?";
+    const query = `
+      SELECT
+        student.name,
+        student.status,
+        student.id_student,
+        student.student_number,
+        student.fk_id_class,
+        class.name AS class_name
+      FROM student
+      INNER JOIN class ON student.fk_id_class = class.id_class
+      WHERE student.fk_id_class = ?
+    `;
     const values = [fk_id_class];
     try {
       connect.query(query, values, function (err, results) {
@@ -247,9 +246,7 @@ module.exports = class studentController {
         if (results.length === 0) {
           return next(new Error("No students found in this class"));
         }
-        return res
-          .status(200)
-          .json({ students: results });
+        return res.status(200).json({ students: results });
       });
     } catch (error) {
       console.error(error);
