@@ -25,7 +25,6 @@ export default function Login() {
   const onChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
-    console.log(user);
   };
 
   const handleSubmit = async (e) => {

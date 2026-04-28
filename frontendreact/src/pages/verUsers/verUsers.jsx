@@ -23,7 +23,7 @@ export default function VerUsers() {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user || user.role !== "adm") {
-      navigate("/home");
+      navigate("/home", { state: { error: "Você não tem permissão para acessar esta página." } });
       return;
     }
   }, []);

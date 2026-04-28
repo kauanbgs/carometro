@@ -28,7 +28,8 @@ const items = [
         icon: Code,
         dad: "Devs",
         label: "Ver Usuários",
-        to: "/verUsers"
+        to: "/verUsers",
+        permission: "adm"
     }
 
 ];

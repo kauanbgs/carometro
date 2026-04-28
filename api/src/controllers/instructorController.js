@@ -124,28 +124,27 @@ module.exports = class instructorController {
 
   static async updateInstructor(req, res, next) {
     const { id_instructor } = req.params;
-    const { password, name, email, role } = req.body;
-
+    const { password, name, role } = req.body;
     let query;
     let values;
 
     try {
-      if (password) {
+      if (password && password.trim() !== "") {
         const hash = await bcrypt.hash(password, saltRounds);
         if (role) {
-          query = `UPDATE instructor SET password = ?, name = ?, email = ?, role = ? WHERE id_instructor = ?`;
-          values = [hash, name, email, role, id_instructor];
+          query = `UPDATE instructor SET name = ?, role = ?, password = ? WHERE id_instructor = ?`;
+          values = [name, role, hash, id_instructor];
         } else {
-          query = `UPDATE instructor SET password = ?, name = ?, email = ? WHERE id_instructor = ?`;
-          values = [hash, name, email, id_instructor];
+          query = `UPDATE instructor SET name = ?, password = ? WHERE id_instructor = ?`;
+          values = [name, hash, id_instructor];
         }
       } else {
         if (role) {
-          query = `UPDATE instructor SET name = ?, email = ?, role = ? WHERE id_instructor = ?`;
-          values = [name, email, role, id_instructor];
+          query = `UPDATE instructor SET name = ?, role = ? WHERE id_instructor = ?`;
+          values = [name, role, id_instructor];
         } else {
-          query = `UPDATE instructor SET name = ?, email = ? WHERE id_instructor = ?`;
-          values = [name, email, id_instructor];
+          query = `UPDATE instructor SET name = ? WHERE id_instructor = ?`;
+          values = [name, id_instructor];
         }
       }
 
@@ -308,7 +307,7 @@ module.exports = class instructorController {
   static async googleClasses(req, res) {
     const id_instructor = req.id_instructor || req.params.id_instructor;
     const query = `SELECT google_access_token FROM instructor WHERE id_instructor = ?`;
-    
+
     connect.query(query, [id_instructor], async (err, results) => {
       if (err) return res.status(500).json({ error: err.message });
       if (results.length === 0 || !results[0].google_access_token) {
@@ -317,7 +316,7 @@ module.exports = class instructorController {
 
       oauth2Client.setCredentials({ access_token: results[0].google_access_token });
       const classroom = google.classroom({ version: "v1", auth: oauth2Client });
-      
+
       try {
         const response = await classroom.courses.list();
         res.json(response.data.courses || []);
@@ -348,5 +347,5 @@ module.exports = class instructorController {
       }
     });
   }
-  
+
 };

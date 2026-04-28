@@ -50,6 +50,7 @@ const API_MESSAGES = {
     "All fields must be filled to be able to create it":"Todos os campos devem ser preenchidos para criar",
     "All required fields (name, status, class) must be filled":"Todos os campos obrigatórios (nome, status, classe) devem ser preenchidos",
     "Password incorrect":"Senha incorreta",
+    "Email already being used by another user":"E-mail já está sendo usado por outro usuário",
 
     // ===== Middlewares =====
     "Token não fornecido!":"Token não fornecido!",

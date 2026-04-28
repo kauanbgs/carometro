@@ -22,7 +22,7 @@ export default function Instrutor() {
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("user"));
         if (!user || user.role !== "adm") {
-            navigate("/home");
+            navigate("/home", { state: { error: "Você não tem permissão para acessar esta página." } });
             return;
         }
     }, []);
@@ -46,8 +46,19 @@ export default function Instrutor() {
                 payload.password = passwordData.newPassword;
             }
             await api.updateInstructor(id_instructor, payload);
+            
+            const loggedUser = JSON.parse(localStorage.getItem("user"));
+            if (loggedUser && String(loggedUser.id_instructor) === String(id_instructor)) {
+                const updatedUser = { ...loggedUser, name: formData.name, role: formData.role };
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+                if (formData.role === "inst") {
+                    navigate("/home");
+                    return;
+                }
+            }
+
             setSnackbar({ isOpen: true, message: "Instrutor atualizado com sucesso!", type: "success" });
-            setInstructor({ ...instructor, name: formData.name, email: formData.email });
+            setInstructor({ ...instructor, name: formData.name, role: formData.role });
             setPasswordData({ newPassword: "", confirmPassword: "" });
             
         } catch (error) {
@@ -56,13 +67,7 @@ export default function Instrutor() {
     };
 
     const handleDelete = async () => {
-        try {
-            await api.deleteDocente(id_instructor);
-            setSnackbar({ isOpen: true, message: "Instrutor excluído com sucesso!", type: "success" });
-            setTimeout(() => navigate("/verUsers"), 1000);
-        } catch (error) {
-            setSnackbar({ isOpen: true, message: error.response?.data?.error || "Erro ao excluir instrutor", type: "error" });
-        }
+        navigate("/removerDocente", { state: { email: instructor.email } })
     };
 
     return (
@@ -77,11 +82,11 @@ export default function Instrutor() {
                 >
                     <div className="flex flex-col gap-4">
                         <Text variant="text" className="mb-2">
-                            Tem certeza que deseja excluir o instrutor <span className="font-bold">{instructor.name}</span>?
+                            Para confirmar a exclusão do instrutor <span className="font-bold">{instructor.name}</span>, digite a senha do usuário na próxima página.
                         </Text>
                         <div className="flex gap-3 justify-end mt-2">
                             <Button color="textoPrincipal" rounded="lg" text="Cancelar" onClick={() => setModalExcluirAberto(false)} />
-                            <Button color="erro" fill rounded="lg" text="Excluir Instrutor" onClick={handleDelete} />
+                            <Button fill rounded="lg" text="Confirmar" onClick={handleDelete} />
                         </div>
                     </div>
                 </Modal>
@@ -125,13 +130,14 @@ export default function Instrutor() {
                         onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
                         className="w-full"
                     />
-                    <Input
-                        label="Email"
-                        placeholder="Email"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full"
-                    />
+                    <div className="flex flex-col">
+                        <Text variant="text" className="text-textoPrincipal text-sm">Email</Text>
+                        <input
+                            className="w-full p-2 h-12 rounded-lg text-sm text-textoPrincipal border border-zinc-300 bg-back focus:outline-none focus:border-azulPrincipal"
+                            value={formData.email}
+                            disabled
+                        />
+                    </div>
                     <button
                         className="h-12 w-12 flex items-center justify-center bg-textoPrincipal/80 rounded-lg cursor-pointer hover:bg-textoPrincipal/60 transition-colors"
                         onClick={handleSave}

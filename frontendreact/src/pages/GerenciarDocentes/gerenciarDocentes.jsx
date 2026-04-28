@@ -16,13 +16,12 @@ export default function GerenciarDocentes() {
                         <Text variant="subtitle">Voltar</Text>
                     </Link>
                 </div>
-                <div className="flex gap-20 justify-center items-center mt-15">
+                <div className="flex gap-20 justify-center items-center mt-15 flex-wrap">
                     <div>
                         <Text variant="title" className="mb-5">Adicionar Docente</Text>
                         <Text variant="text">Deseja adicionar <br /> um administrador?</Text>
                         <Link to="/adicionarDocente" className="text-sm text-azulSecundario underline">Clique Aqui!</Link>
                     </div>
-                    <hr className="border-1 border-gray-500 mt-10 h-60" />
                     <div>
                         <Text variant="title" className="mb-5">Remover Docente</Text>
                         <Text variant="text">Deseja remover <br /> um administrador?</Text>
