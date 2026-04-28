@@ -68,13 +68,13 @@ export default function List({ classes = [], onDeleteSuccess }) {
 
             <div className="grid grid-cols-[1fr_1fr_1fr] px-6 py-4 border-b border-zinc-300">
                 <div className="flex items-center gap-1 text-sm font-semibold text-textoPrincipal cursor-pointer select-none">
-                    Nome <ChevronDown className="w-4 h-4" />
+                    Nome
                 </div>
                 <div className="flex items-center gap-1 text-sm font-semibold text-textoPrincipal cursor-pointer select-none">
-                    Professor <ChevronDown className="w-4 h-4" />
+                    Professor
                 </div>
                 <div className="flex items-center gap-1 text-sm font-semibold text-textoPrincipal cursor-pointer select-none">
-                    Ações <ChevronDown className="w-4 h-4" />
+                    Ações
                 </div>
             </div>
             {classes.map((turma) => (

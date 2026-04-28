@@ -67,16 +67,16 @@ export default function StudentList({ students = [], onDeleteSuccess }) {
 
             <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] px-6 py-4 border-b border-zinc-300">
                 <div className="flex items-center gap-1 text-sm font-semibold text-textoPrincipal cursor-pointer select-none">
-                    Nome <ChevronDown className="w-4 h-4" />
+                    Nome
                 </div>
                 <div className="flex items-center gap-1 text-sm font-semibold text-textoPrincipal cursor-pointer select-none">
-                    Turma <ChevronDown className="w-4 h-4" />
+                    Turma
                 </div>
                 <div className="flex items-center gap-1 text-sm font-semibold text-textoPrincipal cursor-pointer select-none">
-                    Número <ChevronDown className="w-4 h-4" />
+                    Número
                 </div>
                 <div className="flex items-center gap-1 text-sm font-semibold text-textoPrincipal cursor-pointer select-none">
-                    Status <ChevronDown className="w-4 h-4" />
+                    Status
                 </div>
                 <div className="flex items-center gap-1 text-sm font-semibold text-textoPrincipal cursor-pointer select-none">
                     Ações
