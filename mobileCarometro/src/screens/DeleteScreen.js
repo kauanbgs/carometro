@@ -15,12 +15,15 @@ import { Picker } from "@react-native-picker/picker";
 import api from "../services/api";
 import Header from "../components/Header";
 import styles from "../components/Styles";
+import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
 
 export default function DeleteDocente({ navigation }) {
   const [instructor, setInstructor] = useState({
     email: "",
     password: "",
   });
+  const [modalVisivel, setModalVisivel] = useState(false);
+  
 
   function onChange(email, value) {
     setInstructor({ ...instructor, [email]: value });
@@ -41,18 +44,18 @@ export default function DeleteDocente({ navigation }) {
     }
   }
   return (
-    <View style={styles.deleteContainer}>
+    <View style={styles.pageContainer}>
+      <Header navigation={navigation} />
 
-        <Header navigation={navigation} />
-  
-      <View style={styles.deleteContainer}>
-        <Text style={styles.title}>Removendo Docente</Text>
+      <View style={styles.pageContent}>
+        <Text style={styles.titleMedium}>Removendo Docente</Text>
+
         <TextInput
           style={styles.input}
           placeholder="Email do docente"
           placeholderTextColor="#bababa"
           value={instructor.email}
-          onChange={(value) => onChange("email", value)}
+          onChangeText={(value) => onChange("email", value)}
         />
         <TextInput
           style={styles.input}
@@ -60,13 +63,18 @@ export default function DeleteDocente({ navigation }) {
           placeholderTextColor="#bababa"
           
           value={instructor.password}
-          onChange={(value) => onChange("password", value)}
+          onChangeText={(value) => onChange("password", value)}
         />
-        <TouchableOpacity style={styles.buttonDelete} onPress={Delete}>
-        <Text style={styles.buttonText}>Remover</Text>
-      </TouchableOpacity>
+
+        <TouchableOpacity style={styles.primaryButton} onPress={()=> setModalVisivel(true)}>
+          <Text style={styles.buttonWhiteText}>Remover</Text>
+        </TouchableOpacity>
+        <ConfirmDeleteModal 
+          visible={modalVisivel} 
+          onClose={() => setModalVisivel(false)} 
+          onConfirm={Delete} 
+        />
       </View>
-      
     </View>
   );
 }

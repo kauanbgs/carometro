@@ -7,21 +7,20 @@ import {
   Image,
   Pressable,
   Modal,
+  ScrollView,
 } from "react-native";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 
-// Agora a Sidebar recebe 'visible' e 'onClose' do Header
 export default function SideBar({ visible, onClose, navigation }) {
   return (
     <Modal
-      visible={visible} // Define se a Sidebar está visível ou não (True ou False)
-      transparent={true} // Permite que o fundo da tela original (sua Home) continue visível por trás do Modal.
-      animationType="fade" // Deixa a transição mais suave
-      onRequestClose={onClose} // É uma configuração obrigatória para Android (se o usuario apertar no botao fisico de voltar) 
+      visible={visible} 
+      transparent={true} 
+      animationType="fade" 
+      onRequestClose={onClose} 
     >
       <View style={styles.overlay}>
         <View style={styles.sidebar}>
-          {/* Header da Sidebar */}
           <View style={styles.header}>
             <TouchableOpacity onPress={onClose}>
               <AntDesign name="bars" size={28} color="#333" />
@@ -33,7 +32,7 @@ export default function SideBar({ visible, onClose, navigation }) {
           </View>
 
           {/* Itens do Menu */}
-          <View style={styles.menu}>
+          <ScrollView style={styles.menu}>
             <TouchableOpacity
               style={styles.menuItem}
               onPress={() => {
@@ -53,7 +52,7 @@ export default function SideBar({ visible, onClose, navigation }) {
               style={styles.menuItem}
               onPress={() => {
                 onClose();
-                navigation.navigate("Suporte");
+                navigation.navigate("GerenciarTurma");
               }}
             >
               <MaterialIcons name="groups" size={26} color="#333" />
@@ -68,12 +67,16 @@ export default function SideBar({ visible, onClose, navigation }) {
               style={styles.menuItem}
               onPress={() => {
                 onClose();
-                navigation.navigate("Suporte");
+                navigation.navigate("GerenciarDocentes");
               }}
             >
               <MaterialIcons name="groups" size={26} color="#333" />
-              <Text style={styles.menuText}>Gerenciar Docente</Text>
+              <Text style={styles.menuText}>Listar Docentes</Text>
             </TouchableOpacity>
+
+            
+
+            <View style={styles.linhaFinaPreta}></View>
 
             <Text style={styles.sectionLabel}>DEV</Text>
 
@@ -81,16 +84,17 @@ export default function SideBar({ visible, onClose, navigation }) {
               style={styles.menuItem}
               onPress={() => {
                 onClose();
-                navigation.navigate("GerenciarDocentes");
+                navigation.navigate("GerenciarDocentesScreen");
               }}
             >
               <MaterialIcons name="groups" size={26} color="#333" />
-              <Text style={styles.menuText}>Criar ou Editar Docentes</Text>
+              <Text style={styles.menuText}>Gerenciar Docentes</Text>
+              
+              
             </TouchableOpacity>
-          </View>
+          </ScrollView>
         </View>
 
-        {/* Área fora da sidebar (clicar aqui fecha o menu) */}
         <Pressable style={styles.overlayArea} onPress={onClose} />
       </View>
     </Modal>
@@ -99,9 +103,9 @@ export default function SideBar({ visible, onClose, navigation }) {
 
 const styles = StyleSheet.create({
   overlay: {
-    flex: 1, // Faz com que o overlay ocupe toda a tela
+    flex: 1, 
     flexDirection: "row",
-    backgroundColor: "rgba(0,0,0,0.4)", // Fundo levemente escurecido
+    backgroundColor: "rgba(0,0,0,0.4)", 
   },
   sidebar: {
     width: 290,
@@ -110,8 +114,8 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 20,
     flexDirection: "column",
-    elevation: 10, // Sombra para Android
-    shadowColor: "#000", // Sombra para iOS
+    elevation: 10, 
+    shadowColor: "#000", 
     shadowOffset: { width: 2, height: 0 },
     shadowOpacity: 0.5,
     shadowRadius: 5,
@@ -126,7 +130,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 100,
     height: 35,
-    resizeMode: "contain", // Ajusta a imagem para caber inteira na tela
+    resizeMode: "contain", 
   },
   menu: {
     flex: 1,

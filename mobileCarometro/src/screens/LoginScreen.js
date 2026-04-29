@@ -1,6 +1,7 @@
 import { TouchableOpacity, View, Text, TextInput, Alert, Image } from "react-native";
 import Checkbox from "expo-checkbox";
 import { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import api from "../services/api";
 import styles from "../components/Styles";
 
@@ -15,6 +16,7 @@ export default function Login({ navigation }) {
   async function login() {
     try {
       const response = await api.postLogin(instructor);
+      await AsyncStorage.setItem("token", response.data.token); // salva o token
       Alert.alert(response.data.message);
       navigation.navigate("HomeScreen");
     } catch (error) {

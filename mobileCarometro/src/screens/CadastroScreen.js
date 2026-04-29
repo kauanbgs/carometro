@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { TouchableOpacity, View, Text, TextInput, Alert, Platform, KeyboardAvoidingView, ScrollView } from "react-native";
+import {
+  TouchableOpacity,
+  View,
+  Text,
+  TextInput,
+  Alert,
+  Platform,
+  KeyboardAvoidingView,
+  ScrollView,
+} from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import api from "../services/api";
 import Header from "../components/Header";
@@ -18,7 +27,12 @@ export default function CadastroUser({ navigation }) {
   }
 
   async function Cadastro() {
-    if (!instructor.name || !instructor.email || !instructor.password || !instructor.type) {
+    if (
+      !instructor.name ||
+      !instructor.email ||
+      !instructor.password ||
+      !instructor.type
+    ) {
       Alert.alert("Erro", "All fields must be filled");
       return;
     }
@@ -87,7 +101,13 @@ export default function CadastroUser({ navigation }) {
             </View>
           </View>
 
-          <TouchableOpacity style={styles.primaryButton} onPress={Cadastro}>
+          <TouchableOpacity
+            style={styles.primaryButton}
+            onPress={() => {
+              Cadastro();
+              navigation.goBack();
+            }}
+          >
             <Text style={styles.buttonWhiteText}>Criar</Text>
           </TouchableOpacity>
         </View>

@@ -1,5 +1,4 @@
 import { StyleSheet, Platform } from "react-native";
-import GerenciarDocentes from "../screens/GerenciarDocentesScreen";
 
 export default StyleSheet.create({
 
@@ -272,7 +271,32 @@ export default StyleSheet.create({
   },
 
   // ─── DeleteScreen ─────────────────────────────────────────
-  // Usa pageContainer e pageContent
+     title: {
+    fontSize: 22,
+    fontWeight: "500",
+    color: "#333",
+    marginBottom: 30,
+  },
+ input: {
+    width: "100%",
+    height: 40,
+    borderBottomWidth: 1,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+  },
+  
+    buttonDelete: {
+    alignItems: "center",
+    color:"#fff",
+    width: "100%",
+    backgroundColor: "#2957a4",
+    padding: 20,
+    borderRadius: 8,
+    marginTop: 10,
+  },
+  buttonText:{
+    color:"#fff"
+  },
 
   // ─── SuporteScreen 
   // Usa pageContainer, pageContent, titleLarge
@@ -305,7 +329,7 @@ export default StyleSheet.create({
   // Usa primaryButton, titleMedium, textNormal
   titulo: {
     fontSize: 30,
-    fontWeight: "500",
+    fontWeight: "400",
     color: "#333"
   },
   texto: {
@@ -313,4 +337,275 @@ export default StyleSheet.create({
     fontWeight: "normal",
     color: "#333"
   },
+
+  // ─── GerenciarTurmasScreen ────────────────────────────────
+  turmaHeaderContainer: {
+    alignItems: "center",
+    marginVertical: 20,
+  },
+  turmaTitle: {
+    fontSize: 28,
+    fontWeight: "400",
+    color: "#000",
+  },
+  turmaBtnAdicionar: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    paddingVertical: 12,
+    marginBottom: 20,
+  },
+  turmaBtnAdicionarText: {
+    fontSize: 16,
+    color: "#888",
+    marginRight: 10,
+  },
+  turmaFilterRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  turmaInputNome: {
+    flex: 1.3,
+    height: 45,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    paddingHorizontal: 5,
+    width: "33%",
+    marginRight: 5,
+  },
+  turmaPickerContainer: {
+    flex: 1,
+    height: 50,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    justifyContent: "center",
+    marginRight: 10,
+  },
+  turmaBtnSearch: {
+    width: 45,
+    height: 45,
+    backgroundColor: "#333",
+    borderRadius: 8,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  turmaListHeader: {
+    flexDirection: "row",
+    borderBottomWidth: 1,
+    borderBottomColor: "#888",
+    paddingBottom: 10,
+    marginBottom: 10,
+  },
+  turmaListHeaderTextNome: {
+    flex: 2,
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#333",
+  },
+  turmaListHeaderTextProf: {
+    flex: 1.5,
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#333",
+  },
+  turmaListHeaderTextAcao: {
+    flex: 0.5,
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#333",
+    textAlign: "center",
+  },
+  turmaListItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
+  },
+  turmaItemTextNome: {
+    flex: 2,
+    fontSize: 14,
+    color: "#555",
+  },
+  turmaItemTextProf: {
+    flex: 1.5,
+    fontSize: 14,
+    color: "#555",
+  },
+  turmaItemAcaoContainer: {
+    flex: 0.5,
+    alignItems: "center",
+  },
+  // ─── Modals ───────────────────────────────────────────────
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalOverlayClick: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+  },
+  modalContainer: {
+    backgroundColor: "#fff",
+    width: "80%",
+    padding: 25,
+    borderRadius: 10,
+    zIndex: 1,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+    color: "#333",
+  },
+  modalLabel: {
+    color: "#666",
+    marginBottom: 5,
+  },
+  modalInput: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 15,
+  },
+  modalPickerContainer: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    marginBottom: 20,
+  },
+  modalBtnCriar: {
+    backgroundColor: "#4A89DF",
+    padding: 15,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  modalBtnExcluir: {
+    backgroundColor: "#D33F3F",
+    padding: 15,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+  modalBtnText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  
+  // --- ESTILOS DA TELA DE DETALHES DO ALUNO ---
+  avatarContainer: {
+    alignItems: 'center',
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  avatarPlaceholder: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#ccc',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  studentNameTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: '400',
+    marginBottom: 10,
+  },
+  infoText: {
+    fontSize: 12,
+    color: '#888',
+  },
+  infoValue: {
+    fontSize: 14,
+    color: '#333',
+    marginBottom: 10,
+  },
+  rowBetween: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  pickerContainer: {
+    borderWidth: 0.5,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    height: 40,
+    justifyContent: 'center',
+    width: 120,
+  },
+  actionButtonsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
+    marginBottom: 30,
+  },
+  btnExcluirPerfil: {
+    borderWidth: 1,
+    borderColor: '#ff4d4d',
+    borderRadius: 8,
+    width: '48%',
+    height: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  btnExcluirText: {
+    color: '#ff4d4d',
+    fontWeight: '500',
+  },
+  btnEditarPerfil: {
+    backgroundColor: '#434141',
+    borderRadius: 8,
+    width: '48%',
+    height: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  occurrenceInput: {
+    borderWidth: 0.5,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    height: 45,
+    marginBottom: 15,
+  },
+  btnEnviarOcorrencia: {
+    backgroundColor: '#4a8add',
+    borderRadius: 8,
+    height: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  occurrenceItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 15,
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#ccc',
+  },
+  occurrenceText: {
+    fontSize: 12,
+    color: '#666',
+    width: '90%',
+  },
+  
 });
