@@ -4,7 +4,7 @@ const validateStudEmail = require("../services/validateStudEmail");
 
 module.exports = class studentController {
   static async createStudent(req, res, next) {
-    const { name, email, phone, create_date, status, student_number, fk_id_class } = req.body;
+    const { name, email, phone, status, student_number, fk_id_class } = req.body;
     
     const validateStudentError = await validateStudent(req.body);
     if (validateStudentError) {
@@ -16,8 +16,8 @@ module.exports = class studentController {
       return res.status(400).json(validateErrorStudEmail)
     }
 
-    const query = `INSERT INTO student (name, email, phone, create_date, status, student_number, fk_id_class) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-    const values = [name, email, phone, create_date, status, student_number, fk_id_class];
+    const query = `INSERT INTO student (name, email, phone,  status, student_number, fk_id_class) VALUES (?, ?, ?,  ?, ?, ?)`;
+    const values = [name, email, phone, status, student_number, fk_id_class];
 
     try {
       connect.query(query, values, function (err, results) {
@@ -60,7 +60,20 @@ module.exports = class studentController {
     if (!id_student) {
       return res.status(400).json({ error: "Student ID is required" });
     }
-    const query = "SELECT student.name, student.email, student.phone, class.name as class_name, student.status, student.id_student, student.student_number FROM student INNER JOIN class ON student.fk_id_class = class.id_class WHERE id_student = ?";
+    const query = `
+    SELECT 
+      student.name, 
+      student.email, 
+      student.phone, 
+      student.status,
+      student.id_student, 
+      student.student_number,
+      student.fk_id_class,
+      class.name as class_name 
+    FROM student 
+    INNER JOIN class ON student.fk_id_class = class.id_class 
+    WHERE student.id_student = ?
+  `;
     const values = [id_student];
     try {
       connect.query(query, values, function (err, results) {

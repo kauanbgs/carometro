@@ -73,7 +73,7 @@ export default function EditarTurmas({ navigation, route }) {
   const studentsFiltrados = students.filter((item) => {
     const nomeOk =
       filtroNome === "" ||
-      item.name.toLowerCase().includes(filtroNome.toLowerCase());
+      item.student_name.toLowerCase().includes(filtroNome.toLowerCase());
     const numeroOk =
       filtroNumero === "" || String(item.student_number).includes(filtroNumero);
     return nomeOk && numeroOk;
