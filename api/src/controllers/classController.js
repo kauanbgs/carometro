@@ -133,7 +133,7 @@ module.exports = class classController {
   }
 
   static async updateClass(req, res, next) {
-    const { name, fk_id_instructor } = req.body;
+    const { name } = req.body;
     const { id_class } = req.params;
 
     const validationErrorClass = validateClass(req.body);
@@ -142,8 +142,8 @@ module.exports = class classController {
     }
 
     const query =
-      "UPDATE class SET name = ?, fk_id_instructor = ? WHERE id_class = ?";
-    const values = [name, fk_id_instructor, id_class];
+      "UPDATE class SET name = ? WHERE id_class = ?";
+    const values = [name, id_class];
     try {
       connect.query(query, values, function (err, results) {
         if (err) {

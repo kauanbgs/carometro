@@ -40,6 +40,7 @@ const sheets = {
     getTurmaByInstructorName: (name) => api.get(`/class/instructor/${name}`),
     postCriarTurma: (turma) => api.post("/class", turma),
     deleteTurma: (id_class) => api.delete(`/class/${id_class}`),
+    updateTurma: (id_class, turma) => api.put(`/class/${id_class}`, turma),
 
     getAlunosByTurma: (id_class) => api.get(`/student/class/${id_class}`),
     getAlunosByName: (name) => api.get(`/student/name/${name}`),

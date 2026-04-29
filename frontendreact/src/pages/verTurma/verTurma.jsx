@@ -44,20 +44,18 @@ export default function VerTurma() {
         setStudents(data.students || []);
       })
       .catch(() => setStudents([]));
+
     api
       .getTurmaById(id_class)
       .then((response) => {
         const data = response.data.class;
-        setNomeDaTurma(data.name_class || "oii");
-      })
-      .catch(() => setNomeDaTurma(""));
-    api
-      .getTurmaById(id_class)
-      .then((response) => {
-        const data = response.data.class;
+        setNomeDaTurma(data?.name_class || "");
         setTurma(data || {});
       })
-      .catch(() => setTurma({}));
+      .catch(() => {
+        setNomeDaTurma("");
+        setTurma({});
+      });
   }, [id_class]);
 
   const handleSearch = () => {
@@ -119,6 +117,39 @@ export default function VerTurma() {
           type: "error",
         });
       });
+  };
+
+  const handleUpdateTurma = async () => {
+    if (nomeDaTurma === turma.name_class || !nomeDaTurma.trim()) {
+      return;
+    }
+
+    await api
+      .updateTurma(id_class, {
+        name: nomeDaTurma,
+      })
+      .then((response) => {
+        setSnackbar({
+          isOpen: true,
+          message: response?.data?.message || "Turma atualizada com sucesso",
+          type: "success",
+        });
+        setTurma({ ...turma, name_class: nomeDaTurma });
+      })
+      .catch((error) => {
+        setSnackbar({
+          isOpen: true,
+          message: error.response?.data?.error || "Erro ao atualizar turma",
+          type: "error",
+        });
+        setNomeDaTurma(turma.name_class);
+      });
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.target.blur();
+    }
   };
 
   const handleDeleteTurma = async () => {
@@ -252,7 +283,14 @@ export default function VerTurma() {
             className="w-6 h-6 cursor-pointer text-textoPrincipal"
             onClick={() => navigate("/editarTurma")}
           />
-          <Text variant="title">{nomeDaTurma}</Text>
+          <Input
+            className="bg-background border-none p-0 text-textoPrincipal placeholder:text-textoPrincipal text-xl font-bold"
+            placeholder="Nome da Turma"
+            value={nomeDaTurma}
+            onChange={(e) => setNomeDaTurma(e.target.value)}
+            onBlur={handleUpdateTurma}
+            onKeyDown={handleKeyDown}
+          />
         </div>
 
         <div className="flex flex-wrap justify-start gap-5 items-center mt-5">
