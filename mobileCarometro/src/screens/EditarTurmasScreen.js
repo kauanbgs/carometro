@@ -218,7 +218,6 @@ export default function EditarTurmas({ navigation, route }) {
               <Text style={{ width: "20%" }}>{item.class_name}</Text>
               <TouchableOpacity
                 style={{ width: "20%", alignItems: "center" }}
-                style={{ width: "20%", alignItems: "center" }}
                 onPress={() =>
                   navigation.navigate("DetalhesDoAluno", {
                     id_student: item.id_student, // ENVIANDO COMO id_student
@@ -321,7 +320,6 @@ export default function EditarTurmas({ navigation, route }) {
               <TextInput
                 value={novoAluno.phone}
                 onChangeText={(v) => setNovoAluno({ ...novoAluno, phone: v })}
-                keyboardType="phone-pad"
                 style={{
                   borderWidth: 0.5,
                   borderRadius: 8,

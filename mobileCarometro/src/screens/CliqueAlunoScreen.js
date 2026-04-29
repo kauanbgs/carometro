@@ -9,7 +9,6 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
-import { Picker } from "@react-native-picker/picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Header from "../components/Header";
@@ -23,15 +22,9 @@ export default function DetalhesDoAluno({ navigation, route }) {
 
   const [student, setStudent] = useState(null);
   const [occurrences, setOccurrences] = useState([]);
-
-  // FIX BUG 1: guardar fk_id_class separado, pois o objeto student
-  // retornado pela API tem class_name mas não fk_id_class.
-  // Esse valor é necessário para o updateStudent (campo obrigatório no backend).
   const [fkIdClass, setFkIdClass] = useState(null);
-
   const [motivo, setMotivo] = useState("");
   const [detalhes, setDetalhes] = useState("");
-
   const [modalVisivel, setModalVisivel] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
 
@@ -48,37 +41,29 @@ export default function DetalhesDoAluno({ navigation, route }) {
     try {
       const respostaAluno = await api.getStudentByID(id_student);
 
-      if (
-        respostaAluno.data &&
-        respostaAluno.data.students &&
-        respostaAluno.data.students.length > 0
-      ) {
+      if (respostaAluno.data?.students?.length > 0) {
         const alunoCarregado = respostaAluno.data.students[0];
         setStudent(alunoCarregado);
-
-        // FIX BUG 1: salvar fk_id_class se vier na resposta.
-        // Se o backend retornar fk_id_class junto com class_name, perfeito.
-        // Se não retornar, você precisa adicionar fk_id_class na query do
-        // getStudentByID no backend (SELECT student.fk_id_class, ...).
         if (alunoCarregado.fk_id_class) {
           setFkIdClass(alunoCarregado.fk_id_class);
         }
       } else {
-        Alert.alert("Aviso", "Aluno não encontrado no banco de dados.");
+        Alert.alert("Aviso", "Aluno não encontrado.");
         navigation.goBack();
       }
 
       try {
         const respostaOcorrencias = await api.getOccurrencesByStudent(id_student);
         const lista =
-          respostaOcorrencias.data.occurrences || respostaOcorrencias.data || [];
+          respostaOcorrencias.data.occurrences ||
+          (Array.isArray(respostaOcorrencias.data) ? respostaOcorrencias.data : []);
         setOccurrences(lista);
-      } catch (occError) {
-        console.log("Aluno sem ocorrências ou erro na busca de ocorrências");
+      } catch {
         setOccurrences([]);
       }
+
     } catch (error) {
-      console.log("Erro fatal ao buscar aluno:", error);
+      console.log("Erro ao buscar aluno:", error);
       Alert.alert("Erro", "Não foi possível carregar os dados do aluno.");
       navigation.goBack();
     }
@@ -86,12 +71,13 @@ export default function DetalhesDoAluno({ navigation, route }) {
 
   const handleUpdateStudent = async (dadosEdicao) => {
     try {
-      // FIX BUG 2: garantir que fk_id_class esteja presente nos dados de edição.
-      // O updateStudent no backend exige fk_id_class — sem ele a validação falha.
-      // O UpdateAlunoModal deve passar fk_id_class nos dadosEdicao, ou completamos aqui.
       const dadosCompletos = {
-        ...dadosEdicao,
-        fk_id_class: dadosEdicao.fk_id_class ?? fkIdClass,
+        name: dadosEdicao.name,
+        email: dadosEdicao.email,
+        phone: dadosEdicao.phone,
+        // ✅ converte para number — backend exige int
+        student_number: Number(dadosEdicao.student_number ?? student.student_number),
+        fk_id_class: fkIdClass,
         status: dadosEdicao.status ?? student.status,
       };
 
@@ -100,40 +86,8 @@ export default function DetalhesDoAluno({ navigation, route }) {
       setEditModalVisible(false);
       carregarDadosDaAPI();
     } catch (error) {
-      console.log("Erro ao atualizar aluno:", error?.response?.data || error);
+      console.log("Erro ao atualizar:", error?.response?.data || error);
       Alert.alert("Erro", "Falha ao atualizar o aluno.");
-    }
-  };
-
-  // FIX BUG 1: handleUpdateStatus agora monta o payload completo que o backend exige.
-  // Antes, mandava só { ...student, status: newStatus }, mas student.fk_id_class
-  // é undefined — o objeto vindo da API tem class_name, não fk_id_class.
-  // Sem fk_id_class, o validateStudent rejeita a requisição com 400.
-  const handleUpdateStatus = async (newStatus) => {
-    if (!fkIdClass) {
-      Alert.alert(
-        "Erro",
-        "Não foi possível identificar a turma do aluno. Recarregue a tela."
-      );
-      return;
-    }
-
-    try {
-      const payload = {
-        name: student.name,
-        email: student.email,
-        phone: student.phone,
-        status: newStatus,
-        student_number: student.student_number,
-        fk_id_class: fkIdClass, // campo obrigatório que faltava
-      };
-
-      await api.updateStudent(id_student, payload);
-      setStudent((prev) => ({ ...prev, status: newStatus }));
-      Alert.alert("Sucesso", "Status alterado!");
-    } catch (error) {
-      console.log("Erro ao alterar status:", error?.response?.data || error);
-      Alert.alert("Erro", "Falha ao alterar status.");
     }
   };
 
@@ -144,6 +98,7 @@ export default function DetalhesDoAluno({ navigation, route }) {
       Alert.alert("Sucesso", "Aluno removido do sistema.");
       navigation.goBack();
     } catch (error) {
+      console.log("Erro ao excluir:", error?.response?.data || error);
       Alert.alert("Erro", "Falha ao excluir.");
     }
   };
@@ -153,10 +108,6 @@ export default function DetalhesDoAluno({ navigation, route }) {
 
     try {
       const idRaw = await AsyncStorage.getItem("id_instructor");
-
-      // FIX BUG 3: AsyncStorage sempre retorna string ou null.
-      // parseInt(null) retorna NaN — e NaN enviado ao backend causa erro.
-      // Usar o fallback 1 só se realmente não houver id salvo.
       const fk_id_instructor = idRaw ? parseInt(idRaw, 10) : 1;
 
       await api.createOccurrence({
@@ -178,9 +129,7 @@ export default function DetalhesDoAluno({ navigation, route }) {
 
   if (!student) {
     return (
-      <View
-        style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fff" }}
-      >
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fff" }}>
         <ActivityIndicator size="large" color="#0000ff" />
         <Text style={{ marginTop: 15, fontSize: 16 }}>Buscando dados no banco...</Text>
       </View>
@@ -188,7 +137,7 @@ export default function DetalhesDoAluno({ navigation, route }) {
   }
 
   return (
-    <View style={[styles.pageContainer, { flex: 1 }]}>
+    <View style={[styles.pageContainer, { flex: 1, marginBottom: 20 }]}>
       <Header navigation={navigation} />
       <ScrollView
         contentContainerStyle={[styles.pageContent, { paddingBottom: 50 }]}
@@ -196,9 +145,10 @@ export default function DetalhesDoAluno({ navigation, route }) {
       >
         <View style={styles.avatarContainer}>
           <View style={styles.avatarPlaceholder}>
-            <FontAwesome name="user" size={40} color="#fff" />
+            <FontAwesome name="user" size={40} color="#fff" /> 
           </View>
         </View>
+
         <Text style={styles.studentNameTitle}>{student.name}</Text>
 
         <View style={styles.rowBetween}>
@@ -209,12 +159,12 @@ export default function DetalhesDoAluno({ navigation, route }) {
           </View>
           <View>
             <Text style={styles.infoText}>Status</Text>
-            <View style={styles.pickerContainer}>
-              <Picker selectedValue={student.status} onValueChange={handleUpdateStatus}>
-                <Picker.Item label="Ativo" value={1} />
-                <Picker.Item label="Inativo" value={0} />
-              </Picker>
-            </View>
+            <Text style={[
+              styles.infoValue,
+              { color: student.status === 1 ? "#2e7d32" : "#c62828", fontWeight: "bold" }
+            ]}>
+              {student.status === 1 ? "Ativo" : "Inativo"}
+            </Text>
           </View>
         </View>
 
@@ -224,16 +174,10 @@ export default function DetalhesDoAluno({ navigation, route }) {
         <Text style={styles.infoValue}>{student.phone}</Text>
 
         <View style={styles.actionButtonsRow}>
-          <TouchableOpacity
-            style={styles.btnExcluirPerfil}
-            onPress={() => setModalVisivel(true)}
-          >
+          <TouchableOpacity style={styles.btnExcluirPerfil} onPress={() => setModalVisivel(true)}>
             <Text style={styles.btnExcluirText}>Excluir perfil</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.btnEditarPerfil}
-            onPress={() => setEditModalVisible(true)}
-          >
+          <TouchableOpacity style={styles.btnEditarPerfil} onPress={() => setEditModalVisible(true)}>
             <MaterialIcons name="edit" size={20} color="white" />
           </TouchableOpacity>
         </View>
@@ -258,21 +202,13 @@ export default function DetalhesDoAluno({ navigation, route }) {
           <Text style={{ color: "white" }}>Registrar</Text>
         </TouchableOpacity>
 
-        <Text
-          style={[
-            styles.sectionTitle,
-            { marginTop: 30, borderBottomWidth: 1, borderColor: "#ccc", paddingBottom: 5 },
-          ]}
-        >
+        <Text style={[styles.sectionTitle, { marginTop: 30, borderBottomWidth: 1, borderColor: "#ccc", paddingBottom: 5 }]}>
           Últimas Ocorrências
         </Text>
 
         {occurrences && occurrences.length > 0 ? (
           occurrences.map((item, index) => (
-            <View
-              key={index}
-              style={{ paddingVertical: 15, borderBottomWidth: 1, borderColor: "#eee" }}
-            >
+            <View key={index} style={{ paddingVertical: 15, borderBottomWidth: 1, borderColor: "#eee" }}>
               <Text style={{ fontSize: 14, color: "#333", fontWeight: "bold" }}>
                 Motivo: {item.type}
               </Text>
@@ -282,9 +218,7 @@ export default function DetalhesDoAluno({ navigation, route }) {
             </View>
           ))
         ) : (
-          <Text
-            style={{ textAlign: "center", color: "#999", marginTop: 20, fontStyle: "italic" }}
-          >
+          <Text style={{ textAlign: "center", color: "#999", marginTop: 20, fontStyle: "italic", marginBottom: 500 }}>
             Este aluno não possui nenhuma ocorrência registrada.
           </Text>
         )}

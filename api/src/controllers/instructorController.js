@@ -117,11 +117,6 @@ module.exports = class instructorController {
     const { id_instructor } = req.params;
     const { password, name, role } = req.body;
 
-    const validationErrorEmailInst = await validateInstEmail(email);
-    if (validationErrorEmailInst) {
-      return res.status(400).json(validationErrorEmailInst);
-    }
-
     let query;
     let values;
 

@@ -10,7 +10,7 @@ import GerenciarTurma from "./src/screens/GerenciarTurma";
 import DetalhesDoAluno from "./src/screens/CliqueAlunoScreen";
 import GerenciarDocentes from "./src/screens/ListarDocentes";
 import GerenciarDocentesScreen from "./src/screens/GerenciarDocentesScreen";
-
+import CliqueDocente from "./src/screens/CliqueDocenteScreen";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -31,8 +31,7 @@ export default function App() {
         <Stack.Screen name="GerenciarTurma" component={GerenciarTurma} />
         <Stack.Screen name="DetalhesDoAluno" component={DetalhesDoAluno} />
         <Stack.Screen name="GerenciarDocentesScreen" component={GerenciarDocentesScreen} />
-
-
+        <Stack.Screen name="CliqueDocente" component={CliqueDocente} />
       </Stack.Navigator>
     </NavigationContainer>
   );
