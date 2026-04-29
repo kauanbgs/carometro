@@ -83,8 +83,7 @@ module.exports = class studentController {
 
   static async getStudentByNumber(req, res, next) {
     const { student_number } = req.params;
-    console.log("ID recebido:", student_number); // <--- Adicione isto
-    const query = "SELECT * FROM student WHERE student_number = ?";
+    const query = "SELECT student.name as student_name, student.email, student.phone, class.name as class_name, student.status, student.id_student, student.student_number FROM student INNER JOIN class ON student.fk_id_class = class.id_class WHERE student_number = ?";
     const values = [student_number];
     try {
       connect.query(query, values, function (err, results) {
@@ -107,7 +106,7 @@ module.exports = class studentController {
 
   static async getStudentByName(req, res, next) {
     const { name } = req.params;
-    const query = "SELECT * FROM student WHERE name LIKE ?";
+    const query = "SELECT s.name as student_name, s.email, s.phone, c.name as class_name, s.status, s.id_student, s.student_number FROM student s INNER JOIN class c ON s.fk_id_class = c.id_class WHERE s.name LIKE ?";
     const values = [`%${name}%`];
     try {
       connect.query(query, values, function (err, results) {

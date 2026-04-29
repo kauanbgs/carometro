@@ -88,7 +88,7 @@ export default function StudentList({ students = [], onDeleteSuccess }) {
                     key={aluno.id_student}
                     className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] px-6 py-3.5 border-b border-zinc-100 hover:bg-textoPrincipal/5 transition-colors relative"
                 >
-                    <div className="text-sm text-textoPrincipal/90 cursor-pointer" onClick={() => navigate(`/aluno/${aluno.id_student}`)}>{aluno.name}</div>
+                    <div className="text-sm text-textoPrincipal/90 cursor-pointer" onClick={() => navigate(`/aluno/${aluno.id_student}`)}>{aluno.name ? aluno.name : aluno.student_name}</div>
                     <div className="text-sm text-textoPrincipal/90 cursor-pointer" onClick={() => navigate(`/aluno/${aluno.id_student}`)}>{aluno.class_name}</div>
                     <div className="text-sm text-textoPrincipal/90 cursor-pointer" onClick={() => navigate(`/aluno/${aluno.id_student}`)}>{aluno.student_number}</div>
                     <div className="text-sm cursor-pointer" onClick={() => navigate(`/aluno/${aluno.id_student}`)}>

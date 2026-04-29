@@ -66,7 +66,6 @@ export default function VerTurma() {
         .getAlunosByTurma(id_class)
         .then((response) => {
           const data = response.data.students;
-          console.log(data);
           setStudents(data || []);
         })
         .catch(() => setStudents([]));
@@ -76,7 +75,6 @@ export default function VerTurma() {
         .getAlunosByName(nomeDoAluno)
         .then((response) => {
           const data = response.data.students;
-          console.log(data);
           setStudents(data || []);
         })
         .catch(() => setStudents([]));
@@ -86,7 +84,6 @@ export default function VerTurma() {
         .getAlunosByNumber(numeroDoAluno)
         .then((response) => {
           const data = response.data.students;
-          console.log(data);
           setStudents(data || []);
         })
         .catch(() => setStudents([]));

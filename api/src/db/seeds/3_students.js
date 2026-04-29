@@ -8,7 +8,7 @@ exports.seed = async function(knex) {
   await knex('student').insert([
     { name: 'Aluanan Angel de Sousa', email: 'aluanan.sousa@aluno.senai.br', phone: '11900000001', create_date: '2025-01-01 08:00:00', status: 1, student_number: 1, fk_id_class: 1 },
     { name: 'Ana Carolina de Oliveira Monteiro', email: 'ana.monteiro@aluno.senai.br', phone: '11900000002', create_date: '2025-01-01 08:00:00', status: 1, student_number: 2, fk_id_class: 1 },
-    { name: 'Anna Vitória Martins Ramos', email: 'anna.ramos@aluno.senai.br', phone: '11900000003', create_date: '2025-01-01 08:00:00', status: 1, student_number: 3, fk_id_class: 1 },
+    { name: 'Anna Vitória Martins Ramos', email: 'anna.ramos@aluno.senai.br', phone: '11900000003', create_date: '2025-01-01 08:00:00', status: 0, student_number: 3, fk_id_class: 1 },
     { name: 'Arthur Cintra de Lacerda', email: 'arthur.lacerda@aluno.senai.br', phone: '11900000004', create_date: '2025-01-01 08:00:00', status: 1, student_number: 4, fk_id_class: 1 },
     { name: 'Arthur Cintra Faleiros', email: 'arthur.faleiros@aluno.senai.br', phone: '11900000005', create_date: '2025-01-01 08:00:00', status: 1, student_number: 5, fk_id_class: 1 },
     { name: 'Arthur Marques Santos', email: 'arthur.santos@aluno.senai.br', phone: '11900000006', create_date: '2025-01-01 08:00:00', status: 1, student_number: 6, fk_id_class: 1 },
