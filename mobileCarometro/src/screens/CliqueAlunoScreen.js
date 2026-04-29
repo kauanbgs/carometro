@@ -75,7 +75,6 @@ export default function DetalhesDoAluno({ navigation, route }) {
         name: dadosEdicao.name,
         email: dadosEdicao.email,
         phone: dadosEdicao.phone,
-        // ✅ converte para number — backend exige int
         student_number: Number(dadosEdicao.student_number ?? student.student_number),
         fk_id_class: fkIdClass,
         status: dadosEdicao.status ?? student.status,
@@ -137,15 +136,19 @@ export default function DetalhesDoAluno({ navigation, route }) {
   }
 
   return (
-    <View style={[styles.pageContainer, { flex: 1, marginBottom: 20 }]}>
+    <View style={[styles.pageContainer, { flex: 1 }]}>
       <Header navigation={navigation} />
       <ScrollView
-        contentContainerStyle={[styles.pageContent, { paddingBottom: 50 }]}
+        contentContainerStyle={{
+          paddingHorizontal: 30,
+          paddingTop: 20,
+          paddingBottom: 100
+        }}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.avatarContainer}>
           <View style={styles.avatarPlaceholder}>
-            <FontAwesome name="user" size={40} color="#fff" /> 
+            <FontAwesome name="user" size={40} color="#fff" />
           </View>
         </View>
 
@@ -218,7 +221,7 @@ export default function DetalhesDoAluno({ navigation, route }) {
             </View>
           ))
         ) : (
-          <Text style={{ textAlign: "center", color: "#999", marginTop: 20, fontStyle: "italic", marginBottom: 500 }}>
+          <Text style={{ textAlign: "center", color: "#999", marginTop: 20, fontStyle: "italic" }}>
             Este aluno não possui nenhuma ocorrência registrada.
           </Text>
         )}

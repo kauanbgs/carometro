@@ -16,7 +16,7 @@ export default function Login({ navigation }) {
   async function login() {
     try {
       const response = await api.postLogin(instructor);
-      await AsyncStorage.setItem("token", response.data.token); // ✅ salva o token
+      await AsyncStorage.setItem("token", response.data.token); // salva o token
       Alert.alert(response.data.message);
       navigation.navigate("HomeScreen");
     } catch (error) {

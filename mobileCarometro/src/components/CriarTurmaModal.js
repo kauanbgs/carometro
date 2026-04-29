@@ -12,7 +12,6 @@ export default function CriarTurmaModal({
   const [nomeTurma, setNomeTurma] = useState("");
   const [professorId, setProfessorId] = useState("");
 
-  // A função e o return precisam ficar DENTRO da função principal!
   function handleCriar() {
     onCreate({ name: nomeTurma, fk_id_instructor: professorId });
     setNomeTurma("");

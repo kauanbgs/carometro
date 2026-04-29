@@ -213,14 +213,14 @@ export default function EditarTurmas({ navigation, route }) {
                 borderBottomColor: "#ccc",
               }}
             >
-              <Text style={{ width: "40%" }}>{item.name}</Text>
+              <Text style={{ width: "40%" }}>{item.student_name}</Text>
               <Text style={{ width: "20%" }}>{item.student_number}</Text>
               <Text style={{ width: "20%" }}>{item.class_name}</Text>
               <TouchableOpacity
                 style={{ width: "20%", alignItems: "center" }}
                 onPress={() =>
                   navigation.navigate("DetalhesDoAluno", {
-                    id_student: item.id_student, // ENVIANDO COMO id_student
+                    id_student: item.id_student, 
                   })
                 }
               >

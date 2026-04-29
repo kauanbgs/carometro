@@ -5,7 +5,7 @@ exports.up = function(knex) {
       table.string('description', 150).notNullable();
       table.timestamp('create_date').defaultTo(knex.fn.now()).notNullable();
       table.integer('fk_id_student').unsigned().notNullable();
-      table.foreign('fk_id_student').references('id_student').inTable('student');
+      table.foreign('fk_id_student').references('id_student').inTable('student').onDelete('CASCADE');
     });
   };
   

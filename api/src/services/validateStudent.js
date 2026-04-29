@@ -1,11 +1,11 @@
-module.exports = async function validateInstructor(
-  { name, email, phone, status, student_number, fk_id_class }
+module.exports = async function validateStudent(
+  { name, email, status, fk_id_class }
 ) {
-  if (!name || !email || !phone || !status || !student_number || !fk_id_class) {
-    return { error: "All fields must be filled" };
+  if (!name || status === undefined || !fk_id_class) {
+    return { error: "All required fields (name, status, class) must be filled" };
   }
 
-  if (!email.includes("@")) {
+  if (email && !email.includes("@")) {
     return { error: "Invalid Email. Need the '@' symbol" };
   }
   return null;

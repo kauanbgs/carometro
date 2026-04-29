@@ -7,6 +7,14 @@ const jwt = require("jsonwebtoken");
 
 const saltRounds = 10;
 
+const { google } = require("googleapis");
+
+const oauth2Client = new google.auth.OAuth2(
+  process.env.GOOGLE_CLIENT_ID,
+  process.env.GOOGLE_CLIENT_SECRET,
+  "http://localhost:5000/sigo/auth/google/callback",
+);
+
 module.exports = class instructorController {
   static async createInstructor(req, res, next) {
     const { email, password, name, role } = req.body;
@@ -41,9 +49,10 @@ module.exports = class instructorController {
           return res.status(500).json({ error: "Internal Server Error" });
         }
 
-        return res.status(201).json({ message: "Instructor created successfully" });
+        return res
+          .status(201)
+          .json({ message: "Instructor created successfully" });
       });
-
     } catch (error) {
       next(error);
     }
@@ -116,20 +125,29 @@ module.exports = class instructorController {
   static async updateInstructor(req, res, next) {
     const { id_instructor } = req.params;
     const { password, name, role } = req.body;
-
     let query;
     let values;
 
-    if (role) {
-      query = `UPDATE instructor SET password = ?, name = ?, role = ? WHERE id_instructor = ?`;
-      values = [password, name, role, id_instructor];
-    } else {
-      query = `UPDATE instructor SET password = ?, name = ? WHERE id_instructor = ?`;
-      values = [password, name, id_instructor];
-    }
-    const hash = await bcrypt.hash(password, saltRounds);
-    values[0] = hash; //replace the password with the hash
     try {
+      if (password && password.trim() !== "") {
+        const hash = await bcrypt.hash(password, saltRounds);
+        if (role) {
+          query = `UPDATE instructor SET name = ?, role = ?, password = ? WHERE id_instructor = ?`;
+          values = [name, role, hash, id_instructor];
+        } else {
+          query = `UPDATE instructor SET name = ?, password = ? WHERE id_instructor = ?`;
+          values = [name, hash, id_instructor];
+        }
+      } else {
+        if (role) {
+          query = `UPDATE instructor SET name = ?, role = ? WHERE id_instructor = ?`;
+          values = [name, role, id_instructor];
+        } else {
+          query = `UPDATE instructor SET name = ? WHERE id_instructor = ?`;
+          values = [name, id_instructor];
+        }
+      }
+
       connect.query(query, values, function (err, results) {
         if (err) {
           console.log(err);
@@ -140,7 +158,7 @@ module.exports = class instructorController {
         }
         return res
           .status(200)
-          .json({ message: "Instructor updated successfully!", id_instructor });
+          .json({ message: "Instructor updated successfully!", name });
       });
     } catch (error) {
       next(error);
@@ -217,19 +235,131 @@ module.exports = class instructorController {
           const token = jwt.sign(
             { id_instructor: instructor.id_instructor },
             process.env.SECRET,
-            /* O secret vai decodificar e codificar, isso evita invasões com token de outras pessoas */ {
+            {
               expiresIn: "24h",
             },
           );
-          // Remover o atributo senha do objeto user
           delete instructor.password;
           return res
             .status(200)
-            .json({ message: "Successful login", instructor, token });
+            .json({ message: "Successful login", token, instructor });
         }
       });
     } catch (error) {
       next(error);
     }
+  }
+
+  static async authGoogle(req, res, next) {
+    const { id_instructor } = req.query;
+    const authUrl = oauth2Client.generateAuthUrl({
+      access_type: "offline",
+      prompt: "consent",
+      scope: [
+        "https://www.googleapis.com/auth/classroom.courses.readonly",
+        "https://www.googleapis.com/auth/classroom.rosters.readonly",
+      ],
+      state: id_instructor,
+    });
+    res.redirect(authUrl);
+  }
+
+  static async disconnectGoogle(req, res) {
+    const { id_instructor } = req.params;
+    const query = `UPDATE instructor SET google_access_token = NULL WHERE id_instructor = ?`;
+    const value = [id_instructor];
+    connect.query(query, value, function (err, results) {
+      if (err) {
+        console.log(err);
+        return next(err);
+      }
+      if (results.affectedRows === 0) {
+        return next(new Error("Instructor not found"));
+      }
+      return res
+        .status(200)
+        .json({ message: "Google Classroom disconnected successfully!" });
+    });
+  }
+
+  static async callbackGoogle(req, res, next) {
+    const { code, state } = req.query;
+    try {
+      const { tokens } = await oauth2Client.getToken(code);
+      oauth2Client.setCredentials(tokens);
+
+      const id_instructor = state;
+      const google_access_token = tokens.access_token;
+      const query = `UPDATE instructor SET google_access_token = ? WHERE id_instructor = ?`;
+      const value = [google_access_token, id_instructor];
+
+      connect.query(query, value, function (err, results) {
+        if (err) {
+          console.log(err);
+          return next(err);
+        }
+        if (results.affectedRows === 0) {
+          return next(new Error("Instructor not found"));
+        }
+        // Redirect back to frontend
+        return res.redirect("http://localhost:5173/conexoes?success=true");
+      });
+    } catch (error) {
+      console.error("Error in Google Callback:", error);
+      res.redirect("http://localhost:5173/conexoes?error=true");
+    }
+  }
+  static async googleClasses(req, res) {
+    const id_instructor = req.id_instructor || req.params.id_instructor;
+    const query = `SELECT google_access_token FROM instructor WHERE id_instructor = ?`;
+
+    connect.query(query, [id_instructor], async (err, results) => {
+      if (err) return res.status(500).json({ error: err.message });
+      if (results.length === 0 || !results[0].google_access_token) {
+        return res
+          .status(401)
+          .json({ error: "Google Classroom não conectado!" });
+      }
+
+      oauth2Client.setCredentials({
+        access_token: results[0].google_access_token,
+      });
+      const classroom = google.classroom({ version: "v1", auth: oauth2Client });
+
+      try {
+        const response = await classroom.courses.list();
+        res.json(response.data.courses || []);
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    });
+  }
+
+  static async googleStudents(req, res) {
+    const { id_class, id_instructor } = req.params;
+    const query = `SELECT google_access_token FROM instructor WHERE id_instructor = ?`;
+
+    connect.query(query, [id_instructor], async (err, results) => {
+      if (err) return res.status(500).json({ error: err.message });
+      if (results.length === 0 || !results[0].google_access_token) {
+        return res
+          .status(401)
+          .json({ error: "Google Classroom não conectado!" });
+      }
+
+      oauth2Client.setCredentials({
+        access_token: results[0].google_access_token,
+      });
+      const classroom = google.classroom({ version: "v1", auth: oauth2Client });
+
+      try {
+        const response = await classroom.courses.students.list({
+          courseId: id_class,
+        });
+        res.json(response.data.students || []);
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    });
   }
 };

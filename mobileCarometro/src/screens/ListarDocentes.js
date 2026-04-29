@@ -24,7 +24,6 @@ export default function GerenciarDocentes({ navigation }) {
   const carregarDocentes = async () => {
     try {
       const response = await api.getInstructors();
-      // ✅ backend retorna "instructors" (com s)
       setDocentes(response.data.instructors);
     } catch (error) {
       console.log("Erro ao carregar docentes", error);
@@ -34,11 +33,9 @@ export default function GerenciarDocentes({ navigation }) {
   const pesquisar = async () => {
     try {
       if (searchNome !== "") {
-        // ✅ rota correta para buscar por nome de instructor
         const response = await api.getInstructorByName(searchNome);
         setDocentes(response.data.instructor);
       } else if (searchId !== "") {
-        // ✅ busca por ID
         const response = await api.getInstructorById(searchId);
         setDocentes(response.data.instructor);
       } else {

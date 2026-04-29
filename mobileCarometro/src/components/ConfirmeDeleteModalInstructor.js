@@ -25,7 +25,6 @@ export default function ConfirmDeleteModalInstructor({ visible, onClose, onConfi
         <View style={styles.modalContainer}>
           <Text style={styles.modalTitle}>Deseja Realmente excluir?</Text>
 
-          {/* ✅ Campos extras só para exclusão de instructor */}
           {isInstructor && (
             <>
               <Text style={styles.label}>Email</Text>

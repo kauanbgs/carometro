@@ -104,7 +104,7 @@ export default function CliqueDocente({ navigation, route }) {
                     visible={modalVisivel}
                     onClose={() => setModalVisivel(false)}
                     onConfirm={confirmDelete}
-                    isInstructor={true} // ✅ ativa os campos de email e senha
+                    isInstructor={true} 
                 />
             </ScrollView>
         </View>

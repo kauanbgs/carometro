@@ -4,6 +4,7 @@ exports.up = function(knex) {
       table.string('name', 100).notNullable();
       table.string('email', 150).unique().notNullable();
       table.string('password', 100).notNullable();
+      table.string('google_access_token', 5000).nullable();
       table.enum('role', ['adm', 'inst']).defaultTo('inst');
     });
   };
