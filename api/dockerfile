@@ -1,0 +1,22 @@
+## Comando para baixar e instalar o node
+## Alpine é uma versão simplificada e leve
+FROM node:alpine
+
+## Define o local onde o App (API) ficará no disco do container -> padrãozinho
+WORKDIR /usr/app
+
+## Copia tudo que começa com package e termina com .json para dentro da pasta /usr/app
+COPY package*.json ./
+
+## Executa npm install para adicionar todas as dependências e criar a pasta node_modules
+RUN npm install
+
+## Copiar tudo que está no diretório aonde o Dockerfile se encontra
+## para dentro da pasta /usr/app [dentro do container]
+COPY . .
+
+## O Container ficará ouvindo os acessos na porta 5001
+EXPOSE 5001
+
+## Executa o comando npm start para iniciar o script que está no package.json
+CMD npm start
