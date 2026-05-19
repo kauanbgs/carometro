@@ -1,0 +1,29 @@
+
+# Define os serviços que compõem a aplicação (app e db)
+services:
+  app:
+    build: . # O "." indica qual imagem Docker será construída no diretório atual
+    command: /bin/sh -c "npm install && npm start"
+    ports:
+      - "5001:5001" # Mapeia a porta do container para a máquina
+    volumes:
+      - .:/usr/app # Monta o diretório atual da máquina (Host/Física) para o diretório /usr/app dentro do container
+    depends_on: # Indica de o App depende de DB
+      - db
+  
+  db:
+    image: mysql:5.7
+    restart: always # Configura o container para reiniciar automaticamente caso ele pare
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: vio_luiz
+    ports:
+      - "3307:3307" # Mapeia a porta 3306 do container para a 3306 da máquina
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+      # Roda os arquivos SQL existentes dentro da pasta mysql-init na inicialização do container MYSQL
+
+
+volumes:
+  db_data: # Definindo um volume nomeado para persisitir os dados do banco de dados
