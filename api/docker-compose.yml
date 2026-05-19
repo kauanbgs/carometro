@@ -16,9 +16,9 @@ services:
     restart: always # Configura o container para reiniciar automaticamente caso ele pare
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: vio_luiz
+      MYSQL_DATABASE: sigo
     ports:
-      - "3307:3307" # Mapeia a porta 3306 do container para a 3306 da máquina
+      - "3307:3306" # Mapeia a porta 3306 do container para a 3306 da máquina
     volumes:
       - db_data:/var/lib/mysql
       - ./mysql-init:/docker-entrypoint-initdb.d
