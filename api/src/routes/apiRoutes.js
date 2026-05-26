@@ -5,7 +5,7 @@ const classController = require("../controllers/classController");
 const occurrenceController = require("../controllers/occurrenceController");
 const verifyJWT = require("../middlewares/verifyJWT");
 const { loginLimiter } = require("../middlewares/rateLimiter");
-
+const upload = require("../services/upload");
 
 
 
@@ -28,7 +28,7 @@ router.put("/instructor/:id_instructor", verifyJWT,instructorController.updateIn
 router.delete("/instructor", verifyJWT,instructorController.deleteInstructor);
 
 //      CONTROLLER student       //
-router.post("/student", verifyJWT,studentController.createStudent);
+router.post("/student", upload.single("photo"), verifyJWT, studentController.createStudent);
 router.get("/student", verifyJWT,studentController.readStudents);
 router.get("/student/id/:id_student", verifyJWT, studentController.getStudentByID);
 router.get("/student/number/:student_number", verifyJWT, studentController.getStudentByNumber);
