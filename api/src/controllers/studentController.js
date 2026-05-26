@@ -297,4 +297,37 @@ module.exports = class studentController {
       return next(error);
     }
   }
+
+  static async getStudentPhoto(req, res, next) {
+  const { id_student } = req.params;
+
+  if (!id_student) {
+    return res.status(400).json({ error: "Student ID is required" });
+  }
+
+  const query = "SELECT photo FROM student WHERE id_student = ?";
+  const values = [id_student];
+
+  try {
+    connect.query(query, values, function (err, results) {
+      if (err) {
+        console.error(err);
+        return next(err);
+      }
+      
+      if (results.length === 0 || !results[0].photo) {
+        return res.status(404).json({ error: "Photo not found" });
+      }
+
+      const photoBuffer = results[0].photo;
+
+      res.set('Content-Type', 'image/jpeg'); 
+      
+      return res.send(photoBuffer);
+    });
+  } catch (error) {
+    console.error(error);
+    return next(error);
+  }
+}
 };

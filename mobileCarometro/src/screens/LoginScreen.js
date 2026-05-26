@@ -17,6 +17,7 @@ export default function Login({ navigation }) {
     try {
       const response = await api.postLogin(instructor);
       await AsyncStorage.setItem("token", response.data.token); // salva o token
+      console.log("Token recebido:", response.data.token);
       Alert.alert(response.data.message);
       navigation.navigate("HomeScreen");
     } catch (error) {
@@ -67,6 +68,12 @@ export default function Login({ navigation }) {
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.primaryButton} onPress={login}>
+          <Text style={styles.buttonWhiteText}>Entrar</Text>
+        </TouchableOpacity>
+
+
+        
+        <TouchableOpacity style={styles.primaryButton} onPress={() => navigation.navigate("Cadastro")}>
           <Text style={styles.buttonWhiteText}>Entrar</Text>
         </TouchableOpacity>
 

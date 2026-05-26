@@ -2,7 +2,7 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const api = axios.create({
-  baseURL: "http://192.168.100.85:5000/sigo",
+  baseURL: "http://10.89.240.80:5000/sigo",
   headers: {
     'Accept': 'application/json',
   }
@@ -39,6 +39,7 @@ const sheets = {
   createStudent: (student) => api.post('/student', student),
   updateStudent: (id_student, studentData) => api.put(`/student/${id_student}`, studentData),
   deleteStudent: (id_student) => api.delete(`/student/${id_student}`),
+  getStudentPhoto: (id_student) => api.get(`/student/photo/${id_student}`, { responseType: 'arraybuffer' }),
 
   // Occurrences
   getOccurrencesByStudent: (fk_id_student) => api.get(`/occurrence/${fk_id_student}`),

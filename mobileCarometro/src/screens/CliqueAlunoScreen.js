@@ -7,6 +7,7 @@ import {
   Alert,
   ScrollView,
   ActivityIndicator,
+  Image,
 } from "react-native";
 import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -53,15 +54,17 @@ export default function DetalhesDoAluno({ navigation, route }) {
       }
 
       try {
-        const respostaOcorrencias = await api.getOccurrencesByStudent(id_student);
+        const respostaOcorrencias =
+          await api.getOccurrencesByStudent(id_student);
         const lista =
           respostaOcorrencias.data.occurrences ||
-          (Array.isArray(respostaOcorrencias.data) ? respostaOcorrencias.data : []);
+          (Array.isArray(respostaOcorrencias.data)
+            ? respostaOcorrencias.data
+            : []);
         setOccurrences(lista);
       } catch {
         setOccurrences([]);
       }
-
     } catch (error) {
       console.log("Erro ao buscar aluno:", error);
       Alert.alert("Erro", "Não foi possível carregar os dados do aluno.");
@@ -75,7 +78,9 @@ export default function DetalhesDoAluno({ navigation, route }) {
         name: dadosEdicao.name,
         email: dadosEdicao.email,
         phone: dadosEdicao.phone,
-        student_number: Number(dadosEdicao.student_number ?? student.student_number),
+        student_number: Number(
+          dadosEdicao.student_number ?? student.student_number,
+        ),
         fk_id_class: fkIdClass,
         status: dadosEdicao.status ?? student.status,
       };
@@ -128,9 +133,18 @@ export default function DetalhesDoAluno({ navigation, route }) {
 
   if (!student) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fff" }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#fff",
+        }}
+      >
         <ActivityIndicator size="large" color="#0000ff" />
-        <Text style={{ marginTop: 15, fontSize: 16 }}>Buscando dados no banco...</Text>
+        <Text style={{ marginTop: 15, fontSize: 16 }}>
+          Buscando dados no banco...
+        </Text>
       </View>
     );
   }
@@ -142,14 +156,34 @@ export default function DetalhesDoAluno({ navigation, route }) {
         contentContainerStyle={{
           paddingHorizontal: 30,
           paddingTop: 20,
-          paddingBottom: 100
+          paddingBottom: 100,
         }}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.avatarContainer}>
-          <View style={styles.avatarPlaceholder}>
-            <FontAwesome name="user" size={40} color="#fff" />
-          </View>
+        <View
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: 50,
+            overflow: "hidden",
+            backgroundColor: "#ccc", // Cor de fundo para o ícone
+            justifyContent: "center",
+            alignItems: "center",
+            alignSelf: "center", // Opcional: centraliza o círculo na tela
+          }}
+        >
+          {student.photo ? (
+            <Image
+            
+              source={{ uri: student.photo }}
+              style={{ width: "100%", height: "100%" }} // A borda arredondada deve vir do avatarContainer
+              resizeMode="cover"
+            />
+          ) : (
+            <View style={styles.avatarPlaceholder}>
+              <FontAwesome name="user" size={40} color="#fff" />
+            </View>
+          )}
         </View>
 
         <Text style={styles.studentNameTitle}>{student.name}</Text>
@@ -162,10 +196,15 @@ export default function DetalhesDoAluno({ navigation, route }) {
           </View>
           <View>
             <Text style={styles.infoText}>Status</Text>
-            <Text style={[
-              styles.infoValue,
-              { color: student.status === 1 ? "#2e7d32" : "#c62828", fontWeight: "bold" }
-            ]}>
+            <Text
+              style={[
+                styles.infoValue,
+                {
+                  color: student.status === 1 ? "#2e7d32" : "#c62828",
+                  fontWeight: "bold",
+                },
+              ]}
+            >
               {student.status === 1 ? "Ativo" : "Inativo"}
             </Text>
           </View>
@@ -177,10 +216,16 @@ export default function DetalhesDoAluno({ navigation, route }) {
         <Text style={styles.infoValue}>{student.phone}</Text>
 
         <View style={styles.actionButtonsRow}>
-          <TouchableOpacity style={styles.btnExcluirPerfil} onPress={() => setModalVisivel(true)}>
+          <TouchableOpacity
+            style={styles.btnExcluirPerfil}
+            onPress={() => setModalVisivel(true)}
+          >
             <Text style={styles.btnExcluirText}>Excluir perfil</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btnEditarPerfil} onPress={() => setEditModalVisible(true)}>
+          <TouchableOpacity
+            style={styles.btnEditarPerfil}
+            onPress={() => setEditModalVisible(true)}
+          >
             <MaterialIcons name="edit" size={20} color="white" />
           </TouchableOpacity>
         </View>
@@ -201,17 +246,37 @@ export default function DetalhesDoAluno({ navigation, route }) {
           onChangeText={setDetalhes}
         />
 
-        <TouchableOpacity style={styles.btnEnviarOcorrencia} onPress={handleCreateOccurrence}>
+        <TouchableOpacity
+          style={styles.btnEnviarOcorrencia}
+          onPress={handleCreateOccurrence}
+        >
           <Text style={{ color: "white" }}>Registrar</Text>
         </TouchableOpacity>
 
-        <Text style={[styles.sectionTitle, { marginTop: 30, borderBottomWidth: 1, borderColor: "#ccc", paddingBottom: 5 }]}>
+        <Text
+          style={[
+            styles.sectionTitle,
+            {
+              marginTop: 30,
+              borderBottomWidth: 1,
+              borderColor: "#ccc",
+              paddingBottom: 5,
+            },
+          ]}
+        >
           Últimas Ocorrências
         </Text>
 
         {occurrences && occurrences.length > 0 ? (
           occurrences.map((item, index) => (
-            <View key={index} style={{ paddingVertical: 15, borderBottomWidth: 1, borderColor: "#eee" }}>
+            <View
+              key={index}
+              style={{
+                paddingVertical: 15,
+                borderBottomWidth: 1,
+                borderColor: "#eee",
+              }}
+            >
               <Text style={{ fontSize: 14, color: "#333", fontWeight: "bold" }}>
                 Motivo: {item.type}
               </Text>
@@ -221,7 +286,14 @@ export default function DetalhesDoAluno({ navigation, route }) {
             </View>
           ))
         ) : (
-          <Text style={{ textAlign: "center", color: "#999", marginTop: 20, fontStyle: "italic" }}>
+          <Text
+            style={{
+              textAlign: "center",
+              color: "#999",
+              marginTop: 20,
+              fontStyle: "italic",
+            }}
+          >
             Este aluno não possui nenhuma ocorrência registrada.
           </Text>
         )}

@@ -37,6 +37,7 @@ router.get("/student/status/:status", verifyJWT, studentController.getStudentsBy
 router.get("/student/class/:fk_id_class", verifyJWT, studentController.getStudentsByClass);
 router.put("/student/:id_student", verifyJWT, upload.single("photo"), studentController.updateStudent);
 router.delete("/student/:id_student", verifyJWT, studentController.deleteStudent);
+router.get("/student/photo/:id_student", verifyJWT, studentController.getStudentPhoto);
 
 //      CONTROLLER class       //
 router.post("/class", verifyJWT, classController.createClass);
