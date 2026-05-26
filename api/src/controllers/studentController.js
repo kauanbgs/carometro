@@ -18,7 +18,7 @@ module.exports = class studentController {
       return res.status(400).json(validateErrorStudEmail)
     }
 
-    const query = `INSERT INTO student (name, email, phone, status, student_number, fk_id_class) VALUES (?, ?, ?, ?, ?, ?)`;
+    const query = `INSERT INTO student (name, email, phone, photo, status, student_number, fk_id_class) VALUES (?, ?, ?, ?, ?, ?, ?)`;
     const values = [name, email, phone, photo, status, student_number, fk_id_class];
 
     try {

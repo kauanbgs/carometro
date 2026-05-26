@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { Search } from "lucide-react";
 import Separator from "../../components/separator";
@@ -30,6 +30,9 @@ export default function VerTurma() {
   });
   const [nomeDoAluno, setNomeDoAluno] = useState("");
   const [numeroDoAluno, setNumeroDoAluno] = useState("");
+  const [photo, setPhoto] = useState(null);
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const fileInputCriarRef = useRef(null);
   const [snackbar, setSnackbar] = useState({
     isOpen: false,
     message: "",
@@ -90,10 +93,10 @@ export default function VerTurma() {
 
   const handleCreateAluno = async () => {
     await api
-      .createStudent({
-        ...aluno,
-        create_date: new Date().toISOString().split("T")[0],
-      })
+      .createStudent(
+        { ...aluno, create_date: new Date().toISOString().split("T")[0] },
+        photo
+      )
       .then((response) => {
         setSnackbar({
           isOpen: true,
@@ -108,6 +111,8 @@ export default function VerTurma() {
           student_number: "",
           fk_id_class: id_class,
         });
+        setPhoto(null);
+        setPhotoPreview(null);
         handleSearch();
       })
       .catch((error) => {
@@ -187,6 +192,33 @@ export default function VerTurma() {
           title="Criar Aluno"
         >
           <div className="flex flex-col gap-4">
+
+            {/* Foto do aluno */}
+            <div className="flex flex-col items-center gap-2">
+              <input
+                type="file"
+                accept="image/*"
+                ref={fileInputCriarRef}
+                className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (!file) return;
+                  setPhoto(file);
+                  setPhotoPreview(URL.createObjectURL(file));
+                }}
+              />
+              <div
+                onClick={() => fileInputCriarRef.current?.click()}
+                className="cursor-pointer w-20 h-20 rounded-full bg-zinc-200 flex items-center justify-center shadow-md overflow-hidden border-2 border-zinc-300 hover:border-azulPrincipal transition-all"
+              >
+                {photoPreview ? (
+                  <img src={photoPreview} alt="Preview" className="w-full h-full object-cover" />
+                ) : (
+                  <span className="text-zinc-400 text-xs text-center">Adicionar foto</span>
+                )}
+              </div>
+            </div>
+
             <div className="flex flex-col gap-1.5">
               <label className="text-sm font-medium text-zinc-700">
                 Nome do Aluno
