@@ -4,8 +4,10 @@ const validateStudEmail = require("../services/validateStudEmail");
 
 module.exports = class studentController {
   static async createStudent(req, res, next) {
-    const { name, email, phone, status, student_number, fk_id_class } = req.body;
     
+    const { name, email, phone, status, student_number, fk_id_class } = req.body;
+    const photo = req.file ? req.file.buffer : null;
+
     const validateStudentError = await validateStudent(req.body);
     if (validateStudentError) {
       return res.status(400).json(validateStudentError);
@@ -16,8 +18,8 @@ module.exports = class studentController {
       return res.status(400).json(validateErrorStudEmail)
     }
 
-    const query = `INSERT INTO student (name, email, phone,  status, student_number, fk_id_class) VALUES (?, ?, ?,  ?, ?, ?)`;
-    const values = [name, email, phone, status, student_number, fk_id_class];
+    const query = `INSERT INTO student (name, email, phone, photo, status, student_number, fk_id_class) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+    const values = [name, email, phone, photo, status, student_number, fk_id_class];
 
     try {
       connect.query(query, values, function (err, results) {
@@ -69,6 +71,7 @@ module.exports = class studentController {
       student.id_student, 
       student.student_number,
       student.fk_id_class,
+      student.photo,
       class.name as class_name 
     FROM student 
     INNER JOIN class ON student.fk_id_class = class.id_class 
@@ -84,9 +87,21 @@ module.exports = class studentController {
         if (results.length === 0) {
           return res.status(404).json({ error: "Student not found" });
         }
+        const students = results.map(student => {
+          let image = null;
+          if (student.photo) {
+            image = `data:image/jpeg;base64,${student.photo.toString('base64')}`;
+          }
+          return {
+            ...student,
+            image,
+            photo: image
+          };
+        });
+        
         return res
           .status(200)
-          .json({ students: results });
+          .json({ students: students });
       });
     } catch (error) {
       console.error(error);
@@ -174,26 +189,45 @@ module.exports = class studentController {
       fk_id_class,
     } = req.body;
 
+    const photo = req.file ? req.file.buffer : null;
+
     const validateStudentError = await validateStudent(req.body);
     if (validateStudentError) {
       return res.status(400).json(validateStudentError);
     }
 
-    const validateErrorStudEmail = await validateStudEmail(email)
+    const validateErrorStudEmail = await validateStudEmail(email, Number(id_student))
     if(validateErrorStudEmail){
       return res.status(400).json(validateErrorStudEmail)
     }
 
-    const query = `UPDATE student SET name=?, email=?, phone=?, status=?, student_number=?, fk_id_class=? WHERE id_student=?`;
-    const values = [
-      name,
-      email,
-      phone,
-      status,
-      student_number,
-      fk_id_class,
-      id_student,
-    ];
+    let query;
+    let values;
+
+    if (req.file) {
+      query = `UPDATE student SET name=?, photo=?, email=?, phone=?, status=?, student_number=?, fk_id_class=? WHERE id_student=?`;
+      values = [
+        name,
+        req.file.buffer,
+        email,
+        phone,
+        status,
+        student_number,
+        fk_id_class,
+        id_student,
+      ];
+    } else {
+      query = `UPDATE student SET name=?, email=?, phone=?, status=?, student_number=?, fk_id_class=? WHERE id_student=?`;
+      values = [
+        name,
+        email,
+        phone,
+        status,
+        student_number,
+        fk_id_class,
+        id_student,
+      ];
+    }
 
     try {
       connect.query(query, values, function (err, results) {

@@ -3,9 +3,7 @@ import axios from "axios";
 const api = axios.create({
     baseURL: "http://localhost:5000/sigo",
     headers: {
-        'accept': 'application/json',
-        'Content-Type': 'application/json'
-
+        'accept': 'application/json'
     }
 })
 
@@ -46,9 +44,30 @@ const sheets = {
     getAlunosByName: (name) => api.get(`/student/name/${name}`),
     getAlunosByNumber: (student_number) => api.get(`/student/number/${student_number}`),
     getAlunoById: (id_student) => api.get(`/student/id/${id_student}`),
-    updateStudent: (id_student, student) => api.put(`/student/${id_student}`, student),
+    updateStudent: (id_student, student) => {
+        const data = new FormData()
+        for(let key in student) {
+            if(key !== "photo") data.append(key, student[key]);
+        }
+        if(student.photo) data.append("photo", student.photo);
+        return api.put(`/student/${id_student}`, data, {
+            headers: {
+                Accept: "application/json"
+            }
+        })
+    },
     deleteStudent: (id_student) => api.delete(`/student/${id_student}`),
-    createStudent: (student) => api.post("/student", student),
+    createStudent: (form, photo) => {
+        const data = new FormData()
+        for(let key in form) data.append(key,form[key]);
+        if(photo) data.append("photo", photo);
+        
+        return api.post("/student", data, {
+            headers: {
+                Accept: "application/json"
+            }
+        })
+    },
 
     createOccurrence: (occurrence) => api.post("/occurrence", occurrence),
     readOccurrences: () => api.get("/occurrence"),

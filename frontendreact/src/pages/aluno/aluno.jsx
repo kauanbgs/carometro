@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import api from "../../axios/axios"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import SideBar from "../../components/sideBar"
 import items from "../../utils/itemSideBar"
 import Text from "../../components/text"
@@ -17,6 +17,7 @@ import Modal from "../../components/modal"
 
 export default function Aluno() {
     const { id_student } = useParams();
+    const fileInputRef = useRef(null);
     const [student, setStudent] = useState({});
     const [formData, setFormData] = useState({
         name: "",
@@ -25,6 +26,7 @@ export default function Aluno() {
         status: "",
         student_number: "",
         fk_id_class: "",
+        photo: ""
         });
     const [classes, setClasses] = useState([]);
     const [occurrence, setOccurrence] = useState({
@@ -55,6 +57,7 @@ export default function Aluno() {
                     status: data.status,
                     student_number: data.student_number,
                     fk_id_class: data.fk_id_class,
+                    photo: data.photo
                 });
             } catch (error) {
                 console.log(error);
@@ -171,6 +174,21 @@ export default function Aluno() {
             setSnackbar({ isOpen: true, message: "Erro ao atualizar ocorrência", type: "error" });
         }
     }
+    const handlePhotoChange = async(e)=>{
+        const file = e.target.files[0];
+        if (!file) return;
+
+        try{
+            const response = await api.updateStudent(id_student, { ...formData, photo: file });
+            if(response.status === 200) {
+                setSnackbar({ isOpen: true, message: "Foto alterada com sucesso!", type: "success" });
+                window.location.reload();
+            }
+        }catch(error){
+            console.log(error);
+            setSnackbar({ isOpen: true, message: "Erro ao alterar foto", type: "error" });
+        }
+    }
 
     return (
         <div className="h-screen w-screen bg-back flex">
@@ -241,17 +259,29 @@ export default function Aluno() {
                     )}
                 </Modal>
                 
-                <div className="flex items-center gap-2">
-                    <ChevronLeft className="w-6 h-6 cursor-pointer text-textoPrincipal" onClick={() => window.history.back()} />
-                    <Text variant="megaTitle" className="font-bold">{student.name}</Text>
-                    <Button color="erro" rounded="lg" text="Excluir Aluno" className="ml-auto mr-4" onClick={() => setModalExcluirAberto(true)} />
+                <div className="flex justify-between items-center mb-6">
+                    <ChevronLeft className="w-8 h-8 p-1 rounded-full hover:text-textoPrincipal/50 cursor-pointer text-textoPrincipal transition-all" onClick={() => window.history.back()} />
+                    <Button color="erro" rounded="lg" text="Excluir Aluno" onClick={() => setModalExcluirAberto(true)} />
+                </div>
+
+                <input type="file" ref={fileInputRef} onChange={handlePhotoChange} className="hidden" accept="image/*" />
+                
+                <div className="flex flex-col items-center justify-center mb-10 cursor-pointer">
+                    {student.photo ? (
+                        <img onClick={() => fileInputRef.current?.click()} src={student.photo} alt="Foto do aluno" className="w-24 h-24 rounded-full object-cover shadow-md border-2 border-zinc-100" />
+                    ) : (
+                        <div onClick={() => fileInputRef.current?.click()} className="w-24 h-24 rounded-full bg-zinc-200 flex items-center justify-center shadow-md">
+                            <span className="text-zinc-400 font-medium">Sem foto</span>
+                        </div>
+                    )}
+                    <Text variant="megaTitle" className="font-bold mt-4 text-textoPrincipal">{student.name}</Text>
                 </div>
                 <Text variant="title" className="text-lg font-bold mt-4">Informações do Aluno</Text>
                 <div className="grid grid-cols-[3fr_2fr_1fr] gap-4 mt-5 w-[80%]">
                     <Input label="Nome do aluno" placeholder="Nome" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="placeholder:text-zinc-400 w-full" />
                     <div>
                         <Text variant="text" className="text-textoPrincipal text-sm">Turma</Text>
-                        <select className="w-full p-2 h-12 rounded-lg text-sm text-textoPrincipal border border-zinc-300 focus:outline-none" 
+                        <select className="w-full p-2 h-12 rounded-lg text-sm text-textoPrincipal border border-zinc-300 focus:outline-none focus:border-azulPrincipal" 
                                 value={formData.fk_id_class} 
                                 onChange={(e) => setFormData({ ...formData, fk_id_class: e.target.value })}>
                             <option value="" className="text-preto">Selecione uma turma</option>

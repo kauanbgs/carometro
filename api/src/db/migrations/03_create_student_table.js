@@ -7,6 +7,7 @@ exports.up = function(knex) {
       table.timestamp('create_date').defaultTo(knex.fn.now()) ;
       table.boolean('status').defaultTo(1).notNullable();
       table.integer('student_number').nullable();
+      table.specificType('photo', 'LONGBLOB').nullable();
       table.integer('fk_id_class').unsigned().notNullable();
       table.foreign('fk_id_class').references('id_class').inTable('class').onDelete('CASCADE');
     });
