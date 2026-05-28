@@ -297,6 +297,32 @@ module.exports = class studentController {
       return next(error);
     }
   }
+  static async updateStudentPhoto(req, res, next) {
+    const { id_student } = req.params;
+
+    if (!req.file) {
+      return res.status(400).json({ error: "Nenhuma imagem foi enviada." });
+    }
+
+    const query = "UPDATE student SET photo = ? WHERE id_student = ?";
+    const values = [req.file.buffer, id_student];
+
+    try {
+      connect.query(query, values, function (err, results) {
+        if (err) {
+          console.error(err);
+          return next(err);
+        }
+        if (results.affectedRows === 0) {
+          return res.status(404).json({ error: "Aluno não encontrado." });
+        }
+        return res.status(200).json({ message: "Foto atualizada com sucesso!" });
+      });
+    } catch (error) {
+      console.error(error);
+      return next(error);
+    }
+  }
 
   static async getStudentPhoto(req, res, next) {
   const { id_student } = req.params;
@@ -329,5 +355,9 @@ module.exports = class studentController {
     console.error(error);
     return next(error);
   }
+  
+  
+
+  
 }
 };

@@ -39,6 +39,11 @@ router.put("/student/:id_student", verifyJWT, upload.single("photo"), studentCon
 router.delete("/student/:id_student", verifyJWT, studentController.deleteStudent);
 router.get("/student/photo/:id_student", verifyJWT, studentController.getStudentPhoto);
 
+
+router.put("/student/:id_student", verifyJWT, studentController.updateStudent);
+
+router.patch("/student/:id_student/photo", verifyJWT, upload.single("photo"), studentController.updateStudentPhoto);
+
 //      CONTROLLER class       //
 router.post("/class", verifyJWT, classController.createClass);
 router.get("/class", verifyJWT, classController.readClass);
