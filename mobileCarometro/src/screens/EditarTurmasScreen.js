@@ -8,8 +8,11 @@ import {
   Modal,
   Alert,
   ScrollView,
+  Image,
+  ActivityIndicator,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
 import Header from "../components/Header";
 import styles from "../components/Styles";
 import api from "../services/api";
@@ -23,6 +26,8 @@ export default function EditarTurmas({ navigation, route }) {
   const [filtroNome, setFiltroNome] = useState("");
   const [filtroNumero, setFiltroNumero] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [criandoAluno, setCriandoAluno] = useState(false);
+  const [photoNovoAluno, setPhotoNovoAluno] = useState(null);
   const [novoAluno, setNovoAluno] = useState({
     name: "",
     email: "",
@@ -48,14 +53,33 @@ export default function EditarTurmas({ navigation, route }) {
     }
   };
 
+  const handleSelecionarFoto = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== "granted") {
+      Alert.alert("Permissão negada", "Precisamos de acesso à sua galeria para adicionar a foto.");
+      return;
+    }
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ["images"],
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.8,
+    });
+    if (!result.canceled) {
+      setPhotoNovoAluno(result.assets[0]);
+    }
+  };
+
   const createStudent = async () => {
     try {
-      await api.createStudent({
-        ...novoAluno,
-        student_number: Number(novoAluno.student_number),
-      });
+      setCriandoAluno(true);
+      await api.createStudent(
+        { ...novoAluno, student_number: Number(novoAluno.student_number) },
+        photoNovoAluno
+      );
       Alert.alert("Sucesso", "Aluno criado com sucesso!");
       setModalVisible(false);
+      setPhotoNovoAluno(null);
       setNovoAluno({
         name: "",
         email: "",
@@ -67,6 +91,8 @@ export default function EditarTurmas({ navigation, route }) {
       getStudentsByClass();
     } catch (error) {
       Alert.alert("Erro", error.response?.data?.error || "Erro ao criar aluno");
+    } finally {
+      setCriandoAluno(false);
     }
   };
 
@@ -268,6 +294,64 @@ export default function EditarTurmas({ navigation, route }) {
             </Text>
 
             <ScrollView showsVerticalScrollIndicator={false}>
+
+              {/* Foto do aluno */}
+              <View style={{ alignItems: "center", marginBottom: 20 }}>
+                <View style={{ position: "relative" }}>
+                  <TouchableOpacity
+                    onPress={handleSelecionarFoto}
+                    style={{
+                      width: 90,
+                      height: 90,
+                      borderRadius: 45,
+                      backgroundColor: "#e5e7eb",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      overflow: "hidden",
+                      borderWidth: 2,
+                      borderColor: "#d1d5db",
+                    }}
+                  >
+                    {photoNovoAluno ? (
+                      <Image
+                        source={{ uri: photoNovoAluno.uri }}
+                        style={{ width: "100%", height: "100%" }}
+                        resizeMode="cover"
+                      />
+                    ) : (
+                      <Text style={{ color: "#9ca3af", fontSize: 12, textAlign: "center", paddingHorizontal: 8 }}>
+                        Adicionar foto
+                      </Text>
+                    )}
+                  </TouchableOpacity>
+                  {/* Botão câmera */}
+                  <TouchableOpacity
+                    onPress={handleSelecionarFoto}
+                    style={{
+                      position: "absolute",
+                      bottom: 0,
+                      right: 0,
+                      width: 28,
+                      height: 28,
+                      borderRadius: 14,
+                      backgroundColor: "#2957a4",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderWidth: 2,
+                      borderColor: "#fff",
+                      elevation: 3,
+                    }}
+                  >
+                    <MaterialIcons name="camera-alt" size={14} color="#fff" />
+                  </TouchableOpacity>
+                </View>
+                {photoNovoAluno && (
+                  <TouchableOpacity onPress={() => setPhotoNovoAluno(null)} style={{ marginTop: 6 }}>
+                    <Text style={{ color: "#9ca3af", fontSize: 12 }}>Remover foto</Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+
               <Text style={{ color: "#888", marginBottom: 4 }}>
                 Nome do aluno
               </Text>
@@ -332,6 +416,7 @@ export default function EditarTurmas({ navigation, route }) {
 
               <TouchableOpacity
                 onPress={createStudent}
+                disabled={criandoAluno}
                 style={{
                   backgroundColor: "#2957a4",
                   borderRadius: 12,
@@ -339,13 +424,16 @@ export default function EditarTurmas({ navigation, route }) {
                   justifyContent: "center",
                   alignItems: "center",
                   marginBottom: 10,
+                  opacity: criandoAluno ? 0.7 : 1,
                 }}
               >
-                <Text
-                  style={{ color: "white", fontSize: 16, fontWeight: "600" }}
-                >
-                  Criar
-                </Text>
+                {criandoAluno ? (
+                  <ActivityIndicator color="#fff" />
+                ) : (
+                  <Text style={{ color: "white", fontSize: 16, fontWeight: "600" }}>
+                    Criar
+                  </Text>
+                )}
               </TouchableOpacity>
 
               <TouchableOpacity

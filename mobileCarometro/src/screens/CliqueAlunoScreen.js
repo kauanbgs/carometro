@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as ImagePicker from "expo-image-picker"; // ✅ IMPORT DA GALERIA ADICIONADO
+import * as ImagePicker from "expo-image-picker";
 
 import Header from "../components/Header";
 import styles from "../components/Styles";
@@ -29,8 +29,6 @@ export default function DetalhesDoAluno({ navigation, route }) {
   const [detalhes, setDetalhes] = useState("");
   const [modalVisivel, setModalVisivel] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
-  
-  // ✅ ESTADO PARA CONTROLAR O LOADING DA FOTO
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
 
   useEffect(() => {
@@ -76,7 +74,7 @@ export default function DetalhesDoAluno({ navigation, route }) {
     }
   };
 
- const selecionarFoto = async () => {
+  const selecionarFoto = async () => {
     const permissao = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!permissao.granted) {
       Alert.alert("Permissão necessária", "Precisamos de acesso à sua galeria para alterar a foto.");
@@ -84,36 +82,27 @@ export default function DetalhesDoAluno({ navigation, route }) {
     }
 
     const resultado = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ["images"], // ✅ ISSO RESOLVE O WARNING AMARELO
+      mediaTypes: ["images"],
       allowsEditing: true,
       aspect: [1, 1],
-      quality: 0.2, 
+      quality: 0.8,
     });
 
     if (!resultado.canceled) {
       const asset = resultado.assets[0];
       setUploadingPhoto(true);
-
       try {
-        // ✅ PEGA O NOME E TIPO REAL DO ARQUIVO PARA NÃO CONFUNDIR A API
         const localUri = asset.uri;
         const filename = localUri.split('/').pop() || `avatar_${id_student}.jpg`;
         const match = /\.(\w+)$/.exec(filename);
         const tipoArquivo = match ? `image/${match[1]}` : `image/jpeg`;
 
-        console.log("1. Foto selecionada:", asset.uri);
-
         const formData = new FormData();
-        formData.append("photo", {
-          uri: localUri,
-          name: filename,
-          type: tipoArquivo,
-        });
-        console.log("2. FormData montado:", JSON.stringify(formData));
+        formData.append("photo", { uri: localUri, name: filename, type: tipoArquivo });
 
         await api.updateStudentPhoto(id_student, formData);
         Alert.alert("Sucesso", "Foto do aluno atualizada!");
-        carregarDadosDaAPI(); 
+        carregarDadosDaAPI();
       } catch (error) {
         console.log("Erro ao enviar foto:", error?.response?.data || error.message);
         Alert.alert("Erro", "Não foi possível enviar a foto para o servidor.");
@@ -212,10 +201,10 @@ export default function DetalhesDoAluno({ navigation, route }) {
         showsVerticalScrollIndicator={false}
       >
         
-        {/* ✅ VIEW DA FOTO TRANSFORMADA EM BOTÃO CLICÁVEL COM LOADING */}
+        {/* Foto do aluno — clique para atualizar */}
         <TouchableOpacity
           onPress={selecionarFoto}
-          disabled={uploadingPhoto} // Desativa o clique se já estiver enviando
+          disabled={uploadingPhoto}
           style={{
             width: 100,
             height: 100,
@@ -228,7 +217,7 @@ export default function DetalhesDoAluno({ navigation, route }) {
           }}
         >
           {uploadingPhoto ? (
-            <ActivityIndicator size="large" color="#0000ff" />
+            <ActivityIndicator size="large" color="#fff" />
           ) : student.photo ? (
             <Image
               source={{ uri: student.photo }}
@@ -241,9 +230,6 @@ export default function DetalhesDoAluno({ navigation, route }) {
             </View>
           )}
         </TouchableOpacity>
-        <Text style={{ textAlign: "center", color: "#999", fontSize: 12, marginTop: 5, marginBottom: 15 }}>
-          Toque na foto para alterar
-        </Text>
 
         <Text style={styles.studentNameTitle}>{student.name}</Text>
 

@@ -2,7 +2,7 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const api = axios.create({
-  baseURL: "http://10.89.240.47:5000/sigo",
+  baseURL: "http://192.168.100.85:5000/sigo",
   headers: {
     'Accept': 'application/json',
   }
@@ -35,7 +35,22 @@ const sheets = {
 
   getStudentsByClass: (fk_id_class) => api.get(`/student/class/${fk_id_class}`),
   getStudentByID: (id_student) => api.get(`/student/id/${id_student}`),
-  createStudent: (student) => api.post('/student', student),
+  createStudent: (student, photo) => {
+    const formData = new FormData();
+    Object.entries(student).forEach(([key, value]) => {
+      formData.append(key, String(value));
+    });
+    if (photo) {
+      const uri = photo.uri;
+      const filename = uri.split('/').pop() || `photo_${Date.now()}.jpg`;
+      const match = /\.(\w+)$/.exec(filename);
+      const type = match ? `image/${match[1]}` : 'image/jpeg';
+      formData.append('photo', { uri, name: filename, type });
+    }
+    return api.post('/student', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+  },
   updateStudent: (id_student, studentData) => api.put(`/student/${id_student}`, studentData),
   deleteStudent: (id_student) => api.delete(`/student/${id_student}`),
   getStudentPhoto: (id_student) => api.get(`/student/photo/${id_student}`, { responseType: 'arraybuffer' }),
