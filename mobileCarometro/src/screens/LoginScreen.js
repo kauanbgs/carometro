@@ -73,9 +73,9 @@ export default function Login({ navigation }) {
 
 
         
-        <TouchableOpacity style={styles.primaryButton} onPress={() => navigation.navigate("Cadastro")}>
+        {/* <TouchableOpacity style={styles.primaryButton} onPress={() => navigation.navigate("Cadastro")}>
           <Text style={styles.buttonWhiteText}>Entrar</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <View style={styles.footer}>
           <Text style={styles.loginFooterText}>Não tem uma conta? </Text>
