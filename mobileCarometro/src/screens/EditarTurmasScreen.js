@@ -73,10 +73,23 @@ export default function EditarTurmas({ navigation, route }) {
   const createStudent = async () => {
     try {
       setCriandoAluno(true);
-      await api.createStudent(
-        { ...novoAluno, student_number: Number(novoAluno.student_number) },
-        photoNovoAluno
-      );
+
+      let photoBase64 = null;
+      if (photoNovoAluno) {
+        const response = await fetch(photoNovoAluno.uri);
+        const blob = await response.blob();
+        photoBase64 = await new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.readAsDataURL(blob);
+        });
+      }
+
+      await api.createStudent({
+        ...novoAluno,
+        student_number: Number(novoAluno.student_number),
+        ...(photoBase64 && { photo: photoBase64 }),
+      });
       Alert.alert("Sucesso", "Aluno criado com sucesso!");
       setModalVisible(false);
       setPhotoNovoAluno(null);
