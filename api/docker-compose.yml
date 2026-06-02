@@ -2,7 +2,7 @@
 services:
   app:
     build: . # O "." indica qual imagem Docker será construída no diretório atual
-    command: /bin/sh -c "npm install && npm start"
+    command: /bin/sh -c "npm install && npx knex migrate:latest && npx knex seed:run && npm start"
     ports:
       - "5001:5001" # Mapeia a porta do container para a máquina
     volumes:
@@ -13,7 +13,7 @@ services:
       - .env
 
   db:
-    image: mysql:5.7
+    image: mysql:8.0
     restart: always # Configura o container para reiniciar automaticamente caso ele pare
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -22,7 +22,6 @@ services:
       - "3307:3306" # Mapeia a porta 3306 do container para a 3306 da máquina
     volumes:
       - db_data:/var/lib/mysql
-      - ./mysql-init:/docker-entrypoint-initdb.d
       # Roda os arquivos SQL existentes dentro da pasta mysql-init na inicialização do container MYSQL
 
 volumes:
