@@ -4,18 +4,26 @@ const validateStudEmail = require("../services/validateStudEmail");
 
 module.exports = class studentController {
   static async createStudent(req, res, next) {
-    
     const { name, email, phone, status, student_number, fk_id_class } = req.body;
-    const photo = req.file ? req.file.buffer : null;
+
+    // Se veio base64 no body (enviado como JSON), converte para buffer
+    // Se veio como multipart/form-data via multer, usa req.file.buffer diretamente
+    let photo = null;
+    if (req.file) {
+      photo = req.file.buffer;
+    } else if (req.body.photo && typeof req.body.photo === 'string' && req.body.photo.startsWith('data:image')) {
+      const base64Data = req.body.photo.split(',')[1];
+      photo = Buffer.from(base64Data, 'base64');
+    }
 
     const validateStudentError = await validateStudent(req.body);
     if (validateStudentError) {
       return res.status(400).json(validateStudentError);
     }
 
-    const validateErrorStudEmail = await validateStudEmail(email)
-    if(validateErrorStudEmail){
-      return res.status(400).json(validateErrorStudEmail)
+    const validateErrorStudEmail = await validateStudEmail(email);
+    if (validateErrorStudEmail) {
+      return res.status(400).json(validateErrorStudEmail);
     }
 
     const query = `INSERT INTO student (name, email, phone, photo, status, student_number, fk_id_class) VALUES (?, ?, ?, ?, ?, ?, ?)`;
@@ -29,9 +37,7 @@ module.exports = class studentController {
         if (results.affectedRows === 0) {
           return res.status(404).json({ error: "Student not found!" });
         }
-        return res
-          .status(200)
-          .json({ message: "Student created successfully!" });
+        return res.status(200).json({ message: "Student created successfully!" });
       });
     } catch (error) {
       console.error(error);
