@@ -4,13 +4,11 @@ services:
     build: . # O "." indica qual imagem Docker será construída no diretório atual
     command: /bin/sh -c "npm install && npx knex migrate:latest && npx knex seed:run && npm start"
     ports:
-      - "5001:5001" # Mapeia a porta do container para a máquina
+      - "5000:5000" # Mapeia a porta do container para a máquina
     volumes:
       - .:/usr/app # Monta o diretório atual da máquina (Host/Física) para o diretório /usr/app dentro do container
     depends_on: # Indica de o App depende de DB
       - db
-    env_file:
-      - .env
 
   db:
     image: mysql:8.0
