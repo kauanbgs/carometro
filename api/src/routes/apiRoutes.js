@@ -4,6 +4,7 @@ const instructorController = require("../controllers/instructorController");
 const classController = require("../controllers/classController");
 const occurrenceController = require("../controllers/occurrenceController");
 const verifyJWT = require("../middlewares/verifyJWT");
+const verifyAdmin = require("../middlewares/verifyAdmin")
 const { loginLimiter } = require("../middlewares/rateLimiter");
 const upload = require("../services/upload");
 
@@ -21,11 +22,11 @@ router.get("/google_classroom/students/:id_class/:id_instructor", instructorCont
 //      CONTROLLER instructor (INST & DEV)       //
 router.post("/instructor", instructorController.createInstructor);
 router.post("/instructor/login", loginLimiter, instructorController.login);
-router.get("/instructor", verifyJWT, instructorController.readInstructors);
-router.get("/instructor/:id_instructor", verifyJWT, instructorController.getInstructorById);
-router.get("/instructor/name/:name", verifyJWT,instructorController.getInstructorByName);
-router.put("/instructor/:id_instructor", verifyJWT,instructorController.updateInstructor);
-router.delete("/instructor", verifyJWT,instructorController.deleteInstructor);
+router.get("/instructor", verifyJWT, verifyAdmin, instructorController.readInstructors);
+router.get("/instructor/:id_instructor", verifyJWT, verifyAdmin,instructorController.getInstructorById);
+router.get("/instructor/name/:name", verifyJWT, verifyAdmin, instructorController.getInstructorByName);
+router.put("/instructor/:id_instructor", verifyJWT, verifyAdmin, instructorController.updateInstructor);
+router.delete("/instructor", verifyJWT, verifyAdmin, instructorController.deleteInstructor);
 
 //      CONTROLLER student       //
 router.post("/student", upload.single("photo"), verifyJWT, studentController.createStudent);

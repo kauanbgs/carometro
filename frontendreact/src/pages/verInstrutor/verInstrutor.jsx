@@ -19,13 +19,7 @@ export default function Instrutor() {
     const [passwordData, setPasswordData] = useState({ newPassword: "", confirmPassword: "" });
     const [snackbar, setSnackbar] = useState({ isOpen: false, message: "", type: "success" });
 
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem("user"));
-        if (!user || user.role !== "adm") {
-            navigate("/home", { state: { error: "Você não tem permissão para acessar esta página." } });
-            return;
-        }
-    }, []);
+
 
     useEffect(() => {
         api.getInstructorById(id_instructor)

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://10.89.240.100:5000/sigo",
+    baseURL: "http://192.168.100.46:5000/sigo",
     headers: {
         'accept': 'application/json'
     }
@@ -24,6 +24,31 @@ api.interceptors.request.use(
   }
 );
 
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const status = error.response?.status;
+    const message = error.response?.data?.message || "";
+
+    if (status === 401) {
+      // Só faz logout se for token expirado ou não fornecido (não para 401 do Google Classroom)
+      const isTokenError =
+        message.includes("Token") ||
+        message.includes("token") ||
+        message.includes("Expired");
+
+      if (isTokenError) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.location.href = "/";
+      }
+    } else if (status === 403) {
+      window.location.href = "/home";
+    }
+    return Promise.reject(error);
+  }
+);
 
 const sheets = {
     postLogin: (user) => api.post("/instructor/login", user),

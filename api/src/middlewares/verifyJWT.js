@@ -28,7 +28,8 @@ function verifyJWT(req, res, next) {
         .json({ auth: false, message: "Falha na autenticação do token." });
     }
 
-    req.userId = decoded.cpf;
+    req.userId = decoded.id_instructor;
+    req.userRole = decoded.role;
     next();
   });
 }

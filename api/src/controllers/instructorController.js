@@ -233,7 +233,7 @@ module.exports = class instructorController {
           return next(new Error("Password incorrect"));
         } else {
           const token = jwt.sign(
-            { id_instructor: instructor.id_instructor },
+            { id_instructor: instructor.id_instructor, role: instructor.role },
             process.env.SECRET,
             {
               expiresIn: "24h",

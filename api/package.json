@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "start": "node src/server.js",
-    "dev": "node --watch src/server.js",
+    "dev": "nodemon src/server.js",
     "drop-all": "node ./src/utils/dropDatabase.js",
     "populate": "npx knex seed:run",
     "createDB": "node ./src/utils/createDatabase.js && npx knex seed:run"
@@ -28,6 +28,7 @@
     "mysql2": "^3.15.2"
   },
   "devDependencies": {
-    "jest": "^30.3.0"
+    "jest": "^30.3.0",
+    "nodemon": "^3.1.14"
   }
 }

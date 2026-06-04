@@ -2,7 +2,8 @@
 services:
   app:
     build: . # O "." indica qual imagem Docker será construída no diretório atual
-    command: /bin/sh -c "npm install && npx knex migrate:latest && npx knex seed:run && npm start"
+    command: /bin/sh -c "npm install && npx knex migrate:latest && npx knex seed:run && npx nodemon src/server.js" 
+    # o Nodemon vai reiniciar o container quando houver mudanças no código
     ports:
       - "5000:5000" # Mapeia a porta do container para a máquina
     volumes:
