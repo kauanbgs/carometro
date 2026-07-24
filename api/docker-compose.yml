@@ -10,6 +10,9 @@ services:
       - .:/usr/app # Monta o diretório atual da máquina (Host/Física) para o diretório /usr/app dentro do container
     depends_on: # Indica de o App depende de DB
       - db
+    env_file:
+      - .env
+      
 
   db:
     image: mysql:8.0

@@ -1,5 +1,4 @@
 // knexfile.js
-require('dotenv-safe').config();
 module.exports = {
   client: 'mysql2',
   connection: {
